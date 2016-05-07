@@ -1,0 +1,447 @@
+{
+  "ID": "a2ee0952-26b5-49ae-8bf9-4f1d6279b798",
+  "Version": "3.10.0.0",
+  "Name": "MainScene",
+  "Content": {
+    "Content": {
+      "Animation": {
+        "Duration": 0,
+        "Speed": 1.0,
+        "Timelines": [],
+        "ctype": "TimelineActionData"
+      },
+      "AnimationList": [],
+      "ObjectData": {
+        "Children": [
+          {
+            "FileData": {
+              "Type": "Default",
+              "Path": "Default/defaultParticle.plist",
+              "Plist": ""
+            },
+            "BlendFunc": {
+              "Src": 770,
+              "Dst": 769
+            },
+            "AnchorPoint": {},
+            "Position": {
+              "X": 88.1671,
+              "Y": 440.6405
+            },
+            "Scale": {
+              "ScaleX": 3.5334,
+              "ScaleY": -3.4231
+            },
+            "RotationSkewX": 0.698,
+            "RotationSkewY": 0.7037,
+            "CColor": {},
+            "IconVisible": true,
+            "PrePosition": {
+              "X": 0.2755,
+              "Y": 0.918
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "HorizontalEdge": "LeftEdge",
+            "VerticalEdge": "BothEdge",
+            "LeftMargin": 88.1671,
+            "RightMargin": 231.8329,
+            "TopMargin": 39.3595,
+            "BottomMargin": 440.6405,
+            "Tag": 9,
+            "ActionTag": 1531808555,
+            "Size": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "Name": "Particle",
+            "ctype": "ParticleObjectData"
+          },
+          {
+            "FontSize": 18,
+            "ButtonText": "@@@@",
+            "TextColor": {
+              "R": 0,
+              "G": 0,
+              "B": 0
+            },
+            "DisabledFileData": {
+              "Type": "Normal",
+              "Path": "item_7.png",
+              "Plist": ""
+            },
+            "PressedFileData": {
+              "Type": "Normal",
+              "Path": "cup.png",
+              "Plist": ""
+            },
+            "NormalFileData": {
+              "Type": "Normal",
+              "Path": "gift.png",
+              "Plist": ""
+            },
+            "Scale9OriginX": 15,
+            "Scale9OriginY": 27,
+            "Scale9Width": 35,
+            "Scale9Height": 13,
+            "OutlineColor": {
+              "G": 0,
+              "B": 0
+            },
+            "ShadowColor": {
+              "R": 110,
+              "G": 110,
+              "B": 110
+            },
+            "ShadowOffsetX": 2.0,
+            "ShadowOffsetY": -2.0,
+            "TouchEnable": true,
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": 56.9306,
+              "Y": 272.6165
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.1779,
+              "Y": 0.568
+            },
+            "PreSize": {
+              "X": 0.2125,
+              "Y": 0.1417
+            },
+            "LeftMargin": 22.9306,
+            "RightMargin": 229.0694,
+            "TopMargin": 173.3835,
+            "BottomMargin": 238.6165,
+            "Tag": 14,
+            "ActionTag": -1164728101,
+            "Size": {
+              "X": 68.0,
+              "Y": 68.0
+            },
+            "Name": "Button",
+            "ctype": "ButtonObjectData"
+          },
+          {
+            "FileData": {
+              "Type": "Normal",
+              "Path": "item_2.png",
+              "Plist": ""
+            },
+            "Scale9Enable": true,
+            "Scale9OriginX": 48,
+            "Scale9OriginY": 56,
+            "Scale9Width": 52,
+            "Scale9Height": 44,
+            "AnchorPoint": {
+              "ScaleX": 0.3048,
+              "ScaleY": 0.67
+            },
+            "Position": {
+              "X": 253.7706,
+              "Y": 306.1489
+            },
+            "Scale": {
+              "ScaleX": 0.48,
+              "ScaleY": 0.4781
+            },
+            "CColor": {
+              "R": 210,
+              "G": 44,
+              "B": 44
+            },
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.793,
+              "Y": 0.6378
+            },
+            "PreSize": {
+              "X": 0.4625,
+              "Y": 0.3083
+            },
+            "LeftMargin": 208.6664,
+            "RightMargin": -36.6664,
+            "TopMargin": 125.018,
+            "BottomMargin": 206.982,
+            "Tag": 16,
+            "ActionTag": 383535308,
+            "Size": {
+              "X": 148.0,
+              "Y": 148.0
+            },
+            "Name": "Image",
+            "ctype": "ImageViewObjectData"
+          },
+          {
+            "FileData": {
+              "Type": "Normal",
+              "Path": "icons/item_6.png",
+              "Plist": ""
+            },
+            "BlendFunc": {
+              "Src": 1,
+              "Dst": 771
+            },
+            "AnchorPoint": {
+              "ScaleX": 1.0,
+              "ScaleY": 0.2335
+            },
+            "Position": {
+              "X": 252.2408,
+              "Y": 385.4023
+            },
+            "Scale": {
+              "ScaleX": 0.49,
+              "ScaleY": 0.49
+            },
+            "RotationSkewX": 30.998,
+            "RotationSkewY": 31.0011,
+            "CColor": {
+              "B": 0
+            },
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.7883,
+              "Y": 0.8029
+            },
+            "PreSize": {
+              "X": 0.4625,
+              "Y": 0.3083
+            },
+            "LeftMargin": 104.2408,
+            "RightMargin": 67.7592,
+            "TopMargin": -18.8503,
+            "BottomMargin": 350.8503,
+            "Tag": 12,
+            "ActionTag": -1341526821,
+            "Size": {
+              "X": 148.0,
+              "Y": 148.0
+            },
+            "Name": "Sprite",
+            "ctype": "SpriteObjectData"
+          },
+          {
+            "FontSize": 48,
+            "LabelText": "gootest",
+            "HorizontalAlignmentType": "HT_Center",
+            "VerticalAlignmentType": "VT_Center",
+            "OutlineColor": {
+              "G": 0,
+              "B": 0
+            },
+            "ShadowColor": {
+              "G": 23,
+              "B": 0
+            },
+            "ShadowOffsetX": 2.0,
+            "ShadowOffsetY": -2.0,
+            "ShadowEnabled": true,
+            "AnchorPoint": {
+              "ScaleX": 0.3785,
+              "ScaleY": -0.7894
+            },
+            "Position": {
+              "X": 97.6066,
+              "Y": 146.5179
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0502
+            },
+            "CColor": {
+              "R": 230,
+              "G": 20,
+              "B": 20
+            },
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.305,
+              "Y": 0.3052
+            },
+            "PreSize": {
+              "X": 0.525,
+              "Y": 0.1
+            },
+            "LeftMargin": 34.014,
+            "RightMargin": 117.986,
+            "TopMargin": 247.593,
+            "BottomMargin": 184.407,
+            "Tag": 17,
+            "ActionTag": -1956467130,
+            "Size": {
+              "X": 168.0,
+              "Y": 48.0
+            },
+            "Name": "Text",
+            "ctype": "TextObjectData"
+          },
+          {
+            "CharWidth": 14,
+            "CharHeight": 18,
+            "LabelText": "./0123456789",
+            "StartChar": ".",
+            "LabelAtlasFileImage_CNB": {
+              "Type": "Default",
+              "Path": "Default/TextAtlas.png",
+              "Plist": ""
+            },
+            "AnchorPoint": {
+              "ScaleX": 0,
+              "ScaleY": 0
+            },
+            "Position": {
+              "X": 168.0241,
+              "Y": 79.4189
+            },
+            "Scale": {
+              "ScaleX": 1.6601,
+              "ScaleY": 3.6644
+            },
+            "CColor": {
+              "B": 0
+            },
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.5251,
+              "Y": 0.1655
+            },
+            "PreSize": {
+              "X": 0.525,
+              "Y": 0.0375
+            },
+            "LeftMargin": 84.0241,
+            "RightMargin": 67.9759,
+            "TopMargin": 391.5811,
+            "BottomMargin": 70.4189,
+            "Tag": 18,
+            "ActionTag": -1152398214,
+            "Size": {
+              "X": 168.0,
+              "Y": 18.0
+            },
+            "Name": "AtlasLabel",
+            "ctype": "TextAtlasObjectData"
+          },
+          {
+            "ProgressInfo": 48,
+            "ImageFileData": {
+              "Type": "Normal",
+              "Path": "gift.png",
+              "Plist": ""
+            },
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": 163.8663,
+              "Y": 286.5447
+            },
+            "Scale": {
+              "ScaleX": 1.3196,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.5121,
+              "Y": 0.597
+            },
+            "PreSize": {
+              "X": 0.2031,
+              "Y": 0.1417
+            },
+            "LeftMargin": 131.3663,
+            "RightMargin": 123.6337,
+            "TopMargin": 159.4553,
+            "BottomMargin": 252.5447,
+            "Tag": 19,
+            "ActionTag": 143578511,
+            "Size": {
+              "X": 65.0,
+              "Y": 68.0
+            },
+            "Alpha": 166,
+            "Name": "LoadingBar",
+            "ctype": "LoadingBarObjectData"
+          },
+          {
+            "FontSize": 36,
+            "IsCustomSize": true,
+            "LabelText": "请输入文字",
+            "PlaceHolderText": "Text Field",
+            "MaxLengthText": 10,
+            "TouchEnable": true,
+            "AnchorPoint": {
+              "ScaleX": 0.4724,
+              "ScaleY": 0.3192
+            },
+            "Position": {
+              "X": 173.3241,
+              "Y": 142.0168
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {
+              "R": 144,
+              "G": 238,
+              "B": 144
+            },
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.5416,
+              "Y": 0.2959
+            },
+            "PreSize": {
+              "X": 0.9375,
+              "Y": 0.1125
+            },
+            "LeftMargin": 31.6041,
+            "RightMargin": -11.6041,
+            "TopMargin": 301.22,
+            "BottomMargin": 124.78,
+            "Tag": 21,
+            "ActionTag": -883649918,
+            "Size": {
+              "X": 300.0,
+              "Y": 54.0
+            },
+            "Name": "TextField",
+            "ctype": "TextFieldObjectData"
+          }
+        ],
+        "Size": {
+          "X": 320.0,
+          "Y": 480.0
+        },
+        "Name": "Scene",
+        "ctype": "SingleNodeObjectData"
+      },
+      "UsedResources": [
+        "cup.png",
+        "Default/defaultParticle.plist",
+        "Default/TextAtlas.png",
+        "gift.png",
+        "icons/item_6.png",
+        "item_2.png",
+        "item_7.png"
+      ],
+      "ctype": "GameFileData"
+    }
+  },
+  "Type": "Scene"
+}

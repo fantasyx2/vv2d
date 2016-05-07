@@ -1,0 +1,6 @@
+class SkeletonRenderer : public CCNode
+{
+public:
+	bool setSkin (char* skinName);
+	bool setAttachment (char* slotName, char* attachmentName);
+};

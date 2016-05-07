@@ -1,0 +1,21 @@
+
+class spTrackEntry {
+	spAnimationState* state;
+	spTrackEntry* next;
+	spTrackEntry* previous;
+	spAnimation* animation;
+	int loop;
+	float delay;
+	float time;
+	float lastTime;
+	float endTime;
+	float timeScale;
+	float mixTime;
+	float mixDuration;
+	float mix;
+};
+
+class spAnimationState {
+	float timeScale;
+	int tracksCount;
+};

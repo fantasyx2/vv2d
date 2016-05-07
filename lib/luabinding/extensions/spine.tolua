@@ -1,0 +1,10 @@
+
+$#include "spine-cocos2dx.h"
+
+$using namespace spine;
+
+$pfile "extensions/spine/SkeletonRenderer.tolua"
+$pfile "extensions/spine/Animation.tolua"
+$pfile "extensions/spine/AnimationState.tolua"
+$pfile "extensions/spine/SkeletonAnimation.tolua"
+

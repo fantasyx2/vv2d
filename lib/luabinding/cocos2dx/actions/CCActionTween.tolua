@@ -1,0 +1,5 @@
+
+class CCActionTween : public CCActionInterval
+{
+	static CCActionTween* create(float aDuration, char* key, float from, float to,LUA_FUNCTION handler);
+};

@@ -1,0 +1,35 @@
+class __spEventDataForScript
+{
+public:
+	std::string name;
+	int intValue;
+	float floatValue;
+	std::string stringValue;
+};
+class __spEventForScript
+{
+public:
+	__spEventDataForScript data;
+	float time;
+	int intValue;
+	float floatValue;
+	std::string stringValue;
+};
+
+class SkeletonAnimation : public SkeletonRenderer
+{
+public:
+	static SkeletonAnimation* createWithFile (char* skeletonDataFile, char* atlasFile, float scale = 0);
+	void setMix (char* fromAnimation, char* toAnimation, float duration);
+
+	spTrackEntry* setAnimation (int trackIndex, char* name, bool loop);
+	spTrackEntry* addAnimation (int trackIndex, char* name, bool loop, float delay = 0);
+	spTrackEntry* getCurrent (int trackIndex = 0);
+	void clearTracks ();
+	void clearTrack (int trackIndex = 0);	
+
+	void setScriptHandlerForAnima(LUA_FUNCTION funId);
+    void resetScriptHandlerForAnima();
+    void setScriptHandlerForTrack(LUA_FUNCTION funId);
+    void resetScriptHandlerForTrack();
+};
