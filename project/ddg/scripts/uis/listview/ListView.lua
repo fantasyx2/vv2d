@@ -8,6 +8,8 @@ function ListView:ctor(rect, direction,clip)
 	self.curridx=1
 	self.selectidx=0
 	self.touchcell=nil
+	self.touchidx=0
+	self.cellalign=0--(0-1)
 	local nd = display.newNode()
 	self:setContainer(nd)
 	self.listnd = display.newNode()
@@ -17,6 +19,12 @@ end
 function ListView:setContainer(nd)
 	if(not self.container) then
 		ListView.super.setContainer(self,nd)
+	end
+end
+
+function ListView:setCellAlign(align)
+	if(align>0 and align<=1) then
+		self.cellalign = align
 	end
 end
 
@@ -36,12 +44,10 @@ function ListView:getcurridx()
 	return self.curridx
 end
 
-function ListView:setcurridx(index,animate)
-	self:scrollToCell__(index,animate)
+function ListView:setcurridx(index,anim)
+	self:skipToCell(index,nil,anim)
 end
-function ListView:skipToIdx(index,animate)
-	self:scrollToCell__(index,animate)
-end
+
 function ListView:__addCell(cell)
 	self.listnd:addChild(cell)
 	self.cells[#self.cells + 1] = cell	
@@ -101,11 +107,14 @@ function ListView:removeCellAtIndex(index, isRunAction)
 	self:dispatchEvent({name = "removeCellAtIndex", index = index, count = #self.cells})
 end
 
-function ListView:skipToCell(index, anim, time, easing)
-	self:skipToCell__(index, 0,true, time, easing)
-end
+function ListView:skipToCell(index,base,anim, time, easing)
 
-function ListView:skipToCell__(index, base,animated, time, easing)
+	base = base or 0
+	if(anim==nil) then
+		anim = true
+	end
+	time = time or 0.2
+
 	local count = #self.cells
 	if count < 1 then
 		self.curridx = 0
@@ -128,12 +137,23 @@ function ListView:skipToCell__(index, base,animated, time, easing)
 		else
 			offset = offset + size.height
 		end
-	end    
+	end
+
+	local cell=self.cells[index]
+	local size = cell:getContentSize()
+	if self.direction == 2 then
+		offset = offset + size.width*self.cellalign
+	else
+		offset = offset + size.height*self.cellalign
+	end
+
 	self:setOffset(base,offset,anim,time,easing)
+
 	self:dispatchEvent({name = "skipToCell", anim = anim, time = time, easing = easing})
 end
 
-function ListView:skipToCellIfNeed(index)
+function ListView:skipToCellIfNeed(index,base,anim, time, easing)
+
 	local count = #self.cells
 	if index < 1 or index>count then        
 		return
@@ -156,11 +176,11 @@ function ListView:skipToCellIfNeed(index)
 			return 
 		end
 	else   
-		if (self.offset[1]+curoff) <= self.clipsz.width and (self.offset[1]+offset) >= 0 then
+		if (self.offset[1]+offset) <= self.clipsz.width and (self.offset[1]+curoff) >= 0 then
 			return
 		end     
 	end
-	self:skipToCell(index,true)
+	self:skipToCell(index,base,anim, time, easing)
 end
 
 
@@ -213,6 +233,50 @@ end
 
 function ListView:onCleanup()
 	self:removeAllEventListeners()
+end
+
+function ListView:onTouch(event, x, y)
+	self.tpp = self.listnd:convertToNodeSpace(ccp(x,y))
+	return ListView.super.onTouch(self,event, x, y)
+end
+
+function ListView:onTouchBegan(x, y)
+	self.touchidx = 0
+	self.touchcell = nil
+	for i,cell in pairs(self.cells) do
+		if(cell:getBoundingBox():containsPoint(ccp(self.tpp.x, self.tpp.y))) then
+			self.touchidx = i
+			self.touchcell = cell
+			self.touchcell:onTouch("began", x, y)
+			print("onTouchBegan touchcell_idx",i)
+			break
+		end
+	end  
+	return ListView.super.onTouchBegan(self,x,y)
+end
+
+function ListView:onTouchMoved(x, y)
+	ListView.super.onTouchMoved(self,x,y)
+	if(self.drag.isdrag) then
+		if(self.touchcell) then			
+			--print("onTouchMoved touchcell cancelled")	
+			self.touchcell:onTouch("cancelled", x, y, true)
+			--self.touchidx = 0
+			self.touchcell = nil
+		end
+	else
+		if(self.touchcell) then
+			--print("onTouchMoved touchcell moved")	
+			self.touchcell:onTouch("moved", x, y)
+		end
+	end
+end
+
+function ListView:onTouchEnded(x, y)
+	if(self.touchcell) then
+		self.touchcell:onTouch("ended", x, y)
+	end
+	ListView.super.onTouchEnded(self,x,y)
 end
 
 return ListView

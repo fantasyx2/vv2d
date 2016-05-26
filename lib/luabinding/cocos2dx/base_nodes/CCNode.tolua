@@ -448,9 +448,9 @@ class CCNode : public CCScriptEventDispatcher
      *
      * @param child     A child node
      * @param zOrder    Z order for drawing priority. Please refer to setZOrder(int)
-     */
-    void addChild(CCNode * child, int zOrder);
+     */    
     void addChild(CCNode * child, std::string &name);
+    void addChild(CCNode * child, int zOrder);
     /**
      * Adds a child to the container with z-order as 0.
      *

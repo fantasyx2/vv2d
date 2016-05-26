@@ -18,7 +18,24 @@ require("config_debug")
 require("util.weaktable")
 require("ccs.ccs310")
 
+----------------------------
+----------------------------
+print(string.format("%-10s%10s","67890","12345"))
+print(string.format("%-10d%10s",1234567,"12345"))
+print(string.format("%-10d%10s",346788899,"12345"))
+print(string.format("%10s%10s","67890","12345"))
+print(string.format("%s","1234567890"))
 
+--print(string.gsub("format: RGBA8888   \n324","(%a+):%s(%w+)","%1===%2"))
+-- a,b,c=string.gsub("format: RGBA8888 \nxy: t240,320\n","(%a+):%s?([%a%d]+[,%s]?[%a%d]+)",function(a,b)
+-- 	print(a.."="..b)
+-- end)
+-- print(a,"==",b,"==",c)
+
+-- local str = get_file_data("skeleton.atlas")
+-- string.gsub(str,"(%a+):%s+([%-]?[%a%d]+[,]?[%s]?[%-]?[%a%d]+)",function(a,b)
+-- 	print(a.."="..b)
+-- end)
 
 local MyApp = class("MyApp", cc.mvc.AppBase)
 

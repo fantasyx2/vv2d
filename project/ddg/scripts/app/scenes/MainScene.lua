@@ -8,12 +8,22 @@ function MainScene:ctor()
 	--self:tstGenUi()
 	--self:tstJson()
 	--self:tstShader()
-	self:tstJz()
+	--self:tstJz()
 	--self:tstTween()
 	--self:tstSpine()
-	--self:tstCCS()
+	self:tstCCS()
 	--self:tstScrollview()
 	--self:tstListview()
+	--self:tstPageview()
+	-- local i=0
+	-- for i=1,2000 do
+		-- local x = math.random(20,600)
+		-- local y = math.random(100,700)
+		-- local sp = display.newSprite("UI/crit.png")
+		-- self:addChild(sp, 0)
+		-- sp:setPosition(x, y)
+	-- end
+
 end
 
 function MainScene:onEnter()
@@ -25,24 +35,133 @@ end
 function MainScene:initUi()
 end
 
+function MainScene:tstPageview()
+	local timer = require("framework.scheduler")	
+	local PageView = require("uis.listview.PageView")
+	local ListViewCell = require("uis.listview.ListViewCell")
+	local CellBtn = require("uis.listview.CellButton")
+	local nd = PageView.new(CCRect:new(0,0,200,200),2,true)
+	
+	local tb={
+		"UI/crit.png",
+		"UI/god.png",
+		"UI/missA.png",
+		"UI/missB.png",		
+		"UI/xishouA.png",
+		"UI/xishouB.png",
+	}
+	local cells={}
+	for i,v in pairs(tb) do
+		local cell = ListViewCell.new(CCSize(200,200))
+		local bg = CCDrawNode:create()
+		local points={}
+	    points[1] = {0,0}
+	    points[2] = {0,200}
+	    points[3] = {200,200}
+	    points[4] = {200,0}	   
+		bg:drawPolygon(points,
+                        {   
+                            fillColor = cc.c4f(1,1,1,0.5),
+                            borderWidth =   1,
+                            borderColor =   cc.c4f(1,1,1,0.5)
+                        }
+                    )        
+		local cellbtn = CellBtn.new(
+				{
+				    normal  = tb[i],
+				}
+			)
+		bg:setAnchorPoint(ccp(0,0))
+		bg:setPosition(0, 0)
+		cell:addChild(bg)
+		cellbtn:setAnchorPoint(ccp(0.5,0.5))
+		cellbtn:setPosition(100, 100)
+		cellbtn:setPressAnima(true)
+		cell:addNode(cellbtn)
+		table.insert(cells,cell)
+	end
+	nd:addCells(cells)
+	nd:setPosition(320/2, 480/2)
+	nd:ignoreAnchorPointForPosition(false)
+	nd:setAnchorPoint(ccp(0.5,0.5))
+	self:addChild(nd)
+	nd:setTouchEnabled(true)
+	nd:setCellAlign(0.0)
+	--timer.performWithDelayGlobal(function() print("llllllll") nd:skipToCellIfNeed(5,0) end,2.0)
+end
+
 function MainScene:tstListview()
 	local timer = require("framework.scheduler")	
 	local ListView = require("uis.listview.ListView")
 	local ListViewCell = require("uis.listview.ListViewCell")
-	local nd = ListView.new(CCRect:new(0,0,150,200),2,true)
-	local cell1 = ListViewCell.new(CCSize(100,200));
-	local sp1 = display.newSprite("UI/crit.png");
-		  sp1:setAnchorPoint(ccp(0,0))
-		  cell1:addChild(sp1)
-	local cell2 = ListViewCell.new(CCSize(100,200));	
-	local sp2 = display.newSprite("UI/god.png")
-		  sp2:setAnchorPoint(ccp(0,0))
-		  cell2:addChild(sp2)
-	nd:addCells({cell1,cell2})
+	local CellBtn = require("uis.listview.CellButton")
+	local nd = ListView.new(CCRect:new(0,0,200,180),1,true)
+	
+	local tb={
+		"UI/crit.png",
+		"UI/god.png",
+		"UI/missA.png",
+		"UI/missB.png",		
+		"UI/xishouA.png",
+		"UI/xishouB.png",
+
+		"UI/crit.png",
+		"UI/god.png",
+		"UI/missA.png",
+		"UI/missB.png",		
+		"UI/xishouA.png",
+		"UI/xishouB.png",
+
+		"UI/crit.png",
+		"UI/god.png",
+		"UI/missA.png",
+		"UI/missB.png",		
+		"UI/xishouA.png",
+		"UI/xishouB.png",
+
+		"UI/crit.png",
+		"UI/god.png",
+		"UI/missA.png",
+		"UI/missB.png",		
+		"UI/xishouA.png",
+		"UI/xishouB.png",
+	}
+	local cells={}
+	for i,v in pairs(tb) do
+		local cell = ListViewCell.new(CCSize(120,80))
+		local bg = CCDrawNode:create()
+		local points={}
+	    points[1] = {0,0}
+	    points[2] = {0,80}
+	    points[3] = {120,80}
+	    points[4] = {120,0}	   
+		bg:drawPolygon(points,
+                        {   
+                            fillColor = cc.c4f(1,1,1,0.5),
+                            borderWidth =   1,
+                            borderColor =   cc.c4f(1,1,1,0.5)
+                        }
+                    )
+		local cellbtn = CellBtn.new(
+				{
+				    normal  = tb[i],
+				}
+			)
+		bg:setAnchorPoint(ccp(0,0))
+		bg:setPosition(0, 0)
+		cell:addChild(bg)
+		cellbtn:setAnchorPoint(ccp(0.5,0.5))
+		cellbtn:setPosition(60, 40)
+		cellbtn:setPressAnima(true)
+		cell:addNode(cellbtn)
+		table.insert(cells,cell)
+	end
+	nd:addCells(cells)
 	nd:setPosition(50, 50)
 	self:addChild(nd)
 	nd:setTouchEnabled(true)
-	timer.performWithDelayGlobal(function() print("llllllll") nd:skipToCellIfNeed(1) end,2.0)
+	nd:setCellAlign(0.8)
+	timer.performWithDelayGlobal(function() print("llllllll") nd:skipToCellIfNeed(5,0) end,2.0)
 end
 
 function MainScene:tstScrollview()

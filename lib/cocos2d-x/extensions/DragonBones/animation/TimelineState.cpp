@@ -1,12 +1,11 @@
 #include "TimelineState.h"
 #include "objects/TransformTimeline.h"
-#include "Bone.h"
+#include "../Bone.h"
 #include "objects/TransformFrame.h"
 #include "objects/AnimationData.h"
 #include <stdlib.h>
 namespace dragonBones
 {
-
     std::vector<TimelineState*> TimelineState::_pool;
 
         TimelineState* TimelineState::borrowObject()

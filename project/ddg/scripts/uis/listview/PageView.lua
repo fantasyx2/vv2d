@@ -1,109 +1,108 @@
 
-local ScrollView = import(".ScrollView")
-local PageControl = class("PageControl", ScrollView)
+local ListView = import(".ListView")
+local PageView = class("PageView", ListView)
 --过半翻页
-function PageControl:oooo(x, y)
-    local offsetX, offsetY = self.offsetX, self.offsetY
-    local index = 0
+function PageView:oooo(x, y)
+    local index = self.touchidx
     local count = #self.cells
-    local offsetBase = self.offsetBase
-    if self.direction == ScrollView.DIRECTION_HORIZONTAL then
-        offsetX = -offsetX
-        local x = 0
-        local i = 1
-        while i <= count do
-            local cell = self.cells[i]
-            local size = cell:getContentSize()
-            if offsetX < offsetBase+x + size.width / 2 then
-                index = i
-                break
-            end
-            x = x + size.width
-            i = i + 1
-        end
-        if i > count then index = count end
-    else
-        local y = 0
-        local i = 1
-        while i <= count do
-            local cell = self.cells[i]
-            local size = cell:getContentSize()
-            if offsetY < offsetBase+y + size.height / 2 then
-                index = i
-                break
-            end
-            y = y + size.height
-            i = i + 1
-        end
-        if i > count then index = count end
+    --print("----------oooo--",index,count)
+    if (index < 1 or index>count) then        
+        return
     end
-
-    self:scrollToCell(index, true)
+    local dx = self.drag.ex-self.drag.sx
+    local dy = self.drag.ey-self.drag.sy
+    local offset = self.offset[1]
+    local curoff = self.offset[1]
+    for i = 1, index do
+        local cell = self.cells[i]
+        local size = cell:getContentSize()
+        if self.direction == 2 then
+            curoff = offset
+            offset = offset + size.width
+        else
+            curoff = offset
+            offset = offset - size.height
+        end
+    end
+    --print("----------oooo",dx,dy,curoff,offset)
+    if(self.direction==2) then
+        if(dx<0) then
+            if (offset <= self.clipsz.width/2) then
+                index = index+1
+            else
+                index = index    
+            end
+        else
+            if (curoff >= self.clipsz.width/2) then
+                index = index-1
+            else
+                index = index    
+            end
+        end
+    else
+        if(dy<0) then
+            if (curoff <= self.clipsz.height/2) then
+                index = index-1
+            else
+                index = index   
+            end
+        else
+            if (offset >= self.clipsz.height/2) then
+                index = index+1
+            else
+                index = index    
+            end
+        end    
+    end
+    --print("----------oooo",index)
+    if(index < 1) then
+        index=1
+    elseif(index>count) then 
+        index=count   
+    end    
+    self:skipToCell(index)
+    return index
 end
 
 
 --时间，速度控制翻页
-function PageControl:onTouchEndedWithoutTap(x, y)
-    if(not self.touchCellIdx) then
-        print("onTouchEndedWithoutTap",self.touchCellIdx)
-        self:oooo(x,y)
-        return
-    end
-    local cur = self.touchCellIdx
-    local count = #self.cells
-    -- error("ScrollView:onTouchEndedWithoutTap() - inherited class must override this method")    
-    local xt = 30*(self.drag.endX-self.drag.moveX)
-    local yt = 30*(self.drag.endY-self.drag.moveY)
-    local ct = self.drag.endclock - self.drag.lastclock
-    -- self.baseNd:stopAllActions()
-    -- self.baseNd:setPosition(self.offsetX, self.offsetY)
-    -- local seqac = transition.sequence(
-    --         {
-    --             CCMoveBy:create(0.2, ccp(xt,yt)),
-    --             CCCallFunc:create(function()  end)
-    --         }
-    --     )
-    -- self.baseNd:runAction(seqac)
-    --print("onTouchEndedWithoutTap",xt,yt,ct)
-    -- print("self:getIsOutOfRg()",self:getIsOutOfRg())
-    -- print("self:getIsOutOfRg() 11111111 ",self.offsetX,self.view:getContentSize().width,self.touchRect.size.width)
-
-    if self.direction == ScrollView.DIRECTION_HORIZONTAL then
-        if(math.abs(xt)>60 and ct<0.5) then
-            -- self:setContentOffsetWithAnim(self.offsetX+xt, true)
-            if(xt<0) then
-                cur = cur + 1
-            else
-                cur = cur - 1
+function PageView:onTouchEnded_tap(x, y)
+    if(not self:backscroll()) then  
+        --print("PageView onTouchEnded_tap")
+        if(self:autoscroll()) then
+            --print("PageView speed",self.speed)
+            --速度400翻页
+            local index = self.touchidx
+            local count = #self.cells
+            if(self.speed<0 and self.speed<-400) then
+                if(self.direction==2) then
+                    index = index + 1
+                else
+                    index = index - 1
+                end
+            elseif(self.speed>0 and self.speed>400) then
+                if(self.direction==2) then
+                    index = index - 1
+                else
+                    index = index + 1
+                end
             end
-            if(cur<1) then
-                cur=1
-            elseif(cur>count)then
-                cur=count
+            self:resetspeed()
+            if(index < 1) then
+                index=1
+            elseif(index>count) then 
+                index=count   
             end
-            self:scrollToCell(cur, true)
-        else
-            self:oooo(x,y)  
-        end
-    else
-        if(math.abs(yt)>60  and ct<0.5) then
-            -- self:setContentOffsetWithAnim(self.offsetY+yt, true)
-            if(yt<0) then
-                cur = cur -1
-            else
-                cur = cur + 1
-            end
-            if(cur<1) then
-                cur=1
-            elseif(cur>count)then
-                cur=count
-            end
-            print("self:scrollToCell(",cur,yt,count)
-            self:scrollToCell(cur, true)
-        else
-            self:oooo(x,y) 
+            self:skipToCell(index)
+        else          
+            self:oooo()    
         end
     end
 end
 
-return PageControl
+function PageView:onTouchEnded_notap(x, y)
+    self.touchidx = 0
+    self.touchcell = nil
+end
+
+return PageView

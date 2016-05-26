@@ -1,6 +1,6 @@
 local MovePushButton = import(".MovePushButton")
 local SelectButton = import(".SelectButton")
-local CellPushButton = import(".scrollview.CellPushButton")
+local CellButton = import(".listview.CellButton")
 local ProgressBar    =import(".ProgressBar")
 local UIButton = import("framework.cc.ui.UIButton")
 GenUiUtil={}
@@ -92,7 +92,7 @@ function GenUiUtil.genUis(ustb,parent,pathflag)
                 end
             end
         elseif(ps.t=="cellbtn") then
-            uis[ps.n] = CellPushButton.new(
+            uis[ps.n] = CellButton.new(
                                     {
                                         normal  = ps.res[1] and (pathflag .. ps.res[1]) or nil,
                                         pressed = ps.res[2] and (pathflag .. ps.res[2]) or nil,
@@ -381,7 +381,7 @@ function GenUiUtil.genUi(ps,parent,pathflag)
             end
         end
     elseif(ps.t=="cellbtn") then
-        btnn = CellPushButton.new(
+        btnn = CellButton.new(
                                 {
                                     normal  = ps.res[1] and (pathflag .. ps.res[1]) or nil,
                                     pressed = ps.res[2] and (pathflag .. ps.res[2]) or nil,

@@ -162,8 +162,11 @@ local function gen_loading(t)
 		return nd
 	end
 end
+local PageView = require("uis.listview.PageView")
 local function gen_pageview(t)
-	local nd = display.newNode()
+	local sz = t.Size
+    local direct = t.DirectionType=="Vertical" and 1 or 2
+	local nd = PageView.new(CCRect:new(0,0,sz.X,sz.Y),direct,t.ClipAble)
 	if(nd) then
 		nd:setName(t.Name)
 		set_param(nd,t)
@@ -234,12 +237,20 @@ local function gen_textatlas(t)
 	end
 end
 local function gen_input(t)
-	local nd = display.newNode()
-	if(nd) then
-		nd:setName(t.Name)
-		set_param(nd,t)
-		return nd
-	end
+	--dump(t)
+	-- local nd = ui.newEditBox(
+ --                        {
+ --                            image = t.res or "",
+ --                            size = CCSize(t.Size.X,t.Size.Y),
+ --                            imageOpacity = 255,
+ --                            --listener =,
+ --                        })
+	-- print("gen_input")
+	-- if(nd) then
+	-- 	nd:setName(t.Name)
+	-- 	set_param(nd,t)
+	-- 	return nd
+	-- end
 end
 
 local align_map=
@@ -285,6 +296,21 @@ local function gen_text(t)
 		return nd
 	end
 end
+
+
+local function gen_bmfont(t)
+	local a=t.LabelBMFontFile_CNB
+	if(a and a.Path) then
+		local nd = CCLabelBMFont:create()
+		if(nd) then
+			nd:setFntFile(a.Path)
+			nd:setString(t.LabelText or "")
+			nd:setName(t.Name)
+			set_param(nd,t)
+			return nd
+		end
+	end
+end
 --------------------------------------
 local config=
 {
@@ -304,6 +330,7 @@ local config=
 	TextAtlasObjectData		= gen_textatlas,
 	TextFieldObjectData		= gen_input,
 	TextObjectData 			= gen_text,
+	TextBMFontObjectData    = gen_bmfont,
 }
 --------------------------------------
 --[[[
@@ -396,7 +423,7 @@ local function gen(a)
 		--parse childs
 		for _,v in pairs(a.Children) do
 			local n = gen(v)
-			if(n.node) then
+			if(n and n.node) then
 				r.node:addChild(n.node)
 				--table.insert(r.childs,n)
 				r.childs[v.Name]=n

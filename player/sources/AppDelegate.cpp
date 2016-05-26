@@ -13,8 +13,8 @@ using namespace std;
 using namespace cocos2d;
 using namespace CocosDenshion;
 USING_NS_CC_EXTRA;
-//std::string s_debug_prj_dir = "project/ddg";
-std::string s_debug_prj_dir = "";
+std::string s_debug_prj_dir = "project/ddg";
+//std::string s_debug_prj_dir = "";
 AppDelegate::AppDelegate()
 {
     // fixed me

@@ -1,6 +1,6 @@
 /*
 ** Lua binding: Cocos2d
-** Generated automatically by tolua++-1.0.92 on 04/05/16 23:34:54.
+** Generated automatically by tolua++-1.0.92 on Fri May 27 01:30:50 2016.
 */
 
 /****************************************************************************
@@ -21092,36 +21092,6 @@ static int tolua_Cocos2d_CCNode_addChild03(lua_State* tolua_S)
  if (
      !tolua_isusertype(tolua_S,1,"CCNode",0,&tolua_err) ||
      !tolua_isusertype(tolua_S,2,"CCNode",0,&tolua_err) ||
-     !tolua_isnumber(tolua_S,3,0,&tolua_err) ||
-     !tolua_isnoobj(tolua_S,4,&tolua_err)
- )
-  goto tolua_lerror;
- else
- {
-  CCNode* self = (CCNode*)  tolua_tousertype(tolua_S,1,0);
-  CCNode* child = ((CCNode*)  tolua_tousertype(tolua_S,2,0));
-  int zOrder = ((int)  tolua_tonumber(tolua_S,3,0));
-#ifndef TOLUA_RELEASE
-  if (!self) tolua_error(tolua_S,"invalid 'self' in function 'addChild'", NULL);
-#endif
-  {
-   self->addChild(child,zOrder);
-  }
- }
- return 0;
-tolua_lerror:
- return tolua_Cocos2d_CCNode_addChild02(tolua_S);
-}
-#endif //#ifndef TOLUA_DISABLE
-
-/* method: addChild of class  CCNode */
-#ifndef TOLUA_DISABLE_tolua_Cocos2d_CCNode_addChild04
-static int tolua_Cocos2d_CCNode_addChild04(lua_State* tolua_S)
-{
- tolua_Error tolua_err;
- if (
-     !tolua_isusertype(tolua_S,1,"CCNode",0,&tolua_err) ||
-     !tolua_isusertype(tolua_S,2,"CCNode",0,&tolua_err) ||
      !tolua_iscppstring(tolua_S,3,0,&tolua_err) ||
      !tolua_isnoobj(tolua_S,4,&tolua_err)
  )
@@ -21140,6 +21110,36 @@ static int tolua_Cocos2d_CCNode_addChild04(lua_State* tolua_S)
   }
  }
  return 1;
+tolua_lerror:
+ return tolua_Cocos2d_CCNode_addChild02(tolua_S);
+}
+#endif //#ifndef TOLUA_DISABLE
+
+/* method: addChild of class  CCNode */
+#ifndef TOLUA_DISABLE_tolua_Cocos2d_CCNode_addChild04
+static int tolua_Cocos2d_CCNode_addChild04(lua_State* tolua_S)
+{
+ tolua_Error tolua_err;
+ if (
+     !tolua_isusertype(tolua_S,1,"CCNode",0,&tolua_err) ||
+     !tolua_isusertype(tolua_S,2,"CCNode",0,&tolua_err) ||
+     !tolua_isnumber(tolua_S,3,0,&tolua_err) ||
+     !tolua_isnoobj(tolua_S,4,&tolua_err)
+ )
+  goto tolua_lerror;
+ else
+ {
+  CCNode* self = (CCNode*)  tolua_tousertype(tolua_S,1,0);
+  CCNode* child = ((CCNode*)  tolua_tousertype(tolua_S,2,0));
+  int zOrder = ((int)  tolua_tonumber(tolua_S,3,0));
+#ifndef TOLUA_RELEASE
+  if (!self) tolua_error(tolua_S,"invalid 'self' in function 'addChild'", NULL);
+#endif
+  {
+   self->addChild(child,zOrder);
+  }
+ }
+ return 0;
 tolua_lerror:
  return tolua_Cocos2d_CCNode_addChild03(tolua_S);
 }

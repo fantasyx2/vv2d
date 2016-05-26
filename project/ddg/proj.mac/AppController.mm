@@ -73,12 +73,11 @@ using namespace cocos2d::extra;
     env = [env stringByTrimmingCharactersInSet:[NSCharacterSet newlineCharacterSet]];
     SimulatorConfig::sharedDefaults()->setQuickCocos2dxRootPath([env cStringUsingEncoding:NSUTF8StringEncoding]);
     
-    [self updateProjectConfigFromCommandLineArgs:&projectConfig];
-    
-
-    [self updateProjectConfigFromCommandLineArgs:&projectConfig];
+    //[self updateProjectConfigFromCommandLineArgs:&projectConfig];
+   
     //need set cocos2dxroot copy from player
     projectConfig.resetToWelcome();
+    projectConfig.setScriptFile(projectConfig.getScriptFileRealPath());
     [self createWindowAndGLView];
     [self startup];
     [self initUI];
@@ -181,7 +180,7 @@ using namespace cocos2d::extra;
     
     if (projectConfig.isShowConsole())
     {
-        [self openConsoleWindow];
+        //[self openConsoleWindow];
     }
 
 

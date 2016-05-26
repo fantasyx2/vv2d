@@ -3,8 +3,9 @@
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 APP_ROOT="$DIR/.."
 APP_ANDROID_ROOT="$DIR"
+QUICK_COCOS2DX_ROOT=/Users/jeep/cocos/quick-cocos2d-x-2.2.6-release
 COCOS2DX_ROOT=$QUICK_COCOS2DX_ROOT/lib/cocos2d-x
-
+ANDROID_NDK_ROOT=/Users/jeep/ADT/android-ndk-r10d
 echo "- config:"
 echo "  ANDROID_NDK_ROOT    = $ANDROID_NDK_ROOT"
 echo "  QUICK_COCOS2DX_ROOT = $QUICK_COCOS2DX_ROOT"

@@ -16,6 +16,7 @@ local OUT_BOUNCE_DRAG_RATE=0.4--越界拖动位移系数
 
 function ScrollView:ctor(rect, direction,clip)
 	self.drag={}
+	self.drag_min=15
 	self.outofbounce=true
 	self.allsz={0,0}
 	self.offset={0,0,0}
@@ -28,6 +29,7 @@ function ScrollView:ctor(rect, direction,clip)
 	self.direction = direction
 	self.cliprect = rect
 	self.clipsz = rect.size
+	self:setContentSize(self.clipsz)
 
 	self.container=nil	
 	self.clipnd = nil
@@ -217,18 +219,19 @@ end
 
 ---------------------------------------------------
 function ScrollView:onTouch(event, x, y)
-	local pp = self.clipnd:convertToNodeSpace(ccp(x,y))
-	print("=======A",x,y)
-	print("=======B",pp.x,pp.y)
-	local pp = self.container:convertToNodeSpace(ccp(x,y))
-	print("=======C",pp.x,pp.y)
-	if(self.container:getChildByTag(100)) then
-		local pp = (self.container:getChildByTag(100)):convertToNodeSpace(ccp(x,y))
-		print("=======D",pp.x,pp.y)
-	end
-	
-	local pp = self.clipnd:convertToNodeSpace(ccp(x,y))
+	----[[
+	-- local pp = self.clipnd:convertToNodeSpace(ccp(x,y))
+	-- print("=======A",x,y)
+	-- print("=======B",pp.x,pp.y)
+	-- local pp = self.container:convertToNodeSpace(ccp(x,y))
+	-- print("=======C",pp.x,pp.y)
+	-- if(self.container:getChildByTag(100)) then
+	-- 	local pp = (self.container:getChildByTag(100)):convertToNodeSpace(ccp(x,y))
+	-- 	print("=======D",pp.x,pp.y)
+	-- end
+	----]]	
 	if event == "began" then
+		local pp = self.clipnd:convertToNodeSpace(ccp(x,y))
 		if not self.cliprect:containsPoint(pp) then return false end
 		self:resetspeed()
 		return self:onTouchBegan(x, y)
@@ -253,41 +256,49 @@ function ScrollView:onTouchBegan(x, y)
 		ptick = self.currdt,
 		etick = self.currdt,
 		istap = true,
+		isdrag= false,
 	}
 	return true
 end
 
 function ScrollView:onTouchMoved(x, y)	
 	local dx = x-self.drag.px
-	local dy = y-self.drag.py		
+	local dy = y-self.drag.py
+	local ddd		
 	if self.direction == 1 then
-		--if(math.abs(dy)>15) then
-			self.drag.px=x
-			self.drag.py=y
-			self:addOffset(dx,dy)
-		--end
-		self.drag.ptick = self.currdt
+		ddd=dy
 	else
-		--if(math.abs(dx)>15) then
+		ddd=dx
+	end
+	if(not self.drag.isdrag) then
+		if(math.abs(ddd)>self.drag_min) then
+			self.drag.isdrag = true
+			self.drag.sx=x
+			self.drag.sy=y
 			self.drag.px=x
 			self.drag.py=y
-			self:addOffset(dx,dy)
-		--end
-		self.drag.ptick = self.currdt
+			self.drag.stick=self.currdt
+		end	
+	else
+		self.drag.px=x
+		self.drag.py=y
+		self:addOffset(dx,dy)
 	end
+	self.drag.ptick = self.currdt
+
 end
 
 function ScrollView:onTouchEnded(x, y)	
 	local dx = x-self.drag.px
-	local dy = y-self.drag.py		
+	local dy = y-self.drag.py	
+	local ddd	
 	if self.direction == 1 then
-		if(math.abs(dy)>15) then
-			self:addOffset(dx,dy)
-		end
+		ddd=dy
 	else
-		if(math.abs(dx)>15) then
-			self:addOffset(dx,dy)
-		end
+		ddd=dx
+	end
+	if(math.abs(ddd)>self.drag_min) then
+		self:addOffset(dx,dy)
 	end
 	self.drag.ex = x
 	self.drag.ey = y
@@ -332,8 +343,8 @@ function ScrollView:setOffset(base,off,anim,dt,easing)
 		tmpbase = base*self.clipsz.height
 		tmpoff= offset_min+off-tmpbase
 	else
-		tmpbase = base*self.clipsz.width
-		tmpoff= offset_min-off+tmpbase
+		tmpbase = base*self.clipsz.width		
+		tmpoff= offset_max-off+tmpbase
 	end	
 	if(offset<offset_min) then
 		tmpoff=offset_min
@@ -350,7 +361,7 @@ function ScrollView:setOffset(base,off,anim,dt,easing)
 							end
 						)
 			act:setTag(1000)
-			this:runAction(CCEaseSineInOut:create(act))
+			self:runAction(CCEaseSineInOut:create(act))
 		end
 	else
 		self.offset[1]=tmpoff
