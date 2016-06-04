@@ -35,46 +35,6 @@
 	},
 	"buffers":
 	[
-		{
-			"file": "lib/cocos2d-x/scripting/lua/cocos2dx_support/Lua_web_socket.cpp",
-			"settings":
-			{
-				"buffer_size": 18779,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "lib/cocos2d-x/scripting/lua/cocos2dx_support/CCLuaStack.cpp",
-			"settings":
-			{
-				"buffer_size": 28756,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "lib/cocos2d-x/scripting/lua/proj.android/Android.mk",
-			"settings":
-			{
-				"buffer_size": 6324,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "lib/cocos2d-x/extensions/network/WebSocket.h",
-			"settings":
-			{
-				"buffer_size": 4609,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "lib/cocos2d-x/extensions/network/WebSocket.cpp",
-			"settings":
-			{
-				"buffer_size": 19518,
-				"line_ending": "Unix"
-			}
-		}
 	],
 	"build_system": "Packages/User/love2d.sublime-build",
 	"command_palette":
@@ -104,8 +64,20 @@
 	},
 	"file_history":
 	[
-		"/Users/jeep/cocos/quick-cocos2d-x-2.2.6-release/lib/cocos2d-x/extensions/network/WebSocket.h",
+		"/Users/jeep/Library/Application Support/Sublime Text 2/Packages/User/Default (OSX).sublime-keymap",
+		"/Users/jeep/Library/Application Support/Sublime Text 2/Packages/Default/Default (OSX).sublime-keymap",
+		"/Users/jeep/Library/Application Support/Sublime Text 2/Packages/QuickXDev/QuickXDev.sublime-settings",
+		"/Users/jeep/cocos/quick-cocos2d-x-2.2.6-release/lib/cocos2d-x/scripting/lua/lua_extensions/lua_extensions.c",
+		"/Users/jeep/cocos/quick-cocos2d-x-2.2.6-release/lib/cocos2d-x/scripting/lua/lua_extensions/socket/luasocket_scripts.h",
+		"/Users/jeep/cocos/quick-cocos2d-x-2.2.6-release/lib/cocos2d-x/external/libwebsockets/ios/include/libwebsockets.h",
+		"/Users/jeep/cocos/quick-cocos2d-x-2.2.6-release/lib/cocos2d-x/external/Android.mk",
+		"/Users/jeep/cocos/quick-cocos2d-x-2.2.6-release/lib/cocos2d-x/external/extra/platform/android/CCHTTPRequestAndroid.cpp",
+		"/Users/jeep/cocos/quick-cocos2d-x-2.2.6-release/lib/cocos2d-x/scripting/lua/proj.android/Android.mk",
+		"/Users/jeep/Github/Quick-Cocos2dx-Community/cocos/scripting/lua-bindings/proj.android/Android.mk",
 		"/Users/jeep/cocos/quick-cocos2d-x-2.2.6-release/lib/cocos2d-x/extensions/network/WebSocket.cpp",
+		"/Users/jeep/cocos/quick-cocos2d-x-2.2.6-release/lib/cocos2d-x/extensions/network/WebSocket.h",
+		"/Users/jeep/cocos/quick-cocos2d-x-2.2.6-release/lib/cocos2d-x/scripting/lua/cocos2dx_support/CCLuaStack.cpp",
+		"/Users/jeep/cocos/quick-cocos2d-x-2.2.6-release/lib/cocos2d-x/scripting/lua/cocos2dx_support/Lua_web_socket.cpp",
 		"/Users/jeep/cocos/quick-cocos2d-x-2.2.6-release/lib/cocos2d-x/cocos2dx/cocoa/CCScriptEventDispatcher.h",
 		"/Users/jeep/cocos/quick-cocos2d-x-2.2.6-release/lib/cocos2d-x/cocos2dx/cocoa/CCScriptEventDispatcher.cpp",
 		"/Users/jeep/cocos/quick-cocos2d-x-2.2.6-release/framework/framework/functions.lua",
@@ -127,7 +99,6 @@
 		"/Users/jeep/cocos/quick-cocos2d-x-2.2.6-release/framework/framework/cc/mvc/AppBase.lua",
 		"/Users/jeep/cocos/quick-cocos2d-x-2.2.6-release/framework/framework/cc/Registry.lua",
 		"/Users/jeep/cocos/quick-cocos2d-x-2.2.6-release/framework/framework/cc/mvc/init.lua",
-		"/Users/jeep/cocos/quick-cocos2d-x-2.2.6-release/lib/cocos2d-x/scripting/lua/lua_extensions/lua_extensions.c",
 		"/Users/jeep/cocos/quick-cocos2d-x-2.2.6-release/lib/luabinding/cocos2dx/platform/platform.tolua",
 		"/Users/jeep/cocos/quick-cocos2d-x-2.2.6-release/project/ddg/scripts/app/scenes/MainScene.lua",
 		"/Users/jeep/cocos/quick-cocos2d-x-2.2.6-release/project/ddg/scripts/ccs/ccs310.lua",
@@ -145,7 +116,6 @@
 		"/Users/jeep/cocos/quick-cocos2d-x-2.2.6-release/samples/ui/scripts/app/scenes/TestUIScrollViewScene.lua",
 		"/Users/jeep/cocos/quick-cocos2d-x-2.2.6-release/samples/ui/scripts/app/scenes/TestUISliderScene.lua",
 		"/Users/jeep/cocos/quick-cocos2d-x-2.2.6-release/samples/ui/scripts/app/scenes/TestUIListViewScene.lua",
-		"/Users/jeep/cocos/quick-cocos2d-x-2.2.6-release/lib/cocos2d-x/external/Android.mk",
 		"/Users/jeep/cocos/quick-cocos2d-x-2.2.6-release/lib/cocos2d-x/external/extra/apptools/HelperFunc.cpp",
 		"/Users/jeep/cocos/quick-cocos2d-x-2.2.6-release/lib/cocos2d-x/external/extra/apptools/HelperFunc.h",
 		"/Users/jeep/cocos/quick-cocos2d-x-2.2.6-release/lib/cocos2d-x/cocos2dx/Android.mk",
@@ -221,17 +191,7 @@
 		"/D/game/quick-cocos2d-x-2.2.6-release/lib/luabinding/cocos2dx/actions/CCActionTween.tolua",
 		"/D/game/quick-cocos2d-x-2.2.6-release/lib/cocos2d-x/cocos2dx/shaders/CCGLProgram.h",
 		"/D/game/quick-cocos2d-x-2.2.6-release/lib/cocos2d-x/cocos2dx/shaders/ccGLStateCache.h",
-		"/D/game/quick-cocos2d-x-2.2.6-release/lib/cocos2d-x/cocos2dx/shaders/ccGLStateCache.cpp",
-		"/D/game/quick-cocos2d-x-2.2.6-release/lib/cocos2d-x/cocos2dx/textures/CCTexture2D.h",
-		"/D/game/quick-cocos2d-x-2.2.6-release/lib/cocos2d-x/cocos2dx/sprite_nodes/CCSprite.cpp",
-		"/D/game/quick-cocos2d-x-2.2.6-release/lib/luabinding/extensions/spine/SkeletonAnimation.tolua",
-		"/D/game/quick-cocos2d-x-2.2.6-release/lib/cocos2d-x/cocos2dx/misc_nodes/CCProgressTimer.cpp",
-		"/D/game/quick-cocos2d-x-2.2.6-release/lib/cocos2d-x/cocos2dx/textures/CCTexture2D.cpp",
-		"/D/game/quick-cocos2d-x-2.2.6-release/lib/cocos2d-x/extensions/spine/MeshAttachment.h",
-		"/D/game/quick-cocos2d-x-2.2.6-release/lib/cocos2d-x/extensions/spine/MeshAttachment.c",
-		"/D/game/quick-cocos2d-x-2.2.6-release/lib/luabinding/CocoStudio/CCTween.tolua",
-		"/D/game/quick-cocos2d-x-2.2.6-release/lib/luabinding/cocos2dx/draw_nodes/CCShapeNode.tolua",
-		"/D/game/quick-cocos2d-x-2.2.6-release/framework/cocos2dx/OpenGL.lua"
+		"/D/game/quick-cocos2d-x-2.2.6-release/lib/cocos2d-x/cocos2dx/shaders/ccGLStateCache.cpp"
 	],
 	"find":
 	{
@@ -239,7 +199,7 @@
 	},
 	"find_in_files":
 	{
-		"height": 93.0,
+		"height": 0.0,
 		"where_history":
 		[
 			"",
@@ -268,6 +228,8 @@
 		"case_sensitive": true,
 		"find_history":
 		[
+			"lws_callback_reasons",
+			"CCHTTPRequest.cpp",
 			"tolua_Cocos2d_WebSocket_create00",
 			"LuaWebSocket",
 			"tolua_web_socket_open",
@@ -393,9 +355,7 @@
 			"spAnimationState",
 			"spTrackEntry",
 			"ExtensionsDragonBones.tolua",
-			"toluafix_ref_function",
-			"frameEventCallback",
-			"executeFunction"
+			"toluafix_ref_function"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -417,149 +377,8 @@
 	"groups":
 	[
 		{
-			"selected": 1,
 			"sheets":
 			[
-				{
-					"buffer": 0,
-					"file": "lib/cocos2d-x/scripting/lua/cocos2dx_support/Lua_web_socket.cpp",
-					"settings":
-					{
-						"buffer_size": 18779,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								11903,
-								11903
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/C++/C++.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 61.0,
-						"translation.y": 1233.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "lib/cocos2d-x/scripting/lua/cocos2dx_support/CCLuaStack.cpp",
-					"settings":
-					{
-						"buffer_size": 28756,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								6049,
-								6070
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/C++/C++.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 3910.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "lib/cocos2d-x/scripting/lua/proj.android/Android.mk",
-					"settings":
-					{
-						"buffer_size": 6324,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								731,
-								745
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Text/Plain text.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 1998.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "lib/cocos2d-x/extensions/network/WebSocket.h",
-					"settings":
-					{
-						"buffer_size": 4609,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								4609,
-								4609
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/C++/C++.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 581.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 4,
-					"file": "lib/cocos2d-x/extensions/network/WebSocket.cpp",
-					"settings":
-					{
-						"buffer_size": 19518,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								4368,
-								4368
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/C++/C++.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 38.0,
-						"translation.y": 2391.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				}
 			]
 		}
 	],
@@ -596,7 +415,7 @@
 	"menu_visible": true,
 	"output.exec":
 	{
-		"height": 124.0
+		"height": 308.0
 	},
 	"replace":
 	{
@@ -608,6 +427,18 @@
 		"height": 0.0,
 		"selected_items":
 		[
+			[
+				"luasocket_scripts",
+				"lib/cocos2d-x/scripting/lua/lua_extensions/socket/luasocket_scripts.h"
+			],
+			[
+				"lua_extensions.c",
+				"lib/cocos2d-x/scripting/lua/lua_extensions/lua_extensions.c"
+			],
+			[
+				"cchttprequestandroid",
+				"lib/cocos2d-x/external/extra/platform/android/CCHTTPRequestAndroid.cpp"
+			],
 			[
 				"web",
 				"lib/cocos2d-x/extensions/network/WebSocket.cpp"
@@ -1087,6 +918,6 @@
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 376.0,
+	"side_bar_width": 292.0,
 	"status_bar_visible": true
 }
