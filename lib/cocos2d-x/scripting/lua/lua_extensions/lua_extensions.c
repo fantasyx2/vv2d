@@ -17,7 +17,7 @@ extern "C" {
 // socket
 #include "socket/luasocket.h"
 #include "socket/mime.h"
-#include "socket/socket_scripts.h"
+#include "socket/luasocket_scripts.h"
 
 // filesystem
 #include "filesystem/lfs.h"
@@ -56,7 +56,7 @@ void luaopen_lua_extensions(lua_State *L)
     lua_pop(L, 2);
 
     // load extensions script
-    luaopen_socket_scripts(L);
+    luaopen_luasocket_scripts(L);
 }
 
 #if __cplusplus

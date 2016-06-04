@@ -36,52 +36,42 @@
 	"buffers":
 	[
 		{
-			"file": "project/ddg/scripts/app/scenes/MainScene.lua",
+			"file": "lib/cocos2d-x/scripting/lua/cocos2dx_support/Lua_web_socket.cpp",
 			"settings":
 			{
-				"buffer_size": 4458,
+				"buffer_size": 18779,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "lib/cocos2d-x/cocos2dx/Android.mk",
+			"file": "lib/cocos2d-x/scripting/lua/cocos2dx_support/CCLuaStack.cpp",
 			"settings":
 			{
-				"buffer_size": 6849,
+				"buffer_size": 28756,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "lib/cocos2d-x/external/extra/apptools/HelperFunc.h",
+			"file": "lib/cocos2d-x/scripting/lua/proj.android/Android.mk",
 			"settings":
 			{
-				"buffer_size": 331,
+				"buffer_size": 6324,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "lib/cocos2d-x/external/extra/apptools/HelperFunc.cpp",
+			"file": "lib/cocos2d-x/extensions/network/WebSocket.h",
 			"settings":
 			{
-				"buffer_size": 1990,
+				"buffer_size": 4609,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"contents": "Searching 3180 files for \"HelperFunc.cpp\"\n\n/Users/jeep/cocos/quick-cocos2d-x-2.2.6-release/lib/cocos2d-x/external/Android.mk:\n    7  \n    8  LOCAL_SRC_FILES := \\\n    9:     extra/apptools/HelperFunc.cpp \\\n   10      extra/crypto/CCCrypto.cpp \\\n   11      extra/crypto/base64/libbase64.c \\\n\n/Users/jeep/cocos/quick-cocos2d-x-2.2.6-release/lib/proj.ios/quickcocos2dx.xcodeproj/project.pbxproj:\n   61  		2EBAD93D1918BBDC00FF9BD6 /* ccFilterShaders.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2EBAD92A1918BBDC00FF9BD6 /* ccFilterShaders.cpp */; };\n   62  		49832215187FE2C000733BFB /* CZHelperFunc_luabinding.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 49832213187FE2C000733BFB /* CZHelperFunc_luabinding.cpp */; };\n   63: 		49832219187FE2DF00733BFB /* HelperFunc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 49832217187FE2DF00733BFB /* HelperFunc.cpp */; };\n   64  		B2DC7993181BA55A001341D6 /* lsqlite3.c in Sources */ = {isa = PBXBuildFile; fileRef = B2DC798F181BA55A001341D6 /* lsqlite3.c */; };\n   65  		B2DC7994181BA55A001341D6 /* sqlite3.c in Sources */ = {isa = PBXBuildFile; fileRef = B2DC7991181BA55A001341D6 /* sqlite3.c */; };\n   ..\n  516  		49832213187FE2C000733BFB /* CZHelperFunc_luabinding.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CZHelperFunc_luabinding.cpp; sourceTree = \"<group>\"; };\n  517  		49832214187FE2C000733BFB /* CZHelperFunc_luabinding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CZHelperFunc_luabinding.h; sourceTree = \"<group>\"; };\n  518: 		49832217187FE2DF00733BFB /* HelperFunc.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HelperFunc.cpp; sourceTree = \"<group>\"; };\n  519  		49832218187FE2DF00733BFB /* HelperFunc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HelperFunc.h; sourceTree = \"<group>\"; };\n  520  		B2DC798F181BA55A001341D6 /* lsqlite3.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = lsqlite3.c; sourceTree = \"<group>\"; };\n  ...\n 1382  			isa = PBXGroup;\n 1383  			children = (\n 1384: 				49832217187FE2DF00733BFB /* HelperFunc.cpp */,\n 1385  				49832218187FE2DF00733BFB /* HelperFunc.h */,\n 1386  			);\n ....\n 2966  				F459EB84180D0513006CBDF1 /* luasocket_io.c in Sources */,\n 2967  				F459EA79180D04D8006CBDF1 /* CCStore.mm in Sources */,\n 2968: 				49832219187FE2DF00733BFB /* HelperFunc.cpp in Sources */,\n 2969  				F428259417575DA8001479DC /* CCSAXParser.cpp in Sources */,\n 2970  				F428259517575DA8001479DC /* CCThread.cpp in Sources */,\n\n/Users/jeep/cocos/quick-cocos2d-x-2.2.6-release/lib/proj.mac/quickcocos2dx.xcodeproj/project.pbxproj:\n   65  		2EBA8473191B6AC500256D60 /* lua_cocos2dx_manual.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2EBA846E191B6AC500256D60 /* lua_cocos2dx_manual.cpp */; };\n   66  		2EBA8474191B6AC500256D60 /* LuaCocoStudio.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2EBA8470191B6AC500256D60 /* LuaCocoStudio.cpp */; };\n   67: 		4983220E187FE0A900733BFB /* HelperFunc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4983220C187FE0A900733BFB /* HelperFunc.cpp */; };\n   68  		49832211187FE0BE00733BFB /* CZHelperFunc_luabinding.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4983220F187FE0BE00733BFB /* CZHelperFunc_luabinding.cpp */; };\n   69  		E540B383198754880054B7F7 /* AnimationEvent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E540B32F198754870054B7F7 /* AnimationEvent.cpp */; };\n   ..\n  650  		2EBA8470191B6AC500256D60 /* LuaCocoStudio.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LuaCocoStudio.cpp; sourceTree = \"<group>\"; };\n  651  		2EBA8471191B6AC500256D60 /* LuaCocoStudio.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LuaCocoStudio.h; sourceTree = \"<group>\"; };\n  652: 		4983220C187FE0A900733BFB /* HelperFunc.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HelperFunc.cpp; sourceTree = \"<group>\"; };\n  653  		4983220D187FE0A900733BFB /* HelperFunc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HelperFunc.h; sourceTree = \"<group>\"; };\n  654  		4983220F187FE0BE00733BFB /* CZHelperFunc_luabinding.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CZHelperFunc_luabinding.cpp; sourceTree = \"<group>\"; };\n  ...\n 1787  			isa = PBXGroup;\n 1788  			children = (\n 1789: 				4983220C187FE0A900733BFB /* HelperFunc.cpp */,\n 1790  				4983220D187FE0A900733BFB /* HelperFunc.h */,\n 1791  			);\n ....\n 4250  				F412724719F75816005E6CD0 /* CCSpriteFrameCacheHelper.cpp in Sources */,\n 4251  				F412727519F75816005E6CD0 /* WidgetReader.cpp in Sources */,\n 4252: 				4983220E187FE0A900733BFB /* HelperFunc.cpp in Sources */,\n 4253  				F4E8809B1770071600577406 /* CCTexture2D.cpp in Sources */,\n 4254  				F4CB86AB180D017700D81CF3 /* CCCrypto.cpp in Sources */,\n\n/Users/jeep/cocos/quick-cocos2d-x-2.2.6-release/lib/proj.win32/cocos2dx_2012.vcxproj:\n  483        <CompileAs Condition=\"'$(Configuration)|$(Platform)'=='Release|Win32'\">CompileAsCpp</CompileAs>\n  484      </ClCompile>\n  485:     <ClCompile Include=\"..\\cocos2d-x\\external\\extra\\apptools\\HelperFunc.cpp\" />\n  486      <ClCompile Include=\"..\\cocos2d-x\\external\\extra\\crypto\\base64\\libbase64.c\" />\n  487      <ClCompile Include=\"..\\cocos2d-x\\external\\extra\\crypto\\CCCrypto.cpp\" />\n\n/Users/jeep/cocos/quick-cocos2d-x-2.2.6-release/lib/proj.win32/cocos2dx_2012.vcxproj.filters:\n 1147        <Filter>cocos2d-x\\scripting\\lua\\lua_extensions\\debugger</Filter>\n 1148      </ClCompile>\n 1149:     <ClCompile Include=\"..\\cocos2d-x\\external\\extra\\apptools\\HelperFunc.cpp\">\n 1150        <Filter>cocos2d-x\\external\\extra\\apptools</Filter>\n 1151      </ClCompile>\n\n/Users/jeep/cocos/quick-cocos2d-x-2.2.6-release/lib/proj.win32/cocos2dx_2013.vcxproj:\n  450        <CompileAs Condition=\"'$(Configuration)|$(Platform)'=='Release|Win32'\">CompileAsCpp</CompileAs>\n  451      </ClCompile>\n  452:     <ClCompile Include=\"..\\cocos2d-x\\external\\extra\\apptools\\HelperFunc.cpp\" />\n  453      <ClCompile Include=\"..\\cocos2d-x\\external\\extra\\crypto\\base64\\libbase64.c\" />\n  454      <ClCompile Include=\"..\\cocos2d-x\\external\\extra\\crypto\\CCCrypto.cpp\" />\n\n/Users/jeep/cocos/quick-cocos2d-x-2.2.6-release/lib/proj.win32/cocos2dx_2013.vcxproj.filters:\n 1147        <Filter>cocos2d-x\\scripting\\lua\\lua_extensions\\debugger</Filter>\n 1148      </ClCompile>\n 1149:     <ClCompile Include=\"..\\cocos2d-x\\external\\extra\\apptools\\HelperFunc.cpp\">\n 1150        <Filter>cocos2d-x\\external\\extra\\apptools</Filter>\n 1151      </ClCompile>\n\n17 matches across 7 files\n",
+			"file": "lib/cocos2d-x/extensions/network/WebSocket.cpp",
 			"settings":
 			{
-				"buffer_size": 6820,
-				"line_ending": "Unix",
-				"name": "Find Results",
-				"scratch": true
-			}
-		},
-		{
-			"file": "lib/cocos2d-x/external/Android.mk",
-			"settings":
-			{
-				"buffer_size": 2748,
+				"buffer_size": 19518,
 				"line_ending": "Unix"
 			}
 		}
@@ -114,16 +104,55 @@
 	},
 	"file_history":
 	[
+		"/Users/jeep/cocos/quick-cocos2d-x-2.2.6-release/lib/cocos2d-x/extensions/network/WebSocket.h",
+		"/Users/jeep/cocos/quick-cocos2d-x-2.2.6-release/lib/cocos2d-x/extensions/network/WebSocket.cpp",
+		"/Users/jeep/cocos/quick-cocos2d-x-2.2.6-release/lib/cocos2d-x/cocos2dx/cocoa/CCScriptEventDispatcher.h",
+		"/Users/jeep/cocos/quick-cocos2d-x-2.2.6-release/lib/cocos2d-x/cocos2dx/cocoa/CCScriptEventDispatcher.cpp",
+		"/Users/jeep/cocos/quick-cocos2d-x-2.2.6-release/framework/framework/functions.lua",
+		"/Users/jeep/cocos/quick-cocos2d-x-2.2.6-release/lib/cocos2d-x/cocos2dx/CCScheduler.cpp",
+		"/Users/jeep/cocos/quick-cocos2d-x-2.2.6-release/framework/framework/cc/components/behavior/EventProtocol.lua",
+		"/Users/jeep/cocos/quick-cocos2d-x-2.2.6-release/lib/cocos2d-x/cocos2dx/base_nodes/CCNode.cpp",
+		"/Users/jeep/cocos/quick-cocos2d-x-2.2.6-release/lib/cocos2d-x/scripting/lua/cocos2dx_support/CCLuaEngine.cpp",
+		"/Users/jeep/cocos/quick-cocos2d-x-2.2.6-release/framework/framework/scheduler.lua",
+		"/Users/jeep/cocos/quick-cocos2d-x-2.2.6-release/framework/framework/cocos2dx/Event.lua",
+		"/Users/jeep/cocos/quick-cocos2d-x-2.2.6-release/docs/api/functions.html",
+		"/Users/jeep/cocos/quick-cocos2d-x-2.2.6-release/framework/framework/ui.lua",
+		"/Users/jeep/cocos/quick-cocos2d-x-2.2.6-release/lib/cocos2d-x/cocos2dx/base_nodes/CCNode.h",
+		"/Users/jeep/cocos/quick-cocos2d-x-2.2.6-release/framework/framework/init.lua",
+		"/Users/jeep/cocos/quick-cocos2d-x-2.2.6-release/framework/framework/debug.lua",
+		"/Users/jeep/cocos/quick-cocos2d-x-2.2.6-release/lib/luabinding/cocos2dx/base_nodes/CCNode.tolua",
+		"/Users/jeep/cocos/quick-cocos2d-x-2.2.6-release/samples/chukong_ad/scripts/app/scenes/MainScene.lua",
+		"/Users/jeep/cocos/quick-cocos2d-x-2.2.6-release/framework/framework/cc/init.lua",
+		"/Users/jeep/cocos/quick-cocos2d-x-2.2.6-release/framework/framework/cc/mvc/ModelBase.lua",
+		"/Users/jeep/cocos/quick-cocos2d-x-2.2.6-release/framework/framework/cc/mvc/AppBase.lua",
+		"/Users/jeep/cocos/quick-cocos2d-x-2.2.6-release/framework/framework/cc/Registry.lua",
+		"/Users/jeep/cocos/quick-cocos2d-x-2.2.6-release/framework/framework/cc/mvc/init.lua",
+		"/Users/jeep/cocos/quick-cocos2d-x-2.2.6-release/lib/cocos2d-x/scripting/lua/lua_extensions/lua_extensions.c",
+		"/Users/jeep/cocos/quick-cocos2d-x-2.2.6-release/lib/luabinding/cocos2dx/platform/platform.tolua",
+		"/Users/jeep/cocos/quick-cocos2d-x-2.2.6-release/project/ddg/scripts/app/scenes/MainScene.lua",
+		"/Users/jeep/cocos/quick-cocos2d-x-2.2.6-release/project/ddg/scripts/ccs/ccs310.lua",
+		"/Users/jeep/cocos/quick-cocos2d-x-2.2.6-release/project/ddg/res/ccs310.json",
+		"/Users/jeep/cocos/quick-cocos2d-x-2.2.6-release/framework/framework/cc/ui/UIButton.lua",
+		"/Users/jeep/cocos/quick-cocos2d-x-2.2.6-release/framework/framework/cc/ui/UIPushButton.lua",
+		"/Users/jeep/cocos/quick-cocos2d-x-2.2.6-release/project/ddg/sources/AppDelegate.cpp",
+		"/Users/jeep/cocos/quick-cocos2d-x-2.2.6-release/lib/cocos2d-x/extensions/ProjectConfig/SimulatorConfig.cpp",
+		"/Users/jeep/cocos/quick-cocos2d-x-2.2.6-release/project/ddg/scripts/uis/GenUiUtil.lua",
+		"/Users/jeep/cocos/quick-cocos2d-x-2.2.6-release/lib/cocos2d-x/cocos2dx/label_nodes/CCLabelTTF.h",
+		"/Users/jeep/cocos/quick-cocos2d-x-2.2.6-release/project/ddg/res/MainScene.json",
+		"/Users/jeep/cocos/quick-cocos2d-x-2.2.6-release/project/ddg/scripts/app/MyApp.lua",
+		"/Users/jeep/cocos/quick-cocos2d-x-2.2.6-release/framework/framework/cc/ui/UIScrollView.lua",
+		"/Users/jeep/cocos/quick-cocos2d-x-2.2.6-release/framework/framework/cc/ui/UIListView.lua",
+		"/Users/jeep/cocos/quick-cocos2d-x-2.2.6-release/samples/ui/scripts/app/scenes/TestUIScrollViewScene.lua",
+		"/Users/jeep/cocos/quick-cocos2d-x-2.2.6-release/samples/ui/scripts/app/scenes/TestUISliderScene.lua",
+		"/Users/jeep/cocos/quick-cocos2d-x-2.2.6-release/samples/ui/scripts/app/scenes/TestUIListViewScene.lua",
+		"/Users/jeep/cocos/quick-cocos2d-x-2.2.6-release/lib/cocos2d-x/external/Android.mk",
+		"/Users/jeep/cocos/quick-cocos2d-x-2.2.6-release/lib/cocos2d-x/external/extra/apptools/HelperFunc.cpp",
+		"/Users/jeep/cocos/quick-cocos2d-x-2.2.6-release/lib/cocos2d-x/external/extra/apptools/HelperFunc.h",
+		"/Users/jeep/cocos/quick-cocos2d-x-2.2.6-release/lib/cocos2d-x/cocos2dx/Android.mk",
 		"/Users/jeep/cocos/quick-cocos2d-x-2.2.6-release/project/ddg/proj.android/jni/Application.mk",
 		"/Users/jeep/cocos/quick-cocos2d-x-2.2.6-release/lib/proj.android/Android.mk",
 		"/Users/jeep/cocos/quick-cocos2d-x-2.2.6-release/project/ddg/proj.android/jni/Android.mk",
-		"/Users/jeep/cocos/quick-cocos2d-x-2.2.6-release/lib/cocos2d-x/external/extra/apptools/HelperFunc.cpp",
-		"/Users/jeep/cocos/quick-cocos2d-x-2.2.6-release/project/ddg/scripts/app/MyApp.lua",
-		"/Users/jeep/cocos/quick-cocos2d-x-2.2.6-release/project/ddg/scripts/app/scenes/MainScene.lua",
-		"/Users/jeep/cocos/quick-cocos2d-x-2.2.6-release/project/ddg/scripts/ccs/ccs310.lua",
-		"/Users/jeep/cocos/quick-cocos2d-x-2.2.6-release/project/ddg/scripts/uis/GenUiUtil.lua",
 		"/Users/jeep/cocos/quick-cocos2d-x-2.2.6-release/lib/luabinding/Spine.tolua",
-		"/Users/jeep/cocos/quick-cocos2d-x-2.2.6-release/project/ddg/res/MainScene.json",
 		"/Users/jeep/cocos/quick-cocos2d-x-2.2.6-release/framework/framework/transition.lua",
 		"/D/game/quick-cocos2d-x-2.2.6-release/project/ddg/scripts/ccs/ccsload.lua",
 		"/D/game/quick-cocos2d-x-2.2.6-release/project/ddg/scripts/ccs/ccsparam.lua",
@@ -202,46 +231,7 @@
 		"/D/game/quick-cocos2d-x-2.2.6-release/lib/cocos2d-x/extensions/spine/MeshAttachment.c",
 		"/D/game/quick-cocos2d-x-2.2.6-release/lib/luabinding/CocoStudio/CCTween.tolua",
 		"/D/game/quick-cocos2d-x-2.2.6-release/lib/luabinding/cocos2dx/draw_nodes/CCShapeNode.tolua",
-		"/D/game/quick-cocos2d-x-2.2.6-release/framework/cocos2dx/OpenGL.lua",
-		"/D/game/quick-cocos2d-x-2.2.6-release/lib/cocos2d-x/cocos2dx/misc_nodes/CCClippingNode.h",
-		"/D/game/quick-cocos2d-x-2.2.6-release/lib/cocos2d-x/cocos2dx/misc_nodes/CCClippingNode.cpp",
-		"/D/game/quick-cocos2d-x-2.2.6-release/lib/cocos2d-x/cocos2dx/CCDirector.cpp",
-		"/D/game/quick-cocos2d-x-2.2.6-release/lib/cocos2d-x/cocos2dx/CCDirector.h",
-		"/D/game/quick-cocos2d-x-2.2.6-release/lib/cocos2d-x/cocos2dx/actions/CCActionInstant.h",
-		"/D/game/quick-cocos2d-x-2.2.6-release/lib/cocos2d-x/scripting/lua/cocos2dx_support/CCLuaEngine.cpp",
-		"/D/download/cocos2d-x-cocos2d-x-3.10/cocos/renderer/CCRenderer.cpp",
-		"/D/game/quick-cocos2d-x-2.2.6-release/lib/cocos2d-x/extensions/ProjectConfig/SimulatorConfig.cpp",
-		"/D/game/quick-cocos2d-x-2.2.6-release/README.html",
-		"/D/game/quick-cocos2d-x-2.2.6-release/project/ddk/scripts/app/scenes/MainScene.lua",
-		"/D/game/quick-cocos2d-x-2.2.6-release/lib/cocos2d-x/scripting/lua/cocos2dx_support/CCLuaStack.cpp",
-		"/D/game/quick-cocos2d-x-2.2.6-release/lib/cocos2d-x/extensions/DragonBones/renderer/CCDragonBones.h",
-		"/D/game/quick-cocos2d-x-2.2.6-release/lib/cocos2d-x/extensions/DragonBones/renderer/CCDragonBones.cpp",
-		"/D/game/quick-cocos2d-x-2.2.6-release/lib/cocos2d-x/scripting/lua/cocos2dx_support/tolua_fix.c",
-		"/D/game/quick-cocos2d-x-2.2.6-release/lib/cocos2d-x/scripting/lua/cocos2dx_support/tolua_fix.h",
-		"/D/game/quick-cocos2d-x-2.2.6-release/lib/luabinding/Spine.tolua",
-		"/D/game/quick-cocos2d-x-2.2.6-release/lib/luabinding/extensions/spine.tolua",
-		"/D/game/quick-cocos2d-x-2.2.6-release/lib/luabinding/extensions/DragonBones/renderer/CCDBNode.tolua",
-		"/D/game/quick-cocos2d-x-2.2.6-release/lib/luabinding/extensions/DragonBones.tolua",
-		"/D/game/quick-cocos2d-x-2.2.6-release/lib/luabinding/extensions/DragonBones/Armature.tolua",
-		"/D/game/quick-cocos2d-x-2.2.6-release/lib/luabinding/extensions/spine/Animation.tolua",
-		"/D/game/quick-cocos2d-x-2.2.6-release/lib/cocos2d-x/extensions/DragonBones/core/DragonBones.cpp",
-		"/D/game/quick-cocos2d-x-2.2.6-release/framework/dragonbones.lua",
-		"/D/game/quick-cocos2d-x-2.2.6-release/lib/luabinding/extensions/spine/SkeletonRenderer.tolua",
-		"/D/game/quick-cocos2d-x-2.2.6-release/lib/cocos2d-x/licenses/LICENSE_artwork.txt",
-		"/D/game/quick-cocos2d-x-2.2.6-release/lib/cocos2d-x/extensions/spine/SkeletonRenderer.h",
-		"/D/game/quick-cocos2d-x-2.2.6-release/lib/luabinding/extensions/filters/filters/CCFilter.tolua",
-		"/D/game/quick-cocos2d-x-2.2.6-release/lib/luabinding/extensions/Filters.tolua",
-		"/D/game/quick-cocos2d-x-2.2.6-release/lib/cocos2d-x/extensions/filters/filters/CCFilter.cpp",
-		"/D/game/quick-cocos2d-x-2.2.6-release/lib/cocos2d-x/extensions/filters/filters/CCFilter.h",
-		"/D/game/quick-cocos2d-x-2.2.6-release/lib/luabinding/extensions/filters/nodes/CCFilteredSprite.tolua",
-		"/D/game/quick-cocos2d-x-2.2.6-release/lib/cocos2d-x/scripting/lua/cocos2dx_support/LuaCocos2dFilters.cpp",
-		"/D/game/quick-cocos2d-x-2.2.6-release/lib/cocos2d-x/extensions/DragonBones/animation/IAnimatable.h",
-		"/D/game/quick-cocos2d-x-2.2.6-release/lib/luabinding/cocos2dx/sprite_nodes/CCSprite.tolua",
-		"/D/game/quick-cocos2d-x-2.2.6-release/lib/cocos2d-x/scripting/lua/cocos2dx_support/LuaCocos2dDragonBones.h",
-		"/D/game/quick-cocos2d-x-2.2.6-release/lib/cocos2d-x/scripting/lua/tolua/tolua_is.c",
-		"/D/game/quick-cocos2d-x-2.2.6-release/lib/cocos2d-x/extensions/spine/SkeletonRenderer.cpp",
-		"/D/game/quick-cocos2d-x-2.2.6-release/framework/cocos2dx.lua",
-		"/D/game/quick-cocos2d-x-2.2.6-release/project/ddk/proj.android/jni/Application.mk"
+		"/D/game/quick-cocos2d-x-2.2.6-release/framework/cocos2dx/OpenGL.lua"
 	],
 	"find":
 	{
@@ -275,9 +265,33 @@
 	},
 	"find_state":
 	{
-		"case_sensitive": false,
+		"case_sensitive": true,
 		"find_history":
 		[
+			"tolua_Cocos2d_WebSocket_create00",
+			"LuaWebSocket",
+			"tolua_web_socket_open",
+			"Lua_web_socket",
+			"scheduleScriptFunc(",
+			"scheduleScriptFunc",
+			"m_nScriptHandler",
+			"executeSchedule",
+			"executeNodeEvent",
+			"executeSchedule",
+			"cc.ENTER_FRAME_EVENT",
+			"executeNodeEnterFrameEvent",
+			"update",
+			"m_scriptEventListeners",
+			"addEventListener",
+			"ENTER_FRAME_EVENT",
+			"luaopen_socket_scripts",
+			"tcp",
+			"addchild",
+			"s_debug_prj_dir",
+			"ShadowColor",
+			"tstCCS",
+			"gen_loading",
+			"self",
 			"HelperFunc.cpp",
 			"CCSAXParser.cpp",
 			"print(\"r.getChildRoot\",tostring(r:getChildRoot\"Text\"))\n		print(\"r.getChildByName\",tostring(r:getChildByName\"Text\"))\n		",
@@ -381,24 +395,7 @@
 			"ExtensionsDragonBones.tolua",
 			"toluafix_ref_function",
 			"frameEventCallback",
-			"executeFunction",
-			"executeFunctionByHandler",
-			"frameEventCallback",
-			"LuaArmatureWrapper",
-			"tolua_Cocos2dx_CCArmatureAnimation_setMovementEventCallFunc00",
-			"tolua_Cocos2d_CCNode_setAnchorPoint01",
-			"extendCCNode",
-			"extendCCArmatureAnimation",
-			"startListener",
-			"spAnimationState_getCurrent",
-			"_spAttachment_init",
-			"_Attachment_init",
-			"_spAttachment_init",
-			"_spAttachment_deinit",
-			"CCNodeRGBA",
-			"CCBlendProtocol",
-			"do",
-			"{\n    \"selector\": \"source.lua\",\n    \"cmd\": [\"D:/love2d/love.exe\", \"${project_path:${file_path}}\"],\n    \"shell\": true,\n    \"file_regex\": \"^Error: (?:[^:]+: )?([^: ]+?):(\\\\d+):() ([^:]*)$\"\n}"
+			"executeFunction"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -414,7 +411,7 @@
 		"reverse": false,
 		"show_context": true,
 		"use_buffer2": true,
-		"whole_word": false,
+		"whole_word": true,
 		"wrap": true
 	},
 	"groups":
@@ -425,99 +422,46 @@
 			[
 				{
 					"buffer": 0,
-					"file": "project/ddg/scripts/app/scenes/MainScene.lua",
+					"file": "lib/cocos2d-x/scripting/lua/cocos2dx_support/Lua_web_socket.cpp",
 					"settings":
 					{
-						"buffer_size": 4458,
+						"buffer_size": 18779,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								267,
-								267
+								11903,
+								11903
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/Lua/Lua.tmLanguage",
-							"translate_tabs_to_spaces": false
+							"syntax": "Packages/C++/C++.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
 						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.x": 61.0,
+						"translation.y": 1233.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 1,
-					"file": "lib/cocos2d-x/cocos2dx/Android.mk",
+					"file": "lib/cocos2d-x/scripting/lua/cocos2dx_support/CCLuaStack.cpp",
 					"settings":
 					{
-						"buffer_size": 6849,
+						"buffer_size": 28756,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								5747,
-								5747
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Text/Plain text.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 3019.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "lib/cocos2d-x/external/extra/apptools/HelperFunc.h",
-					"settings":
-					{
-						"buffer_size": 331,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								102,
-								102
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/C++/C++.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "lib/cocos2d-x/external/extra/apptools/HelperFunc.cpp",
-					"settings":
-					{
-						"buffer_size": 1990,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								154,
-								154
+								6049,
+								6070
 							]
 						],
 						"settings":
@@ -527,132 +471,25 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 217.0,
+						"translation.y": 3910.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
-					"buffer": 4,
+					"buffer": 2,
+					"file": "lib/cocos2d-x/scripting/lua/proj.android/Android.mk",
 					"settings":
 					{
-						"buffer_size": 6820,
-						"regions":
-						{
-							"match":
-							{
-								"flags": 112,
-								"regions":
-								[
-									[
-										188,
-										202
-									],
-									[
-										763,
-										777
-									],
-									[
-										853,
-										867
-									],
-									[
-										1622,
-										1636
-									],
-									[
-										1732,
-										1746
-									],
-									[
-										2229,
-										2243
-									],
-									[
-										2496,
-										2510
-									],
-									[
-										3125,
-										3139
-									],
-									[
-										3215,
-										3229
-									],
-									[
-										3996,
-										4010
-									],
-									[
-										4106,
-										4120
-									],
-									[
-										4641,
-										4655
-									],
-									[
-										4928,
-										4942
-									],
-									[
-										5383,
-										5397
-									],
-									[
-										5839,
-										5853
-									],
-									[
-										6232,
-										6246
-									],
-									[
-										6688,
-										6702
-									]
-								],
-								"scope": ""
-							}
-						},
-						"selection":
-						[
-							[
-								196,
-								196
-							]
-						],
-						"settings":
-						{
-							"detect_indentation": false,
-							"output_tag": 1,
-							"result_base_dir": "",
-							"result_file_regex": "^([A-Za-z\\\\/<].*):$",
-							"result_line_regex": "^ +([0-9]+):",
-							"scroll_past_end": true,
-							"syntax": "Packages/Default/Find Results.hidden-tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 10.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 5,
-					"file": "lib/cocos2d-x/external/Android.mk",
-					"settings":
-					{
-						"buffer_size": 2748,
+						"buffer_size": 6324,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								167,
-								182
+								731,
+								745
 							]
 						],
 						"settings":
@@ -662,7 +499,63 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 14.0,
+						"translation.y": 1998.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "lib/cocos2d-x/extensions/network/WebSocket.h",
+					"settings":
+					{
+						"buffer_size": 4609,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								4609,
+								4609
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 581.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "lib/cocos2d-x/extensions/network/WebSocket.cpp",
+					"settings":
+					{
+						"buffer_size": 19518,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								4368,
+								4368
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 38.0,
+						"translation.y": 2391.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -716,6 +609,62 @@
 		"selected_items":
 		[
 			[
+				"web",
+				"lib/cocos2d-x/extensions/network/WebSocket.cpp"
+			],
+			[
+				"websoc",
+				"lib/cocos2d-x/extensions/network/WebSocket.h"
+			],
+			[
+				"lua_web_socket.cpp",
+				"lib/cocos2d-x/scripting/lua/cocos2dx_support/Lua_web_socket.cpp"
+			],
+			[
+				"ccnode",
+				"lib/cocos2d-x/cocos2dx/base_nodes/CCNode.cpp"
+			],
+			[
+				"function",
+				"framework/framework/functions.lua"
+			],
+			[
+				"ccscrip",
+				"lib/cocos2d-x/cocos2dx/cocoa/CCScriptEventDispatcher.cpp"
+			],
+			[
+				"ccscripteventdispatcher",
+				"lib/cocos2d-x/cocos2dx/cocoa/CCScriptEventDispatcher.h"
+			],
+			[
+				"ccs3",
+				"project/ddg/res/ccs310.json"
+			],
+			[
+				"ccs310",
+				"project/ddg/scripts/ccs/ccs310.lua"
+			],
+			[
+				"appbase",
+				"framework/framework/cc/mvc/AppBase.lua"
+			],
+			[
+				"mainscene.j",
+				"project/ddg/res/MainScene.json"
+			],
+			[
+				"cclabelttf",
+				"lib/cocos2d-x/cocos2dx/label_nodes/CCLabelTTF.h"
+			],
+			[
+				"ccs31",
+				"project/ddg/scripts/ccs/ccs310.lua"
+			],
+			[
+				"ddg/mainscene",
+				"project/ddg/scripts/app/scenes/MainScene.lua"
+			],
+			[
 				"help",
 				"lib/cocos2d-x/external/extra/apptools/HelperFunc.cpp"
 			],
@@ -746,10 +695,6 @@
 			[
 				"genui",
 				"project/ddg/scripts/uis/GenUiUtil.lua"
-			],
-			[
-				"ccnode",
-				"lib/cocos2d-x/cocos2dx/base_nodes/CCNode.h"
 			],
 			[
 				"ccsparam",
@@ -1142,6 +1087,6 @@
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 280.0,
+	"side_bar_width": 376.0,
 	"status_bar_visible": true
 }

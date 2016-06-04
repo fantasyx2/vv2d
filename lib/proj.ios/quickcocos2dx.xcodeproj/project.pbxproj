@@ -41,6 +41,11 @@
 		1E9542DA1CDE425B0062367F /* TransformConstraint.c in Sources */ = {isa = PBXBuildFile; fileRef = 1E9542B71CDE425B0062367F /* TransformConstraint.c */; };
 		1E9542DB1CDE425B0062367F /* TransformConstraintData.c in Sources */ = {isa = PBXBuildFile; fileRef = 1E9542B91CDE425B0062367F /* TransformConstraintData.c */; };
 		1E9542DC1CDE425B0062367F /* WeightedMeshAttachment.c in Sources */ = {isa = PBXBuildFile; fileRef = 1E9542BB1CDE425B0062367F /* WeightedMeshAttachment.c */; };
+		1EF598031D02CC9200E547ED /* buffer.c in Sources */ = {isa = PBXBuildFile; fileRef = 1EF597FF1D02CC9200E547ED /* buffer.c */; };
+		1EF598041D02CC9200E547ED /* luasocket_scripts.c in Sources */ = {isa = PBXBuildFile; fileRef = 1EF598011D02CC9200E547ED /* luasocket_scripts.c */; };
+		1EF598071D02CE7F00E547ED /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1EF598051D02CE7F00E547ED /* libcrypto.a */; settings = {ATTRIBUTES = (Required, ); }; };
+		1EF598081D02CE7F00E547ED /* libssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1EF598061D02CE7F00E547ED /* libssl.a */; };
+		1EF5980B1D02CF1600E547ED /* io.c in Sources */ = {isa = PBXBuildFile; fileRef = 1EF598091D02CF1600E547ED /* io.c */; };
 		2EBAD92C1918BBDC00FF9BD6 /* CCBlurFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2EBAD8E91918BBDC00FF9BD6 /* CCBlurFilter.cpp */; };
 		2EBAD92D1918BBDC00FF9BD6 /* CCBrightnessFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2EBAD8EB1918BBDC00FF9BD6 /* CCBrightnessFilter.cpp */; };
 		2EBAD92E1918BBDC00FF9BD6 /* CCContrastFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2EBAD8ED1918BBDC00FF9BD6 /* CCContrastFilter.cpp */; };
@@ -156,13 +161,10 @@
 		F459EB80180D0513006CBDF1 /* except.c in Sources */ = {isa = PBXBuildFile; fileRef = F459EB56180D0513006CBDF1 /* except.c */; };
 		F459EB81180D0513006CBDF1 /* inet.c in Sources */ = {isa = PBXBuildFile; fileRef = F459EB58180D0513006CBDF1 /* inet.c */; };
 		F459EB82180D0513006CBDF1 /* luasocket.c in Sources */ = {isa = PBXBuildFile; fileRef = F459EB5A180D0513006CBDF1 /* luasocket.c */; };
-		F459EB83180D0513006CBDF1 /* luasocket_buffer.c in Sources */ = {isa = PBXBuildFile; fileRef = F459EB5C180D0513006CBDF1 /* luasocket_buffer.c */; };
-		F459EB84180D0513006CBDF1 /* luasocket_io.c in Sources */ = {isa = PBXBuildFile; fileRef = F459EB5E180D0513006CBDF1 /* luasocket_io.c */; };
 		F459EB85180D0513006CBDF1 /* mime.c in Sources */ = {isa = PBXBuildFile; fileRef = F459EB60180D0513006CBDF1 /* mime.c */; };
 		F459EB86180D0513006CBDF1 /* options.c in Sources */ = {isa = PBXBuildFile; fileRef = F459EB62180D0513006CBDF1 /* options.c */; };
 		F459EB87180D0513006CBDF1 /* select.c in Sources */ = {isa = PBXBuildFile; fileRef = F459EB64180D0513006CBDF1 /* select.c */; };
 		F459EB88180D0513006CBDF1 /* serial.c in Sources */ = {isa = PBXBuildFile; fileRef = F459EB66180D0513006CBDF1 /* serial.c */; };
-		F459EB89180D0513006CBDF1 /* socket_scripts.c in Sources */ = {isa = PBXBuildFile; fileRef = F459EB68180D0513006CBDF1 /* socket_scripts.c */; };
 		F459EB8A180D0513006CBDF1 /* tcp.c in Sources */ = {isa = PBXBuildFile; fileRef = F459EB6A180D0513006CBDF1 /* tcp.c */; };
 		F459EB8B180D0513006CBDF1 /* timeout.c in Sources */ = {isa = PBXBuildFile; fileRef = F459EB6C180D0513006CBDF1 /* timeout.c */; };
 		F459EB8C180D0513006CBDF1 /* udp.c in Sources */ = {isa = PBXBuildFile; fileRef = F459EB6E180D0513006CBDF1 /* udp.c */; };
@@ -447,6 +449,14 @@
 		1E9542BA1CDE425B0062367F /* TransformConstraintData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TransformConstraintData.h; path = spine/TransformConstraintData.h; sourceTree = "<group>"; };
 		1E9542BB1CDE425B0062367F /* WeightedMeshAttachment.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = WeightedMeshAttachment.c; path = spine/WeightedMeshAttachment.c; sourceTree = "<group>"; };
 		1E9542BC1CDE425B0062367F /* WeightedMeshAttachment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WeightedMeshAttachment.h; path = spine/WeightedMeshAttachment.h; sourceTree = "<group>"; };
+		1EF597FF1D02CC9200E547ED /* buffer.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = buffer.c; sourceTree = "<group>"; };
+		1EF598001D02CC9200E547ED /* buffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = buffer.h; sourceTree = "<group>"; };
+		1EF598011D02CC9200E547ED /* luasocket_scripts.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = luasocket_scripts.c; sourceTree = "<group>"; };
+		1EF598021D02CC9200E547ED /* luasocket_scripts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = luasocket_scripts.h; sourceTree = "<group>"; };
+		1EF598051D02CE7F00E547ED /* libcrypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcrypto.a; path = "../cocos2d-x/cocos2dx/platform/third_party/ios/libraries/libcrypto.a"; sourceTree = "<group>"; };
+		1EF598061D02CE7F00E547ED /* libssl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libssl.a; path = "../cocos2d-x/cocos2dx/platform/third_party/ios/libraries/libssl.a"; sourceTree = "<group>"; };
+		1EF598091D02CF1600E547ED /* io.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = io.c; sourceTree = "<group>"; };
+		1EF5980A1D02CF1600E547ED /* io.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = io.h; sourceTree = "<group>"; };
 		2EBAD8E71918BBDC00FF9BD6 /* cocos2dFilters.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cocos2dFilters.h; sourceTree = "<group>"; };
 		2EBAD8E91918BBDC00FF9BD6 /* CCBlurFilter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCBlurFilter.cpp; sourceTree = "<group>"; };
 		2EBAD8EA1918BBDC00FF9BD6 /* CCBlurFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCBlurFilter.h; sourceTree = "<group>"; };
@@ -728,10 +738,6 @@
 		F459EB59180D0513006CBDF1 /* inet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = inet.h; sourceTree = "<group>"; };
 		F459EB5A180D0513006CBDF1 /* luasocket.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = luasocket.c; sourceTree = "<group>"; };
 		F459EB5B180D0513006CBDF1 /* luasocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = luasocket.h; sourceTree = "<group>"; };
-		F459EB5C180D0513006CBDF1 /* luasocket_buffer.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = luasocket_buffer.c; sourceTree = "<group>"; };
-		F459EB5D180D0513006CBDF1 /* luasocket_buffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = luasocket_buffer.h; sourceTree = "<group>"; };
-		F459EB5E180D0513006CBDF1 /* luasocket_io.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = luasocket_io.c; sourceTree = "<group>"; };
-		F459EB5F180D0513006CBDF1 /* luasocket_io.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = luasocket_io.h; sourceTree = "<group>"; };
 		F459EB60180D0513006CBDF1 /* mime.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = mime.c; sourceTree = "<group>"; };
 		F459EB61180D0513006CBDF1 /* mime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mime.h; sourceTree = "<group>"; };
 		F459EB62180D0513006CBDF1 /* options.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = options.c; sourceTree = "<group>"; };
@@ -740,8 +746,6 @@
 		F459EB65180D0513006CBDF1 /* select.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = select.h; sourceTree = "<group>"; };
 		F459EB66180D0513006CBDF1 /* serial.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = serial.c; sourceTree = "<group>"; };
 		F459EB67180D0513006CBDF1 /* socket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = socket.h; sourceTree = "<group>"; };
-		F459EB68180D0513006CBDF1 /* socket_scripts.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = socket_scripts.c; sourceTree = "<group>"; };
-		F459EB69180D0513006CBDF1 /* socket_scripts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = socket_scripts.h; sourceTree = "<group>"; };
 		F459EB6A180D0513006CBDF1 /* tcp.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = tcp.c; sourceTree = "<group>"; };
 		F459EB6B180D0513006CBDF1 /* tcp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tcp.h; sourceTree = "<group>"; };
 		F459EB6C180D0513006CBDF1 /* timeout.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = timeout.c; sourceTree = "<group>"; };
@@ -1199,8 +1203,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F45A2BA1166B07B600760194 /* Foundation.framework in Frameworks */,
+				1EF598071D02CE7F00E547ED /* libcrypto.a in Frameworks */,
+				1EF598081D02CE7F00E547ED /* libssl.a in Frameworks */,
 				DA56D2FE1A3819B3007350D6 /* libcurl.a in Frameworks */,
+				F45A2BA1166B07B600760194 /* Foundation.framework in Frameworks */,
 				F4A8F6BB17F0B1A400110198 /* libwebsockets.a in Frameworks */,
 				F42825BA17575DBE001479DC /* libwebp.a in Frameworks */,
 			);
@@ -1861,6 +1867,12 @@
 		F459EB53180D0513006CBDF1 /* socket */ = {
 			isa = PBXGroup;
 			children = (
+				1EF598091D02CF1600E547ED /* io.c */,
+				1EF5980A1D02CF1600E547ED /* io.h */,
+				1EF597FF1D02CC9200E547ED /* buffer.c */,
+				1EF598001D02CC9200E547ED /* buffer.h */,
+				1EF598011D02CC9200E547ED /* luasocket_scripts.c */,
+				1EF598021D02CC9200E547ED /* luasocket_scripts.h */,
 				F459EB54180D0513006CBDF1 /* auxiliar.c */,
 				F459EB55180D0513006CBDF1 /* auxiliar.h */,
 				F459EB56180D0513006CBDF1 /* except.c */,
@@ -1869,10 +1881,6 @@
 				F459EB59180D0513006CBDF1 /* inet.h */,
 				F459EB5A180D0513006CBDF1 /* luasocket.c */,
 				F459EB5B180D0513006CBDF1 /* luasocket.h */,
-				F459EB5C180D0513006CBDF1 /* luasocket_buffer.c */,
-				F459EB5D180D0513006CBDF1 /* luasocket_buffer.h */,
-				F459EB5E180D0513006CBDF1 /* luasocket_io.c */,
-				F459EB5F180D0513006CBDF1 /* luasocket_io.h */,
 				F459EB60180D0513006CBDF1 /* mime.c */,
 				F459EB61180D0513006CBDF1 /* mime.h */,
 				F459EB62180D0513006CBDF1 /* options.c */,
@@ -1881,8 +1889,6 @@
 				F459EB65180D0513006CBDF1 /* select.h */,
 				F459EB66180D0513006CBDF1 /* serial.c */,
 				F459EB67180D0513006CBDF1 /* socket.h */,
-				F459EB68180D0513006CBDF1 /* socket_scripts.c */,
-				F459EB69180D0513006CBDF1 /* socket_scripts.h */,
 				F459EB6A180D0513006CBDF1 /* tcp.c */,
 				F459EB6B180D0513006CBDF1 /* tcp.h */,
 				F459EB6C180D0513006CBDF1 /* timeout.c */,
@@ -1927,6 +1933,8 @@
 		F45A2B9F166B07B600760194 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1EF598051D02CE7F00E547ED /* libcrypto.a */,
+				1EF598061D02CE7F00E547ED /* libssl.a */,
 				F45A2BA0166B07B600760194 /* Foundation.framework */,
 			);
 			name = Frameworks;
@@ -2949,7 +2957,6 @@
 				F412728F19F75A59005E6CD0 /* LuaCocos2dFilters.cpp in Sources */,
 				F459EA77180D04D8006CBDF1 /* CCNative.mm in Sources */,
 				F47C66C316EB37DB00132435 /* snapshot.c in Sources */,
-				F459EB89180D0513006CBDF1 /* socket_scripts.c in Sources */,
 				F4FDD0831A1DF75200DD4C0B /* liolib.c in Sources */,
 				F42824FA17575D88001479DC /* CCCamera.cpp in Sources */,
 				F42824FB17575D88001479DC /* CCConfiguration.cpp in Sources */,
@@ -2963,7 +2970,6 @@
 				F459EB10180D04E1006CBDF1 /* cpSpace.c in Sources */,
 				F428259217575DA8001479DC /* CCFileUtils.cpp in Sources */,
 				F428259317575DA8001479DC /* CCImageCommonWebp.cpp in Sources */,
-				F459EB84180D0513006CBDF1 /* luasocket_io.c in Sources */,
 				F459EA79180D04D8006CBDF1 /* CCStore.mm in Sources */,
 				49832219187FE2DF00733BFB /* HelperFunc.cpp in Sources */,
 				F428259417575DA8001479DC /* CCSAXParser.cpp in Sources */,
@@ -2995,7 +3001,6 @@
 				F4E882AF177015C400577406 /* CCActionPageTurn3D.cpp in Sources */,
 				2EBAD9301918BBDC00FF9BD6 /* CCExposureFilter.cpp in Sources */,
 				1E9542D91CDE425B0062367F /* spine-cocos2dx.cpp in Sources */,
-				F459EB83180D0513006CBDF1 /* luasocket_buffer.c in Sources */,
 				F4E882B0177015C400577406 /* CCActionProgressTimer.cpp in Sources */,
 				F4E882B1177015C400577406 /* CCActionTiledGrid.cpp in Sources */,
 				F4E882B2177015C400577406 /* CCActionTween.cpp in Sources */,
@@ -3085,6 +3090,7 @@
 				2EBAD93D1918BBDC00FF9BD6 /* ccFilterShaders.cpp in Sources */,
 				F459EA78180D04D8006CBDF1 /* CCNativeIOS.mm in Sources */,
 				F4E882E3177015C400577406 /* CCProgressTimer.cpp in Sources */,
+				1EF598041D02CC9200E547ED /* luasocket_scripts.c in Sources */,
 				F4E882E4177015C400577406 /* CCRenderTexture.cpp in Sources */,
 				F4E882E5177015C400577406 /* CCParticleBatchNode.cpp in Sources */,
 				F4E882E6177015C400577406 /* CCParticleExamples.cpp in Sources */,
@@ -3098,6 +3104,7 @@
 				F459EB86180D0513006CBDF1 /* options.c in Sources */,
 				F4E882EB177015C400577406 /* ccGLStateCache.cpp in Sources */,
 				F4E882EC177015C400577406 /* CCShaderCache.cpp in Sources */,
+				1EF598031D02CC9200E547ED /* buffer.c in Sources */,
 				F4E882ED177015C400577406 /* ccShaders.cpp in Sources */,
 				F4E882EE177015C400577406 /* CCAnimation.cpp in Sources */,
 				F44A20D9182A566D00E181EB /* libbase64.c in Sources */,
@@ -3234,6 +3241,7 @@
 				F4FDD0911A1DF75200DD4C0B /* ltm.c in Sources */,
 				1E9542CD1CDE425B0062367F /* IkConstraintData.c in Sources */,
 				F459EA80180D04D8006CBDF1 /* SBJsonWriter.m in Sources */,
+				1EF5980B1D02CF1600E547ED /* io.c in Sources */,
 				1E9542D21CDE425B0062367F /* Skeleton.c in Sources */,
 				1E9542C81CDE425B0062367F /* BoundingBoxAttachment.c in Sources */,
 				F459EB87180D0513006CBDF1 /* select.c in Sources */,

@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		1E2559B11CDD17CF0053A2EA /* LuaCocos2dSpine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1E2559AF1CDD17CF0053A2EA /* LuaCocos2dSpine.cpp */; };
+		1E4D3C5A1D032BE9003D5061 /* io.c in Sources */ = {isa = PBXBuildFile; fileRef = 1E4D3C581D032BE9003D5061 /* io.c */; };
+		1ED714181D02A076007EBB53 /* buffer.c in Sources */ = {isa = PBXBuildFile; fileRef = 1ED714141D02A076007EBB53 /* buffer.c */; };
+		1ED714191D02A076007EBB53 /* luasocket_scripts.c in Sources */ = {isa = PBXBuildFile; fileRef = 1ED714161D02A076007EBB53 /* luasocket_scripts.c */; };
 		1EE11F461CDBB18A00D6AE2C /* CCShaderSprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1EE11F441CDBB18A00D6AE2C /* CCShaderSprite.cpp */; };
 		1EF8D1FF1CDD9C0800C4D31A /* SkeletonAnimation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1EF8D1C01CDD9C0800C4D31A /* SkeletonAnimation.cpp */; };
 		1EF8D2001CDD9C0800C4D31A /* SkeletonRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1EF8D1C11CDD9C0800C4D31A /* SkeletonRenderer.cpp */; };
@@ -292,13 +295,10 @@
 		F4CB87A7180D02F600D81CF3 /* except.c in Sources */ = {isa = PBXBuildFile; fileRef = F4CB877D180D02F600D81CF3 /* except.c */; };
 		F4CB87A8180D02F600D81CF3 /* inet.c in Sources */ = {isa = PBXBuildFile; fileRef = F4CB877F180D02F600D81CF3 /* inet.c */; };
 		F4CB87A9180D02F600D81CF3 /* luasocket.c in Sources */ = {isa = PBXBuildFile; fileRef = F4CB8781180D02F600D81CF3 /* luasocket.c */; };
-		F4CB87AA180D02F600D81CF3 /* luasocket_buffer.c in Sources */ = {isa = PBXBuildFile; fileRef = F4CB8783180D02F600D81CF3 /* luasocket_buffer.c */; };
-		F4CB87AB180D02F600D81CF3 /* luasocket_io.c in Sources */ = {isa = PBXBuildFile; fileRef = F4CB8785180D02F600D81CF3 /* luasocket_io.c */; };
 		F4CB87AC180D02F600D81CF3 /* mime.c in Sources */ = {isa = PBXBuildFile; fileRef = F4CB8787180D02F600D81CF3 /* mime.c */; };
 		F4CB87AD180D02F600D81CF3 /* options.c in Sources */ = {isa = PBXBuildFile; fileRef = F4CB8789180D02F600D81CF3 /* options.c */; };
 		F4CB87AE180D02F600D81CF3 /* select.c in Sources */ = {isa = PBXBuildFile; fileRef = F4CB878B180D02F600D81CF3 /* select.c */; };
 		F4CB87AF180D02F600D81CF3 /* serial.c in Sources */ = {isa = PBXBuildFile; fileRef = F4CB878D180D02F600D81CF3 /* serial.c */; };
-		F4CB87B0180D02F600D81CF3 /* socket_scripts.c in Sources */ = {isa = PBXBuildFile; fileRef = F4CB878F180D02F600D81CF3 /* socket_scripts.c */; };
 		F4CB87B1180D02F600D81CF3 /* tcp.c in Sources */ = {isa = PBXBuildFile; fileRef = F4CB8791180D02F600D81CF3 /* tcp.c */; };
 		F4CB87B2180D02F600D81CF3 /* timeout.c in Sources */ = {isa = PBXBuildFile; fileRef = F4CB8793180D02F600D81CF3 /* timeout.c */; };
 		F4CB87B3180D02F600D81CF3 /* udp.c in Sources */ = {isa = PBXBuildFile; fileRef = F4CB8795180D02F600D81CF3 /* udp.c */; };
@@ -505,6 +505,13 @@
 		1E2559AF1CDD17CF0053A2EA /* LuaCocos2dSpine.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LuaCocos2dSpine.cpp; sourceTree = "<group>"; };
 		1E2559B01CDD17CF0053A2EA /* LuaCocos2dSpine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LuaCocos2dSpine.h; sourceTree = "<group>"; };
 		1E339F2F1CDB9C940008897B /* libcurl.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libcurl.tbd; path = usr/lib/libcurl.tbd; sourceTree = SDKROOT; };
+		1E4D3C581D032BE9003D5061 /* io.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = io.c; sourceTree = "<group>"; };
+		1E4D3C591D032BE9003D5061 /* io.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = io.h; sourceTree = "<group>"; };
+		1ED714141D02A076007EBB53 /* buffer.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = buffer.c; sourceTree = "<group>"; };
+		1ED714151D02A076007EBB53 /* buffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = buffer.h; sourceTree = "<group>"; };
+		1ED714161D02A076007EBB53 /* luasocket_scripts.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = luasocket_scripts.c; sourceTree = "<group>"; };
+		1ED714171D02A076007EBB53 /* luasocket_scripts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = luasocket_scripts.h; sourceTree = "<group>"; };
+		1ED7141A1D02A4B0007EBB53 /* lws_config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lws_config.h; sourceTree = "<group>"; };
 		1EE11F441CDBB18A00D6AE2C /* CCShaderSprite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCShaderSprite.cpp; sourceTree = "<group>"; };
 		1EE11F451CDBB18A00D6AE2C /* CCShaderSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCShaderSprite.h; sourceTree = "<group>"; };
 		1EF8D1BD1CDD9C0800C4D31A /* Animation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Animation.h; path = spine/Animation.h; sourceTree = "<group>"; };
@@ -1136,10 +1143,6 @@
 		F4CB8780180D02F600D81CF3 /* inet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = inet.h; sourceTree = "<group>"; };
 		F4CB8781180D02F600D81CF3 /* luasocket.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = luasocket.c; sourceTree = "<group>"; };
 		F4CB8782180D02F600D81CF3 /* luasocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = luasocket.h; sourceTree = "<group>"; };
-		F4CB8783180D02F600D81CF3 /* luasocket_buffer.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = luasocket_buffer.c; sourceTree = "<group>"; };
-		F4CB8784180D02F600D81CF3 /* luasocket_buffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = luasocket_buffer.h; sourceTree = "<group>"; };
-		F4CB8785180D02F600D81CF3 /* luasocket_io.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = luasocket_io.c; sourceTree = "<group>"; };
-		F4CB8786180D02F600D81CF3 /* luasocket_io.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = luasocket_io.h; sourceTree = "<group>"; };
 		F4CB8787180D02F600D81CF3 /* mime.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = mime.c; sourceTree = "<group>"; };
 		F4CB8788180D02F600D81CF3 /* mime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mime.h; sourceTree = "<group>"; };
 		F4CB8789180D02F600D81CF3 /* options.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = options.c; sourceTree = "<group>"; };
@@ -1148,8 +1151,6 @@
 		F4CB878C180D02F600D81CF3 /* select.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = select.h; sourceTree = "<group>"; };
 		F4CB878D180D02F600D81CF3 /* serial.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = serial.c; sourceTree = "<group>"; };
 		F4CB878E180D02F600D81CF3 /* socket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = socket.h; sourceTree = "<group>"; };
-		F4CB878F180D02F600D81CF3 /* socket_scripts.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = socket_scripts.c; sourceTree = "<group>"; };
-		F4CB8790180D02F600D81CF3 /* socket_scripts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = socket_scripts.h; sourceTree = "<group>"; };
 		F4CB8791180D02F600D81CF3 /* tcp.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = tcp.c; sourceTree = "<group>"; };
 		F4CB8792180D02F600D81CF3 /* tcp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tcp.h; sourceTree = "<group>"; };
 		F4CB8793180D02F600D81CF3 /* timeout.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = timeout.c; sourceTree = "<group>"; };
@@ -2540,6 +2541,7 @@
 		F41D98F817F08B9E007171D8 /* include */ = {
 			isa = PBXGroup;
 			children = (
+				1ED7141A1D02A4B0007EBB53 /* lws_config.h */,
 				F41D98F917F08B9E007171D8 /* libwebsockets.h */,
 			);
 			path = include;
@@ -2931,6 +2933,12 @@
 		F4CB877A180D02F600D81CF3 /* socket */ = {
 			isa = PBXGroup;
 			children = (
+				1E4D3C581D032BE9003D5061 /* io.c */,
+				1E4D3C591D032BE9003D5061 /* io.h */,
+				1ED714141D02A076007EBB53 /* buffer.c */,
+				1ED714151D02A076007EBB53 /* buffer.h */,
+				1ED714161D02A076007EBB53 /* luasocket_scripts.c */,
+				1ED714171D02A076007EBB53 /* luasocket_scripts.h */,
 				F4CB877B180D02F600D81CF3 /* auxiliar.c */,
 				F4CB877C180D02F600D81CF3 /* auxiliar.h */,
 				F4CB877D180D02F600D81CF3 /* except.c */,
@@ -2939,10 +2947,6 @@
 				F4CB8780180D02F600D81CF3 /* inet.h */,
 				F4CB8781180D02F600D81CF3 /* luasocket.c */,
 				F4CB8782180D02F600D81CF3 /* luasocket.h */,
-				F4CB8783180D02F600D81CF3 /* luasocket_buffer.c */,
-				F4CB8784180D02F600D81CF3 /* luasocket_buffer.h */,
-				F4CB8785180D02F600D81CF3 /* luasocket_io.c */,
-				F4CB8786180D02F600D81CF3 /* luasocket_io.h */,
 				F4CB8787180D02F600D81CF3 /* mime.c */,
 				F4CB8788180D02F600D81CF3 /* mime.h */,
 				F4CB8789180D02F600D81CF3 /* options.c */,
@@ -2951,8 +2955,6 @@
 				F4CB878C180D02F600D81CF3 /* select.h */,
 				F4CB878D180D02F600D81CF3 /* serial.c */,
 				F4CB878E180D02F600D81CF3 /* socket.h */,
-				F4CB878F180D02F600D81CF3 /* socket_scripts.c */,
-				F4CB8790180D02F600D81CF3 /* socket_scripts.h */,
 				F4CB8791180D02F600D81CF3 /* tcp.c */,
 				F4CB8792180D02F600D81CF3 /* tcp.h */,
 				F4CB8793180D02F600D81CF3 /* timeout.c */,
@@ -3971,6 +3973,7 @@
 				E540B38B198754880054B7F7 /* TransformTimeline.cpp in Sources */,
 				F4DE0AAD16800201005DB2DB /* SimpleAudioEngine.mm in Sources */,
 				F43152A1180CF7E30046351C /* cpSpaceStep.c in Sources */,
+				1ED714181D02A076007EBB53 /* buffer.c in Sources */,
 				1EF8D21B1CDD9C0800C4D31A /* spine-cocos2dx.cpp in Sources */,
 				F412725C19F75816005E6CD0 /* UIImageView.cpp in Sources */,
 				F412723219F75816005E6CD0 /* CCActionObject.cpp in Sources */,
@@ -4008,7 +4011,6 @@
 				F40019A71A231A20003D323B /* lparser.c in Sources */,
 				F43152A2180CF7E30046351C /* cpSpatialIndex.c in Sources */,
 				E540B393198754880054B7F7 /* DragonBones.cpp in Sources */,
-				F4CB87B0180D02F600D81CF3 /* socket_scripts.c in Sources */,
 				F412724B19F75816005E6CD0 /* CCComAttribute.cpp in Sources */,
 				E540B390198754880054B7F7 /* DBGeometry.cpp in Sources */,
 				F4CB86AC180D017700D81CF3 /* md5.c in Sources */,
@@ -4021,7 +4023,6 @@
 				F431529E180CF7E30046351C /* cpSpaceComponent.c in Sources */,
 				F4315290180CF7E30046351C /* cpRatchetJoint.c in Sources */,
 				F431529C180CF7E30046351C /* cpShape.c in Sources */,
-				F4CB87AA180D02F600D81CF3 /* luasocket_buffer.c in Sources */,
 				F477B8491757404200260C19 /* CCCamera.cpp in Sources */,
 				F412724419F75816005E6CD0 /* CCArmatureDataManager.cpp in Sources */,
 				F477B84A1757404200260C19 /* CCConfiguration.cpp in Sources */,
@@ -4112,6 +4113,7 @@
 				F4E8805D1770071600577406 /* mat4.c in Sources */,
 				F4E8805E1770071600577406 /* neon_matrix_impl.c in Sources */,
 				E540B38D198754880054B7F7 /* BytesType.cpp in Sources */,
+				1ED714191D02A076007EBB53 /* luasocket_scripts.c in Sources */,
 				F41D98F417F08B85007171D8 /* WebSocket.cpp in Sources */,
 				F40019941A231A20003D323B /* lapi.c in Sources */,
 				F4E8805F1770071600577406 /* plane.c in Sources */,
@@ -4245,7 +4247,6 @@
 				F4EE1773199E0E9700023E28 /* CCDampedSpringJoint.cpp in Sources */,
 				F4CB87B2180D02F600D81CF3 /* timeout.c in Sources */,
 				F4E880991770071600577406 /* CCIMEDispatcher.cpp in Sources */,
-				F4CB87AB180D02F600D81CF3 /* luasocket_io.c in Sources */,
 				F4E8809A1770071600577406 /* CCTextFieldTTF.cpp in Sources */,
 				F412724719F75816005E6CD0 /* CCSpriteFrameCacheHelper.cpp in Sources */,
 				F412727519F75816005E6CD0 /* WidgetReader.cpp in Sources */,
@@ -4375,6 +4376,7 @@
 				F4315297180CF7E30046351C /* cpBBTree.c in Sources */,
 				F4E8813A17700E5E00577406 /* CCMenuItemLoader.cpp in Sources */,
 				F4CB86C1180D017700D81CF3 /* CCNetworkIOSMac.mm in Sources */,
+				1E4D3C5A1D032BE9003D5061 /* io.c in Sources */,
 				F414F4471961EB5D007C18E4 /* CCTouchTargetNode.cpp in Sources */,
 				F40019971A231A20003D323B /* lcode.c in Sources */,
 				F4E8813B17700E5E00577406 /* CCNode+CCBRelativePositioning.cpp in Sources */,
