@@ -7,3 +7,4 @@ find . -type f | grep "\.sh" | xargs chmod 755 $1
 
 chmod 755 bin/mac/tolua++
 chmod 755 player/mac/player.app/Contents/MacOS/player
+chmod 755 player/mac/playerB.app/Contents/MacOS/playerB

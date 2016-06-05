@@ -464,6 +464,10 @@
 					"-lxml2",
 					"-lz",
 					"-ObjC",
+					"-pagezero_size",
+					10000,
+					"-image_base",
+					100000000,
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -533,6 +537,10 @@
 					"-lxml2",
 					"-lz",
 					"-ObjC",
+					"-pagezero_size",
+					10000,
+					"-image_base",
+					100000000,
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";

@@ -1,0 +1,1 @@
+./bin/compile_scripts.sh -i ./framework -o ./lib/framework_precompiled/framework_precompiled.zip

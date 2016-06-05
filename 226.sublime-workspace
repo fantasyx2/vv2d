@@ -35,6 +35,14 @@
 	},
 	"buffers":
 	[
+		{
+			"file": "bin/lib/quick/init.php",
+			"settings":
+			{
+				"buffer_size": 3917,
+				"line_ending": "Unix"
+			}
+		}
 	],
 	"build_system": "Packages/User/love2d.sublime-build",
 	"command_palette":
@@ -64,6 +72,8 @@
 	},
 	"file_history":
 	[
+		"/Users/jeep/cocos/quick-cocos2d-x-2.2.6-release/project/ddg/res/framework_precompiled 2.zip",
+		"/Users/jeep/cocos/quick-cocos2d-x-2.2.6-release/lib/framework_precompiled/framework_precompiled.zip",
 		"/Users/jeep/Library/Application Support/Sublime Text 2/Packages/User/Default (OSX).sublime-keymap",
 		"/Users/jeep/Library/Application Support/Sublime Text 2/Packages/Default/Default (OSX).sublime-keymap",
 		"/Users/jeep/Library/Application Support/Sublime Text 2/Packages/QuickXDev/QuickXDev.sublime-settings",
@@ -189,9 +199,7 @@
 		"/D/game/quick-cocos2d-x-2.2.6-release/lib/cocos2d-x/extensions/CocoStudio/Armature/animation/CCArmatureAnimation.cpp",
 		"/D/game/quick-cocos2d-x-2.2.6-release/lib/cocos2d-x/cocos2dx/actions/CCActionTween.cpp",
 		"/D/game/quick-cocos2d-x-2.2.6-release/lib/luabinding/cocos2dx/actions/CCActionTween.tolua",
-		"/D/game/quick-cocos2d-x-2.2.6-release/lib/cocos2d-x/cocos2dx/shaders/CCGLProgram.h",
-		"/D/game/quick-cocos2d-x-2.2.6-release/lib/cocos2d-x/cocos2dx/shaders/ccGLStateCache.h",
-		"/D/game/quick-cocos2d-x-2.2.6-release/lib/cocos2d-x/cocos2dx/shaders/ccGLStateCache.cpp"
+		"/D/game/quick-cocos2d-x-2.2.6-release/lib/cocos2d-x/cocos2dx/shaders/CCGLProgram.h"
 	],
 	"find":
 	{
@@ -377,8 +385,37 @@
 	"groups":
 	[
 		{
+			"selected": 0,
 			"sheets":
 			[
+				{
+					"buffer": 0,
+					"file": "bin/lib/quick/init.php",
+					"settings":
+					{
+						"buffer_size": 3917,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								169,
+								169
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
 			]
 		}
 	],
