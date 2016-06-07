@@ -712,16 +712,20 @@ void CCNode::addChild(CCNode* child, int localZOrder, const std::string &name)
 {
     this->addChild(child, localZOrder, child->m_nTag,name);
 }
-void CCNode::addChild(CCNode* child, int zOrder, int tag)
+void CCNode::addChild(CCNode* child, int zOrder, int tag,const std::string& name)
 {
-    this->addChild(child, zOrder, tag,"");
+    this->addChild(child, zOrder, tag);
+    if(name.length()>0)
+    {
+        child->setName(name);
+    }
 }
 
 /* "add" logic MUST only be on this method
  * If a class want's to extend the 'addChild' behavior it only needs
  * to override this method
  */
-void CCNode::addChild(CCNode *child, int zOrder, int tag, const std::string& name)
+void CCNode::addChild(CCNode *child, int zOrder, int tag)
 {
     CCAssert( child != NULL, "Argument must be non-nil");
     CCAssert( child->m_pParent == NULL, "child already added. It can't be added again");
@@ -734,10 +738,6 @@ void CCNode::addChild(CCNode *child, int zOrder, int tag, const std::string& nam
     this->insertChild(child, zOrder);
 
     child->m_nTag = tag;
-    if(name.length()>0)
-    {
-        child->setName(name);
-    }
 
     child->setParent(this);
     child->setOrderOfArrival(s_globalOrderOfArrival++);
@@ -752,13 +752,13 @@ void CCNode::addChild(CCNode *child, int zOrder, int tag, const std::string& nam
 void CCNode::addChild(CCNode *child, int zOrder)
 {
     CCAssert( child != NULL, "Argument must be non-nil");
-    this->addChild(child, zOrder, child->m_nTag,"");
+    this->addChild(child, zOrder, child->m_nTag);
 }
 
 void CCNode::addChild(CCNode *child)
 {
     CCAssert( child != NULL, "Argument must be non-nil");
-    this->addChild(child, child->m_nZOrder, child->m_nTag,"");
+    this->addChild(child, child->m_nZOrder, child->m_nTag);
 }
 
 void CCNode::removeSelf()
