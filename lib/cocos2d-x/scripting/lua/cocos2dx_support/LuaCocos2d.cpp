@@ -1,6 +1,6 @@
 /*
 ** Lua binding: Cocos2d
-** Generated automatically by tolua++-1.0.92 on Fri May 27 01:30:50 2016.
+** Generated automatically by tolua++-1.0.92 on 06/12/16 17:37:57.
 */
 
 /****************************************************************************
@@ -28805,7 +28805,41 @@ static int tolua_Cocos2d_CCShaderSprite_setQuadVertex00(lua_State* tolua_S)
 #endif
 }
 #endif //#ifndef TOLUA_DISABLE
-
+/* method: initVertices of class  CCShaderSprite */
+#ifndef TOLUA_DISABLE_tolua_Cocos2d_CCShaderSprite_initVertices00
+static int tolua_Cocos2d_CCShaderSprite_initVertices00(lua_State* tolua_S)
+{
+#ifndef TOLUA_RELEASE
+ tolua_Error tolua_err;
+ if (
+     !tolua_isusertype(tolua_S,1,"CCShaderSprite",0,&tolua_err) ||
+     !tolua_isnumber(tolua_S,2,0,&tolua_err) ||
+     !tolua_iscppstring(tolua_S,3,0,&tolua_err) ||
+     !tolua_isnoobj(tolua_S,4,&tolua_err)
+ )
+  goto tolua_lerror;
+ else
+#endif
+ {
+  CCShaderSprite* self = (CCShaderSprite*)  tolua_tousertype(tolua_S,1,0);
+  int mode = ((int)  tolua_tonumber(tolua_S,2,0));
+  std::string meshstr = ((std::string)  tolua_tocppstring(tolua_S,3,0));
+#ifndef TOLUA_RELEASE
+  if (!self) tolua_error(tolua_S,"invalid 'self' in function 'initVertices'", NULL);
+#endif
+  {
+   self->initVertices(mode,meshstr);
+   tolua_pushcppstring(tolua_S,(const char*)meshstr);
+  }
+ }
+ return 1;
+#ifndef TOLUA_RELEASE
+ tolua_lerror:
+ tolua_error(tolua_S,"#ferror in function 'initVertices'.",&tolua_err);
+ return 0;
+#endif
+}
+#endif //#ifndef TOLUA_DISABLE
 /* method: createWithTexture of class  CCParticleBatchNode */
 #ifndef TOLUA_DISABLE_tolua_Cocos2d_CCParticleBatchNode_createWithTexture00
 static int tolua_Cocos2d_CCParticleBatchNode_createWithTexture00(lua_State* tolua_S)
@@ -59751,6 +59785,7 @@ TOLUA_API int tolua_Cocos2d_open (lua_State* tolua_S)
    tolua_function(tolua_S,"setShaderFromByte",tolua_Cocos2d_CCShaderSprite_setShaderFromByte00);
    tolua_function(tolua_S,"resetShader",tolua_Cocos2d_CCShaderSprite_resetShader00);
    tolua_function(tolua_S,"setQuadVertex",tolua_Cocos2d_CCShaderSprite_setQuadVertex00);
+   tolua_function(tolua_S,"initVertices",tolua_Cocos2d_CCShaderSprite_initVertices00);
   tolua_endmodule(tolua_S);
   tolua_cclass(tolua_S,"CCParticleBatchNode","CCParticleBatchNode","CCNode",NULL);
   tolua_beginmodule(tolua_S,"CCParticleBatchNode");

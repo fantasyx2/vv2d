@@ -121,6 +121,33 @@ public:
 	//3 bl
 	//4 br
 	void setQuadVertex(float tl_x,float tl_y,float tr_x,float tr_y,float bl_x,float bl_y,float br_x,float br_y);
+	////mesh
+	ccV3F_C4B_T2F* m_Vertices;
+	int m_VericesCount;
+	int m_meshmode;
+	void initVertices()
+	{
+		m_Vertices=nullptr;
+		m_VericesCount=0;
+		m_meshmode=GL_TRIANGLE_STRIP;
+	}
+	void allocVertices(int c)
+	{
+		deinitVertices();
+		m_VericesCount = c;
+		m_Vertices = new ccV3F_C4B_T2F[c];
+	}
+	void deinitVertices()
+	{
+		if(m_Vertices)
+		{
+			delete (m_Vertices);
+			m_Vertices=nullptr;
+		}
+	}
+	void initVertices(int mode,std::string& meshstr);
+	virtual bool drawMesh(void);
+	void initForTest();
 };
 
 NS_CC_END

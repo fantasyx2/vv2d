@@ -12,7 +12,7 @@ function MainScene:ctor()
 	-- self:tstTween()
 	-- self:tstSpine()
 	-- self:tstCCS()
-	self:tstScrollview()
+	-- self:tstScrollview()
 	-- self:tstListview()
 	-- self:tstPageview()
 	-- local i=0
@@ -23,6 +23,8 @@ function MainScene:ctor()
 	-- 	self:addChild(sp, 0)
 	-- 	sp:setPosition(x, y)
 	-- end
+	-- self:tstMesh()
+	self:tstTiled()
 
 end
 
@@ -33,6 +35,34 @@ function MainScene:onExit()
 end
 
 function MainScene:initUi()
+end
+function MainScene:tstTiled()
+	local map= tiledload.load("fruits.lua")
+	if(map) then
+		for _,nd in pairs(map.nodes) do
+			self:addChild(nd)
+		end
+		dump(map:getGirdInfo(10),"map gird info")
+	end
+end
+function MainScene:tstMesh()
+	local spp = CCShaderSprite:create("UI/cpt_bg_02.png")
+	spp:setAnchorPoint(ccp(0,0))
+	spp:setPosition(display.cx,display.cy)
+	spp:initVertices(gl.GL_TRIANGLE_STRIP,"-100,100,0,1|-100,-100,0,0|100,100,1,1|100,-100,1,0")
+	self:addChild(spp)
+
+	local spp = CCShaderSprite:create("UI/cpt_bg_01.png")
+	spp:setAnchorPoint(ccp(0,0))
+	spp:setScale(1.0)
+	spp:setFlipX(true)
+	spp:setPosition(display.cx,display.cy)
+	-- spp:initVertices(gl.GL_TRIANGLE_FAN,"0,0,0.5,0.5|-100,100,0,1|-100,-100,0,0|100,-100,1,0|100,100,1,1|-100,100,0,1")
+	-- spp:initVertices(gl.GL_TRIANGLE_STRIP,"-100,50,0,1|-100,-50,0,0|100,100,1,1|100,-100,1,0")
+	-- spp:initVertices(gl.GL_QUADS,"-100,50,0,1|-100,-100,0,0|100,-100,1,0|100,100,1,1")
+	-- spp:initVertices(gl.GL_TRIANGLE_STRIP,"100,100,1,1|100,50,1,0.7|-100,50,0,1|100,-50,1,0.3|-100,-50,0,0|100,-100,1,0")
+	self:addChild(spp)
+	--spp:runAction(CCRotateBy:create(10.0,720))
 end
 
 function MainScene:tstPageview()
