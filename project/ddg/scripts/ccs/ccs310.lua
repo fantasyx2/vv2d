@@ -374,18 +374,17 @@ local config=
 }
 --]]
 --------------------------------------
-local MM={}
-MM.__index=function(self,k)
-	if(MM[k]) then
-		return MM[k]
+M.__index=function(self,k)
+	if(M[k]) then
+		return M[k]
 	elseif(type(k)=="string") then
-		return MM.getChildByName(self,k)
+		return M.getChildByName(self,k)
 	elseif(type(k)=="number") then
-		return 	MM.getChildByTag(self,k)
+		return 	M.getChildByTag(self,k)
 	end
 	return nil
 end
-function MM:getChildByTag(tag)
+function M:getChildByTag(tag)
 	if(tag>=0 and self.childs) then
 		for _,v in pairs(self.childs) do
 			if(v.tag==tag) then
@@ -394,10 +393,10 @@ function MM:getChildByTag(tag)
 		end
 	end
 end
-function MM:getChildByName(name)
+function M:getChildByName(name)
 	return self.childs and self.childs[name] and self.childs[name].node
 end
-function MM:getChildRoot(name)
+function M:getChildRoot(name)
 	return self.childs and self.childs[name]
 end
 
@@ -430,7 +429,7 @@ local function gen(a)
 			end
 		end
 	end
-	setmetatable(r, MM)	
+	setmetatable(r, M)	
 	return r
 end	
 --conver json to table
@@ -457,12 +456,12 @@ end
 function M.createNode(jsonfile)
 	local r=M.load(jsonfile)
 	if(r) then
-		dump(r,"ccsload",5)
-		print("r.getChildRoot_Text		",tostring(r:getChildRoot"Text"))
-		print("r.getChildByName_Text	",tostring(r:getChildByName"Text"))
-		print("r.getChildByTag_17		",tostring(r:getChildByTag(17)))
-		print("r.Text					",tostring(r.Text))
-		print("r[17]					",tostring(r[17]))
+		-- dump(r,"ccsload",5)
+		-- print("r.getChildRoot_Text		",tostring(r:getChildRoot"Text"))
+		-- print("r.getChildByName_Text	",tostring(r:getChildByName"Text"))
+		-- print("r.getChildByTag_17		",tostring(r:getChildByTag(17)))
+		-- print("r.Text					",tostring(r.Text))
+		-- print("r[17]					",tostring(r[17]))
 		return r
 	end
 end

@@ -1,4 +1,3 @@
-
 require("config")
 require("framework.init")
 require("framework.shortcodes")
@@ -17,7 +16,7 @@ require("config_debug")
 ----------------------------
 require("util.weaktable")
 require("ccs.ccs310")
-
+require("tiled.tiledload")
 ----------------------------
 ----------------------------
 print(string.format("%-10s%10s","67890","12345"))

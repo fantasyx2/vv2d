@@ -79,4 +79,5 @@ class CCShaderSprite: public CCSprite
 	bool resetShader();
     void setQuadVertex(float tl_x,float tl_y,float tr_x,float tr_y,float bl_x,float bl_y,float br_x,float br_y);
 
+    void initVertices(int mode,std::string& meshstr);
 };

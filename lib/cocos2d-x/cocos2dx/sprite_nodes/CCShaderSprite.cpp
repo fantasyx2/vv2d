@@ -149,15 +149,21 @@ CCShaderSprite* CCShaderSprite::createWithSpriteFrameName(const char *pszSpriteF
 CCShaderSprite::CCShaderSprite(void)
 {
 	__initsd();
+	initVertices();
 }
 
 CCShaderSprite::~CCShaderSprite(void)
 {
 	__deinitsd();
+	deinitVertices();
 }
 
 void CCShaderSprite::draw(void)
 {
+	if(drawMesh())
+	{
+		return;
+	}
 	CC_PROFILER_START_CATEGORY(kCCProfilerCategorySprite, "CCShaderSprite - draw");
 
 	CCAssert(!m_pobBatchNode, "If CCShaderSprite is being rendered by CCSpriteBatchNode, CCSprite#draw SHOULD NOT be called");
@@ -354,5 +360,136 @@ void CCShaderSprite::setQuadVertex(float tl_x,float tl_y,float tr_x,float tr_y,f
     }
 }
 
+bool CCShaderSprite::drawMesh(void)
+{
+	if(!m_Vertices)
+	{
+		return false;
+	}
 
+	CC_NODE_DRAW_SETUP();
+
+	ccGLBlendFunc( m_sBlendFunc.src, m_sBlendFunc.dst );
+
+	ccGLBindTexture2D( m_pobTexture->getName() );
+
+	//add for shader
+	if(m_Texture1)
+	{
+		glActiveTexture(GL_TEXTURE1);
+		ccGLBindTexture2DN(1,m_Texture1->getName());
+		if(m_Texture2)
+		{
+			glActiveTexture(GL_TEXTURE2);
+			ccGLBindTexture2DN(2,m_Texture2->getName());
+		}
+		if(m_Texture3)
+		{
+			glActiveTexture(GL_TEXTURE3);
+			ccGLBindTexture2DN(3,m_Texture3->getName());
+		}
+	}
+	do{
+		if(!m_sdf_b[1]){
+			break;
+		}
+		getShaderProgram()->setUniformLocationV4P1(m_sdf[1],m_sdf[2],m_sdf[3],m_sdf[4]);
+		//--------------------
+		if(!m_sdf_b[5]){
+			break;
+		}
+		getShaderProgram()->setUniformLocationV4P1(m_sdf[5],m_sdf[6],m_sdf[7],m_sdf[8]);
+		//--------------------
+		if(!m_sdf_b[9]){
+			break;
+		}
+		getShaderProgram()->setUniformLocationV4P1(m_sdf[9],m_sdf[10],m_sdf[11],m_sdf[12]);
+		//--------------------
+	}
+	while(0);
+	//add end
+
+
+	ccGLEnableVertexAttribs( kCCVertexAttribFlag_PosColorTex );
+
+
+	#define kQuadSize sizeof(ccV3F_C4B_T2F)
+	long offset = (long)m_Vertices;
+
+	// vertex
+	int diff = offsetof( ccV3F_C4B_T2F, vertices);
+	glVertexAttribPointer(kCCVertexAttrib_Position, 3, GL_FLOAT, GL_FALSE, kQuadSize, (void*) (offset + diff));
+
+	// texCoods
+	diff = offsetof( ccV3F_C4B_T2F, texCoords);
+	glVertexAttribPointer(kCCVertexAttrib_TexCoords, 2, GL_FLOAT, GL_FALSE, kQuadSize, (void*)(offset + diff));
+
+	// color
+	diff = offsetof( ccV3F_C4B_T2F, colors);
+	glVertexAttribPointer(kCCVertexAttrib_Color, 4, GL_UNSIGNED_BYTE, GL_TRUE, kQuadSize, (void*)(offset + diff));
+
+	glDrawArrays(m_meshmode,0, m_VericesCount);
+	CHECK_GL_ERROR_DEBUG();
+
+	CC_INCREMENT_GL_DRAWS(1);
+
+	return true;
+}
+#include <regex>
+using namespace std;
+
+void CCShaderSprite::initVertices(int mode,std::string& meshstr)
+{
+	//x,y,u,v,r,g,b,a|
+	//"111,13,2.5,5000|999,989";
+	regex rgxa("[\\d\\.\\-\\,]+\\|{0,1}");
+	regex rgx("[\\d\\.\\-]{1,}");
+	std::regex_iterator<string::iterator> ita(meshstr.begin(),meshstr.end(),rgxa);	
+	regex_iterator<string::iterator> end;
+	regex_iterator<string::iterator> itaback = ita;
+	int vc=0;
+	while(itaback!=end)
+	{
+		itaback++;
+		vc++;
+	}
+	if(vc==0)
+	{
+		return;
+
+	}
+	m_meshmode = mode;
+	allocVertices(vc);
+	int i=0;
+	while(ita!=end)
+	{
+        std::string seq = std::string(ita->str());
+		std::regex_iterator<string::iterator> it(seq.begin(),seq.end(),rgx);
+		float t[8]={0,0,0,0,255,255,255,255};
+		int j=0;
+		while (it!=end)
+		{
+			float f = (float)strtod(it->str().c_str(),nullptr);
+			t[j++]=f;
+			it++;
+		}
+		m_Vertices[i].vertices.x = t[0]; 
+		m_Vertices[i].vertices.y = t[1];
+		m_Vertices[i].vertices.z = 0;
+		m_Vertices[i].texCoords.u=t[2];
+		m_Vertices[i].texCoords.v=1.0-t[3];
+		m_Vertices[i].colors.r=t[4];
+		m_Vertices[i].colors.g=t[5];
+		m_Vertices[i].colors.b=t[6];
+		m_Vertices[i].colors.a=t[7];
+		ita++;
+		i++;
+	}
+
+}
+void CCShaderSprite::initForTest()
+{
+	std::string meshstr = "0,200,0.5,1|-100,0,0,0|100,0,1,0";
+	initVertices(GL_TRIANGLE_STRIP,meshstr);
+}
 
