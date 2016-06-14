@@ -24,8 +24,47 @@ function MainScene:ctor()
 	-- 	sp:setPosition(x, y)
 	-- end
 	-- self:tstMesh()
-	self:tstTiled()
+	local nd = display.newNode()
+	nd:setContentSize(CCSize(display.width,display.height))
+	nd:setPosition(0, 0)
+	nd:addTo(self)
+	nd:setNodeEventEnabled(true)
+	nd:setTouchEnabled(true)
 
+	self.pf=false
+	self.px=0
+	self.py=0
+	self.ex=0
+	self.ey=0
+    nd:addNodeEventListener(cc.NODE_TOUCH_EVENT, function(event)
+        if(event.name == 'began') then
+        	self.pf=true
+        	self.px = event.x
+        	self.py = event.y
+        	return true
+        end
+        if(not self.pf) then
+        	return
+        end	
+        if(event.name == 'moved' and self.pf) then 
+            self.ex = event.x
+        	self.ey = event.y
+        	local xx = math.floor(self.ex/90) - math.floor(self.px/90)
+        	local yy = math.floor(self.ey/90) - math.floor(self.py/90)
+        	if(xx~=0) then
+        		self:tstTiledSwap(self.px,self.py,self.ex,self.py)
+        		self.pf=false 	 	
+        	elseif(yy~=0) then
+        		self:tstTiledSwap(self.px,self.py,self.px,self.ey)
+        		self.pf=false
+        	end	
+        elseif event.name == "ended" or event.name == "cancelled" then
+        	local x,y=math.floor(event.x),math.floor(event.y)
+            self:tstTiledClick(x,y)            
+        end
+        return true
+    end)
+    self:tstTiled()
 end
 
 function MainScene:onEnter()
@@ -36,13 +75,47 @@ end
 
 function MainScene:initUi()
 end
+function MainScene:tstTiledSwap(a,b,c,d)
+	local layer = self.map:getLayerByName('surface')
+	-- layer:swapAtGid(a,b)
+	layer:swapAt(a,b,c,d)
+end
+function MainScene:tstTiledClick(x,y)
+	local layer = self.map:getLayerByName('surface')
+	layer:setTileAt(math.random(1,126),x,y,true)
+	local spt,tid  = layer:getTileAt(x,y)
+	-- print(spt)
+	-- print(tid)
+	if(spt and tid) then
+		-- print(spt)
+		spt:runAction(
+			transition.sequence(
+				{
+					CCRotateBy:create(1.0,720),
+					CCScaleTo:create(0.2,0.0),
+					CCScaleTo:create(0.2,1.0),
+					-- CCMoveBy:create(0.2,ccp(100,100)),
+					-- CCMoveBy:create(0.2,ccp(-100,-100)),
+					-- CCCallFunc:create(function()
+					-- 		layer:setTileGID(math.random(1,126),x,y)
+					-- 	end),				
+				}
+			)
+		)
+		
+	end
+	-- batchnd:setTileGID()
+	-- batchnd:setTileGID()
+end
+
 function MainScene:tstTiled()
-	local map= tiledload.load("fruits.lua")
+	local map= tiledload.load("fruits.lua",true)
 	if(map) then
-		for _,nd in pairs(map.nodes) do
-			self:addChild(nd)
+		for _,v in pairs(map.nodes) do
+			self:addChild(v.root)
 		end
-		dump(map:getGirdInfo(10),"map gird info")
+		dump(map:getRootByName('surface'),'surface')
+		self.map=map		
 	end
 end
 function MainScene:tstMesh()
