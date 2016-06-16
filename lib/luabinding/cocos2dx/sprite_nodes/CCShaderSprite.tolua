@@ -80,4 +80,5 @@ class CCShaderSprite: public CCSprite
     void setQuadVertex(float tl_x,float tl_y,float tr_x,float tr_y,float bl_x,float bl_y,float br_x,float br_y);
 
     void initVertices(int mode,std::string& meshstr);
+	void initVerticesWithRegex(int mode,std::string& meshstr,std::string& ra,std::string& rb);
 };

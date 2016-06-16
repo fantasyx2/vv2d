@@ -1,4 +1,4 @@
-local MovePushButton = import(".MovePushButton")
+local McButton = import(".McButton")
 local SelectButton = import(".SelectButton")
 local CellButton = import(".listview.CellButton")
 local ProgressBar    =import(".ProgressBar")
@@ -128,11 +128,11 @@ function GenUiUtil.genUis(ustb,parent,pathflag)
                     uis[ps.n]:addEventListener(UIButton.IMAGE_CHANGE_EVENT, function(evt)
                         GenUiUtil.attackShader(evt.sprite,sdd)
                     end)
-                end
-            end
-        elseif(t=="movebtn") then
+                end 
+            end        
+        elseif(t=="mcbtn") then
             --uis[ps.n] = cc.ui.UIPushButton.new(
-            uis[ps.n] = MovePushButton.new(
+            uis[ps.n] = McButton.new(
                                     {
                                         normal  = ps.res[1] and (pathflag .. ps.res[1]) or nil,
                                         pressed = ps.res[2] and (pathflag .. ps.res[2]) or nil,
@@ -319,8 +319,8 @@ function GenUiUtil.genUi(ps,parent,pathflag)
                 btnn:setScale(ps.scale)
             end
         end
-    elseif(ps.t=="movebtn") then
-        btnn = MovePushButton.new(
+    elseif(ps.t=="mcbtn") then 
+        btnn = McButton.new(
                                 {
                                     normal  = ps.res[1] and (pathflag .. ps.res[1]) or nil,
                                     pressed = ps.res[2] and (pathflag .. ps.res[2]) or nil,
@@ -637,7 +637,7 @@ function GenUiUtil.genJpgMaskClipSp(name,maskName,clipName,pathflag)
         clipName = pathflag .. clipName
     end
 
-    local spp = display.newSprite(name)
+    local spp = CCShaderSprite:create(name)
     if(spp) then
 --[[
         local masksp =  display.newSprite(maskName)
@@ -648,18 +648,18 @@ function GenUiUtil.genJpgMaskClipSp(name,maskName,clipName,pathflag)
 --]]
         local maskTexture = CCTextureCache:sharedTextureCache():addImageForMask(maskName)
         if(maskTexture) then
-            spp:setCC_Texture1_s(maskTexture)
+            spp:setCC_Texture1(maskTexture)
         end
 
 --[[
         local clipsp =  display.newSprite(clipName)
         if(clipsp) then
-            spp:setCC_Texture2_s(clipsp:getTexture())
-        end
+            spp:setCC_Texture2_s(clipsp:getTexture())             
+        end   
 --]]
         local clipTexture = CCTextureCache:sharedTextureCache():addImageForMask(clipName)
         if(clipTexture) then
-            spp:setCC_Texture2_s(clipTexture)
+            spp:setCC_Texture2(clipTexture)
         end
         --print("-------spp stringForFormat",masksp:getTexture():stringForFormat())
         spp:setShaderFromFile("shader/JpgMaskClipShader.vsh","shader/JpgMaskClipShader.fsh")
@@ -1056,9 +1056,8 @@ end
     --方向 3 左到右
     --方向 4 右到左
 -- fadeRg 渐变边缘宽度
--- addRg  每一帧卷动宽度
--- isout  渐隐，渐显
-function GenUiUtil.runJzEffect(sp,dt,direct,fadeRg,addRg,isout,callback)
+-- addRg  每一帧卷动宽度    
+function GenUiUtil.runJzEffect(sp,direct,fadeRg,addRg,isout,callback)
     GenUiUtil.attackShader(sp,"FADEINUV")
     local __mb = ccBlendFunc()
     __mb.src = GL_SRC_ALPHA
@@ -1103,18 +1102,14 @@ function GenUiUtil.runJzEffect(sp,dt,direct,fadeRg,addRg,isout,callback)
         0.0)
         actg = ac:setTag(105808)
         --]]
-        local act = CCActionTween:create(dt,"uv",sp:getSdf(2),posRg,function(v,key)
+        local act = CCActionTween:create(1.0,"uv",sp:getSdf(2),posRg,function(v,key)
             sp:setSdf(2,v)
         end)
         callback = callback or function()end
-
-        --local ac = transition.sequence({
-                --CCEaseOut:create(act,0.2),
-        --        act,
-                --CCDelayTime:create(0.5),
-        --        CCCallFunc:create(callback)
-        --    })
-        ac = CCSequence:createWithTwoActions(act, CCCallFunc:create(callback))
+        local ac = transition.sequence({
+                CCEaseOut:create(act,0.2),
+                CCCallFunc:create(callback)
+            })
         sp:runAction(ac)
     else
         local posRg = 0.0
@@ -1148,7 +1143,7 @@ function GenUiUtil.runJzEffect(sp,dt,direct,fadeRg,addRg,isout,callback)
         0.0)
         actg = ac:setTag(105808)
         --]]
-        local act = CCActionTween:create(dt,"uv",sp:getSdf(2),posRg,function(v,key)
+        local act = CCActionTween:create(1.0,"uv",sp:getSdf(2),posRg,function(v,key)
             sp:setSdf(2,v)
         end)
         callback = callback or function()end

@@ -866,7 +866,7 @@ bool CCImage::initWithImageData(void * pData,
                            int nWidth,
                            int nHeight,
                            int nBitsPerComponent,
-                           char*filename)
+                           const char*filename)
 {
     bool bRet = false;
     tImageInfo info = {0};

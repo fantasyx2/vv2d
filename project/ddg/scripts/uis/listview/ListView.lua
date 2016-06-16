@@ -227,7 +227,7 @@ function ListView:reorder_allcells(isRunAction)
 		self.listnd:setPosition(0, 0)
 		size = CCSize(maxw, self.clipsz.height)
 	end
-	print("----------0000000",x,maxw,maxh)
+	-- print("----------0000000",x,maxw,maxh)
 	self:updataContainer(size)
 end
 
@@ -248,7 +248,7 @@ function ListView:onTouchBegan(x, y)
 			self.touchidx = i
 			self.touchcell = cell
 			self.touchcell:onTouch("began", x, y)
-			print("onTouchBegan touchcell_idx",i)
+			-- print("onTouchBegan touchcell_idx",i)
 			break
 		end
 	end  

@@ -135,17 +135,18 @@ public:
 	{
 		deinitVertices();
 		m_VericesCount = c;
-		m_Vertices = new ccV3F_C4B_T2F[c];
+		m_Vertices = new ccV3F_C4B_T2F[m_VericesCount];
 	}
 	void deinitVertices()
 	{
 		if(m_Vertices)
 		{
-			delete (m_Vertices);
+			delete [] m_Vertices;
 			m_Vertices=nullptr;
 		}
 	}
 	void initVertices(int mode,std::string& meshstr);
+	void initVerticesWithRegex(int mode,std::string& meshstr,std::string& ra,std::string& rb);
 	virtual bool drawMesh(void);
 	void initForTest();
 };

@@ -182,19 +182,19 @@ bool CCImage::initWithImageFileThreadSafe(const char *fullpath, EImageFormat ima
             int nnn = sss.length() - (posStart + 1);
             sss = sss.substr(posStart+1,nnn);
         }
-        bRet = initWithImageData(pBuffer, nSize, imageType,0,0,8,(char*)sss.c_str());
+        bRet = initWithImageData(pBuffer, nSize, imageType,0,0,8,(const char*)sss.c_str());
     }
     CC_SAFE_DELETE_ARRAY(pBuffer);
     return bRet;
 }
-extern int deencypt_file_png_buff(const unsigned char*buff,unsigned int bufflen,char*shorname);
+extern int deencypt_file_png_buff(const unsigned char*buff,unsigned int bufflen,const char*shorname);
 bool CCImage::initWithImageData(void * pData, 
                                 int nDataLen, 
                                 EImageFormat eFmt/* = eSrcFmtPng*/, 
                                 int nWidth/* = 0*/,
                                 int nHeight/* = 0*/,
                                 int nBitsPerComponent/* = 8*/,
-                                char*filename)
+                                const char*filename)
 {
     bool bRet = false;
     do 

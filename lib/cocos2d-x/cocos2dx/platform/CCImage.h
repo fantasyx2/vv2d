@@ -108,8 +108,8 @@ public:
                            int nWidth = 0,
                            int nHeight = 0,
                            int nBitsPerComponent = 8,
-                           char*filename = "");
-    
+                           const char*filename = "");
+
     /**
     @brief    Create image with specified string.
     @param  pText       the text the image will show (cannot be nil).

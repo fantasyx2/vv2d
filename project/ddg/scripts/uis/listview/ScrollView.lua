@@ -314,7 +314,7 @@ end
 
 function ScrollView:onTouchEnded_tap(x, y)	
 	if(not self:backscroll()) then	
-		print("onTouchEnded_tap__2")
+		-- print("onTouchEnded_tap__2")
 		self:autoscroll()
 	end
 end

@@ -440,11 +440,19 @@ using namespace std;
 
 void CCShaderSprite::initVertices(int mode,std::string& meshstr)
 {
+	//std::string a="[\\d\\.\\-\\,]+\\|{0,1}";//for win32 mac
+	std::string a="[^\\|]{1,}\\|{0,1}";//for ndk
+	std::string b="[\\d\\.\\-]{1,}";
+	initVerticesWithRegex(mode,meshstr,a,b);
+}
+
+void CCShaderSprite::initVerticesWithRegex(int mode,std::string& meshstr,std::string& ra,std::string& rb)
+{
 	//x,y,u,v,r,g,b,a|
 	//"111,13,2.5,5000|999,989";
-	regex rgxa("[\\d\\.\\-\\,]+\\|{0,1}");
-	regex rgx("[\\d\\.\\-]{1,}");
-	std::regex_iterator<string::iterator> ita(meshstr.begin(),meshstr.end(),rgxa);	
+	regex rgxa(ra.c_str());
+	regex rgx(rb.c_str());
+	regex_iterator<string::iterator> ita(meshstr.begin(),meshstr.end(),rgxa);	
 	regex_iterator<string::iterator> end;
 	regex_iterator<string::iterator> itaback = ita;
 	int vc=0;
@@ -453,26 +461,29 @@ void CCShaderSprite::initVertices(int mode,std::string& meshstr)
 		itaback++;
 		vc++;
 	}
+	//CCLOG("initVertices ct = %d",vc);
 	if(vc==0)
 	{
 		return;
-
-	}
+	}	
 	m_meshmode = mode;
 	allocVertices(vc);
 	int i=0;
 	while(ita!=end)
 	{
-        std::string seq = std::string(ita->str());
-		std::regex_iterator<string::iterator> it(seq.begin(),seq.end(),rgx);
+		string seq(ita->str());
+		//CCLOG("seq %d = %s",i,seq.c_str());
+		regex_iterator<string::iterator> it(seq.begin(),seq.end(),rgx);
 		float t[8]={0,0,0,0,255,255,255,255};
 		int j=0;
 		while (it!=end)
 		{
+			//CCLOG("subseq %d=%s",j,it->str().c_str());
 			float f = (float)strtod(it->str().c_str(),nullptr);
 			t[j++]=f;
-			it++;
+			it++;			
 		}
+		
 		m_Vertices[i].vertices.x = t[0]; 
 		m_Vertices[i].vertices.y = t[1];
 		m_Vertices[i].vertices.z = 0;
@@ -489,7 +500,6 @@ void CCShaderSprite::initVertices(int mode,std::string& meshstr)
 }
 void CCShaderSprite::initForTest()
 {
-	std::string meshstr = "0,200,0.5,1|-100,0,0,0|100,0,1,0";
+	string meshstr = "0,200,0.5,1|-100,0,0,0|100,0,1,0";
 	initVertices(GL_TRIANGLE_STRIP,meshstr);
 }
-

@@ -492,11 +492,11 @@ static unsigned char XOR_END[]=
 {
 	0x39,0xcd,0x02,0x98,0x67,0x25
 };
-static char* XOR_KEY = "XYTEA";
+static const char* XOR_KEY = "XYTEA";
 
 static unsigned char XOR_BUFFER_GEN[42];
 
-static void gen_key(char*shorname,unsigned char** ppKEY,unsigned int *keylen)
+static void gen_key(const char*shorname,unsigned char** ppKEY,unsigned int *keylen)
 {
     int xorlen = sizeof(XOR_BUFFER)/sizeof(unsigned char);
     unsigned char*newKey = XOR_BUFFER_GEN;
@@ -534,7 +534,7 @@ static void xor_memory__(unsigned char* buff,unsigned int buffsize,unsigned char
     }
 }
 
-static void xor_memory(unsigned char* buff,unsigned int buffsize,char*shorname)
+static void xor_memory(unsigned char* buff,unsigned int buffsize,const char*shorname)
 {
 //  int xorlen = sizeof(XOR_BUFFER)/sizeof(unsigned char);
 //  xor_memory__(buff,buffsize,XOR_BUFFER,xorlen);
@@ -553,7 +553,7 @@ static void xor_memory_end(unsigned char* buff,unsigned int buffsize)
 	}
 }
 
-unsigned long CCFileUtils::dencypt_file(unsigned char*p_tmp,unsigned long filesize,char*shorname)
+unsigned long CCFileUtils::dencypt_file(unsigned char*p_tmp,unsigned long filesize,const char*shorname)
 {
 	bool ret;
 	unsigned char PEND[20];
@@ -611,7 +611,7 @@ static PNG_INFO get_png_chuck(unsigned char*buff,int skip)
 }
 
 
-int deencypt_file_png_buff(const unsigned char*buff,unsigned int bufflen,char*shorname)
+int deencypt_file_png_buff(const unsigned char*buff,unsigned int bufflen,const char*shorname)
 {
     if(shorname==NULL)
     {
@@ -750,7 +750,7 @@ unsigned char* CCFileUtils::getFileData(const char* pszFileName, const char* psz
 			int nnn = sss.length() - (posStart + 1);
 			sss = sss.substr(posStart+1,nnn);
 		}		
-		*pSize = dencypt_file(pBuffer,*pSize,(char*)sss.c_str());
+		*pSize = dencypt_file(pBuffer,*pSize,(const char*)sss.c_str());
 	}
     return pBuffer;
 }

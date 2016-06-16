@@ -72,7 +72,7 @@ CCZipFile *CCZipFile::createWithPathName(const char *zipPathName)
             zip->m_buff = buffer;
             return zip;
         }
-        delete[] buffer;
+        delete[] (unsigned char*)buffer;
     }
     return NULL;
 }
@@ -121,7 +121,7 @@ CCZipFile::~CCZipFile(void)
 {
     close();
 	m_fileList.clear();
-    if(m_buff) delete[] m_buff;
+    if(m_buff) delete[] (unsigned char*)m_buff;
     m_buff=NULL;
 }
 

@@ -56,6 +56,11 @@ function Node:pos(x, y)
     return self
 end
 
+function Node:arch(x, y)
+    self:setAnchorPoint(ccp(x, y))
+    return self
+end
+
 function Node:center()
     self:setPosition(display.cx, display.cy)
     return self

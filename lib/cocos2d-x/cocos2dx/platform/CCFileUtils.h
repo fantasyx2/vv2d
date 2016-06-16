@@ -87,7 +87,7 @@ public:
     virtual void purgeCachedEntries();
 	
 	//解密文件返回新长度
-	unsigned long dencypt_file(unsigned char*p_tmp,unsigned long filesize,char*shorname);
+	unsigned long dencypt_file(unsigned char*p_tmp,unsigned long filesize,const char*shorname);
     
     /**
      *  Gets resource file data
