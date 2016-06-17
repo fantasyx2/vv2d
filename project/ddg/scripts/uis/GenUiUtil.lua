@@ -695,6 +695,7 @@ function GenUiUtil.attackShader(sp,name)
         BLUE  = {"BlueShader.vsh","BlueShader.fsh"},
         GREEN  = {"GreenShader.vsh","GreenShader.fsh"},
         WBULE = {"BuleWaterShader.vsh","BuleWaterShader.fsh"},
+        LIGHTBAND = {"LightbandShader.vsh","LightbandShader.fsh"},
     }
     local EFT_SHADER_PATH = "shader/"
     local name = string.upper(name)

@@ -22,7 +22,7 @@ function TestScene:ctor()
 	}
 	self.TND = display.newNode()
 	self.TND:setPosition(0, 0)
-	self.TND:setTouchEnabled(true)
+	--self.TND:setTouchEnabled(true)
 	self:addChild(self.TND, 2)
 	local ListView = require("uis.listview.ListView")
 	local ListViewCell = require("uis.listview.ListViewCell")
@@ -49,10 +49,10 @@ function TestScene:ctor()
 		cell:addChild(bg)
 		-------------------------------
 		local color=ccc3(255,0,0)
-		local outline = ccc3(0, 255, 0)
+		local outline = ccc3(255, 255, 0)
     	local label = CCLabelTTF:create(v[1],CFG_SYSTEM_FONT,48)    
     	label:setColor(color)
-    	label:enableStroke(outline, 4)
+    	label:enableStroke(outline, 2)
     	cell:addChild(label) 
     	label:setAnchorPoint(ccp(0,0.5))
     	label:setPosition(20, cell_h/2)
@@ -70,6 +70,8 @@ function TestScene:ctor()
 	self:addChild(list)
 	list:setTouchEnabled(true)
 	list:setCellAlign(0.8)	
+
+	-- self:tstShader()
 end
 
 function TestScene:onEnter()
@@ -197,8 +199,6 @@ function TestScene:tstMesh()
 	-- 	"[^\\|]{1,}\\|{0,1}",
 	-- 	"[\\d\\.\\-]{1,}"
 	-- 	)
-	print(gl.GL_TRIANGLE_STRIP)
-	print(spp)
 	spp:initVertices(
 		gl.GL_TRIANGLE_STRIP,
 		"-50,50,0,0.5,255,0,0,255|-100,-50,0,0|100,100,1,1|100,-100,1,0,255,255,0,255"
@@ -387,6 +387,29 @@ function TestScene:tstShader()
 	spp:setScale(0.5)
 	spp:setPosition(display.cx,display.cy)
 	self:addTestNd(spp)
+	local str = "cup.png"
+	-- local str = "UI/hero1014.jpg"
+	-- local str = "monkey.png"
+	local spp = CCShaderSprite:create(str)
+	spp:scale(2.0)
+	GenUiUtil.attackShader(spp,"LIGHTBAND")
+	spp:setPosition(display.cx,display.cy)
+	spp:setColor(ccc3(255,255,255))
+	self:addTestNd(spp)
+	-- local __mb = ccBlendFunc()
+ --    __mb.src = GL_SRC_ALPHA
+ --    __mb.dst = GL_ONE_MINUS_SRC_ALPHA
+ --    spp:setBlendFunc(__mb)
+ 	local sp_w =spp:getContentSize().width
+ 	local sp_h =spp:getContentSize().height
+ 	spp:setTouchEnabled(true)
+ 	spp:addNodeEventListener(cc.NODE_TOUCH_EVENT,function(evt)
+ 		local pp = spp:convertToNodeSpace(ccp(evt.x,evt.y))
+ 		spp:setSdf(1,pp.x/sp_w)
+ 		spp:setSdf(2,1-pp.y/sp_h)
+ 		return true
+ 	end)
+
 end
 function TestScene:tstJz()
 	local spp = CCShaderSprite:create("UI/cpt_bg_01.png")
