@@ -30,7 +30,7 @@ function ScrollView:ctor(rect, direction,clip)
 	self.cliprect = rect
 	self.clipsz = rect.size
 	self:setContentSize(self.clipsz)
-
+	self.bgsp=nil
 	self.container=nil	
 	self.clipnd = nil
 	if not clip then
@@ -49,6 +49,28 @@ function ScrollView:ctor(rect, direction,clip)
 	self:addNodeEventListener(cc.NODE_ENTER_FRAME_EVENT,handler(self,self.update))
 
 	self:scheduleUpdate_()
+
+end
+
+function ScrollView:setBgSp(sp)
+	if(self.bgsp) then
+		self.bgsp:removeSelf()
+	end
+	self.bgsp=sp
+	self.bgsp:setPosition(self.clipsz.width/2, self.clipsz.height/2)
+	self:addChild(self.bgsp,-1)
+end
+function ScrollView:setBgColor(color)
+	if(self.bgsp) then
+		self.bgsp:removeSelf()
+	end
+	self.bgsp=display.newColorLayer(ccc4(color.r,color.g,color.b,color,a))
+	self.bgsp:setContentSize(self.clipsz)
+	self.bgsp:setPosition(0,0)
+	self:addChild(self.bgsp,-1)
+end
+
+function ScrollView:setBg(path)
 
 end
 

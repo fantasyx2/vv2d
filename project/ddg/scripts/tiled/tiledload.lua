@@ -238,7 +238,7 @@ local function unzip(data)
 	end
 	return tb
 end
-local function gen(T,suppm)
+local function gen(T,path,suppm)
 	local r={}
 	local nodes={}
 	local girdrect={}
@@ -253,7 +253,6 @@ local function gen(T,suppm)
 	r.objinfo=objinfo--[group][gid](1-N)
 	-- r.objects={}
 	-- r.tiles={}
-
 	local tw = T.tilewidth
 	local th = T.tileheight
 	local gw = T.width
@@ -291,6 +290,7 @@ local function gen(T,suppm)
 	-- dump(objinfo)
 	-- modify tilesets
 	for TI,v in ipairs(T.tilesets) do
+		v.image = path..v.image --add full path
 		v.endgid = v.firstgid+v.tilecount-1
 		--only one grid tiles empty
 		local tw = v.tilewidth
@@ -374,7 +374,7 @@ local function gen(T,suppm)
 				end	
 			end
 		elseif(v.type=='imagelayer') then
-			local spt = CCSprite:create(v.image)
+			local spt = CCSprite:create(path..v.image)
 			local sz = spt:getContentSize()
 			-- spt:setAnchorPoint(ccp(0,0))
 			local x = v.offsetx
@@ -414,12 +414,13 @@ local function gen(T,suppm)
 end	
 
 --conver json to table
-function M.load(luafile,supp_more_image_each_layer)
-	local tb = run_lua_file(luafile)
+function M.load(luafile,path,supp_more_image_each_layer)
+	path = path or ""
+	local tb = run_lua_file(path..luafile)
 	if(not tb) then
 		return
 	end
-	return gen(tb,supp_more_image_each_layer)
+	return gen(tb,path,supp_more_image_each_layer)
 end
 ----------------------------------------------
 tiledload=M

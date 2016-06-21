@@ -10,7 +10,7 @@ local UI_POS =
 {   
     --头像背景
     {n="bg",        t="sp",       x=display.cx,y=display.cy,   tg = 100,  ftg = 0, res="cpt_bg_02.png"},  
-    {n="god",      t="mcbtn",  x=display.cx,y=display.cy,   tg = 101,  ftg = 0, res={"god.png"}},
+    {n="crit",      t="mcbtn",  x=display.cx,y=display.cy,   tg = 101,  ftg = 0, res={"crit.png","crit.png"}},
     {n="black",     t="color",    x=display.cx,y=display.cy,   tg = 102,  ftg = 0, od = 1000,color={0,0,0,0}},
     {n="blacktxt",  t="txt",      x=display.cx,y=display.cy-40,   tg = 103,  ftg = 0, color={255,255,255},size=20,txt="do It" },
  }
@@ -32,7 +32,7 @@ function ALayer:ctor(param)
     self.uis={}    
     self.uis = GenUiUtil.genUis(UI_POS,self,pathflag)
     --点击开启
-    self.uis["god"]:onButtonClicked(
+    self.uis["crit"]:onButtonClicked(
         function()
         end
         )

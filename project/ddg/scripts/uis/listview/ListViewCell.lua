@@ -8,10 +8,14 @@ local ListViewCell = class("ListViewCell", function(contentSize)
 end)
 
 function ListViewCell:ctor(contentSize,id)
-	self.id = id
+	self.id = id or 0
 	self.btns = {}	
 	self.actbtn = nil
 	self.__addChild = CCNode.addChild
+end
+
+function ListViewCell:setId(id)
+	self.id = id
 end
 
 function ListViewCell:addNode(nd,od,tg)

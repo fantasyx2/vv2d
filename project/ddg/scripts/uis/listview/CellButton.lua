@@ -14,6 +14,9 @@ function CellButton:ctor(images, options)
     self.originalScale = 1.0
     self.pressScale = 1.2
     self.pressDt = 0.2
+    if((not images.pressed) or images.normal==images.pressed) then
+        self.pressAnim = true
+    end
 end
 --不处理
 function CellButton:onTouch_(event)

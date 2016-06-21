@@ -3,7 +3,7 @@ local ALayer = import(".ALayer")
 local TestScene = class("TestScene", function()
     return display.newScene("TestScene")
 end)
-
+local timer = require("framework.scheduler")	
 function TestScene:ctor()
 	local listconfig=
 	{		
@@ -19,6 +19,7 @@ function TestScene:ctor()
 		{"tstCCS",			handler(self,self.tstCCS)},
 		{"tstSpine",		handler(self,self.tstSpine)},
 		{"tstGenUi",		handler(self,self.tstGenUi)},
+		{"tstRenderTexture",handler(self,self.tstRenderTexture)},
 	}
 	self.TND = display.newNode()
 	self.TND:setPosition(0, 0)
@@ -72,6 +73,8 @@ function TestScene:ctor()
 	list:setCellAlign(0.8)	
 
 	-- self:tstShader()
+	-- self:tstRenderTexture()
+	-- self:tstCCS()
 end
 
 function TestScene:onEnter()
@@ -138,12 +141,12 @@ function TestScene:initForMap()
 end
 
 function TestScene:tstTiledSwap(a,b,c,d)
-	local layer = self.map:getLayerByName('surface')
+	local layer = self.map:getLayerByName('conveyor')
 	-- layer:swapAtGid(a,b)
 	layer:swapAt(a,b,c,d)
 end
 function TestScene:tstTiledClick(x,y)
-	local layer = self.map:getLayerByName('surface')
+	local layer = self.map:getLayerByName('conveyor')
 	layer:setTileAt(math.random(1,126),x,y,true)
 	local spt,tid  = layer:getTileAt(x,y)
 	-- print(spt)
@@ -171,7 +174,7 @@ function TestScene:tstTiledClick(x,y)
 end
 
 function TestScene:tstTiled()
-	local map= tiledload.load("fruits.lua",true)
+	local map= tiledload.load("1010001.lua","map/",true)
 	if(map) then
 		self:cleanTestNd()
 		self:initForMap()
@@ -180,8 +183,8 @@ function TestScene:tstTiled()
 		end
 		self.map=map
 		dump(map,"map",1)
-		dump(map:getRootByName('surface'),"root",1)
-		dump(map:getLayerByName('surface'),"layer",1)
+		dump(map:getRootByName('conveyor'),"root",1)
+		dump(map:getLayerByName('conveyor'),"layer",1)
 		dump(map:getObjectInfo("ground",5),"objinfo",1)
 		dump(map:getObjectPropertys("ground",5),"objpro",1)
 		dump(map:getTiledInfo(10),'tileinfo',1)
@@ -219,7 +222,6 @@ function TestScene:tstMesh()
 end
 
 function TestScene:tstPageview()
-	local timer = require("framework.scheduler")	
 	local PageView = require("uis.listview.PageView")
 	local ListViewCell = require("uis.listview.ListViewCell")
 	local CellBtn = require("uis.listview.CellButton")
@@ -362,11 +364,38 @@ function TestScene:tstScrollview()
 end
 
 function TestScene:tstCCS()
-	--ccsload.createNode("test.json")
-	local r = ccsload.createNode("TestScene.json")
+	-- local r = ccsload.createNode("MainLayer.json")
+	local r = ccsload.load("MainScene.json")
 	if(r and r.node) then
 		r.node:setPosition(0, 0)
 		self:addTestNd(r.node,10);
+		-- local nd = r:getChildByName("PageView")
+		-- local img = r:getChildByName("Image")
+		local img = r.Image
+		-- GenUiUtil.attackShader(img,"LIGHTBAND")
+		img:runAction(CCRotateBy:create(2.0,720))
+		
+		local nd = r:getChildByName("ListView")
+		
+		local ListViewCell = require("uis.listview.ListViewCell")
+		local CellBtn = require("uis.listview.CellButton")
+		local cells={}
+		for i=1,5 do
+			local r = ccsload.load_listviewcell("PageCell.json")
+			-- dump(r,"PageCell",5)
+			-- local btn = r:getChildByName('Button')
+			local btn = r.Button
+			btn:onButtonClicked(function(evt)
+				print("PageCell btn click",evt.x)
+			end)
+			local cell = r.node
+			cell:setId(i)
+			table.insert(cells,cell)
+
+		end
+		nd:addCells(cells)
+		nd:setTouchEnabled(true)
+		nd:setCellAlign(0.0)
 	end
 end
 
@@ -387,19 +416,19 @@ function TestScene:tstShader()
 	spp:setScale(0.5)
 	spp:setPosition(display.cx,display.cy)
 	self:addTestNd(spp)
-	local str = "cup.png"
-	-- local str = "UI/hero1014.jpg"
-	-- local str = "monkey.png"
+	local str = "UI/cup.png"
+	local str = "UI/hero1014.jpg"
+	-- local str = "UI/monkey.png"
 	local spp = CCShaderSprite:create(str)
 	spp:scale(2.0)
 	GenUiUtil.attackShader(spp,"LIGHTBAND")
 	spp:setPosition(display.cx,display.cy)
-	spp:setColor(ccc3(255,255,255))
+	spp:setColor(ccc3(255,200,0))
 	self:addTestNd(spp)
-	-- local __mb = ccBlendFunc()
- --    __mb.src = GL_SRC_ALPHA
- --    __mb.dst = GL_ONE_MINUS_SRC_ALPHA
- --    spp:setBlendFunc(__mb)
+	local __mb = ccBlendFunc()
+    __mb.src = GL_SRC_ALPHA
+    __mb.dst = GL_ZERO
+    spp:setBlendFunc(__mb)
  	local sp_w =spp:getContentSize().width
  	local sp_h =spp:getContentSize().height
  	spp:setTouchEnabled(true)
@@ -432,21 +461,64 @@ function TestScene:tstTween()
 end
 
 function TestScene:tstSpine()
-	local skeletonNode = SkeletonAnimation:createWithFile("data/spineboy.json", "data/spineboy.atlas", 0.3)
+	local skeletonNode = SkeletonAnimation:createWithFile("data/A160413.json", "data/A160413.atlas", 0.3)
 	dump(SkeletonRenderer)
 
-	skeletonNode:setMix("walk", "jump", 0.2);
-	skeletonNode:setMix("jump", "run", 0.2);
-	skeletonNode:setAnimation(0, "walk", true);
-	local jumpEntry = skeletonNode:addAnimation(0, "jump", false, 3);
-	skeletonNode:addAnimation(0, "run", true);
-	skeletonNode:setPosition(display.width / 2, 20);
-	self:addTestNd(skeletonNode);
+	skeletonNode:setMix("pig_1", "pig_2", 0.2)
+	skeletonNode:setMix("pig_2", "pig_3", 0.2)
+	skeletonNode:setAnimation(0, "pig_1", true)
+	local jumpEntry = skeletonNode:addAnimation(0, "pig_3", false, 3)
+	skeletonNode:addAnimation(0, "pig_2", true)
+	skeletonNode:setPosition(display.width / 2, 20)
+	self:addTestNd(skeletonNode)
 	skeletonNode:setScriptHandlerForAnima(function(name,trackidx,tp,evt,loopct)
 		print(name,trackidx,tp,evt.data.name,loopct)
 	end)
 	skeletonNode:setScriptHandlerForTrack(function(name,trackidx,tp,evt,loopct)
 		print(name,trackidx,tp,evt.data.name,loopct)
 	end)
+end
+
+function TestScene:tstRenderTexture()
+		local rt = CCRenderTexture:create(display.width,display.height)
+		rt:setAnchorPoint(ccp(0,0))
+		rt:setPosition(0,0)
+		local str = "UI/monkey.png"
+		local spp = display.newSprite(str)
+		if(spp) then
+			print("----------",spp:getContentSize().width,spp:getContentSize().height)
+			spp:setPosition(display.cx,display.cy)
+			rt:addChild(spp)
+		end
+
+		local bg = CCDrawNode:create()
+		local points={}
+	    points[1] = {0,0}
+	    points[2] = {50,100}
+	    points[3] = {150,100}
+	    points[4] = {100,0}	   
+		bg:drawPolygon(points,
+                        {   
+                            fillColor = cc.c4f(1,1,1,0.5),
+                            borderWidth =   4,
+                            borderColor =   cc.c4f(1,1,1,0.5)
+                        }
+                    )
+		local __pb = ccBlendFunc()
+		__pb.src = GL_SRC_ALPHA
+		__pb.dst = GL_ONE_MINUS_SRC_ALPHA
+		spp:setBlendFunc(__pb)
+		bg:setBlendFunc(__pb)
+		rt:addChild(bg)
+		rt:begin()
+	    spp:visit()
+	    bg:visit()
+	    rt:endToLua()
+
+		print("llllllll333=%d,%d")
+		local rtspt = CCSprite:createWithTexture(rt:getSprite():getTexture())
+    	rtspt:setFlipY(true)
+    	rtspt:setAnchorPoint(ccp(0,0))
+    	self:addTestNd(rtspt)
 end
 return TestScene

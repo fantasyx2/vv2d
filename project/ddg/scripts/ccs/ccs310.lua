@@ -1,4 +1,6 @@
 local M={}
+local sharedTextureCache     = CCTextureCache:sharedTextureCache()
+local sharedSpriteFrameCache = CCSpriteFrameCache:sharedSpriteFrameCache()
 local function set_param(nd,t)
 	local a
 	a=t.Position
@@ -29,7 +31,7 @@ local function set_param(nd,t)
 		nd:setRotationY(a)
 	end
 	a=t.CColor
-	if(a) then
+	if(a and (a.R or a.G or a.B)) then
 		local c = ccc3(a.R or 255, a.G or 255, a.B or 255)
 		nd:setColor(c)
 	end
@@ -58,6 +60,57 @@ local function get_scale9cap(t)
 		return CCRect(t.Scale9OriginX, t.Scale9OriginY, t.Scale9Width, t.Scale9Height)
 	end
 end
+local function gen_sp(t)	
+	local a = t.FileData
+	if(a and a.Path) then
+		local nd
+		local s9cap = get_scale9cap(t)
+		if(a.Type == "PlistSubImage") then			
+			sharedSpriteFrameCache:addSpriteFramesWithFile(a.Plist)
+			local frame = display.newSpriteFrame(a.Path)
+	        if frame then
+	            if s9cap then
+	                nd = CCScale9Sprite:createWithSpriteFrame(frame, s9cap)
+	            else
+	                nd = CCSprite:createWithSpriteFrame(frame)
+	            end
+	        end
+	 	else
+			if(s9cap) then
+				nd = display.newScale9Sprite(a.Path,nil,nil,nil,s9cap)
+			else	
+				nd = display.newSprite(a.Path)
+			end
+		end
+		return nd
+	end	
+end
+local function gen_bgsp(t)	
+	local a = t.FileData
+	if(a and a.Path) then
+		local sp = gen_sp(t)
+		if(sp) then
+			local a=t.Size
+			if(a) then
+				sp:setContentSize(CCSize(a.X, a.Y))
+			end
+			return sp
+		end
+	else
+		local a = t.SingleColor
+		if(a and (a.R or a.G or a.B)) then
+			local c = ccc4(a.R or 255, a.G or 255, a.B or 255,t.BackColorAlpha or 255)
+			local nd=display.newColorLayer(c)
+			local a=t.Size
+			if(a) then
+				nd:setContentSize(CCSize(a.X, a.Y))
+			end
+			nd:ignoreAnchorPointForPosition(false)
+			return nd
+		end
+	end
+end		
+
 local function gen_node(t)
 	local nd = display.newNode()
 	if(nd) then
@@ -66,14 +119,18 @@ local function gen_node(t)
 		return nd
 	end
 end
-local function gen_btn(t)
+local McButton = require("uis.McButton")
+local CellButton = require("uis.listview.CellButton")
+local function gen_btn(t,class)
 	local s9cap = get_scale9cap(t)
 	--print("gen_btn_1",s9cap)
 	local a = t.NormalFileData and t.NormalFileData.Path
 	local b = t.PressedFileData and t.PressedFileData.Path
 	local c = t.DisabledFileData and t.DisabledFileData.Path
 	--print("gen_btn_2",a,b,c)
-	local nd=cc.ui.UIPushButton.new(
+	-- local class = cc.ui.UIPushButton
+	class = class or McButton
+	local nd=class.new(
 				{
 				    normal  = a,
 				    pressed = b,
@@ -101,10 +158,8 @@ local function gen_btn(t)
 			lb = CCLabelTTF:create(a,CFG_SYSTEM_FONT,b)
 			lb:setColor(cl)
         	nd:setButtonLabel("pressed", lb)
-        	nd:setButtonLabelOffset(0,-8)
-    	end
-
-		
+        	--nd:setButtonLabelOffset(0,0)
+    	end	
 		--print("gen_btn_3",nd)
 		return nd
 	end
@@ -127,20 +182,11 @@ local function gen_map(t)
 	end
 end
 local function gen_imgview(t)
-	local s9cap = get_scale9cap(t)
-	local a = t.FileData
-	if(a and a.Path) then
-		local nd
-		if(s9cap) then
-			nd = display.newScale9Sprite(a.Path,nil,nil,nil,s9cap)
-		else	
-			nd = display.newSprite(a.Path)
-		end
-		if(nd) then
-			nd:setName(t.Name)
-			set_param(nd,t)			
-			return nd
-		end		
+	local nd = gen_sp(t)
+	if(nd) then
+		nd:setName(t.Name)
+		set_param(nd,t)		
+		return nd
 	end	
 end
 local ListView = require("uis.listview.ListView")
@@ -151,33 +197,76 @@ local function gen_listview(t)
 	if(nd) then
 		nd:setName(t.Name)
 		set_param(nd,t)
+		local bgsp = gen_bgsp(t)
+		if(bgsp) then
+			nd:setBgSp(bgsp)
+		end
 		return nd
 	end
 end
-local function gen_loading(t)
-	local nd = display.newNode()
+
+local ListViewCell = require("uis.listview.ListViewCell")
+local function gen_listviewcell(t)
+	local sz = t.Size
+	local nd = ListViewCell.new(cc.size(sz.X,sz.Y))
 	if(nd) then
 		nd:setName(t.Name)
 		set_param(nd,t)
+		return nd
+	end
+end
+
+local ProgressBar = require("uis.ProgressBar")
+
+local function gen_loading(t)
+	local sp = display.newSprite(t.ImageFileData.Path)
+	local nd = ProgressBar.new(_,sp,0,0)
+	if(nd) then
+		nd:setName(t.Name)
+		set_param(nd,t)
+		nd:setPercent(t.ProgressInfo)
 		return nd
 	end
 end
 local PageView = require("uis.listview.PageView")
 local function gen_pageview(t)
 	local sz = t.Size
-    local direct = t.DirectionType=="Vertical" and 1 or 2
+    local direct = t.ScrollDirectionType==0 and 1 or 2
 	local nd = PageView.new(CCRect:new(0,0,sz.X,sz.Y),direct,t.ClipAble)
 	if(nd) then
 		nd:setName(t.Name)
 		set_param(nd,t)
+		local bgsp = gen_bgsp(t)
+		if(bgsp) then
+			nd:setBgSp(bgsp)
+		end
 		return nd
 	end
 end
 local function gen_panel(t)
-	local nd = display.newNode()
+	local a = t.SingleColor
+	local c
+	if(a and (a.R or a.G or a.B)) then
+		c = ccc4(a.R or 255, a.G or 255, a.B or 255,t.BackColorAlpha or 255)
+	end	
+	local nd
+	if(c) then
+		-- print("gen_panel",c.r,c.g,c.b,c.a)
+		nd = display.newColorLayer(c)
+	else	
+		nd = display.newNode()
+	end	
 	if(nd) then
 		nd:setName(t.Name)
 		set_param(nd,t)
+		local bgsp = gen_sp(t)
+		if(bgsp) then
+			nd:addChild(bgsp)
+			if(t.Scale9Enable) then
+				bgsp:size(t.Size.X,t.Size.Y)
+			end
+			bgsp:pos(t.Size.X/2,t.Size.Y/2)
+		end
 		return nd
 	end
 end
@@ -195,13 +284,17 @@ end
 local ScrollView = require("uis.listview.ScrollView")
 local function gen_scrollview(t)
     local sz = t.Size
-    local direct = t.DirectionType=="Vertical" and 1 or 2
+    local direct = t.ScrollDirectionType==0 and 1 or 2
 	local nd = ScrollView.new(CCRect:new(0,0,sz.X,sz.Y),direct,t.ClipAble)
 	--nd:setContainer(display.newSprite("UI/cpt_bg_01.png"))
 	--nd:setTouchEnabled(true)
 	if(nd) then
 		nd:setName(t.Name)
 		set_param(nd,t)
+		local bgsp = gen_bgsp(t)
+		if(bgsp) then
+			nd:setBgSp(bgsp)
+		end
 		return nd
 	end
 end
@@ -213,17 +306,12 @@ local function gen_audio(t)
 		return nd
 	end
 end
-local function gen_sprite(t)
-	local a=t.FileData
-	if(a and a.Path) then
-		local nd = display.newSprite(a.Path)
-		if(nd) then
-			print("gen_sprite---",a.Path)
-			nd:setName(t.Name)
-			set_param(nd,t)		
-			print("gen_sprite---",a.Path)	
-			return nd
-		end		
+local function gen_sprite(t)	
+	local nd = gen_sp(t)
+	if(nd) then
+		nd:setName(t.Name)
+		set_param(nd,t)		
+		return nd
 	end	
 end
 local function gen_textatlas(t)
@@ -237,20 +325,27 @@ local function gen_textatlas(t)
 	end
 end
 local function gen_input(t)
-	--dump(t)
-	-- local nd = ui.newEditBox(
- --                        {
- --                            image = t.res or "",
- --                            size = CCSize(t.Size.X,t.Size.Y),
- --                            imageOpacity = 255,
- --                            --listener =,
- --                        })
-	-- print("gen_input")
-	-- if(nd) then
-	-- 	nd:setName(t.Name)
-	-- 	set_param(nd,t)
-	-- 	return nd
-	-- end
+	local nd = ui.newEditBox(
+                        {
+                            size = cc.size(t.Size.X,t.Size.Y),
+                        })
+    nd:setPlaceHolder(t.PlaceHolderText)
+    if(t.FontResource and t.FontResource.Path) then
+    	nd:setFontName(t.FontResource.Path)
+	end
+    nd:setFontSize(t.FontSize or 24)
+    nd:setText(t.LabelText)
+    if t.PasswordEnable then
+    	nd:setInputFlag(cc.EDITBOX_INPUT_FLAG_PASSWORD)
+	end
+	if t.MaxLengthEnable then
+		nd:setMaxLength(t.MaxLengthText)
+	end
+	if(nd) then
+		nd:setName(t.Name)
+		set_param(nd,t)
+		return nd
+	end
 end
 
 local align_map=
@@ -271,24 +366,25 @@ local function gen_text(t)
 	if(a and a.X and a.Y) then
 		local align=align_map[a.HorizontalAlignmentType or "HT_Center"]
 		local valign=align_map[a.VerticalAlignmentType or "VT_Center"]
-		nd = CCLabelTTF:create(txt, CFG_SYSTEM_FONT, fontsz, CCSize(a.X,a.Y), align, valign)
+		nd = CCLabelTTF:create(txt, CFG_SYSTEM_FONT, fontsz, CCSize(a.X+4,a.Y), align, valign)
 	else
 		nd = CCLabelTTF:create(txt, CFG_SYSTEM_FONT, fontsz)
 	end	
-	a=t.OutlineColor
-	if(a) then		
+	
+	if(t.OutlineEnabled) then
+		a=t.OutlineColor	
 		local c = ccc3(a.R or 255, a.G or 255, a.B or 255)		
 		nd:enableStroke(c, 2)
-	end
-	a=t.ShadowColor
-	if(a) then		
-		--local c = ccc3(a.R or 255, a.G or 255, a.B or 255)		
-		--nd:enableStroke(c, 2)
 	end
 	a=t.ShadowEnabled
 	if(a) then		
 		local sz = CCSize(t.ShadowOffsetX or 1.0,t.ShadowOffsetY or -1.0)		
 		nd:enableShadow(sz,0.8,0.5)
+		a=t.ShadowColor
+		if(a) then		
+			local c = ccc3(a.R or 255, a.G or 255, a.B or 255)		
+			nd:enableStroke(c, 2)
+		end
 	end
 	if(nd) then
 		nd:setName(t.Name)
@@ -314,18 +410,23 @@ end
 --------------------------------------
 local config=
 {
-	ButtonObjectData	= gen_btn,
-	CheckBoxObjectData	= gen_checkbox,
-	GameMapObjectData	= gen_map,
-	ImageViewObjectData	= gen_imgview,
-	ListViewObjectData	= gen_listview,
+	ButtonObjectData		= gen_btn,
+	--CheckBoxObjectData	= gen_checkbox,
+	--GameMapObjectData		= gen_map,
+	ImageViewObjectData		= gen_imgview,
+	ListViewObjectData		= gen_listview,
 	LoadingBarObjectData	= gen_loading,
 	PageViewObjectData		= gen_pageview,
 	PanelObjectData			= gen_panel,
 	ParticleObjectData		= gen_particle,
 	ScrollViewObjectData	= gen_scrollview,
-	SimpleAudioObjectData	= gen_audio,
-	SingleNodeObjectData	= gen_node,
+	ListViewCell         	= gen_listviewcell,--custom class
+	CellButton         		= function(t)
+								return gen_btn(t,CellButton)
+							  end,--custom class addto ListViewCell
+	--SimpleAudioObjectData	= gen_audio,
+	SingleNodeObjectData	= gen_node,--scene.ccs root node
+	LayerObjectData			= gen_node,--layer.css root node
 	SpriteObjectData		= gen_sprite,
 	TextAtlasObjectData		= gen_textatlas,
 	TextFieldObjectData		= gen_input,
@@ -405,8 +506,8 @@ local function gen(a)
 	if(not tp) then
 		return
 	end
-	print("-----"..tp)
-	local f = config[tp]
+	--print("-----"..tp)
+	local f = config[a.CustomClassName] or config[tp]
 	if(not f) then
 		print("-----no config----"..tp)
 		return
@@ -420,7 +521,7 @@ local function gen(a)
 	if(a.Children) then
 		r.childs={}
 		--parse childs
-		for _,v in pairs(a.Children) do
+		for _,v in ipairs(a.Children) do
 			local n = gen(v)
 			if(n and n.node) then
 				r.node:addChild(n.node)
@@ -433,7 +534,21 @@ local function gen(a)
 	return r
 end	
 --conver json to table
-function M.load(jsonfile)
+function M.load_tb(jsontb,func)
+	local res = jsontb.Content.Content.UsedResources
+	local root = jsontb.Content.Content.ObjectData
+	--use custom class name force if editor not mark
+	if(func) then
+		func(root)
+	end	
+	------------------------------------------------
+	local size = root.Size
+	local name = root.Name
+	local nodes = root.Children
+	local r=gen(root)
+	return r
+end
+function M.load(jsonfile,func)
 	local str = get_file_data(jsonfile)
 	if(not str) then
 		return false
@@ -443,28 +558,38 @@ function M.load(jsonfile)
 	if(not jsontb) then
 		return false
 	end
-	local res = jsontb.Content.Content.UsedResources
-	local root = jsontb.Content.Content.ObjectData
-	local size = root.Size
-	local name = root.Name
-	local nodes = root.Children
-	local r=gen(root)
-	return r
+	return M.load_tb(jsontb,func)
 end
+
+function M.load_listviewcell(jsonfile)	
+	return M.load(jsonfile,function(root)
+								root.CustomClassName = "ListViewCell"
+								for _,v in ipairs(root.Children) do
+									if(v.ctype=='ButtonObjectData') then
+										v.CustomClassName='CellButton'										
+									end									
+								end
+						   end
+	)	
+end	
 ----------------------------------------------
 --gen node
 function M.createNode(jsonfile)
 	local r=M.load(jsonfile)
 	if(r) then
-		-- dump(r,"ccsload",5)
-		-- print("r.getChildRoot_Text		",tostring(r:getChildRoot"Text"))
-		-- print("r.getChildByName_Text	",tostring(r:getChildByName"Text"))
-		-- print("r.getChildByTag_17		",tostring(r:getChildByTag(17)))
-		-- print("r.Text					",tostring(r.Text))
-		-- print("r[17]					",tostring(r[17]))
+		dump(r,"ccsload",5)
+		--print("r.getChildByName",tostring(r:getChildInfo"Text":getChildByName("Text")))
+		--print("r.getChildByTag ",tostring(r:getChildByTag(17)))
 		return r
 	end
 end
+--[[
+1.can parse scene.ccs and layer.css as same format
+2.img and sprite can use plist
+3.btn not support plist
+4.listviewcell pageviewvell use CustomClassName:ListViewCell
+5.CellBtn use CustomClassName:CellBtn
+--]]
 ccsload=M
 
  
