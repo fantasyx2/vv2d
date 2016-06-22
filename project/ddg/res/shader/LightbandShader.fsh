@@ -187,6 +187,31 @@ void lightoutline()
         gl_FragColor = color;
     }
 }
+
+void lightcircle()
+{
+    vec4 normalColor = texture2D(CC_Texture0, v_texCoord);
+    vec2 uv = v_texCoord;
+    float cx = CC_V4P1[0];
+    float cy = CC_V4P1[1];
+    float m1 = mod(CC_Time[1],4.0)/4.0;
+    float m2 = m1+0.1;
+    float x = cx-uv.x;
+    float y = cy-uv.y;
+    y*=8.0/7.5;
+    float r = sqrt(pow(x,2.0)+pow(y,2.0));
+    if(r>=m1 && r<=m2)
+    {
+        float v = abs(r)/0.5;
+        gl_FragColor = v_fragmentColor*v+texture2D(CC_Texture0, v_texCoord)*(1.0-v);   
+    }
+    else
+    {   
+    
+        gl_FragColor = texture2D(CC_Texture0, v_texCoord-vec2(0.05,0.05));
+    }
+}
+
 void main()
 {
     //lightup();
@@ -194,5 +219,7 @@ void main()
     //lightband();
     //lightoutline();
     lightband2();
+    //lightcircle();
+    //lightcut();
 }
 

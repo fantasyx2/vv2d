@@ -10,16 +10,17 @@ function TestScene:ctor()
 		{"tstScrollview",	handler(self,self.tstScrollview)},
 		{"tstListview",		handler(self,self.tstListview)},
 		{"tstPageview",		handler(self,self.tstPageview)},
-		{"tstTiled",		handler(self,self.tstTiled)},
-		{"tstMesh",			handler(self,self.tstMesh)},
-		{"tstTween",		handler(self,self.tstTween)},		
-		{"tstJson",			handler(self,self.tstJson)},
 		{"tstShader",		handler(self,self.tstShader)},
-		{"tstJz",			handler(self,self.tstJz)},
+		{"tstShader2",		handler(self,self.tstShader2)},
 		{"tstCCS",			handler(self,self.tstCCS)},
 		{"tstSpine",		handler(self,self.tstSpine)},
 		{"tstGenUi",		handler(self,self.tstGenUi)},
 		{"tstRenderTexture",handler(self,self.tstRenderTexture)},
+		{"tstTiled",		handler(self,self.tstTiled)},
+		{"tstMesh",			handler(self,self.tstMesh)},	
+		{"tstJz",			handler(self,self.tstJz)},
+		{"tstTween",		handler(self,self.tstTween)},		
+		{"tstJson",			handler(self,self.tstJson)},
 	}
 	self.TND = display.newNode()
 	self.TND:setPosition(0, 0)
@@ -75,6 +76,7 @@ function TestScene:ctor()
 	-- self:tstShader()
 	-- self:tstRenderTexture()
 	-- self:tstCCS()
+	-- self:tstShader2()
 end
 
 function TestScene:onEnter()
@@ -417,17 +419,19 @@ function TestScene:tstShader()
 	spp:setPosition(display.cx,display.cy)
 	self:addTestNd(spp)
 	local str = "UI/cup.png"
-	local str = "UI/hero1014.jpg"
-	-- local str = "UI/monkey.png"
+	-- local str = "UI/hero1015.jpg"
+	-- local str = "UI/hero1014.jpg"
+	local str = "UI/monkey.png"
+	local str = "UI/item_2.png"
 	local spp = CCShaderSprite:create(str)
 	spp:scale(2.0)
 	GenUiUtil.attackShader(spp,"LIGHTBAND")
 	spp:setPosition(display.cx,display.cy)
-	spp:setColor(ccc3(255,200,0))
+	spp:setColor(ccc3(255,255,128))
 	self:addTestNd(spp)
 	local __mb = ccBlendFunc()
     __mb.src = GL_SRC_ALPHA
-    __mb.dst = GL_ZERO
+    __mb.dst = GL_ONE_MINUS_SRC_ALPHA
     spp:setBlendFunc(__mb)
  	local sp_w =spp:getContentSize().width
  	local sp_h =spp:getContentSize().height
@@ -520,5 +524,36 @@ function TestScene:tstRenderTexture()
     	rtspt:setFlipY(true)
     	rtspt:setAnchorPoint(ccp(0,0))
     	self:addTestNd(rtspt)
+end
+
+function TestScene:tstShader2()
+	local rock = "UI/hero1015.jpg"
+	-- local rock = "UI/pig.jpg"
+	local noise = "UI/noise.png"
+	local water = "UI/water.png"
+	local spp = CCShaderSprite:create(rock)
+	local watertextute = CCTextureCache:sharedTextureCache():addImage(water)
+	spp:setCC_Texture1(watertextute)
+
+	local noisetextute = CCTextureCache:sharedTextureCache():addImage(noise)
+	spp:setCC_Texture2(noisetextute)
+
+	local tp = ccTexParams()
+    tp.minFilter = 9729
+    tp.magFilter = 9729
+    tp.wrapS = 10497
+    tp.wrapT = 10497
+	noisetextute:setTexParameters(tp)
+	watertextute:setTexParameters(tp)
+	spp:scale(2.0)
+	GenUiUtil.attackShader(spp,"WATERWAVE")
+	spp:setPosition(display.cx,display.cy)
+	spp:setColor(ccc3(255,255,128))
+	self:addTestNd(spp)
+
+		local __pb = ccBlendFunc()
+		__pb.src = GL_SRC_ALPHA
+		__pb.dst = GL_ZERO
+		spp:setBlendFunc(__pb)
 end
 return TestScene

@@ -3,6 +3,7 @@ local SelectButton = import(".SelectButton")
 local CellButton = import(".listview.CellButton")
 local ProgressBar    =import(".ProgressBar")
 local UIButton = import("framework.cc.ui.UIButton")
+import(".EffectConfig")
 GenUiUtil={}
 
 function GenUiUtil.genUis(ustb,parent,pathflag)
@@ -128,8 +129,8 @@ function GenUiUtil.genUis(ustb,parent,pathflag)
                     uis[ps.n]:addEventListener(UIButton.IMAGE_CHANGE_EVENT, function(evt)
                         GenUiUtil.attackShader(evt.sprite,sdd)
                     end)
-                end 
-            end        
+                end
+            end
         elseif(t=="mcbtn") then
             --uis[ps.n] = cc.ui.UIPushButton.new(
             uis[ps.n] = McButton.new(
@@ -319,7 +320,7 @@ function GenUiUtil.genUi(ps,parent,pathflag)
                 btnn:setScale(ps.scale)
             end
         end
-    elseif(ps.t=="mcbtn") then 
+    elseif(ps.t=="mcbtn") then
         btnn = McButton.new(
                                 {
                                     normal  = ps.res[1] and (pathflag .. ps.res[1]) or nil,
@@ -654,8 +655,8 @@ function GenUiUtil.genJpgMaskClipSp(name,maskName,clipName,pathflag)
 --[[
         local clipsp =  display.newSprite(clipName)
         if(clipsp) then
-            spp:setCC_Texture2_s(clipsp:getTexture())             
-        end   
+            spp:setCC_Texture2_s(clipsp:getTexture())
+        end
 --]]
         local clipTexture = CCTextureCache:sharedTextureCache():addImageForMask(clipName)
         if(clipTexture) then
@@ -674,34 +675,10 @@ function GenUiUtil.genJpgMaskClipSp(name,maskName,clipName,pathflag)
 end
 
 function GenUiUtil.attackShader(sp,name)
-    local EffectConfig =
-    {
-        STONE ={"StoneShader.vsh","StoneShader.fsh"},
-        GREY  ={"GrayScalingShader.vsh","GrayScalingShader.fsh"},
-        GREYJPGMASK  ={"JpgMaskShaderGrey.vsh","JpgMaskShaderGrey.fsh"},
-        FROZEN  ={"FrozenShader.vsh","FrozenShader.fsh"},
-        ICE  ={"IceShader.vsh","IceShader.fsh"},
-        BLUR  ={"Blur.vsh","Blur.fsh"},
-        --------------------------------------------
-        HIDE  = {"InvisibleShader.vsh","InvisibleShader.fsh"},
-        LIGHT  = {"LightShader.vsh","LightShader.fsh"},
-        LIGHTF  = {"LightFShader.vsh","LightFShader.fsh"},
-        TRANS  = {"TransShader.vsh","TransShader.fsh"},
-        LK  = {"LKShader.vsh","LKShader.fsh"},
-        GOLD  = {"GoldShader.vsh","GoldShader.fsh"},
-        FADEINUV  = {"FadeInUV.vsh","FadeInUV.fsh"},
-
-        RED  = {"RedShader.vsh","RedShader.fsh"},
-        BLUE  = {"BlueShader.vsh","BlueShader.fsh"},
-        GREEN  = {"GreenShader.vsh","GreenShader.fsh"},
-        WBULE = {"BuleWaterShader.vsh","BuleWaterShader.fsh"},
-        LIGHTBAND = {"LightbandShader.vsh","LightbandShader.fsh"},
-    }
-    local EFT_SHADER_PATH = "shader/"
     local name = string.upper(name)
-    local tb = EffectConfig[name]
-    if(sp and tb) then
-        sp:setShaderFromFile(EFT_SHADER_PATH .. tb[1],EFT_SHADER_PATH .. tb[2])
+    local a,b = getShaderInfo(name)
+    if(sp and a and b) then
+        sp:setShaderFromFile(a,b)
     end
 end
 function GenUiUtil.deattackShader(sp)
@@ -1057,7 +1034,7 @@ end
     --方向 3 左到右
     --方向 4 右到左
 -- fadeRg 渐变边缘宽度
--- addRg  每一帧卷动宽度    
+-- addRg  每一帧卷动宽度
 function GenUiUtil.runJzEffect(sp,direct,fadeRg,addRg,isout,callback)
     GenUiUtil.attackShader(sp,"FADEINUV")
     local __mb = ccBlendFunc()
