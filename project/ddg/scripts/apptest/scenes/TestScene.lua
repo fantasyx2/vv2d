@@ -427,7 +427,7 @@ function TestScene:tstShader()
 	spp:scale(2.0)
 	GenUiUtil.attackShader(spp,"LIGHTBAND")
 	spp:setPosition(display.cx,display.cy)
-	spp:setColor(ccc3(255,255,128))
+	spp:setColor(ccc3(255,255,255))
 	self:addTestNd(spp)
 	local __mb = ccBlendFunc()
     __mb.src = GL_SRC_ALPHA
@@ -528,7 +528,7 @@ end
 
 function TestScene:tstShader2()
 	local rock = "UI/hero1015.jpg"
-	-- local rock = "UI/pig.jpg"
+	-- local rock = "UI/monkey.png"
 	local noise = "UI/noise.png"
 	local water = "UI/water.png"
 	local spp = CCShaderSprite:create(rock)
@@ -539,13 +539,13 @@ function TestScene:tstShader2()
 	spp:setCC_Texture2(noisetextute)
 
 	local tp = ccTexParams()
-    tp.minFilter = 9729
-    tp.magFilter = 9729
-    tp.wrapS = 10497
-    tp.wrapT = 10497
+    tp.minFilter = gl.GL_LINEAR
+    tp.magFilter = gl.GL_LINEAR
+    tp.wrapS = gl.GL_REPEAT
+    tp.wrapT = gl.GL_REPEAT
 	noisetextute:setTexParameters(tp)
 	watertextute:setTexParameters(tp)
-	spp:scale(2.0)
+	spp:scale(2.5)
 	GenUiUtil.attackShader(spp,"WATERWAVE")
 	spp:setPosition(display.cx,display.cy)
 	spp:setColor(ccc3(255,255,128))

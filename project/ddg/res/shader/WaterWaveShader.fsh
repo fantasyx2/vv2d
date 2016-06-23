@@ -50,7 +50,7 @@ void distort(){
     //texCoord.y += 0.02*sin(5.0*texCoord.y + time);
     
     texCoord.x += 0.02*sin(4.0*texCoord.y+time);
-    texCoord.y += 0.02*cos(2.0*texCoord.y+time);
+    texCoord.y += 0.02*cos(4.0*texCoord.y+2.0*time);
     
 
     gl_FragColor = texture2D(CC_Texture0, texCoord);
@@ -60,14 +60,19 @@ void water(){
     //CC_Texture1;water
     //CC_Texture2;noise
     vec2 waterScroll = vec2(CC_Time[1]/50.0, 0.0);
-    vec2 distortion = 2.0*texture2D(CC_Texture2, v_texCoord2).xy - 1.0;
-    distortion = distortion*0.05;
-    gl_FragColor = texture2D(CC_Texture0, v_texCoord + distortion);
-    gl_FragColor += 0.5*texture2D(CC_Texture1, v_texCoord+waterScroll - distortion);
+    vec2 disScroll = vec2(CC_Time[1], 0.0);
+    vec2 screen01 = (0.5*v_texCoord2/1.0 + 0.5);
+    vec2 v_texCoordNs = screen01*512.0/256.0 + disScroll;
+	vec2 distortion = 2.0*texture2D(CC_Texture2, v_texCoordNs).xy - 1.0;
+	distortion = distortion*0.05;
+	gl_FragColor = texture2D(CC_Texture0, v_texCoord + distortion);
+	gl_FragColor += 0.5*texture2D(CC_Texture1, v_texCoord+waterScroll - distortion);
 }
 
 void main()
 {
    water();
+   //wave();
+   //distort();
 }
 

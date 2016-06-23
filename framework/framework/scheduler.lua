@@ -108,4 +108,13 @@ function scheduler.performWithDelayGlobal(listener, time)
     return handle
 end
 
+function scheduler.delay(listener, time)
+    return scheduler.performWithDelayGlobal(listener, time)
+end
+function scheduler.start(listener,interval)
+    return scheduler.scheduleGlobal(listener, interval or 0)
+end
+function scheduler.stop(handle)
+    return scheduler.unscheduleGlobal(handle)
+end
 return scheduler

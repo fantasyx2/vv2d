@@ -363,10 +363,10 @@ local function gen_text(t)
 	local fontsz = t.FontSize or 24
 	local txt = t.LabelText or ""
 	local a=t.Size
-	if(a and a.X and a.Y) then
+	if(t.IsCustomSize and a and a.X and a.Y) then
 		local align=align_map[a.HorizontalAlignmentType or "HT_Center"]
 		local valign=align_map[a.VerticalAlignmentType or "VT_Center"]
-		nd = CCLabelTTF:create(txt, CFG_SYSTEM_FONT, fontsz, CCSize(a.X+4,a.Y), align, valign)
+		nd = CCLabelTTF:create(txt, CFG_SYSTEM_FONT, fontsz, CCSize(a.X,a.Y), align, valign)
 	else
 		nd = CCLabelTTF:create(txt, CFG_SYSTEM_FONT, fontsz)
 	end	

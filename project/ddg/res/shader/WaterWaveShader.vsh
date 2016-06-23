@@ -17,9 +17,8 @@ void main()
 	gl_Position = CC_MVPMatrix * a_position;
 	v_fragmentColor = a_color;
 	v_texCoord = a_texCoord;
-
-	vec2 disScroll = vec2(CC_Time[1], 0.0);
-	vec2 screen01 = (0.5*gl_Position.xy/gl_Position.w + 0.5);
-	v_texCoord2 = screen01*512.0/256.0 + disScroll;
-
+	//vec2 disScroll = vec2(CC_Time[1], 0.0);
+	//vec2 screen01 = (0.5*gl_Position.xy/1.0 + 0.5);
+	//v_texCoord2 = screen01*512.0/256.0 + disScroll;
+	v_texCoord2 = gl_Position.xy;
 }

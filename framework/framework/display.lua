@@ -425,7 +425,7 @@ end
 
 CCLayerColor 对象使用指定的颜色填充。
 
-@param ccColor3B color
+@param ccColor4B color
 
 @return CCLayerColor
 
