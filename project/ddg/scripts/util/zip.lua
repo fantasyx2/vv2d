@@ -19,6 +19,23 @@ function unzip_decode_str(str)
 	return str	
 end
 
+function zipfile_open(path)
+	local zipfile = CCZipFile:createWithPathName(path)
+	if(zipfile) then
+        zipfile:retain()
+    end
+    return zipfile       
+end
+function zipfile_close(zipfile)
+	if(zipfile) then
+        zipfile:release()
+        zipfile:close()
+    end
+end
+-- zipfile:getFirstFilename()
+-- zipfile:getNextFilename()
+-- zipfile:getFileDataNoOrder(name)
+-- zipfile:getFileList()
 
 
 

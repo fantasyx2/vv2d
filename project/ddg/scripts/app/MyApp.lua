@@ -18,6 +18,7 @@ require("util.weaktable")
 require("ccs.ccs310")
 require("tiled.tiledload")
 ----------------------------
+require("http.http")
 ----------------------------
 
 local MyApp = class("MyApp", cc.mvc.AppBase)

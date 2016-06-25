@@ -27,6 +27,11 @@ THE SOFTWARE.
 #ifndef __CCSCHEDULER_H__
 #define __CCSCHEDULER_H__
 
+#include <functional>
+#include <mutex>
+#include <set>
+#include <vector>
+
 #include "cocoa/CCObject.h"
 #include "support/data_support/uthash.h"
 
@@ -309,6 +314,12 @@ protected:
     // If true unschedule will not remove anything from a hash. Elements will only be marked for deletion.
     bool m_bUpdateHashLocked;
     CCArray* m_pScriptHandlerEntries;
+
+	// Used for "perform Function"
+	std::vector<std::function<void()>> _functionsToPerform;
+	std::mutex _performMutex;
+public:
+	void performFunctionInCocosThread( const std::function<void()> &function);
 };
 
 // end of global group

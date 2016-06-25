@@ -40,16 +40,19 @@ public:
     const std::string getNextFilename(void);
     
     // unsigned char* getFileData(const char *filename, unsigned long *filesize);
-    int getFileData(const char *filename);
+    // int getFileData(const char *filename);
+    void getFileDataOrder(const char *filename);
     void close(void);
  
     //bool initWithFilename(const char *zipFilename);
     //bool initWithBuffer(const void *buffer, uLong size);
 
     //unsigned char* getFileDataNoOrder(const char *filename, unsigned long *filesize);
-    int getFileDataNoOrder(const char *filename);
+    void getFileDataNoOrder(const char *filename);
 
     bool genFileList();
+
+    void getFileList();
 };
 
 // end of platform group

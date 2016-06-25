@@ -21,6 +21,11 @@ function TestScene:ctor()
 		{"tstJz",			handler(self,self.tstJz)},
 		{"tstTween",		handler(self,self.tstTween)},		
 		{"tstJson",			handler(self,self.tstJson)},
+		--{"tstImgPick",		handler(self,self.tstImgPick)},
+		{"tstHttp",		handler(self,self.tstHttp)},
+		{"tstZip",		handler(self,self.tstZip)},
+		{"tstFs",		handler(self,self.tstFs)},
+
 	}
 	self.TND = display.newNode()
 	self.TND:setPosition(0, 0)
@@ -77,6 +82,7 @@ function TestScene:ctor()
 	-- self:tstRenderTexture()
 	-- self:tstCCS()
 	-- self:tstShader2()
+	-- self:tstFs()
 end
 
 function TestScene:onEnter()
@@ -556,4 +562,66 @@ function TestScene:tstShader2()
 		__pb.dst = GL_ZERO
 		spp:setBlendFunc(__pb)
 end
+function TestScene:tstImgPick()
+	print("imgpick_hasCamera = ",imgpick_hasCamera())
+    timer.delay(imgpick_fromalbum,2.0)
+end
+function TestScene:tstHttp()
+	function httprsp(id,type,data)
+			if(type==0) then
+				print(id,type,string.len(data))
+			elseif(type==1) then
+				print(id,type,data[1],data[2])
+			elseif(type==-1) then
+				print(id,type,data)
+			elseif(type==-2) then
+				print(id,type,data)
+			end
+	end
+	http.get('bing',"http://www.bing.com",20,httprsp)
+	http.get('sina',"http://www.sina.com",20,httprsp)
+end
+function TestScene:tstZip()
+	local fd = zipfile_open('framework_precompiled.zip')
+	-- local fd = zipfile_open('test.zip')
+	if(fd) then
+		local str = fd:getFirstFilename()
+		while(str and str~='') do
+			 print("zipfile: ",str)
+			 str = fd:getNextFilename()
+		end
+	end
+	local tb = fd:getFileList()	
+	print("tb",tb)
+	if(tb) then
+		dump(tb,"getFileList")
+		for i,v in ipairs(tb) do
+			print(v)
+			-- package.preload[v]=nil
+		end
+	end
+	unload_code_zip('framework_precompiled.zip')
+	local data = fd:getFileDataNoOrder("framework.init")
+	if(data) then
+		print("get framework.json: ",string.len(data),string.byte(data,1,4))
+	end
+	print("get no exits: ",fd:getFileDataNoOrder("exits.json"))
+	zipfile_close(fd)
+	--dump(package.loaded,2)
+	for k,v in pairs(package.loaded) do
+		if(k~='_G') then
+			print(k)
+		end
+	end
+	print("llllllllllll")
+end
+
+function TestScene:tstFs()
+	local str = string.gsub(string.sub(fs_write_path,1,-2),'\\','/')
+	print('tstFs',str)
+	local dir,file = fs.list(str)
+	print("dir",#dir)
+	print("file",#file)
+end
+
 return TestScene

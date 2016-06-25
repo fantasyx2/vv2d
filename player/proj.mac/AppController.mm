@@ -491,9 +491,12 @@ using namespace cocos2d::extra;
     NSData *data = [[note userInfo] objectForKey:NSFileHandleNotificationDataItem];
     NSString *str = [[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] autorelease];
     //show log to console
-    [consoleController trace:str];
-    if(fileHandle!=nil){
-        [fileHandle writeData:[str dataUsingEncoding:NSUTF8StringEncoding]];
+    if(str)
+    {
+        [consoleController trace:str];
+        if(fileHandle!=nil){
+            [fileHandle writeData:[str dataUsingEncoding:NSUTF8StringEncoding]];
+        }
     }
 
 }

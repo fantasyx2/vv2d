@@ -18,6 +18,8 @@ require("util.weaktable")
 require("ccs.ccs310")
 require("tiled.tiledload")
 ----------------------------
+require("util.fs")
+require("http.http")
 ----------------------------
 -- print(string.format("%-10s%10s","67890","12345"))
 -- print(string.format("%-10d%10s",1234567,"12345"))

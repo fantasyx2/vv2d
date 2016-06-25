@@ -181,6 +181,7 @@ private:
     };
 
     static unsigned int s_id;
+    unsigned int m_id;
     string m_url;
     CCHTTPRequestDelegate* m_delegate;
     int m_listener;

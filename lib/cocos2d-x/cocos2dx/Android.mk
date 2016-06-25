@@ -161,13 +161,19 @@ LOCAL_EXPORT_C_INCLUDES := $(LOCAL_PATH) \
                     $(LOCAL_PATH)/include \
                     $(LOCAL_PATH)/kazmath/include \
                     $(LOCAL_PATH)/platform/android \
-                    $(LOCAL_PATH)/support
+                    $(LOCAL_PATH)/support \
+$(QUICK_COCOS2DX_ROOT)/lib/cocos2d-x/scripting/lua/luajit/include \
+$(QUICK_COCOS2DX_ROOT)/lib/cocos2d-x/scripting/lua/tolua \
+$(QUICK_COCOS2DX_ROOT)/lib/cocos2d-x/scripting/lua/cocos2dx_support
 
 LOCAL_C_INCLUDES := $(LOCAL_PATH) \
                     $(LOCAL_PATH)/include \
                     $(LOCAL_PATH)/kazmath/include \
                     $(LOCAL_PATH)/platform/android \
-$(QUICK_COCOS2DX_ROOT)/lib/cocos2d-x/external/extra
+$(QUICK_COCOS2DX_ROOT)/lib/cocos2d-x/external/extra \
+$(QUICK_COCOS2DX_ROOT)/lib/cocos2d-x/scripting/lua/luajit/include \
+$(QUICK_COCOS2DX_ROOT)/lib/cocos2d-x/scripting/lua/tolua \
+$(QUICK_COCOS2DX_ROOT)/lib/cocos2d-x/scripting/lua/cocos2dx_support
 
 LOCAL_EXPORT_LDLIBS := -lGLESv2 \
                        -llog \
