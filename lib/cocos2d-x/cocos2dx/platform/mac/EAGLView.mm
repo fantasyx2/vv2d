@@ -458,6 +458,8 @@ static EAGLView *view;
 
 	// pass the event along to the next responder (like your NSWindow subclass)
 	[super keyUp:theEvent];
+    
+    //cocos2d::CCDirector::sharedDirector()->dispatchKeyPadMsg(1,2);
 }
 
 - (void)flagsChanged:(NSEvent *)theEvent
