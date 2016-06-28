@@ -1,6 +1,6 @@
 /*
 ** Lua binding: Spine
-** Generated automatically by tolua++-1.0.92 on 03/16/16 16:29:35.
+** Generated automatically by tolua++-1.0.92 on Tue Jun 28 23:24:12 2016.
 */
 
 /****************************************************************************
@@ -36,6 +36,7 @@ extern "C" {
 #include "cocos2d.h"
 #include "CCLuaEngine.h"
 #include "SimpleAudioEngine.h"
+#include "CCZipFile.h"
 
 using namespace cocos2d;
 using namespace CocosDenshion;

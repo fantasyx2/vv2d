@@ -1,0 +1,8 @@
+class InstantGif : public GifBase
+{
+public:
+	static InstantGif* create(const char*name);
+	InstantGif();
+	~InstantGif();
+	std::string getGifFrameName(int index);
+};

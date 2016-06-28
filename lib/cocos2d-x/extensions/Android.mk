@@ -233,6 +233,22 @@ LOCAL_SRC_FILES += \
     spine/spine-cocos2dx.cpp
 endif
 
+ifeq ($(CC_GIF_ENABLED),1)
+LOCAL_SRC_FILES += \
+    Gif/Bitmap.cpp \
+    Gif/CacheGif.cpp \
+    Gif/GifBase.cpp \
+    Gif/GifMovie.cpp \
+    Gif/InstantGif.cpp \
+	Gif/Movie.cpp \
+    Gif/gif_lib/dgif_lib.c \
+    Gif/gif_lib/gif_err.c \
+    Gif/gif_lib/gif_font.c \
+    Gif/gif_lib/gif_hash.c \
+    Gif/gif_lib/gifalloc.c \
+	Gif/gif_lib/quantize.c
+endif
+
 LOCAL_WHOLE_STATIC_LIBRARIES := cocos2dx_static
 LOCAL_WHOLE_STATIC_LIBRARIES += cocosdenshion_static
 LOCAL_WHOLE_STATIC_LIBRARIES += cocos_lua_static
@@ -268,7 +284,9 @@ LOCAL_EXPORT_C_INCLUDES := $(LOCAL_PATH) \
                            $(LOCAL_PATH)/DragonBones \
 						   $(LOCAL_PATH)/spine/ \
 						   $(LOCAL_PATH)/spine/spine/ \
-                           $(LOCAL_PATH)/spine/spine-cocos2dx/2
+                           $(LOCAL_PATH)/spine/spine-cocos2dx/2 \
+						   $(LOCAL_PATH)/Gif \
+						   $(LOCAL_PATH)/Gif/gif_lib
 
 
 LOCAL_C_INCLUDES = $(LOCAL_EXPORT_C_INCLUDES)

@@ -10,3 +10,9 @@ ${TOLUA} -L "$DIR/basic.lua" -o "$QUICK_COCOS2DX_ROOT/lib/cocos2d-x/scripting/lu
 
 cd "$DIR/"
 ${TOLUA} -L "$DIR/basic.lua" -o "$QUICK_COCOS2DX_ROOT/lib/cocos2d-x/scripting/lua/cocos2dx_support/LuaCocos2dDragonBones.cpp" ExtensionsDragonBones.tolua
+
+cd "$DIR/"
+${TOLUA} -L "$DIR/basic.lua" -o "$QUICK_COCOS2DX_ROOT/lib/cocos2d-x/scripting/lua/cocos2dx_support/LuaCocos2dSpine.cpp" Spine.tolua
+
+cd "$DIR/"
+${TOLUA} -L "$DIR/basic.lua" -o "$QUICK_COCOS2DX_ROOT/lib/cocos2d-x/scripting/lua/cocos2dx_support/LuaCocos2dGif.cpp" Gif.tolua

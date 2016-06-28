@@ -8,3 +8,5 @@ end
 
 -- require("app.MyApp").new():run()
 require("apptest.TstApp").new():run()
+-- require("appeditor.EditorApp").new():run()
+

@@ -59,8 +59,8 @@ void water(){
     //CC_Texture0;orgin
     //CC_Texture1;water
     //CC_Texture2;noise
-    vec2 waterScroll = vec2(CC_Time[1]/50.0, 0.0);
-    vec2 disScroll = vec2(CC_Time[1], 0.0);
+    vec2 waterScroll = vec2(CC_V4P1[0], 0.0);
+    vec2 disScroll = vec2(CC_V4P1[1], 0.0);
     vec2 screen01 = (0.5*v_texCoord2/1.0 + 0.5);
     vec2 v_texCoordNs = screen01*512.0/256.0 + disScroll;
 	vec2 distortion = 2.0*texture2D(CC_Texture2, v_texCoordNs).xy - 1.0;

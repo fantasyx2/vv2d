@@ -1,0 +1,8 @@
+
+class CacheGif : public GifBase
+{
+public:
+	static CacheGif* create(char* name);
+	CacheGif();
+	~CacheGif();
+};

@@ -263,6 +263,9 @@ local CCObjectTypes = {
     "CCActionTween",
     "CCShaderSprite",
     "CCZipFile",
+    "GifBase",
+    "CacheGif",
+    "InstantGif",
 }
 
 -- register CCObject types
