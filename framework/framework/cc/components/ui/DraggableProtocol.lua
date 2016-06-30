@@ -36,7 +36,7 @@ function DraggableProtocol:dragOnTouch_(event)
 	end
 
 	if "began" == event.name then
-		self.target_:runAction(CCScaleTo:create(0.2,0.5,0.5))
+		-- self.target_:runAction(CCScaleTo:create(0.2,0.5,0.5))
 		return true
 	elseif "moved" == event.name then
 		local posX, posY = self.target_:getPosition()
@@ -44,7 +44,7 @@ function DraggableProtocol:dragOnTouch_(event)
 			posX + event.x - event.prevX,
 			posY + event.y - event.prevY)
 	elseif "ended" == event.name then
-		self.target_:runAction(CCScaleTo:create(0.2,1.0,1.0))
+		-- self.target_:runAction(CCScaleTo:create(0.2,1.0,1.0))
 	end
 end
 

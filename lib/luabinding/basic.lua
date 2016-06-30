@@ -263,6 +263,9 @@ local CCObjectTypes = {
     "CCActionTween",
     "CCShaderSprite",
     "CCZipFile",
+    "GifBase",
+    "CacheGif",
+    "InstantGif",
 }
 
 -- register CCObject types
@@ -399,35 +402,74 @@ TOLUA_API int  tolua_Cocos2d_open (lua_State* tolua_S);]], [[]])
         lua_pushnil(tolua_S);
     }
     if (buffer) delete[] buffer;]])
+   --   for CCZipFile
+   --  replace([[int tolua_ret = (int)  self->getFileData(filename);
+   -- tolua_pushnumber(tolua_S,(lua_Number)tolua_ret);]],
+   --      [[unsigned long size = 0;
+   --  unsigned char* buffer = self->getFileData(filename, &size);
+   --  if (buffer && size)
+   --  {
+   --      lua_pushlstring(tolua_S, (char*)buffer, size);
+   --  }
+   --  else
+   --  {
+   --      lua_pushnil(tolua_S);
+   --  }
+   --  if (buffer) delete[] buffer;]])
 
-    replace([[int tolua_ret = (int)  self->getFileData(filename);
-   tolua_pushnumber(tolua_S,(lua_Number)tolua_ret);]],
-        [[unsigned long size = 0;
-    unsigned char* buffer = self->getFileData(filename, &size);
-    if (buffer && size)
-    {
-        lua_pushlstring(tolua_S, (char*)buffer, size);
-    }
-    else
-    {
-        lua_pushnil(tolua_S);
-    }
-    if (buffer) delete[] buffer;]])
+   --  replace([[int tolua_ret = (int)  self->getFileDataNoOrder(filename);
+   -- tolua_pushnumber(tolua_S,(lua_Number)tolua_ret);]],
+   --      [[unsigned long size = 0;
+   --  unsigned char* buffer = self->getFileDataNoOrder(filename, &size);
+   --  if (buffer && size)
+   --  {
+   --      lua_pushlstring(tolua_S, (char*)buffer, size);
+   --  }
+   --  else
+   --  {
+   --      lua_pushnil(tolua_S);
+   --  }
+   --  if (buffer) delete[] buffer;]])
+replace(
+[[#endif
+  {
+   self->getFileList();
+  }
+ }
+ return 0;]],
+ [[#endif
+  {
+   self->getFileList();
+  }
+ }
+ return 1;]])
+replace(
+[[#endif
+  {
+   self->getFileDataNoOrder(filename);
+  }
+ }
+ return 0;]],
+[[#endif
+  {
+   self->getFileDataNoOrder(filename);
+  }
+ }
+ return 1;]])
+replace(
+[[#endif
+  {
+   self->getFileDataOrder(filename);
+  }
+ }
+ return 0;]],
+ [[#endif
+  {
+   self->getFileDataOrder(filename);
+  }
+ }
+ return 1;]])
 
-    replace([[int tolua_ret = (int)  self->getFileDataNoOrder(filename);
-   tolua_pushnumber(tolua_S,(lua_Number)tolua_ret);]],
-        [[unsigned long size = 0;
-    unsigned char* buffer = self->getFileDataNoOrder(filename, &size);
-    if (buffer && size)
-    {
-        lua_pushlstring(tolua_S, (char*)buffer, size);
-    }
-    else
-    {
-        lua_pushnil(tolua_S);
-    }
-    if (buffer) delete[] buffer;]])
-        
 
     replace('\t', '    ')
 

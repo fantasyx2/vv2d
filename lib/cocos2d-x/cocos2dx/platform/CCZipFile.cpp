@@ -25,7 +25,7 @@
 #include "CCZipFile.h"
 #include "ccMacros.h"
 #include "platform/CCFileUtils.h"
-
+#include "CCLuaEngine.h"
 NS_CC_BEGIN
 
 static const std::string emptyFilename("");
@@ -72,7 +72,7 @@ CCZipFile *CCZipFile::createWithPathName(const char *zipPathName)
             zip->m_buff = buffer;
             return zip;
         }
-        delete[] buffer;
+        delete[] (unsigned char*)buffer;
     }
     return NULL;
 }
@@ -121,7 +121,7 @@ CCZipFile::~CCZipFile(void)
 {
     close();
 	m_fileList.clear();
-    if(m_buff) delete[] m_buff;
+    if(m_buff) delete[] (unsigned char*)m_buff;
     m_buff=NULL;
 }
 
@@ -248,7 +248,7 @@ bool  CCZipFile::genFileList()
         ret = true;
         
     } while(false);
-    
+    m_hasGenFlist = true;
     return ret;
 }
 
@@ -274,6 +274,60 @@ int CCZipFile::getCurrentFileInfo(std::string *filename, unz_file_info *info)
         filename->assign(path);
     }
     return ret;
+}
+
+void CCZipFile::getFileDataNoOrder(const char *filename)
+{
+    if(!m_hasGenFlist)
+    {
+        genFileList();
+    }
+    unsigned long size;
+    unsigned char* buf = getFileDataNoOrder(filename, &size);
+	CCLuaStack* stack = CCLuaEngine::defaultEngine()->getLuaStack();
+	stack->clean();
+	if (NULL==buf) 
+	{
+		stack->pushNil();
+		return;
+	}    
+    stack->pushString((const char*)buf, size);
+    delete []buf;
+    return;
+}
+
+void CCZipFile::getFileDataOrder(const char *filename)
+{
+    unsigned long size;
+    unsigned char* buf = getFileData(filename, &size);
+	CCLuaStack* stack = CCLuaEngine::defaultEngine()->getLuaStack();
+	stack->clean();
+	if (NULL==buf) 
+	{
+		stack->pushNil();
+		return;
+	}
+    stack->pushString((const char*)buf, size);
+    delete []buf;
+    return;   
+}
+
+void CCZipFile::getFileList()
+{
+	if(!m_hasGenFlist)
+	{
+		genFileList();
+	}
+    CCLuaValueArray array;
+	for(auto a:m_fileList)
+	{
+        CCLuaValue value = CCLuaValue::stringValue(a.first);
+        array.push_back(value);
+    }    
+    CCLuaStack* stack = CCLuaEngine::defaultEngine()->getLuaStack();
+    stack->clean();
+    stack->pushCCLuaValueArray(array);
+	return;
 }
 
 NS_CC_END

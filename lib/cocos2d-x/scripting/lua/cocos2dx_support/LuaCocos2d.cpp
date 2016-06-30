@@ -1,6 +1,6 @@
 /*
 ** Lua binding: Cocos2d
-** Generated automatically by tolua++-1.0.92 on 06/12/16 17:37:57.
+** Generated automatically by tolua++-1.0.92 on Tue Jun 28 23:24:04 2016.
 */
 
 /****************************************************************************
@@ -10268,9 +10268,9 @@ static int tolua_Cocos2d_CCZipFile_getNextFilename00(lua_State* tolua_S)
 }
 #endif //#ifndef TOLUA_DISABLE
 
-/* method: getFileData of class  CCZipFile */
-#ifndef TOLUA_DISABLE_tolua_Cocos2d_CCZipFile_getFileData00
-static int tolua_Cocos2d_CCZipFile_getFileData00(lua_State* tolua_S)
+/* method: getFileDataOrder of class  CCZipFile */
+#ifndef TOLUA_DISABLE_tolua_Cocos2d_CCZipFile_getFileDataOrder00
+static int tolua_Cocos2d_CCZipFile_getFileDataOrder00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -10286,26 +10286,16 @@ static int tolua_Cocos2d_CCZipFile_getFileData00(lua_State* tolua_S)
   CCZipFile* self = (CCZipFile*)  tolua_tousertype(tolua_S,1,0);
   const char* filename = ((const char*)  tolua_tostring(tolua_S,2,0));
 #ifndef TOLUA_RELEASE
-  if (!self) tolua_error(tolua_S,"invalid 'self' in function 'getFileData'", NULL);
+  if (!self) tolua_error(tolua_S,"invalid 'self' in function 'getFileDataOrder'", NULL);
 #endif
   {
-   unsigned long size = 0;
-    unsigned char* buffer = self->getFileData(filename, &size);
-    if (buffer && size)
-    {
-        lua_pushlstring(tolua_S, (char*)buffer, size);
-    }
-    else
-    {
-        lua_pushnil(tolua_S);
-    }
-    if (buffer) delete[] buffer;
+   self->getFileDataOrder(filename);
   }
  }
  return 1;
 #ifndef TOLUA_RELEASE
  tolua_lerror:
- tolua_error(tolua_S,"#ferror in function 'getFileData'.",&tolua_err);
+ tolua_error(tolua_S,"#ferror in function 'getFileDataOrder'.",&tolua_err);
  return 0;
 #endif
 }
@@ -10363,17 +10353,7 @@ static int tolua_Cocos2d_CCZipFile_getFileDataNoOrder00(lua_State* tolua_S)
   if (!self) tolua_error(tolua_S,"invalid 'self' in function 'getFileDataNoOrder'", NULL);
 #endif
   {
-   unsigned long size = 0;
-    unsigned char* buffer = self->getFileDataNoOrder(filename, &size);
-    if (buffer && size)
-    {
-        lua_pushlstring(tolua_S, (char*)buffer, size);
-    }
-    else
-    {
-        lua_pushnil(tolua_S);
-    }
-    if (buffer) delete[] buffer;
+   self->getFileDataNoOrder(filename);
   }
  }
  return 1;
@@ -10412,6 +10392,37 @@ static int tolua_Cocos2d_CCZipFile_genFileList00(lua_State* tolua_S)
 #ifndef TOLUA_RELEASE
  tolua_lerror:
  tolua_error(tolua_S,"#ferror in function 'genFileList'.",&tolua_err);
+ return 0;
+#endif
+}
+#endif //#ifndef TOLUA_DISABLE
+
+/* method: getFileList of class  CCZipFile */
+#ifndef TOLUA_DISABLE_tolua_Cocos2d_CCZipFile_getFileList00
+static int tolua_Cocos2d_CCZipFile_getFileList00(lua_State* tolua_S)
+{
+#ifndef TOLUA_RELEASE
+ tolua_Error tolua_err;
+ if (
+     !tolua_isusertype(tolua_S,1,"CCZipFile",0,&tolua_err) ||
+     !tolua_isnoobj(tolua_S,2,&tolua_err)
+ )
+  goto tolua_lerror;
+ else
+#endif
+ {
+  CCZipFile* self = (CCZipFile*)  tolua_tousertype(tolua_S,1,0);
+#ifndef TOLUA_RELEASE
+  if (!self) tolua_error(tolua_S,"invalid 'self' in function 'getFileList'", NULL);
+#endif
+  {
+   self->getFileList();
+  }
+ }
+ return 1;
+#ifndef TOLUA_RELEASE
+ tolua_lerror:
+ tolua_error(tolua_S,"#ferror in function 'getFileList'.",&tolua_err);
  return 0;
 #endif
 }
@@ -28805,6 +28816,7 @@ static int tolua_Cocos2d_CCShaderSprite_setQuadVertex00(lua_State* tolua_S)
 #endif
 }
 #endif //#ifndef TOLUA_DISABLE
+
 /* method: initVertices of class  CCShaderSprite */
 #ifndef TOLUA_DISABLE_tolua_Cocos2d_CCShaderSprite_initVertices00
 static int tolua_Cocos2d_CCShaderSprite_initVertices00(lua_State* tolua_S)
@@ -28829,10 +28841,9 @@ static int tolua_Cocos2d_CCShaderSprite_initVertices00(lua_State* tolua_S)
 #endif
   {
    self->initVertices(mode,meshstr);
-   tolua_pushcppstring(tolua_S,(const char*)meshstr);
   }
  }
- return 1;
+ return 0;
 #ifndef TOLUA_RELEASE
  tolua_lerror:
  tolua_error(tolua_S,"#ferror in function 'initVertices'.",&tolua_err);
@@ -28840,6 +28851,46 @@ static int tolua_Cocos2d_CCShaderSprite_initVertices00(lua_State* tolua_S)
 #endif
 }
 #endif //#ifndef TOLUA_DISABLE
+
+/* method: initVerticesWithRegex of class  CCShaderSprite */
+#ifndef TOLUA_DISABLE_tolua_Cocos2d_CCShaderSprite_initVerticesWithRegex00
+static int tolua_Cocos2d_CCShaderSprite_initVerticesWithRegex00(lua_State* tolua_S)
+{
+#ifndef TOLUA_RELEASE
+ tolua_Error tolua_err;
+ if (
+     !tolua_isusertype(tolua_S,1,"CCShaderSprite",0,&tolua_err) ||
+     !tolua_isnumber(tolua_S,2,0,&tolua_err) ||
+     !tolua_iscppstring(tolua_S,3,0,&tolua_err) ||
+     !tolua_iscppstring(tolua_S,4,0,&tolua_err) ||
+     !tolua_iscppstring(tolua_S,5,0,&tolua_err) ||
+     !tolua_isnoobj(tolua_S,6,&tolua_err)
+ )
+  goto tolua_lerror;
+ else
+#endif
+ {
+  CCShaderSprite* self = (CCShaderSprite*)  tolua_tousertype(tolua_S,1,0);
+  int mode = ((int)  tolua_tonumber(tolua_S,2,0));
+  std::string meshstr = ((std::string)  tolua_tocppstring(tolua_S,3,0));
+  std::string ra = ((std::string)  tolua_tocppstring(tolua_S,4,0));
+  std::string rb = ((std::string)  tolua_tocppstring(tolua_S,5,0));
+#ifndef TOLUA_RELEASE
+  if (!self) tolua_error(tolua_S,"invalid 'self' in function 'initVerticesWithRegex'", NULL);
+#endif
+  {
+   self->initVerticesWithRegex(mode,meshstr,ra,rb);
+  }
+ }
+ return 0;
+#ifndef TOLUA_RELEASE
+ tolua_lerror:
+ tolua_error(tolua_S,"#ferror in function 'initVerticesWithRegex'.",&tolua_err);
+ return 0;
+#endif
+}
+#endif //#ifndef TOLUA_DISABLE
+
 /* method: createWithTexture of class  CCParticleBatchNode */
 #ifndef TOLUA_DISABLE_tolua_Cocos2d_CCParticleBatchNode_createWithTexture00
 static int tolua_Cocos2d_CCParticleBatchNode_createWithTexture00(lua_State* tolua_S)
@@ -58816,10 +58867,11 @@ TOLUA_API int tolua_Cocos2d_open (lua_State* tolua_S)
    tolua_function(tolua_S,"createWithPathName",tolua_Cocos2d_CCZipFile_createWithPathName00);
    tolua_function(tolua_S,"getFirstFilename",tolua_Cocos2d_CCZipFile_getFirstFilename00);
    tolua_function(tolua_S,"getNextFilename",tolua_Cocos2d_CCZipFile_getNextFilename00);
-   tolua_function(tolua_S,"getFileData",tolua_Cocos2d_CCZipFile_getFileData00);
+   tolua_function(tolua_S,"getFileDataOrder",tolua_Cocos2d_CCZipFile_getFileDataOrder00);
    tolua_function(tolua_S,"close",tolua_Cocos2d_CCZipFile_close00);
    tolua_function(tolua_S,"getFileDataNoOrder",tolua_Cocos2d_CCZipFile_getFileDataNoOrder00);
    tolua_function(tolua_S,"genFileList",tolua_Cocos2d_CCZipFile_genFileList00);
+   tolua_function(tolua_S,"getFileList",tolua_Cocos2d_CCZipFile_getFileList00);
   tolua_endmodule(tolua_S);
   tolua_function(tolua_S,"ccpNeg",tolua_Cocos2d_ccpNeg00);
   tolua_function(tolua_S,"ccpAdd",tolua_Cocos2d_ccpAdd00);
@@ -59786,6 +59838,7 @@ TOLUA_API int tolua_Cocos2d_open (lua_State* tolua_S)
    tolua_function(tolua_S,"resetShader",tolua_Cocos2d_CCShaderSprite_resetShader00);
    tolua_function(tolua_S,"setQuadVertex",tolua_Cocos2d_CCShaderSprite_setQuadVertex00);
    tolua_function(tolua_S,"initVertices",tolua_Cocos2d_CCShaderSprite_initVertices00);
+   tolua_function(tolua_S,"initVerticesWithRegex",tolua_Cocos2d_CCShaderSprite_initVerticesWithRegex00);
   tolua_endmodule(tolua_S);
   tolua_cclass(tolua_S,"CCParticleBatchNode","CCParticleBatchNode","CCNode",NULL);
   tolua_beginmodule(tolua_S,"CCParticleBatchNode");

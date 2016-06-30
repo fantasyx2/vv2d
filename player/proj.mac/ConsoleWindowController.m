@@ -6,8 +6,8 @@
 @end
 
 #define SKIP_LINES_COUNT    3
-#define MAX_LINE_LEN        4096
-#define MAX_LINES_COUNT     200
+#define MAX_LINE_LEN        409600
+#define MAX_LINES_COUNT     20000
 
 @implementation ConsoleWindowController
 @synthesize textView;

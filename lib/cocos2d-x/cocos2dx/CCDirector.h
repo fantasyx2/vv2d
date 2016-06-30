@@ -107,6 +107,7 @@ public:
      */
     virtual ~CCDirector(void);
     virtual bool init(void);
+    void dispatchKeyPadMsg(int code,int type);
     /**
      * @js NA
      * @lua NA

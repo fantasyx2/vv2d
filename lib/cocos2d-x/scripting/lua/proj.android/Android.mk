@@ -83,6 +83,10 @@ ifeq ($(CC_SPINE_ENABLED),1)
 LOCAL_SRC_FILES += \
     ../cocos2dx_support/LuaCocos2dSpine.cpp
 endif
+ifeq ($(CC_GIF_ENABLED),1)
+LOCAL_SRC_FILES += \
+    ../cocos2dx_support/LuaCocos2dGif.cpp
+endif
 
 LOCAL_EXPORT_C_INCLUDES := $(LOCAL_PATH)/../luajit/include \
                            $(LOCAL_PATH)/../tolua \

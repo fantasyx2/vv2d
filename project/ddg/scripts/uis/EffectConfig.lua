@@ -2,19 +2,28 @@
 
 EffectConfig =
 {
-	STONE ={"StoneShader.vsh","StoneShader.fsh"},
-	GRAY  ={"GrayScalingShader.vsh","GrayScalingShader.fsh"},
-	--------------------------------------------
-	HIDE  = {"InvisibleShader.vsh","InvisibleShader.fsh"},
+    STONE ={"StoneShader.vsh","StoneShader.fsh"},
+    GREY  ={"GrayScalingShader.vsh","GrayScalingShader.fsh"},
+    GREYJPGMASK  ={"JpgMaskShaderGrey.vsh","JpgMaskShaderGrey.fsh"},
+    FROZEN  ={"FrozenShader.vsh","FrozenShader.fsh"},
+    ICE  ={"IceShader.vsh","IceShader.fsh"},
+    BLUR  ={"Blur.vsh","Blur.fsh"},
+    --------------------------------------------
+    HIDE  = {"InvisibleShader.vsh","InvisibleShader.fsh"},
     LIGHT  = {"LightShader.vsh","LightShader.fsh"},
     LIGHTF  = {"LightFShader.vsh","LightFShader.fsh"},
     TRANS  = {"TransShader.vsh","TransShader.fsh"},
     LK  = {"LKShader.vsh","LKShader.fsh"},
     GOLD  = {"GoldShader.vsh","GoldShader.fsh"},
+    FADEINUV  = {"FadeInUV.vsh","FadeInUV.fsh"},
+
     RED  = {"RedShader.vsh","RedShader.fsh"},
     BLUE  = {"BlueShader.vsh","BlueShader.fsh"},
     GREEN  = {"GreenShader.vsh","GreenShader.fsh"},
-    WBULE = {"BuleWaterShader.vsh","BuleWaterShader.fsh"}
+    WBULE = {"BuleWaterShader.vsh","BuleWaterShader.fsh"},
+    --------------------------------------------
+    LIGHTBAND = {"LightbandShader.vsh","LightbandShader.fsh"},
+    WATERWAVE = {"WaterWaveShader.vsh","WaterWaveShader.fsh"},
 }
 
 EFT_SHADER_PATH = "shader/"
@@ -53,13 +62,6 @@ FT_INFO_ANIMA = {
 	petEempty = {anim='common11',	arc={0.5,0.5},off={0,0},order=1},
 }
 
---仙将满大招粒子
-FT_INFO_G_LIZI = {						
-						arc={0.5,0.5},
-						res="img/UI/fight/zjtx_lizi_01.plist",
-						autodel=true,
-						delay=1.0,
-}
 --BOSS战粒子
 FT_INFO_BOSS_LIZI = {						
 						arc={0.5,0.5},
@@ -87,20 +89,6 @@ FT_INFO_FRAME_ANIM = {
 		        delay=0.5,
 		        dt=0.05,		        	        
 		    },
-	gRound  =
-		    {
-		    	arc={0.5,0.5},
-		        res="img/UI/fight/playing_effect.plist",
-		        name="tx-cgfkuang_nmb%d.png",
-		        a=1,
-		        b=8,
-		        reverse = false,
-		        loop=true,
-		        autodel=false,
-		        onfinish = nil,
-		        delay=0.03*8,
-		        dt=0.12,
-		    },
 	gEmaxD = {
 				arc={0.5,0.5},
 		        res="img/UI/fight/playing_effect.plist",
@@ -116,20 +104,7 @@ FT_INFO_FRAME_ANIM = {
 
 		        ac='fadeinout',
 		        acparam={from=0,to=255,dt=1.0,delay=0.5,loop=true},
-			},
-	gEmaxU = {
-				arc={0.5,0.5},
-		        res="img/UI/fight/playing_effect.plist",
-		        name="tx-dsnmbcgf_dsb%d.png",
-		        a=1,
-		        b=7,
-		        reverse = false,
-		        loop=true,
-		        autodel=false,
-		        onfinish = nil,
-		        delay=0.03*8,
-		        dt=0.2,
-			},			
+			},		
 	gLight = {
                 arc={0.5,0.5},
                 res="img/UI/fight/playing_effect.plist",
@@ -148,80 +123,6 @@ FT_INFO_FRAME_ANIM = {
 
 			},
 
-	petEfull = {
-                arc={0.5,0.5},
-                res="img/UI/fight/playing_effect.plist",
-                name="tx-shan_cgfnmb.png",
-                a=1,
-                b=1,
-                reverse = false,
-                loop=true,
-                autodel=false,
-                onfinish = nil,
-                delay=0.0,
-                dt=0.1,
-
-                ac='fadeinout',
-		        acparam={from=50,to=255,dt=0.3,delay=0.5,loop=true},
-			},
-	--仙兽能量加点
-	petEadd = {
-                arc={0.5,0.5},
-                res="img/UI/fight/playing_effect.plist",
-                name="tx-xs_sjcgfnmb%d.png",
-                a=1,
-                b=5,
-                reverse = false,
-                loop=false,
-                autodel=true,
-                onfinish = nil,
-                delay=0.0,
-                dt=0.1,
-			},
-	
-	--仙兽最后一个能量满	
-	petELast = {
-                arc={0.5,0.5},
-                res="img/UI/fight/playing_effect.plist",
-                name="tx-xscscgf_sxian%d.png",
-                a=1,
-                b=12,
-                reverse = false,
-                loop=false,
-                autodel=true,
-                onfinish = nil,
-                delay=0.0,
-                dt=0.1,
-			},
-	--仙兽能量清空
-	petEempty = {
-                arc={0.5,0.5},
-                res="img/UI/fight/playing_effect.plist",
-                name="tx-xxsqs_cfggfchishi%d.png",
-                a=1,
-                b=11,
-                reverse = false,
-                loop=false,
-                autodel=true,
-                onfinish = nil,
-                delay=0.0,
-                dt=0.1,
-			},
-	--宝箱法阵
-	boxbg = {
-                arc={0.5,0.8},
-                res="img/UI/fight/playing_effect.plist",
-                name="tx-diaonml_sbbs%d.png",
-                a=1,
-                b=8,
-                reverse = false,
-                loop=true,
-                autodel=false,
-                onfinish = nil,
-                delay=0.0,
-                dt=0.1,
-			},
-
 }
 ------------------------------------------------
 -----------------出生光效-----------------------
@@ -234,53 +135,4 @@ EFT_BORN_TB =
 	arc = {0.5,-0.6},
 	bone = 'b_bottom'
 }
----冒烟---
-EFT_BORN_SMOKE = 
-{
-	arm = "effect_system",
-	res = "effect_system.xml",
-	anima = "bomb5",
-	arc = {0.5,0},
-	bone = 'b_bottom'
-}
----法阵1---
-EFT_BORN_FZ1 = 
-{
-	arm = "effect_system",
-	res = "effect_system.xml",
-	anima = "bomb14",
-	arc = {0.5,0.2},
-	bone = 'b_bottom'
-}
-EFT_BORN_FZ2 = 
-{
-	arm = "effect_system",
-	res = "effect_system.xml",
-	anima = "bomb15",
-	arc = {0.5,0},
-	bone = 'b_bottom'
-}
-EFT_BORN_TB2 = 
-{
-	arm = "effect_system",
-	res = "effect_system.xml",
-	anima = "bomb17",
-	arc = {0.5,0},
-	bone = 'b_bottom'
-}
 ------------------------------------------------
---系统大招释放光效
-EFT_FIGHT_COMMON_LAUNCH_ID = 1013
-EFT_BORN_TB_ID = 10001
-EFT_BORN_SMOKE_ID = 10002
-EFT_BORN_FZ1_ID = 10003
-EFT_BORN_FZ2_ID = 10004
-EFT_DROPBUFF_BORN_ID = 10005
-EFT_BORN_TB2_ID = 10006
-EFT_RANK_BACK_EFTID = EFT_BORN_TB_ID
---影子光效
-EFT_SHADOW_ID = 40001
---仙兽影子光效
-EFT_PET_SHADOW_ID = 2008
---黑屏光效
-EFT_BLACK_ID = 40001

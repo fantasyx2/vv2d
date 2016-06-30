@@ -495,14 +495,14 @@ bool CCImage::initWithImageFileThreadSafe(const char *fullpath, EImageFormat ima
     CC_SAFE_DELETE_ARRAY(pBuffer);
     return bRet;
 }
-extern int deencypt_file_png_buff(const unsigned char*buff,unsigned int bufflen,char*shorname);
+extern int deencypt_file_png_buff(const unsigned char*buff,unsigned int bufflen,const char*shorname);
 bool CCImage::initWithImageData(void * pData, 
                                 int nDataLen, 
                                 EImageFormat eFmt,
                                 int nWidth,
                                 int nHeight,
                                 int nBitsPerComponent,
-                                char*filename)
+                                const char*filename)
 {
     bool bRet = false;
     tImageInfo info = {0};

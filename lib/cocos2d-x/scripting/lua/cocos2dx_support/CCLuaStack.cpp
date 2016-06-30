@@ -90,6 +90,10 @@ extern "C" {
 #include "LuaCocos2dSpine.h"
 #endif
 
+#if CC_GIF_ENABLED >0
+#include "LuaCocos2dGif.h"
+#endif
+
 // cocos2dx_extra luabinding
 #include "cocos2dx_extra_luabinding.h"
 #include "CZHelperFunc_luabinding.h"
@@ -177,6 +181,10 @@ bool CCLuaStack::init(void)
 #if CC_SPINE_ENABLED > 0
     luaopen_Spine(m_state);
 #endif    
+
+#if	CC_GIF_ENABLED >0 
+	luaopen_Gif(m_state);
+#endif
 
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS || CC_TARGET_PLATFORM == CC_PLATFORM_MAC || (CC_TARGET_PLATFORM == CC_PLATFORM_QT && defined(Q_OS_MAC)))
     CCLuaObjcBridge::luaopen_luaoc(m_state);

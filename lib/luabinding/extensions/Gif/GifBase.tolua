@@ -1,0 +1,8 @@
+class GifBase : public CCShaderSprite
+{
+	std::string getGifFrameName(int index);
+	void pause();
+	void play();
+	bool isplaying();
+	void setloop(bool lp);
+};

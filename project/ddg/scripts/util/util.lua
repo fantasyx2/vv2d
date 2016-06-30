@@ -66,6 +66,24 @@ function save_game_data()
 	GameState.save(gamedata or {})
 end
 
+--------------------------------------------------------
+function unload_code_zip(filename)
+	local fd = zipfile_open(filename)
+	if(not fd) then
+		return
+	end
+	local tb = fd:getFileList()
+	if(tb) then
+		for _,v in ipairs(tb) do
+			package.loaded[v]=nil
+		end
+	end
+	zipfile_close(fd)
+end
+function preload_code_zip(filename)
+	CCLuaLoadChunksFromZIP(filename)
+end
+-------------------------------------------------------
 
 
 

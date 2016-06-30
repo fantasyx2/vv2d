@@ -1,0 +1,8 @@
+
+$#include "CacheGif.h"
+$#include "InstantGif.h"
+
+$pfile "extensions/Gif/GifBase.tolua"
+$pfile "extensions/Gif/CacheGif.tolua"
+$pfile "extensions/Gif/InstantGif.tolua"
+

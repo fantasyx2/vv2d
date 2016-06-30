@@ -164,6 +164,11 @@ bool CCDirector::init(void)
 
     return true;
 }
+
+void CCDirector::dispatchKeyPadMsg(int code,int type)
+{
+    m_pKeypadDispatcher->dispatchKeypadMSG(kTypeBackClicked);
+}
     
 CCDirector::~CCDirector(void)
 {

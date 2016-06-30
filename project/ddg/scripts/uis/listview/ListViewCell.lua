@@ -8,10 +8,14 @@ local ListViewCell = class("ListViewCell", function(contentSize)
 end)
 
 function ListViewCell:ctor(contentSize,id)
-	self.id = id
+	self.id = id or 0
 	self.btns = {}	
 	self.actbtn = nil
 	self.__addChild = CCNode.addChild
+end
+
+function ListViewCell:setId(id)
+	self.id = id
 end
 
 function ListViewCell:addNode(nd,od,tg)
@@ -55,14 +59,17 @@ function ListViewCell:onTouch(event, x, y,isMoveCell)
 	elseif(self.actbtn) then		
 		self.actbtn:onCellTouch_(event,x,y,isMoveCell)			
 		if(event=="cancelled" or event=="ended") then
-			self.actbtn = nil
+			self.actbtn = nil			
 		end
+	end
+	if(event=="ended") then
+		self:onTap(x,y)
 	end
 	return true
 end
 
 function ListViewCell:onTap(x, y)
-	self:dispatchEvent({name = "onCellTap", id = self.id})
+	self:dispatchEvent({name = "onCellTap", id = self.id,x=x,y=y})
 end
 
 function ListViewCell:onCleanup()

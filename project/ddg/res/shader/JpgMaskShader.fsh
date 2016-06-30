@@ -12,15 +12,3 @@ void main()
     float aaa = color2.a; 	
     gl_FragColor = vec4(color1.r, color1.g, color1.b, color1.a*aaa);		
 }
-#if 0
-        "uniform vec4 CC_Time;\n"
-        "uniform vec4 CC_SinTime;\n"
-        "uniform vec4 CC_CosTime;\n"
-        "uniform vec4 CC_Random01;\n"
-        "uniform sampler2D CC_Texture1;\n"
-        "uniform sampler2D CC_Texture2;\n"
-        "uniform sampler2D CC_Texture3;\n"
-        "uniform vec4 CC_V4P1;\n"
-        "uniform vec4 CC_V4P2;\n"
-        "uniform vec4 CC_V4P3;\n"
-#endif        

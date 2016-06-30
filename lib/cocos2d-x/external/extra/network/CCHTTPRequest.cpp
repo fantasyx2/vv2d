@@ -71,8 +71,8 @@ bool CCHTTPRequest::initWithUrl(const char *url, int method)
         curl_easy_setopt(m_curl, CURLOPT_COPYPOSTFIELDS, "");
     }
     
-    ++s_id;
-    CCLOG("CCHTTPRequest[0x%04x] - create request with url: %s", s_id, url);
+    m_id = ++s_id;
+    CCLOG("CCHTTPRequest[0x%04x] - create request with url: %s", m_id, url);
     return true;
 #else
     return false;
@@ -86,7 +86,7 @@ CCHTTPRequest::~CCHTTPRequest(void)
     {
         CCLuaEngine::defaultEngine()->removeScriptHandler(m_listener);
     }
-    CCLOG("CCHTTPRequest[0x%04x] - request removed", s_id);
+    CCLOG("CCHTTPRequest[0x%04x] - request removed", m_id);
 }
 
 void CCHTTPRequest::setRequestUrl(const char *url)

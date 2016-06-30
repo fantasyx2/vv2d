@@ -67,10 +67,16 @@ public:
     bool genFileList();
 	void *m_buff;
     
+    //for lua only
+    void getFileDataNoOrder(const char *filename);
+    void getFileDataOrder(const char *filename);
+    void getFileList();
+    
 private:
     CCZipFile(void)
     : m_zipFile(NULL)
     ,m_buff(NULL)
+    ,m_hasGenFlist(false)
     {        
     }
     bool initWithFilename(const char *zipFilename);
@@ -81,6 +87,8 @@ private:
     unzFile m_zipFile; 
 
     std::map<std::string, struct __ZipEntryInfo> m_fileList;
+
+    bool m_hasGenFlist;
     
 };
 

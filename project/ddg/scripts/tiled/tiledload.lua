@@ -23,18 +23,24 @@ function M:getLayerByName(name)
 		end
 	end
 end
---格子元素属性所有图元素编号tid
+--格子元素属性
+--编号tid(1-M)
 function M:getTiledInfo(tid)
 	return self.tiledinfo[tid]
 end
---对象属性gid 格子顺序
+--格子元素属性
+--编号type
+function M:getTiledInfoByType(type)
+	return self.tiledinfo_bytype[type]
+end
+--对象属性gid(1-N) 格子顺序
 function M:getObjectInfo(groupname,gid)
 	local v = self.objinfo[groupname]
 	if(v) then
 		return v[gid]
 	end
 end
---对象属性gid 格子顺序
+--对象属性gid(1-N) 格子顺序
 function M:getObjectPropertys(groupname,gid)
 	local v = self.objinfo[groupname]
 	if(v and v[gid]) then
@@ -56,8 +62,8 @@ end
 -- girdrect[i-1+v.firstgid] = {x=x,y=y,w=tw,h=th,tiled=TI}
 local SM={}
 SM.__index=SM
---x->gird_X(0-n-1)
---y->gird_Y(0-n-1)
+--gid 1-N
+--gx,gy 0--N-1
 function SM:genGid(x,y)
 	y = self.h-y
 	x = math.floor(x/self.tw)
@@ -67,8 +73,7 @@ function SM:genGid(x,y)
 	end
 	return y*self.gw+x+1,x,y
 end
---gird_X(0-n-1)->x
---gird_Y(0-n-1)->y
+--gx,gy 0--N-1
 function SM:genPos(gx,gy,center)
 	if(center) then
 		return gx*self.tw+self.tw/2,self.h-(gy*self.th+self.th/2)
@@ -76,8 +81,8 @@ function SM:genPos(gx,gy,center)
 		return gx*self.tw,self.h-gy*self.th
 	end	
 end
---gid->gird_X(0-n-1)
---gid->gird_Y(0-n-1)
+--gid 1-N
+--gx,gy 0--N-1
 function SM:genGxy(gid)
 	local gx = math.mod(gid-1,self.gw)
 	local gy = math.floor((gid-1)/self.gw)
@@ -233,20 +238,21 @@ local function unzip(data)
 	end
 	return tb
 end
-local function gen(T,suppm)
+local function gen(T,path,suppm)
 	local r={}
 	local nodes={}
 	local girdrect={}
 	local tiledinfo={}
+	local tiledinfo_bytype={}
 	local objinfo={}
 	--r.data = T
 	r.nodes=nodes
-	r.girdrect=girdrect
-	r.tiledinfo=tiledinfo
-	r.objinfo=objinfo
+	r.girdrect=girdrect--[gid](1-N)
+	r.tiledinfo=tiledinfo--[tid](1-N)
+	r.tiledinfo_bytype=tiledinfo_bytype--[type]
+	r.objinfo=objinfo--[group][gid](1-N)
 	-- r.objects={}
 	-- r.tiles={}
-
 	local tw = T.tilewidth
 	local th = T.tileheight
 	local gw = T.width
@@ -271,7 +277,7 @@ local function gen(T,suppm)
 				if(vv.x>w or vv.x<0 or vv.y>h or vv.y<0) then
 					vv.gid = 0
 				else	
-					local x = math.floor(tw-1+vv.x/tw)
+					local x = math.floor((tw-1+vv.x)/tw)
 					local y = math.floor(vv.y/th)
 					vv.gid = x + y*gw
 				end
@@ -284,6 +290,7 @@ local function gen(T,suppm)
 	-- dump(objinfo)
 	-- modify tilesets
 	for TI,v in ipairs(T.tilesets) do
+		v.image = path..v.image --add full path
 		v.endgid = v.firstgid+v.tilecount-1
 		--only one grid tiles empty
 		local tw = v.tilewidth
@@ -304,7 +311,11 @@ local function gen(T,suppm)
 			girdrect[i-1+v.firstgid] = {x=x,y=y,w=tw,h=th,tiled=TI}
 		end
 		for _,vv in ipairs(v.tiles) do
+			vv.properties.tid = vv.id+v.firstgid
 			tiledinfo[vv.id+v.firstgid] = vv.properties
+			if(vv.properties.type) then
+				tiledinfo_bytype[vv.properties.type] = vv.properties
+			end
 		end
 	end
 	-- dump(girdrect)
@@ -363,7 +374,7 @@ local function gen(T,suppm)
 				end	
 			end
 		elseif(v.type=='imagelayer') then
-			local spt = CCSprite:create(v.image)
+			local spt = CCSprite:create(path..v.image)
 			local sz = spt:getContentSize()
 			-- spt:setAnchorPoint(ccp(0,0))
 			local x = v.offsetx
@@ -403,12 +414,13 @@ local function gen(T,suppm)
 end	
 
 --conver json to table
-function M.load(luafile,supp_more_image_each_layer)
-	local tb = run_lua_file(luafile)
+function M.load(luafile,path,supp_more_image_each_layer)
+	path = path or ""
+	local tb = run_lua_file(path..luafile)
 	if(not tb) then
 		return
 	end
-	return gen(tb,supp_more_image_each_layer)
+	return gen(tb,path,supp_more_image_each_layer)
 end
 ----------------------------------------------
 tiledload=M

@@ -396,7 +396,7 @@ function ui.newTTFLabel(params)
     local font       = params.font or ui.DEFAULT_TTF_FONT
     local size       = params.size or ui.DEFAULT_TTF_FONT_SIZE
     local color      = params.color
-    local textAlign  = params.align or ui.TEXT_ALIGN_LEFT
+    local textAlign  = params.align or ui.TEXT_ALIGN_CENTER
     local textValign = params.valign or ui.TEXT_VALIGN_CENTER
     local x, y       = params.x, params.y
     local dimensions = params.dimensions or CCSizeMake(0, 0)
@@ -418,17 +418,18 @@ function ui.newTTFLabel(params)
             label:setColor(color)
         end
 
-        function label:realign(x, y)
-            if textAlign == ui.TEXT_ALIGN_LEFT then
-                label:setPosition(math.round(x + label:getContentSize().width / 2), y)
-            elseif textAlign == ui.TEXT_ALIGN_RIGHT then
-                label:setPosition(x - math.round(label:getContentSize().width / 2), y)
-            else
-                label:setPosition(x, y)
-            end
-        end
+        -- function label:realign(x, y)
+        --     if textAlign == ui.TEXT_ALIGN_LEFT then
+        --         label:setPosition(math.round(x + label:getContentSize().width / 2), y)
+        --     elseif textAlign == ui.TEXT_ALIGN_RIGHT then
+        --         label:setPosition(x - math.round(label:getContentSize().width / 2), y)
+        --     else
+        --         label:setPosition(x, y)
+        --     end
+        -- end
 
-        if x and y then label:realign(x, y) end
+        -- if x and y then label:realign(x, y) end
+        if x and y then label:setPosition(x, y) end
     end
 
     return label

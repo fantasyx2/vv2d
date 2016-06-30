@@ -6,4 +6,7 @@ function __G__TRACKBACK__(errorMessage)
     print("----------------------------------------")
 end
 
-require("app.MyApp").new():run()
+-- require("app.MyApp").new():run()
+require("apptest.TstApp").new():run()
+-- require("appeditor.EditorApp").new():run()
+

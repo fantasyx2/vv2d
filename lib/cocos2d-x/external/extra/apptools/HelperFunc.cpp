@@ -62,10 +62,13 @@ int CZHelperFunc::getFileData(const char *pPathFile)
 {
     unsigned long size;
     unsigned char* buf = CZHelperFunc::getFileData(pPathFile, "rb", &size);
-    if (NULL==buf) return 0;
-    
     CCLuaStack* stack = CCLuaEngine::defaultEngine()->getLuaStack();
-	stack->clean();
+    stack->clean();
+    if (NULL==buf) 
+    {
+		stack->pushNil();
+        return 0;
+    }    
     stack->pushString((const char*)buf, size);
     delete []buf;
     return 1;
