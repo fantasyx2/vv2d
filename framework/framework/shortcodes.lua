@@ -95,6 +95,26 @@ function Node:zorder(z)
     return self
 end
 
+function Node:onTouch(listener)
+    if USE_DEPRECATED_EVENT_ARGUMENTS then
+        self:addNodeEventListener(c.NODE_TOUCH_EVENT, function(event)
+            return listener(event.name, event.x, event.y, event.prevX, event.prevY)
+        end)
+    else
+        self:addNodeEventListener(c.NODE_TOUCH_EVENT, listener)
+    end
+    return self
+end
+
+function Node:enableTouch(enabled)
+    self:setTouchEnabled(enabled)
+    return self
+end
+
+
+Node.timer=Node.schedule
+Node.delay=Node.performWithDelay
+
 
 -- Sprite
 
@@ -126,22 +146,6 @@ end
 -- Layer
 
 local Layer = c.Layer
-
-function Layer:onTouch(listener)
-    if USE_DEPRECATED_EVENT_ARGUMENTS then
-        self:addNodeEventListener(c.NODE_TOUCH_EVENT, function(event)
-            return listener(event.name, event.x, event.y, event.prevX, event.prevY)
-        end)
-    else
-        self:addNodeEventListener(c.NODE_TOUCH_EVENT, listener)
-    end
-    return self
-end
-
-function Layer:enableTouch(enabled)
-    self:setTouchEnabled(enabled)
-    return self
-end
 
 function Layer:onKeypad(listener)
     if USE_DEPRECATED_EVENT_ARGUMENTS then

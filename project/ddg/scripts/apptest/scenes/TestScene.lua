@@ -25,6 +25,9 @@ function TestScene:ctor()
 		{"tstHttp",		handler(self,self.tstHttp)},
 		{"tstZip",		handler(self,self.tstZip)},
 		{"tstFs",		handler(self,self.tstFs)},
+		{"tstShrot",	handler(self,self.tstShort)},
+		{"tstEdit", 	handler(self,self.tstEdit)},
+		{"tstGif",		handler(self,self.tstGif)},
 
 	}
 	self.TND = display.newNode()
@@ -404,6 +407,20 @@ function TestScene:tstCCS()
 		nd:addCells(cells)
 		nd:setTouchEnabled(true)
 		nd:setCellAlign(0.0)
+
+		local gif = r.gif
+		gif:enableTouch(true)
+		gif:onTouch(function(evt)
+	 		if(evt.name=='began') then
+	 			if(gif:isplaying()) then
+	 				gif:pause()
+	 			else
+	 				gif:play()
+	 			end
+	 			return true
+	 		end
+	 	end)
+	 	gif:setloop(false)
 	end
 end
 
@@ -543,6 +560,15 @@ function TestScene:tstShader2()
 
 	local noisetextute = CCTextureCache:sharedTextureCache():addImage(noise)
 	spp:setCC_Texture2(noisetextute)
+	spp:setSdf(1,0.0)
+	spp:setSdf(2,0.0)
+	self.dt=0.0
+
+	 spp:schedule(function(dt)
+						self.dt=self.dt+1.0/60.0;
+						spp:setSdf(1,math.mod(self.dt/50.0,1.0))
+						spp:setSdf(2,math.mod(self.dt,1.0))
+					end, 0.01)
 
 	local tp = ccTexParams()
     tp.minFilter = gl.GL_LINEAR
@@ -624,4 +650,69 @@ function TestScene:tstFs()
 	print("file",#file)
 end
 
+function TestScene:tstShort()
+	local nd = display.newSprite("UI/pig.jpg"):pos(100,100):arch(0,0)
+	self:addTestNd(nd)
+
+end	
+
+function TestScene:tstEdit()
+
+	local nd = ui.newEditBox(
+                        {
+                            size = cc.size(200,50),
+                        })
+    nd:setPlaceHolder("please inputfffff")
+    nd:setFontSize(48)
+    nd:setColor(ccc3(255,255,0))
+    nd:arch(0.5,0.5)
+    nd:setText("name jackf")
+	nd:pos(display.cy,display.cy-200)
+	self:addChild(nd)
+	nd:setContentSize(cc.size(200,50))
+	print(nd:getPositionY(),nd:isVisible())
+	nd:runAction(CCScaleTo:create(2.0, 100.0))
+
+end	
+function TestScene:tstGif()
+	--self.TND:setTouchEnabled(true)
+	local name = "UI/g3.gif";
+	local gif = InstantGif:create(name)
+	print(gif)
+	gif:arch(0.5,0.5)
+	gif:pos(display.cx,display.cy)
+	gif:scale(2.0)
+	self:addTestNd(gif)
+	gif:setTouchEnabled(true)
+	gif:addNodeEventListener(cc.NODE_TOUCH_EVENT,function(evt)
+ 		if(evt.name=='began') then
+ 			if(gif:isplaying()) then
+ 				gif:pause()
+ 			else
+ 				gif:play()
+ 			end
+ 			return true
+ 		end
+ 	end)
+ 	gif:setloop(false)
+	-- local name = "UI/g2.gif"
+	-- local gif = CacheGif:create(name)
+	-- gif:arch(0.5,0.5)
+	-- gif:pos(400,700)
+	-- gif:scale(0.5);
+	-- self:addTestNd(gif,true)
+	-- gif:setTouchEnabled(true)
+	-- gif:addNodeEventListener(cc.NODE_TOUCH_EVENT,function(evt)
+	-- 	if(evt.name=='began') then
+	-- 		if(gif:isplaying()) then
+	-- 			gif:pause()
+	-- 		else
+	-- 			gif:play()
+	-- 		end
+	-- 		return true
+	-- 	end
+	-- end)
+	-- gif:setloop(false)
+
+end
 return TestScene
