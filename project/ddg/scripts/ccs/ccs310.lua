@@ -9,9 +9,10 @@ local function set_param(nd,t)
 		nd:setPosition(a.X, a.Y)
 	end
 	a=t.AnchorPoint
-	if(a and a.ScaleX and a.ScaleY) then
+	if(a) then
 		--print("set_param arc",a.ScaleX, a.ScaleY)
-		nd:setAnchorPoint(ccp(a.ScaleX, a.ScaleY))
+		--studio for mac output json test default (0,0)
+		nd:setAnchorPoint(ccp(a.ScaleX or 0, a.ScaleY or 0))
 	end
 	a=t.Scale
 	if(a) then
@@ -62,11 +63,12 @@ local function get_scale9cap(t)
 end
 local function gen_sp(t)	
 	local a = t.FileData
+	a = a or t.ImageFileData
 	if(a and a.Path) then
 		local nd
 		local s9cap = get_scale9cap(t)
-		if(a.Type == "PlistSubImage") then			
-			sharedSpriteFrameCache:addSpriteFramesWithFile(a.Plist)
+		if((a.Type == "PlistSubImage") or (a.Type=='MarkedSubImage') ) then	
+			-- sharedSpriteFrameCache:addSpriteFramesWithFile(a.Plist)
 			local frame = display.newSpriteFrame(a.Path)
 	        if frame then
 	            if s9cap then
@@ -124,9 +126,29 @@ local CellButton = require("uis.listview.CellButton")
 local function gen_btn(t,class)
 	local s9cap = get_scale9cap(t)
 	--print("gen_btn_1",s9cap)
-	local a = t.NormalFileData and t.NormalFileData.Path
-	local b = t.PressedFileData and t.PressedFileData.Path
-	local c = t.DisabledFileData and t.DisabledFileData.Path
+	local a,b,c
+	local m 
+	m = t.NormalFileData
+	if(m) then
+		a = m.Path
+		if(m.Type=="PlistSubImage") then
+			a = '#' .. a
+		end
+	end
+	m = t.PressedFileData
+	if(m) then
+		b = m.Path
+		if(m.Type=="PlistSubImage") then
+			b = '#' .. b
+		end
+	end
+	m = t.DisabledFileData
+	if(m) then
+		c = m.Path
+		if(m.Type=="PlistSubImage") then
+			c = '#' .. c
+		end
+	end
 	--print("gen_btn_2",a,b,c)
 	-- local class = cc.ui.UIPushButton
 	class = class or McButton
@@ -166,7 +188,25 @@ local function gen_btn(t,class)
 end
 
 local function gen_checkbox(t)
-	local nd = display.newNode()
+	local onimg
+	local offimg
+	local a 
+	a = t.NodeNormalFileData
+	if(a.Type == "PlistSubImage") then	
+    	onimg = '#'..a.Path
+    else
+    	onimg = a.Path	
+    end
+    a = t.NormalBackFileData
+	if(a.Type == "PlistSubImage") then	
+    	offimg = '#'..a.Path
+    else
+    	offimg = a.Path	
+    end      
+	local nd = cc.ui.UICheckBoxButton.new({
+			off = offimg,
+			on = onimg,
+		})
 	if(nd) then
 		nd:setName(t.Name)
 		set_param(nd,t)
@@ -219,7 +259,8 @@ end
 local ProgressBar = require("uis.ProgressBar")
 
 local function gen_loading(t)
-	local sp = display.newSprite(t.ImageFileData.Path)
+	-- local sp = gen_sp(t.ImageFileData)
+	local sp = gen_sp(t)
 	local nd = ProgressBar.new(_,sp,0,0)
 	if(nd) then
 		nd:setName(t.Name)
@@ -334,6 +375,12 @@ local function gen_input(t)
     	nd:setFontName(t.FontResource.Path)
 	end
     nd:setFontSize(t.FontSize or 24)
+
+    local a=t.CColor
+	if(a and (a.R or a.G or a.B)) then
+		local c = ccc3(a.R or 255, a.G or 255, a.B or 255)
+		nd:setFontColor(c)
+	end
     nd:setText(t.LabelText)
     if t.PasswordEnable then
     	nd:setInputFlag(cc.EDITBOX_INPUT_FLAG_PASSWORD)
@@ -407,11 +454,26 @@ local function gen_bmfont(t)
 		end
 	end
 end
+
+local function gen_gif(t)
+	local a=t.UserData
+	if(a and string.len(a)>0) then
+		local nd = InstantGif:create(a)
+		if(nd) then
+			nd:setName(t.Name)
+			t.Size=nil
+			t.AnchorPoint=nil
+			set_param(nd,t)
+			return nd
+		end
+	end
+end
+
 --------------------------------------
 local config=
 {
 	ButtonObjectData		= gen_btn,
-	--CheckBoxObjectData	= gen_checkbox,
+	CheckBoxObjectData		= gen_checkbox,
 	--GameMapObjectData		= gen_map,
 	ImageViewObjectData		= gen_imgview,
 	ListViewObjectData		= gen_listview,
@@ -432,6 +494,8 @@ local config=
 	TextFieldObjectData		= gen_input,
 	TextObjectData 			= gen_text,
 	TextBMFontObjectData    = gen_bmfont,
+	Gif 					= gen_gif,
+
 }
 --------------------------------------
 --[[[
@@ -540,6 +604,12 @@ function M.load_tb(jsontb,func)
 	--use custom class name force if editor not mark
 	if(func) then
 		func(root)
+	end	
+	------------------------------------------------
+	for _,v in ipairs(res) do
+		if(string.match(v,'%.plist$')) then
+			sharedSpriteFrameCache:addSpriteFramesWithFile(v)
+		end
 	end	
 	------------------------------------------------
 	local size = root.Size
