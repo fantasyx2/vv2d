@@ -676,7 +676,7 @@ function TestScene:tstEdit()
 end	
 function TestScene:tstGif()
 	--self.TND:setTouchEnabled(true)
-	local name = "UI/g3.gif";
+	local name = "UI/g4.gif";
 	local gif = InstantGif:create(name)
 	print(gif)
 	gif:arch(0.5,0.5)
@@ -694,7 +694,7 @@ function TestScene:tstGif()
  			return true
  		end
  	end)
- 	gif:setloop(false)
+ 	-- gif:setloop(false)
 	-- local name = "UI/g2.gif"
 	-- local gif = CacheGif:create(name)
 	-- gif:arch(0.5,0.5)

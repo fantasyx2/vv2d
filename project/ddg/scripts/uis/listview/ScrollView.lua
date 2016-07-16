@@ -9,9 +9,9 @@ end)
 --DIRECTION_VERTICAL   = 1
 --DIRECTION_HORIZONTAL = 2
 
-local FORCE_ACC=600 --摩擦力
+local FORCE_ACC=1000 --摩擦力
 local OUT_BOUNCE_RATE=10 --越界减速1/15每帧
-local SPEED_MIN=200--惯性最低速度
+local SPEED_MIN=50--惯性最低速度
 local OUT_BOUNCE_DRAG_RATE=0.4--越界拖动位移系数
 
 function ScrollView:ctor(rect, direction,clip)
