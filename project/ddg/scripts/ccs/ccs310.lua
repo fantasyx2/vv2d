@@ -55,6 +55,12 @@ local function set_param(nd,t)
 		if(a.Src) then bld.src=a.Src end
 		nd:setBlendFunc(bld)
 	end
+	if(t.FlipX) then
+		nd:setFlipX(true)
+	end
+	if(t.FlipY) then
+		nd:setFlipY(true)
+	end
 end
 local function get_scale9cap(t)
 	if(t.Scale9Enable) then
