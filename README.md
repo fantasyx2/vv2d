@@ -10,10 +10,6 @@ Quick-Cocos2d-x 基于 Cocos2d-x 开发，具有 Cocos2d-x 的所有优点。并
 
 **成熟可靠：** 目前使用 Cocos2d-x 平台开发的热门手游产品中，几乎一半都用到了 Lua 脚本语言。而 Quick-Cocos2d-x 作为 Cocos2d-x + Lua 的升级解决方案，保持了成熟可靠的特点。
 
--   quick-cocos2d-x 中文站 [http://quick.cocos.org/](http://quick.cocos.org/)
--   新浪微博 [http://weibo.com/quickcocos2dx](http://weibo.com/quickcocos2dx)
--   QQ 群 284148017, 243709595, 8952580
--   CSDN 镜像仓库（国内访问稳定快速），和 github 仓库同步，地址 [https://code.csdn.net/u014257247/quick-cocos2d-x](https://code.csdn.net/u014257247/quick-cocos2d-x)
 
 ~
 
