@@ -337,11 +337,14 @@
     <Filter Include="cocos2d-x\external\chipmunk\cocos2dx_support\constraints">
       <UniqueIdentifier>{2c1549fd-adef-4609-bb77-28c78892b71a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="cocos2d-x\scripting\lua\lua">
-      <UniqueIdentifier>{a749176d-bd4d-4aae-9e2c-33df575211e8}</UniqueIdentifier>
-    </Filter>
     <Filter Include="cocos2d-x\extensions\spine">
       <UniqueIdentifier>{58876854-2445-4e8c-b4cd-314de5b2a7f4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cocos2d-x\extensions\Gif">
+      <UniqueIdentifier>{f51eb94e-3226-4406-9068-16970fe61bc9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cocos2d-x\extensions\Gif\gif_lib">
+      <UniqueIdentifier>{3fd603ca-0146-4eb1-9cd4-1649b519c5cb}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -1095,12 +1098,6 @@
     <ClCompile Include="..\cocos2d-x\scripting\lua\lua_extensions\socket\luasocket.c">
       <Filter>cocos2d-x\scripting\lua\lua_extensions\socket</Filter>
     </ClCompile>
-    <ClCompile Include="..\cocos2d-x\scripting\lua\lua_extensions\socket\luasocket_buffer.c">
-      <Filter>cocos2d-x\scripting\lua\lua_extensions\socket</Filter>
-    </ClCompile>
-    <ClCompile Include="..\cocos2d-x\scripting\lua\lua_extensions\socket\luasocket_io.c">
-      <Filter>cocos2d-x\scripting\lua\lua_extensions\socket</Filter>
-    </ClCompile>
     <ClCompile Include="..\cocos2d-x\scripting\lua\lua_extensions\socket\mime.c">
       <Filter>cocos2d-x\scripting\lua\lua_extensions\socket</Filter>
     </ClCompile>
@@ -1108,9 +1105,6 @@
       <Filter>cocos2d-x\scripting\lua\lua_extensions\socket</Filter>
     </ClCompile>
     <ClCompile Include="..\cocos2d-x\scripting\lua\lua_extensions\socket\select.c">
-      <Filter>cocos2d-x\scripting\lua\lua_extensions\socket</Filter>
-    </ClCompile>
-    <ClCompile Include="..\cocos2d-x\scripting\lua\lua_extensions\socket\socket_scripts.c">
       <Filter>cocos2d-x\scripting\lua\lua_extensions\socket</Filter>
     </ClCompile>
     <ClCompile Include="..\cocos2d-x\scripting\lua\lua_extensions\socket\tcp.c">
@@ -1455,96 +1449,6 @@
     <ClCompile Include="..\cocos2d-x\extensions\CocoStudio\Action\ActionManager.cpp">
       <Filter>cocos2d-x\extensions\CocoStudio</Filter>
     </ClCompile>
-    <ClCompile Include="..\cocos2d-x\extensions\DragonBones\Armature.cpp">
-      <Filter>cocos2d-x\extensions\DragonBones</Filter>
-    </ClCompile>
-    <ClCompile Include="..\cocos2d-x\extensions\DragonBones\Bone.cpp">
-      <Filter>cocos2d-x\extensions\DragonBones</Filter>
-    </ClCompile>
-    <ClCompile Include="..\cocos2d-x\extensions\DragonBones\Slot.cpp">
-      <Filter>cocos2d-x\extensions\DragonBones</Filter>
-    </ClCompile>
-    <ClCompile Include="..\cocos2d-x\extensions\DragonBones\objects\dbtinyxml2.cpp">
-      <Filter>cocos2d-x\extensions\DragonBones\objects</Filter>
-    </ClCompile>
-    <ClCompile Include="..\cocos2d-x\extensions\DragonBones\objects\DisplayData.cpp">
-      <Filter>cocos2d-x\extensions\DragonBones\objects</Filter>
-    </ClCompile>
-    <ClCompile Include="..\cocos2d-x\extensions\DragonBones\objects\TransformTimeline.cpp">
-      <Filter>cocos2d-x\extensions\DragonBones\objects</Filter>
-    </ClCompile>
-    <ClCompile Include="..\cocos2d-x\extensions\DragonBones\objects\XMLDataParser.cpp">
-      <Filter>cocos2d-x\extensions\DragonBones\objects</Filter>
-    </ClCompile>
-    <ClCompile Include="..\cocos2d-x\extensions\DragonBones\animation\Animation.cpp">
-      <Filter>cocos2d-x\extensions\DragonBones\animation</Filter>
-    </ClCompile>
-    <ClCompile Include="..\cocos2d-x\extensions\DragonBones\animation\AnimationState.cpp">
-      <Filter>cocos2d-x\extensions\DragonBones\animation</Filter>
-    </ClCompile>
-    <ClCompile Include="..\cocos2d-x\extensions\DragonBones\animation\TimelineState.cpp">
-      <Filter>cocos2d-x\extensions\DragonBones\animation</Filter>
-    </ClCompile>
-    <ClCompile Include="..\cocos2d-x\extensions\DragonBones\core\DBObject.cpp">
-      <Filter>cocos2d-x\extensions\DragonBones\core</Filter>
-    </ClCompile>
-    <ClCompile Include="..\cocos2d-x\extensions\DragonBones\core\DragonBones.cpp">
-      <Filter>cocos2d-x\extensions\DragonBones\core</Filter>
-    </ClCompile>
-    <ClCompile Include="..\cocos2d-x\extensions\DragonBones\events\AnimationEvent.cpp">
-      <Filter>cocos2d-x\extensions\DragonBones\events</Filter>
-    </ClCompile>
-    <ClCompile Include="..\cocos2d-x\extensions\DragonBones\events\ArmatureEvent.cpp">
-      <Filter>cocos2d-x\extensions\DragonBones\events</Filter>
-    </ClCompile>
-    <ClCompile Include="..\cocos2d-x\extensions\DragonBones\events\Event.cpp">
-      <Filter>cocos2d-x\extensions\DragonBones\events</Filter>
-    </ClCompile>
-    <ClCompile Include="..\cocos2d-x\extensions\DragonBones\events\FrameEvent.cpp">
-      <Filter>cocos2d-x\extensions\DragonBones\events</Filter>
-    </ClCompile>
-    <ClCompile Include="..\cocos2d-x\extensions\DragonBones\events\SoundEvent.cpp">
-      <Filter>cocos2d-x\extensions\DragonBones\events</Filter>
-    </ClCompile>
-    <ClCompile Include="..\cocos2d-x\extensions\DragonBones\events\SoundEventManager.cpp">
-      <Filter>cocos2d-x\extensions\DragonBones\events</Filter>
-    </ClCompile>
-    <ClCompile Include="..\cocos2d-x\extensions\DragonBones\factories\BaseFactory.cpp">
-      <Filter>cocos2d-x\extensions\DragonBones\factories</Filter>
-    </ClCompile>
-    <ClCompile Include="..\cocos2d-x\extensions\DragonBones\renderer\CCDBAtlasNode.cpp">
-      <Filter>cocos2d-x\extensions\DragonBones\renderer</Filter>
-    </ClCompile>
-    <ClCompile Include="..\cocos2d-x\extensions\DragonBones\renderer\CCDBDisplayBridge.cpp">
-      <Filter>cocos2d-x\extensions\DragonBones\renderer</Filter>
-    </ClCompile>
-    <ClCompile Include="..\cocos2d-x\extensions\DragonBones\renderer\CCDBFactory.cpp">
-      <Filter>cocos2d-x\extensions\DragonBones\renderer</Filter>
-    </ClCompile>
-    <ClCompile Include="..\cocos2d-x\extensions\DragonBones\renderer\CCDBManager.cpp">
-      <Filter>cocos2d-x\extensions\DragonBones\renderer</Filter>
-    </ClCompile>
-    <ClCompile Include="..\cocos2d-x\extensions\DragonBones\renderer\CCDBTextureAtlas.cpp">
-      <Filter>cocos2d-x\extensions\DragonBones\renderer</Filter>
-    </ClCompile>
-    <ClCompile Include="..\cocos2d-x\extensions\DragonBones\renderer\CCDragonBones.cpp">
-      <Filter>cocos2d-x\extensions\DragonBones\renderer</Filter>
-    </ClCompile>
-    <ClCompile Include="..\cocos2d-x\extensions\DragonBones\utils\BytesType.cpp">
-      <Filter>cocos2d-x\extensions\DragonBones\utils</Filter>
-    </ClCompile>
-    <ClCompile Include="..\cocos2d-x\extensions\DragonBones\utils\ConstValues.cpp">
-      <Filter>cocos2d-x\extensions\DragonBones\utils</Filter>
-    </ClCompile>
-    <ClCompile Include="..\cocos2d-x\extensions\DragonBones\utils\DBDataUtil.cpp">
-      <Filter>cocos2d-x\extensions\DragonBones\utils</Filter>
-    </ClCompile>
-    <ClCompile Include="..\cocos2d-x\extensions\DragonBones\utils\DBGeometry.cpp">
-      <Filter>cocos2d-x\extensions\DragonBones\utils</Filter>
-    </ClCompile>
-    <ClCompile Include="..\cocos2d-x\extensions\DragonBones\utils\TransformUtil.cpp">
-      <Filter>cocos2d-x\extensions\DragonBones\utils</Filter>
-    </ClCompile>
     <ClCompile Include="..\cocos2d-x\external\chipmunk\cocos2dx_support\constraints\CCGrooveJoint.cpp">
       <Filter>cocos2d-x\external\chipmunk\cocos2dx_support\constraints</Filter>
     </ClCompile>
@@ -1574,99 +1478,6 @@
     </ClCompile>
     <ClCompile Include="..\cocos2d-x\scripting\lua\cocos2dx_support\LuaCocos2dFilters.cpp">
       <Filter>cocos2d-x\scripting\lua\cocos2dx_support</Filter>
-    </ClCompile>
-    <ClCompile Include="..\cocos2d-x\scripting\lua\lua\lua-5.1.5\src\lapi.c">
-      <Filter>cocos2d-x\scripting\lua\lua</Filter>
-    </ClCompile>
-    <ClCompile Include="..\cocos2d-x\scripting\lua\lua\lua-5.1.5\src\lauxlib.c">
-      <Filter>cocos2d-x\scripting\lua\lua</Filter>
-    </ClCompile>
-    <ClCompile Include="..\cocos2d-x\scripting\lua\lua\lua-5.1.5\src\lbaselib.c">
-      <Filter>cocos2d-x\scripting\lua\lua</Filter>
-    </ClCompile>
-    <ClCompile Include="..\cocos2d-x\scripting\lua\lua\lua-5.1.5\src\lcode.c">
-      <Filter>cocos2d-x\scripting\lua\lua</Filter>
-    </ClCompile>
-    <ClCompile Include="..\cocos2d-x\scripting\lua\lua\lua-5.1.5\src\ldblib.c">
-      <Filter>cocos2d-x\scripting\lua\lua</Filter>
-    </ClCompile>
-    <ClCompile Include="..\cocos2d-x\scripting\lua\lua\lua-5.1.5\src\ldebug.c">
-      <Filter>cocos2d-x\scripting\lua\lua</Filter>
-    </ClCompile>
-    <ClCompile Include="..\cocos2d-x\scripting\lua\lua\lua-5.1.5\src\ldo.c">
-      <Filter>cocos2d-x\scripting\lua\lua</Filter>
-    </ClCompile>
-    <ClCompile Include="..\cocos2d-x\scripting\lua\lua\lua-5.1.5\src\ldump.c">
-      <Filter>cocos2d-x\scripting\lua\lua</Filter>
-    </ClCompile>
-    <ClCompile Include="..\cocos2d-x\scripting\lua\lua\lua-5.1.5\src\lfunc.c">
-      <Filter>cocos2d-x\scripting\lua\lua</Filter>
-    </ClCompile>
-    <ClCompile Include="..\cocos2d-x\scripting\lua\lua\lua-5.1.5\src\lgc.c">
-      <Filter>cocos2d-x\scripting\lua\lua</Filter>
-    </ClCompile>
-    <ClCompile Include="..\cocos2d-x\scripting\lua\lua\lua-5.1.5\src\linit.c">
-      <Filter>cocos2d-x\scripting\lua\lua</Filter>
-    </ClCompile>
-    <ClCompile Include="..\cocos2d-x\scripting\lua\lua\lua-5.1.5\src\liolib.c">
-      <Filter>cocos2d-x\scripting\lua\lua</Filter>
-    </ClCompile>
-    <ClCompile Include="..\cocos2d-x\scripting\lua\lua\lua-5.1.5\src\llex.c">
-      <Filter>cocos2d-x\scripting\lua\lua</Filter>
-    </ClCompile>
-    <ClCompile Include="..\cocos2d-x\scripting\lua\lua\lua-5.1.5\src\lmathlib.c">
-      <Filter>cocos2d-x\scripting\lua\lua</Filter>
-    </ClCompile>
-    <ClCompile Include="..\cocos2d-x\scripting\lua\lua\lua-5.1.5\src\lmem.c">
-      <Filter>cocos2d-x\scripting\lua\lua</Filter>
-    </ClCompile>
-    <ClCompile Include="..\cocos2d-x\scripting\lua\lua\lua-5.1.5\src\loadlib.c">
-      <Filter>cocos2d-x\scripting\lua\lua</Filter>
-    </ClCompile>
-    <ClCompile Include="..\cocos2d-x\scripting\lua\lua\lua-5.1.5\src\lobject.c">
-      <Filter>cocos2d-x\scripting\lua\lua</Filter>
-    </ClCompile>
-    <ClCompile Include="..\cocos2d-x\scripting\lua\lua\lua-5.1.5\src\lopcodes.c">
-      <Filter>cocos2d-x\scripting\lua\lua</Filter>
-    </ClCompile>
-    <ClCompile Include="..\cocos2d-x\scripting\lua\lua\lua-5.1.5\src\loslib.c">
-      <Filter>cocos2d-x\scripting\lua\lua</Filter>
-    </ClCompile>
-    <ClCompile Include="..\cocos2d-x\scripting\lua\lua\lua-5.1.5\src\lparser.c">
-      <Filter>cocos2d-x\scripting\lua\lua</Filter>
-    </ClCompile>
-    <ClCompile Include="..\cocos2d-x\scripting\lua\lua\lua-5.1.5\src\lstate.c">
-      <Filter>cocos2d-x\scripting\lua\lua</Filter>
-    </ClCompile>
-    <ClCompile Include="..\cocos2d-x\scripting\lua\lua\lua-5.1.5\src\lstring.c">
-      <Filter>cocos2d-x\scripting\lua\lua</Filter>
-    </ClCompile>
-    <ClCompile Include="..\cocos2d-x\scripting\lua\lua\lua-5.1.5\src\lstrlib.c">
-      <Filter>cocos2d-x\scripting\lua\lua</Filter>
-    </ClCompile>
-    <ClCompile Include="..\cocos2d-x\scripting\lua\lua\lua-5.1.5\src\ltable.c">
-      <Filter>cocos2d-x\scripting\lua\lua</Filter>
-    </ClCompile>
-    <ClCompile Include="..\cocos2d-x\scripting\lua\lua\lua-5.1.5\src\ltablib.c">
-      <Filter>cocos2d-x\scripting\lua\lua</Filter>
-    </ClCompile>
-    <ClCompile Include="..\cocos2d-x\scripting\lua\lua\lua-5.1.5\src\ltm.c">
-      <Filter>cocos2d-x\scripting\lua\lua</Filter>
-    </ClCompile>
-    <ClCompile Include="..\cocos2d-x\scripting\lua\lua\lua-5.1.5\src\lua.c">
-      <Filter>cocos2d-x\scripting\lua\lua</Filter>
-    </ClCompile>
-    <ClCompile Include="..\cocos2d-x\scripting\lua\lua\lua-5.1.5\src\lundump.c">
-      <Filter>cocos2d-x\scripting\lua\lua</Filter>
-    </ClCompile>
-    <ClCompile Include="..\cocos2d-x\scripting\lua\lua\lua-5.1.5\src\lvm.c">
-      <Filter>cocos2d-x\scripting\lua\lua</Filter>
-    </ClCompile>
-    <ClCompile Include="..\cocos2d-x\scripting\lua\lua\lua-5.1.5\src\lzio.c">
-      <Filter>cocos2d-x\scripting\lua\lua</Filter>
-    </ClCompile>
-    <ClCompile Include="..\cocos2d-x\scripting\lua\lua\lua-5.1.5\src\print.c">
-      <Filter>cocos2d-x\scripting\lua\lua</Filter>
     </ClCompile>
     <ClCompile Include="..\cocos2d-x\scripting\lua\cocos2dx_support\LuaCocos2dSpine.cpp">
       <Filter>cocos2d-x\scripting\lua\cocos2dx_support</Filter>
@@ -1769,6 +1580,54 @@
     </ClCompile>
     <ClCompile Include="..\cocos2d-x\extensions\spine\WeightedMeshAttachment.c">
       <Filter>cocos2d-x\extensions\spine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\cocos2d-x\extensions\Gif\gif_lib\dgif_lib.c">
+      <Filter>cocos2d-x\extensions\Gif\gif_lib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\cocos2d-x\extensions\Gif\gif_lib\gif_err.c">
+      <Filter>cocos2d-x\extensions\Gif\gif_lib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\cocos2d-x\extensions\Gif\gif_lib\gif_font.c">
+      <Filter>cocos2d-x\extensions\Gif\gif_lib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\cocos2d-x\extensions\Gif\gif_lib\gif_hash.c">
+      <Filter>cocos2d-x\extensions\Gif\gif_lib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\cocos2d-x\extensions\Gif\gif_lib\gifalloc.c">
+      <Filter>cocos2d-x\extensions\Gif\gif_lib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\cocos2d-x\extensions\Gif\gif_lib\quantize.c">
+      <Filter>cocos2d-x\extensions\Gif\gif_lib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\cocos2d-x\extensions\Gif\Bitmap.cpp">
+      <Filter>cocos2d-x\extensions\Gif</Filter>
+    </ClCompile>
+    <ClCompile Include="..\cocos2d-x\extensions\Gif\CacheGif.cpp">
+      <Filter>cocos2d-x\extensions\Gif</Filter>
+    </ClCompile>
+    <ClCompile Include="..\cocos2d-x\extensions\Gif\GifBase.cpp">
+      <Filter>cocos2d-x\extensions\Gif</Filter>
+    </ClCompile>
+    <ClCompile Include="..\cocos2d-x\extensions\Gif\GifMovie.cpp">
+      <Filter>cocos2d-x\extensions\Gif</Filter>
+    </ClCompile>
+    <ClCompile Include="..\cocos2d-x\extensions\Gif\InstantGif.cpp">
+      <Filter>cocos2d-x\extensions\Gif</Filter>
+    </ClCompile>
+    <ClCompile Include="..\cocos2d-x\extensions\Gif\Movie.cpp">
+      <Filter>cocos2d-x\extensions\Gif</Filter>
+    </ClCompile>
+    <ClCompile Include="..\cocos2d-x\scripting\lua\lua_extensions\socket\buffer.c">
+      <Filter>cocos2d-x\scripting\lua\lua_extensions\socket</Filter>
+    </ClCompile>
+    <ClCompile Include="..\cocos2d-x\scripting\lua\lua_extensions\socket\luasocket_scripts.c">
+      <Filter>cocos2d-x\scripting\lua\lua_extensions\socket</Filter>
+    </ClCompile>
+    <ClCompile Include="..\cocos2d-x\scripting\lua\cocos2dx_support\LuaCocos2dGif.cpp">
+      <Filter>cocos2d-x\scripting\lua\cocos2dx_support</Filter>
+    </ClCompile>
+    <ClCompile Include="..\cocos2d-x\scripting\lua\lua_extensions\socket\io.c">
+      <Filter>cocos2d-x\scripting\lua\lua_extensions\socket</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -2762,12 +2621,6 @@
     <ClInclude Include="..\cocos2d-x\scripting\lua\lua_extensions\socket\luasocket.h">
       <Filter>cocos2d-x\scripting\lua\lua_extensions\socket</Filter>
     </ClInclude>
-    <ClInclude Include="..\cocos2d-x\scripting\lua\lua_extensions\socket\luasocket_buffer.h">
-      <Filter>cocos2d-x\scripting\lua\lua_extensions\socket</Filter>
-    </ClInclude>
-    <ClInclude Include="..\cocos2d-x\scripting\lua\lua_extensions\socket\luasocket_io.h">
-      <Filter>cocos2d-x\scripting\lua\lua_extensions\socket</Filter>
-    </ClInclude>
     <ClInclude Include="..\cocos2d-x\scripting\lua\lua_extensions\socket\mime.h">
       <Filter>cocos2d-x\scripting\lua\lua_extensions\socket</Filter>
     </ClInclude>
@@ -2778,9 +2631,6 @@
       <Filter>cocos2d-x\scripting\lua\lua_extensions\socket</Filter>
     </ClInclude>
     <ClInclude Include="..\cocos2d-x\scripting\lua\lua_extensions\socket\socket.h">
-      <Filter>cocos2d-x\scripting\lua\lua_extensions\socket</Filter>
-    </ClInclude>
-    <ClInclude Include="..\cocos2d-x\scripting\lua\lua_extensions\socket\socket_scripts.h">
       <Filter>cocos2d-x\scripting\lua\lua_extensions\socket</Filter>
     </ClInclude>
     <ClInclude Include="..\cocos2d-x\scripting\lua\lua_extensions\socket\tcp.h">
@@ -3335,75 +3185,6 @@
     <ClInclude Include="..\cocos2d-x\scripting\lua\cocos2dx_support\LuaCocos2dFilters.h">
       <Filter>cocos2d-x\scripting\lua\cocos2dx_support</Filter>
     </ClInclude>
-    <ClInclude Include="..\cocos2d-x\scripting\lua\lua\lua-5.1.5\src\lapi.h">
-      <Filter>cocos2d-x\scripting\lua\lua</Filter>
-    </ClInclude>
-    <ClInclude Include="..\cocos2d-x\scripting\lua\lua\lua-5.1.5\src\lauxlib.h">
-      <Filter>cocos2d-x\scripting\lua\lua</Filter>
-    </ClInclude>
-    <ClInclude Include="..\cocos2d-x\scripting\lua\lua\lua-5.1.5\src\lcode.h">
-      <Filter>cocos2d-x\scripting\lua\lua</Filter>
-    </ClInclude>
-    <ClInclude Include="..\cocos2d-x\scripting\lua\lua\lua-5.1.5\src\ldebug.h">
-      <Filter>cocos2d-x\scripting\lua\lua</Filter>
-    </ClInclude>
-    <ClInclude Include="..\cocos2d-x\scripting\lua\lua\lua-5.1.5\src\ldo.h">
-      <Filter>cocos2d-x\scripting\lua\lua</Filter>
-    </ClInclude>
-    <ClInclude Include="..\cocos2d-x\scripting\lua\lua\lua-5.1.5\src\lfunc.h">
-      <Filter>cocos2d-x\scripting\lua\lua</Filter>
-    </ClInclude>
-    <ClInclude Include="..\cocos2d-x\scripting\lua\lua\lua-5.1.5\src\lgc.h">
-      <Filter>cocos2d-x\scripting\lua\lua</Filter>
-    </ClInclude>
-    <ClInclude Include="..\cocos2d-x\scripting\lua\lua\lua-5.1.5\src\llex.h">
-      <Filter>cocos2d-x\scripting\lua\lua</Filter>
-    </ClInclude>
-    <ClInclude Include="..\cocos2d-x\scripting\lua\lua\lua-5.1.5\src\llimits.h">
-      <Filter>cocos2d-x\scripting\lua\lua</Filter>
-    </ClInclude>
-    <ClInclude Include="..\cocos2d-x\scripting\lua\lua\lua-5.1.5\src\lmem.h">
-      <Filter>cocos2d-x\scripting\lua\lua</Filter>
-    </ClInclude>
-    <ClInclude Include="..\cocos2d-x\scripting\lua\lua\lua-5.1.5\src\lobject.h">
-      <Filter>cocos2d-x\scripting\lua\lua</Filter>
-    </ClInclude>
-    <ClInclude Include="..\cocos2d-x\scripting\lua\lua\lua-5.1.5\src\lopcodes.h">
-      <Filter>cocos2d-x\scripting\lua\lua</Filter>
-    </ClInclude>
-    <ClInclude Include="..\cocos2d-x\scripting\lua\lua\lua-5.1.5\src\lparser.h">
-      <Filter>cocos2d-x\scripting\lua\lua</Filter>
-    </ClInclude>
-    <ClInclude Include="..\cocos2d-x\scripting\lua\lua\lua-5.1.5\src\lstate.h">
-      <Filter>cocos2d-x\scripting\lua\lua</Filter>
-    </ClInclude>
-    <ClInclude Include="..\cocos2d-x\scripting\lua\lua\lua-5.1.5\src\lstring.h">
-      <Filter>cocos2d-x\scripting\lua\lua</Filter>
-    </ClInclude>
-    <ClInclude Include="..\cocos2d-x\scripting\lua\lua\lua-5.1.5\src\ltable.h">
-      <Filter>cocos2d-x\scripting\lua\lua</Filter>
-    </ClInclude>
-    <ClInclude Include="..\cocos2d-x\scripting\lua\lua\lua-5.1.5\src\ltm.h">
-      <Filter>cocos2d-x\scripting\lua\lua</Filter>
-    </ClInclude>
-    <ClInclude Include="..\cocos2d-x\scripting\lua\lua\lua-5.1.5\src\lua.h">
-      <Filter>cocos2d-x\scripting\lua\lua</Filter>
-    </ClInclude>
-    <ClInclude Include="..\cocos2d-x\scripting\lua\lua\lua-5.1.5\src\luaconf.h">
-      <Filter>cocos2d-x\scripting\lua\lua</Filter>
-    </ClInclude>
-    <ClInclude Include="..\cocos2d-x\scripting\lua\lua\lua-5.1.5\src\lualib.h">
-      <Filter>cocos2d-x\scripting\lua\lua</Filter>
-    </ClInclude>
-    <ClInclude Include="..\cocos2d-x\scripting\lua\lua\lua-5.1.5\src\lundump.h">
-      <Filter>cocos2d-x\scripting\lua\lua</Filter>
-    </ClInclude>
-    <ClInclude Include="..\cocos2d-x\scripting\lua\lua\lua-5.1.5\src\lvm.h">
-      <Filter>cocos2d-x\scripting\lua\lua</Filter>
-    </ClInclude>
-    <ClInclude Include="..\cocos2d-x\scripting\lua\lua\lua-5.1.5\src\lzio.h">
-      <Filter>cocos2d-x\scripting\lua\lua</Filter>
-    </ClInclude>
     <ClInclude Include="..\cocos2d-x\cocos2dx\sprite_nodes\CCShaderSprite.h">
       <Filter>cocos2d-x\cocos2dx\sprite_nodes</Filter>
     </ClInclude>
@@ -3505,6 +3286,48 @@
     </ClInclude>
     <ClInclude Include="..\cocos2d-x\extensions\spine\WeightedMeshAttachment.h">
       <Filter>cocos2d-x\extensions\spine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\cocos2d-x\extensions\Gif\gif_lib\gif_hash.h">
+      <Filter>cocos2d-x\extensions\Gif\gif_lib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\cocos2d-x\extensions\Gif\gif_lib\gif_lib.h">
+      <Filter>cocos2d-x\extensions\Gif\gif_lib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\cocos2d-x\extensions\Gif\gif_lib\gif_lib_private.h">
+      <Filter>cocos2d-x\extensions\Gif\gif_lib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\cocos2d-x\extensions\Gif\Bitmap.h">
+      <Filter>cocos2d-x\extensions\Gif</Filter>
+    </ClInclude>
+    <ClInclude Include="..\cocos2d-x\extensions\Gif\CacheGif.h">
+      <Filter>cocos2d-x\extensions\Gif</Filter>
+    </ClInclude>
+    <ClInclude Include="..\cocos2d-x\extensions\Gif\GifBase.h">
+      <Filter>cocos2d-x\extensions\Gif</Filter>
+    </ClInclude>
+    <ClInclude Include="..\cocos2d-x\extensions\Gif\GifMacros.h">
+      <Filter>cocos2d-x\extensions\Gif</Filter>
+    </ClInclude>
+    <ClInclude Include="..\cocos2d-x\extensions\Gif\GIFMovie.h">
+      <Filter>cocos2d-x\extensions\Gif</Filter>
+    </ClInclude>
+    <ClInclude Include="..\cocos2d-x\extensions\Gif\GifUtils.h">
+      <Filter>cocos2d-x\extensions\Gif</Filter>
+    </ClInclude>
+    <ClInclude Include="..\cocos2d-x\extensions\Gif\InstantGif.h">
+      <Filter>cocos2d-x\extensions\Gif</Filter>
+    </ClInclude>
+    <ClInclude Include="..\cocos2d-x\extensions\Gif\Movie.h">
+      <Filter>cocos2d-x\extensions\Gif</Filter>
+    </ClInclude>
+    <ClInclude Include="..\cocos2d-x\scripting\lua\lua_extensions\socket\buffer.h">
+      <Filter>cocos2d-x\scripting\lua\lua_extensions\socket</Filter>
+    </ClInclude>
+    <ClInclude Include="..\cocos2d-x\scripting\lua\lua_extensions\socket\luasocket_scripts.h">
+      <Filter>cocos2d-x\scripting\lua\lua_extensions\socket</Filter>
+    </ClInclude>
+    <ClInclude Include="..\cocos2d-x\scripting\lua\cocos2dx_support\LuaCocos2dGif.h">
+      <Filter>cocos2d-x\scripting\lua\cocos2dx_support</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

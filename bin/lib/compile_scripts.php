@@ -15,7 +15,8 @@ $options = array(
     array('ex',  'extname',    1,      'lua',       'encrypted file extension name (default is "lua"), only valid for xxtea_chunk'),
     array('c',   'config',     1,      null,        'load options from config file'),
     array('q',   'quiet',      0,      false,       'quiet'),
-    array('jit', 'jit',        0,      true,       'using luajit compile framework'),
+	//jit param accept value,default 1 use luajitc ,0 to use luac
+    array('jit', 'jit',        1,      1,       'using luajit compile framework'),
 );
 
 function errorhelp()
@@ -90,6 +91,11 @@ examples:
 
     # load options from config file
     compile_scripts -c my_proj_compile_config.php
+	
+	# use luajit default on ios android mac
+    compile_scripts -jit 1 or compile_scripts
+	# use lua on win32
+    compile_scripts -jit 0
 
 
 EOT;
