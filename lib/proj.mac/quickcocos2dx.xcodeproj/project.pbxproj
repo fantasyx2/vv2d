@@ -495,7 +495,6 @@
 		1E3122D31D03D5D9003E3CCB /* libluajit.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libluajit.a; path = "../cocos2d-x/scripting/lua/luajit/prebuilt/mac/libluajit.a"; sourceTree = "<group>"; };
 		1E339F2F1CDB9C940008897B /* libcurl.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libcurl.tbd; path = usr/lib/libcurl.tbd; sourceTree = SDKROOT; };
 		1E4D3C581D032BE9003D5061 /* io.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = io.c; sourceTree = "<group>"; };
-		1E4D3C591D032BE9003D5061 /* io.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = io.h; sourceTree = "<group>"; };
 		1EA6D5551D22BCFA00DC98A5 /* dgif_lib.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = dgif_lib.c; path = Gif/gif_lib/dgif_lib.c; sourceTree = "<group>"; };
 		1EA6D5561D22BCFA00DC98A5 /* gif_err.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = gif_err.c; path = Gif/gif_lib/gif_err.c; sourceTree = "<group>"; };
 		1EA6D5571D22BCFA00DC98A5 /* gif_font.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = gif_font.c; path = Gif/gif_lib/gif_font.c; sourceTree = "<group>"; };
@@ -593,6 +592,7 @@
 		1EF8D1FC1CDD9C0800C4D31A /* TransformConstraintData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TransformConstraintData.h; path = spine/TransformConstraintData.h; sourceTree = "<group>"; };
 		1EF8D1FD1CDD9C0800C4D31A /* WeightedMeshAttachment.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = WeightedMeshAttachment.c; path = spine/WeightedMeshAttachment.c; sourceTree = "<group>"; };
 		1EF8D1FE1CDD9C0800C4D31A /* WeightedMeshAttachment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WeightedMeshAttachment.h; path = spine/WeightedMeshAttachment.h; sourceTree = "<group>"; };
+		1EFC39531D3E6F5900BBB76D /* socket_io.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = socket_io.h; sourceTree = "<group>"; };
 		2EBA8303191B6A5700256D60 /* ExtensionExport.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ExtensionExport.h; sourceTree = "<group>"; };
 		2EBA840E191B6A6E00256D60 /* cocos2dFilters.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cocos2dFilters.h; sourceTree = "<group>"; };
 		2EBA8410191B6A6E00256D60 /* CCBlurFilter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCBlurFilter.cpp; sourceTree = "<group>"; };
@@ -2876,8 +2876,8 @@
 		F4CB877A180D02F600D81CF3 /* socket */ = {
 			isa = PBXGroup;
 			children = (
+				1EFC39531D3E6F5900BBB76D /* socket_io.h */,
 				1E4D3C581D032BE9003D5061 /* io.c */,
-				1E4D3C591D032BE9003D5061 /* io.h */,
 				1ED714141D02A076007EBB53 /* buffer.c */,
 				1ED714151D02A076007EBB53 /* buffer.h */,
 				1ED714161D02A076007EBB53 /* luasocket_scripts.c */,

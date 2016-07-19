@@ -470,7 +470,7 @@
 		1EF598051D02CE7F00E547ED /* libcrypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcrypto.a; path = "../cocos2d-x/cocos2dx/platform/third_party/ios/libraries/libcrypto.a"; sourceTree = "<group>"; };
 		1EF598061D02CE7F00E547ED /* libssl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libssl.a; path = "../cocos2d-x/cocos2dx/platform/third_party/ios/libraries/libssl.a"; sourceTree = "<group>"; };
 		1EF598091D02CF1600E547ED /* io.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = io.c; sourceTree = "<group>"; };
-		1EF5980A1D02CF1600E547ED /* io.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = io.h; sourceTree = "<group>"; };
+		1EFC39551D3E71C500BBB76D /* socket_io.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = socket_io.h; sourceTree = "<group>"; };
 		2EBAD8E71918BBDC00FF9BD6 /* cocos2dFilters.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cocos2dFilters.h; sourceTree = "<group>"; };
 		2EBAD8E91918BBDC00FF9BD6 /* CCBlurFilter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCBlurFilter.cpp; sourceTree = "<group>"; };
 		2EBAD8EA1918BBDC00FF9BD6 /* CCBlurFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCBlurFilter.h; sourceTree = "<group>"; };
@@ -1886,8 +1886,8 @@
 		F459EB53180D0513006CBDF1 /* socket */ = {
 			isa = PBXGroup;
 			children = (
+				1EFC39551D3E71C500BBB76D /* socket_io.h */,
 				1EF598091D02CF1600E547ED /* io.c */,
-				1EF5980A1D02CF1600E547ED /* io.h */,
 				1EF597FF1D02CC9200E547ED /* buffer.c */,
 				1EF598001D02CC9200E547ED /* buffer.h */,
 				1EF598011D02CC9200E547ED /* luasocket_scripts.c */,
