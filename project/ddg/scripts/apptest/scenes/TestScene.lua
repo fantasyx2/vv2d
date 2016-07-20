@@ -28,6 +28,7 @@ function TestScene:ctor()
 		{"tstShrot",	handler(self,self.tstShort)},
 		{"tstEdit", 	handler(self,self.tstEdit)},
 		{"tstGif",		handler(self,self.tstGif)},
+		{"tstBlend",	handler(self,self.tstBlend)},
 
 	}
 	self.TND = display.newNode()
@@ -86,6 +87,7 @@ function TestScene:ctor()
 	-- self:tstCCS()
 	-- self:tstShader2()
 	-- self:tstFs()
+	self:tstBlend()
 end
 
 function TestScene:onEnter()
@@ -715,4 +717,18 @@ function TestScene:tstGif()
 	-- gif:setloop(false)
 
 end
+function TestScene:tstBlend()
+	local nd = display.newSprite("UI/cpt_bg_01.png")
+	nd:arch(0,0):pos(0,0):scale(2.0)
+	self:addTestNd(nd)
+
+	local bg , mask = GenUiUtil.genMaskNode("UI/filter.png",60)
+	if(bg and mask) then
+		self:addTestNd(bg,true)
+		mask:pos(320,500)
+		mask:runAction(CCScaleTo:create(10.0,5.0))
+		mask:runAction(CCRotateBy:create(12.0,4600))
+	end
+end	
+
 return TestScene

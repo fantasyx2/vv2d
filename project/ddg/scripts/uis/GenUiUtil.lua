@@ -1324,4 +1324,38 @@ function GenUiUtil.genParticleNd(param)
 
 end
 
+function GenUiUtil.genMaskNode(img,alpha)
+    --img reverse alpha, need show to set black , need hide to set white
+    local nd  = display.newNode()
+    local ly1 = display.newColorLayer(ccc4(255,255,255,alpha))
+    local sp  = display.newSprite(img)
+    local ly2 = display.newColorLayer(ccc4(0,0,0,0))
+    
+    if(not sp) then
+        return
+    end
+
+    ly1:addTo(nd)
+    sp:addTo(nd)
+    ly2:addTo(nd)
+ 
+    --keep rgb && use a of ly1 
+    local __mb1 = ccBlendFunc()
+    __mb1.src = GL_ZERO
+    __mb1.dst = GL_SRC_COLOR
+    --keep rgb && add a of sp to a
+    local __mb = ccBlendFunc()
+    __mb.src = GL_ONE
+    __mb.dst = GL_ONE
+    --use dst alpha && ly2 completely no use just call draw
+    local __mb2 = ccBlendFunc()
+    __mb2.src = GL_ZERO
+    __mb2.dst = GL_DST_ALPHA
+    
+    ly1:setBlendFunc(__mb1)
+    sp:setBlendFunc(__mb)
+    ly2:setBlendFunc(__mb2)
+    return nd,sp
+end
+
 return GenUiUtil
