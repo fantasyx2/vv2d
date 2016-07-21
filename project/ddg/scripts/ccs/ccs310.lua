@@ -1,3 +1,4 @@
+import(".ccs310anim")
 local M={}
 local sharedTextureCache     = CCTextureCache:sharedTextureCache()
 local sharedSpriteFrameCache = CCSpriteFrameCache:sharedSpriteFrameCache()
@@ -546,6 +547,7 @@ local config=
 --]]
 --------------------------------------
 M.__index=function(self,k)
+	-- print("_index",k)
 	if(M[k]) then
 		return M[k]
 	elseif(type(k)=="string") then
@@ -565,10 +567,39 @@ function M:getChildByTag(tag)
 	end
 end
 function M:getChildByName(name)
-	return self.childs and self.childs[name] and self.childs[name].node
+	--return self.childs and self.childs[name] and self.childs[name].node
+	local r = rawget(self,'childs')
+	r  = r and rawget(r,name)
+	r  = r and rawget(r,'node')
+	return r
 end
 function M:getChildRoot(name)
-	return self.childs and self.childs[name]
+	print("------getChildRoot")
+	-- return self.childs and self.childs[name]
+	local r = rawget(self,'childs')
+	r  = r and rawget(r,name)
+	return r
+end
+function M:playAnim(handler)
+	local anim 		= self.anim
+	local animlist  = self.animlist
+	local parent = self.parent
+	while((not anim) and parent) do
+		anim = parent.anim
+		animlist = parent.animlist
+		parent = parent.parent
+	end
+	if(anim) then
+		local act = ccsanim_genaction(self.actag,anim,animlist,handler)
+		if(act) then
+			--print("playAnim",act)
+			--act:setTag(self.actag)
+			--self.node:runAction(act)
+			self.node:runAction(CCRepeat:create(act,10))
+			--self.node:runAction(CCRepeat:create(act[1],10))
+			--self.node:runAction(CCRepeat:create(act[2],10))
+		end
+	end
 end
 
 local function gen(a)
@@ -588,6 +619,7 @@ local function gen(a)
 		return
 	end
 	r.tag = a.Tag or -1
+	r.actag = a.ActionTag or 0
 	if(a.Children) then
 		r.childs={}
 		--parse childs
@@ -597,16 +629,19 @@ local function gen(a)
 				r.node:addChild(n.node)
 				--table.insert(r.childs,n)
 				r.childs[v.Name]=n
+				n.parent = r
 			end
 		end
 	end
-	setmetatable(r, M)	
+	setmetatable(r, M)
 	return r
 end	
 --conver json to table
 function M.load_tb(jsontb,func)
 	local res = jsontb.Content.Content.UsedResources
 	local root = jsontb.Content.Content.ObjectData
+	local anim = jsontb.Content.Content.Animation
+	local animlist = jsontb.Content.Content.AnimationList
 	--use custom class name force if editor not mark
 	if(func) then
 		func(root)
@@ -622,6 +657,10 @@ function M.load_tb(jsontb,func)
 	local name = root.Name
 	local nodes = root.Children
 	local r=gen(root)
+	if(r) then
+		r.anim=anim
+		r.animlist=animlist
+	end
 	return r
 end
 function M.load(jsonfile,func)

@@ -87,7 +87,7 @@ function TestScene:ctor()
 	-- self:tstCCS()
 	-- self:tstShader2()
 	-- self:tstFs()
-	self:tstBlend()
+	-- self:tstBlend()
 end
 
 function TestScene:onEnter()
@@ -386,14 +386,14 @@ function TestScene:tstCCS()
 		-- local img = r:getChildByName("Image")
 		local img = r.Image
 		-- GenUiUtil.attackShader(img,"LIGHTBAND")
-		img:runAction(CCRotateBy:create(2.0,720))
+		--img:runAction(CCRotateBy:create(2.0,720))
 		
 		local nd = r:getChildByName("ListView")
 		
 		local ListViewCell = require("uis.listview.ListViewCell")
 		local CellBtn = require("uis.listview.CellButton")
 		local cells={}
-		for i=1,5 do
+		for i=1,1 do
 			local r = ccsload.load_listviewcell("PageCell.json")
 			-- dump(r,"PageCell",5)
 			-- local btn = r:getChildByName('Button')
@@ -404,6 +404,9 @@ function TestScene:tstCCS()
 			local cell = r.node
 			cell:setId(i)
 			table.insert(cells,cell)
+			r:getChildRoot("img"):playAnim(function(key)
+				print("ccs310anim k: ",key)
+			end)
 
 		end
 		nd:addCells(cells)
@@ -411,18 +414,20 @@ function TestScene:tstCCS()
 		nd:setCellAlign(0.0)
 
 		local gif = r.gif
-		gif:enableTouch(true)
-		gif:onTouch(function(evt)
-	 		if(evt.name=='began') then
-	 			if(gif:isplaying()) then
-	 				gif:pause()
-	 			else
-	 				gif:play()
-	 			end
-	 			return true
-	 		end
-	 	end)
-	 	gif:setloop(false)
+		if(gif) then
+			gif:enableTouch(true)
+			gif:onTouch(function(evt)
+		 		if(evt.name=='began') then
+		 			if(gif:isplaying()) then
+		 				gif:pause()
+		 			else
+		 				gif:play()
+		 			end
+		 			return true
+		 		end
+		 	end)
+		 	gif:setloop(false)
+	 	end
 	end
 end
 
