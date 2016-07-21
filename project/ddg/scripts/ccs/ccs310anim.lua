@@ -179,7 +179,7 @@ function ccsanim_genaction(tagorname,anim,animlist,evthandler)
   
   if(type(tagorname)=='number')then
   --gen one action by tag
-      local speed = anim.Speed*FRAME_DT
+      local speed = FRAME_DT/anim.Speed
       local tb={}
       for _,v in ipairs(anim.Timelines) do
           if(v.ActionTag==tagorname) then

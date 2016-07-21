@@ -580,7 +580,7 @@ function M:getChildRoot(name)
 	r  = r and rawget(r,name)
 	return r
 end
-function M:playAnim(handler)
+function M:playAnim(rpt,handler)
 	local anim 		= self.anim
 	local animlist  = self.animlist
 	local parent = self.parent
@@ -592,12 +592,13 @@ function M:playAnim(handler)
 	if(anim) then
 		local act = ccsanim_genaction(self.actag,anim,animlist,handler)
 		if(act) then
-			--print("playAnim",act)
-			--act:setTag(self.actag)
-			--self.node:runAction(act)
-			self.node:runAction(CCRepeat:create(act,10))
-			--self.node:runAction(CCRepeat:create(act[1],10))
-			--self.node:runAction(CCRepeat:create(act[2],10))
+			if(rpt==0) then
+				self.node:runAction(act)
+			elseif(rpt==-1) then
+				self.node:runAction(CCRepeatForever:create(act))
+			else	
+				self.node:runAction(CCRepeat:create(act,rpt))
+			end
 		end
 	end
 end

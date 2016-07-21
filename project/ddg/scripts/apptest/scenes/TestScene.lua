@@ -29,6 +29,7 @@ function TestScene:ctor()
 		{"tstEdit", 	handler(self,self.tstEdit)},
 		{"tstGif",		handler(self,self.tstGif)},
 		{"tstBlend",	handler(self,self.tstBlend)},
+		{"tstAnim",		handler(self,self.tstAnim)},
 
 	}
 	self.TND = display.newNode()
@@ -735,5 +736,30 @@ function TestScene:tstBlend()
 		mask:runAction(CCRotateBy:create(12.0,4600))
 	end
 end	
+function TestScene:tstAnim()
+	local r = ccsload.load("AnimScene.json")
+	if(r and r.node) then
+		r.node:setPosition(0, 0)
+		self:addTestNd(r.node)
+	end
+	r:getChildRoot("img"):playAnim(5,function(key)
+		print("img frame ",key)
+	end)
+	r:getChildRoot("gif"):playAnim(-1)
+	r.gif:setTouchEnabled(true)
+	r.gif:addNodeEventListener(cc.NODE_TOUCH_EVENT,function(evt)
+ 		if(evt.name=='began') then
+ 			if(r.gif:isplaying()) then
+ 				r.gif:pause()
+ 				transition.resumeTarget(r.gif)
+ 			else
+ 				r.gif:play()
+ 				transition.pauseTarget(r.gif)
+ 			end
+ 			return true
+ 		end
+ 	end)
+ 	r.gif:setloop(true)
 
+end
 return TestScene
