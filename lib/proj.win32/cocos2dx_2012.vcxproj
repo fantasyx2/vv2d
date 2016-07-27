@@ -85,6 +85,7 @@
     <ClCompile Include="..\cocos2d-x\cocos2dx\particle_nodes\CCParticleSystem.cpp" />
     <ClCompile Include="..\cocos2d-x\cocos2dx\particle_nodes\CCParticleSystemQuad.cpp" />
     <ClCompile Include="..\cocos2d-x\cocos2dx\platform\CCEGLViewProtocol.cpp" />
+    <ClCompile Include="..\cocos2d-x\cocos2dx\platform\CCFileMount.cpp" />
     <ClCompile Include="..\cocos2d-x\cocos2dx\platform\CCFileUtils.cpp" />
     <ClCompile Include="..\cocos2d-x\cocos2dx\platform\CCImageCommonWebp.cpp" />
     <ClCompile Include="..\cocos2d-x\cocos2dx\platform\CCSAXParser.cpp" />
@@ -301,6 +302,9 @@
     <ClCompile Include="..\cocos2d-x\extensions\GUI\CCScrollView\CCSorting.cpp" />
     <ClCompile Include="..\cocos2d-x\extensions\GUI\CCScrollView\CCTableView.cpp" />
     <ClCompile Include="..\cocos2d-x\extensions\GUI\CCScrollView\CCTableViewCell.cpp" />
+    <ClCompile Include="..\cocos2d-x\extensions\nanovg\nanonode\NVGDrawNode.cpp" />
+    <ClCompile Include="..\cocos2d-x\extensions\nanovg\nanonode\NVGNode.cpp" />
+    <ClCompile Include="..\cocos2d-x\extensions\nanovg\nanovg\nanovg.c" />
     <ClCompile Include="..\cocos2d-x\extensions\network\WebSocket.cpp" />
     <ClCompile Include="..\cocos2d-x\extensions\proj.win32\Win32InputBox.cpp" />
     <ClCompile Include="..\cocos2d-x\extensions\ProjectConfig\SimulatorConfig.cpp" />
@@ -619,6 +623,7 @@
     <ClInclude Include="..\cocos2d-x\cocos2dx\platform\CCCommon.h" />
     <ClInclude Include="..\cocos2d-x\cocos2dx\platform\CCDevice.h" />
     <ClInclude Include="..\cocos2d-x\cocos2dx\platform\CCEGLViewProtocol.h" />
+    <ClInclude Include="..\cocos2d-x\cocos2dx\platform\CCFileMount.h" />
     <ClInclude Include="..\cocos2d-x\cocos2dx\platform\CCFileUtils.h" />
     <ClInclude Include="..\cocos2d-x\cocos2dx\platform\CCImage.h" />
     <ClInclude Include="..\cocos2d-x\cocos2dx\platform\CCImageCommon_cpp.h" />
@@ -963,6 +968,14 @@
     <ClInclude Include="..\cocos2d-x\extensions\GUI\CCScrollView\CCSorting.h" />
     <ClInclude Include="..\cocos2d-x\extensions\GUI\CCScrollView\CCTableView.h" />
     <ClInclude Include="..\cocos2d-x\extensions\GUI\CCScrollView\CCTableViewCell.h" />
+    <ClInclude Include="..\cocos2d-x\extensions\nanovg\nanonode\NVGDrawNode.h" />
+    <ClInclude Include="..\cocos2d-x\extensions\nanovg\nanonode\NVGNode.h" />
+    <ClInclude Include="..\cocos2d-x\extensions\nanovg\nanovg\fontstash.h" />
+    <ClInclude Include="..\cocos2d-x\extensions\nanovg\nanovg\nanovg.h" />
+    <ClInclude Include="..\cocos2d-x\extensions\nanovg\nanovg\nanovg_gl.h" />
+    <ClInclude Include="..\cocos2d-x\extensions\nanovg\nanovg\nanovg_gl_utils.h" />
+    <ClInclude Include="..\cocos2d-x\extensions\nanovg\nanovg\stb_image.h" />
+    <ClInclude Include="..\cocos2d-x\extensions\nanovg\nanovg\stb_truetype.h" />
     <ClInclude Include="..\cocos2d-x\extensions\network\WebSocket.h" />
     <ClInclude Include="..\cocos2d-x\extensions\proj.win32\Win32InputBox.h" />
     <ClInclude Include="..\cocos2d-x\extensions\ProjectConfig\SimulatorConfig.h" />

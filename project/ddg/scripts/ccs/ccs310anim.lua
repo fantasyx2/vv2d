@@ -125,6 +125,9 @@ local function gen_alpha(frames,start,speed,delay)
     return transition.sequence(arr)
 end
 local function gen_evt(frames,start,speed,delay,evthandler)
+    if(not evthandler) then
+        return
+    end  
     local arr={}
     local lastIdx=0
     for _,f in ipairs(frames) do

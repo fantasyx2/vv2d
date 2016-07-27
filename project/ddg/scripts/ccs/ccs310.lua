@@ -558,10 +558,13 @@ M.__index=function(self,k)
 	return nil
 end
 function M:getChildByTag(tag)
-	if(tag>=0 and self.childs) then
-		for _,v in pairs(self.childs) do
-			if(v.tag==tag) then
-				return v.node
+	if(tag>=0) then
+		local childs = rawget(self,'childs')
+		if(childs) then
+			for _,v in pairs(childs) do
+				if(v.tag==tag) then
+					return rawget(v,'node')
+				end
 			end
 		end
 	end

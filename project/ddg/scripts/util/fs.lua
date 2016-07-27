@@ -129,4 +129,28 @@ function fs.md5(filepath)
 	end
 end
 
+--mount
+function fs.mount(prefix,source,iszip,order)
+    return CCFileUtils:sharedFileUtils():mount(prefix,source,iszip or false,order or 0)
+end
+function fs.unmount(source)
+    return CCFileUtils:sharedFileUtils():unmount(source)
+end
+function fs.mountclean(prefix)
+    return CCFileUtils:sharedFileUtils():clean(prefix or "")
+end
+function fs.data(name)    
+    local path = CCFileUtils:sharedFileUtils():fullPathForFilename(name)
+    local r = CZHelperFunc:getFileData(path)
+    if(r) then
+        return r
+    else
+        print("[Error]----fs.data ".. (path or ""))
+    end 
+end
+--
+function fs.fullpath(name)
+    return CCFileUtils:sharedFileUtils():fullPathForFilename(name)
+end
+
 return fs

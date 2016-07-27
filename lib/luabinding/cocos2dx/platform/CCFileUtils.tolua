@@ -236,6 +236,13 @@ class CCFileUtils
      */
     void setPopupNotify(bool bNotify);
     bool isPopupNotify();
+
+    bool mount(std::string prefix,std::string source);
+    bool mount(std::string prefix,std::string source,bool iszip);
+    bool mount(std::string prefix,std::string source,bool iszip,int order);
+
+    void unmount(std::string source);
+    void clean(std::string prefix);
 };
 
 // end of platform group

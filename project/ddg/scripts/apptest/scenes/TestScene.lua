@@ -30,6 +30,7 @@ function TestScene:ctor()
 		{"tstGif",		handler(self,self.tstGif)},
 		{"tstBlend",	handler(self,self.tstBlend)},
 		{"tstAnim",		handler(self,self.tstAnim)},
+		{"tstMount",	handler(self,self.tstMount)},		
 
 	}
 	self.TND = display.newNode()
@@ -405,7 +406,7 @@ function TestScene:tstCCS()
 			local cell = r.node
 			cell:setId(i)
 			table.insert(cells,cell)
-			r:getChildRoot("img"):playAnim(function(key)
+			r:getChildRoot("img"):playAnim(5,function(key)
 				print("ccs310anim k: ",key)
 			end)
 
@@ -762,4 +763,36 @@ function TestScene:tstAnim()
  	r.gif:setloop(true)
 
 end
+function TestScene:tstMount()
+	local fd = zipfile_open('res.zip')
+	-- local fd = zipfile_open('test.zip')
+	if(fd) then
+		local str = fd:getFirstFilename()
+		while(str and str~='') do
+			 print("Mount zipfile: ",str)
+			 str = fd:getNextFilename()
+		end
+	end
+	local tb = fd:getFileList()	
+	if(tb) then
+		dump(tb,"Mount getFileList")
+		for i,v in ipairs(tb) do
+			print(v)
+			-- package.preload[v]=nil
+		end
+	end
+	print("get no exits: ",fd:getFileDataNoOrder("exits.json"))
+	zipfile_close(fd)
+
+	local source = fs.fullpath("res.zip")
+	print("mount @app == ",fs.mount("app",source,true))
+	print("@app/a.txt == ",fs.data("@app/a.txt"))
+	print("@app/add/b.txt == ",fs.data("@app/add/b.txt"))
+	print("@app/add/ccc/c.txt == ",fs.data("@app/add/ccc/c.txt"))
+	fs.unmount(source)
+	print("@app/a.txt == ",fs.data("@app/a.txt"))
+	fs.mountclean()
+
+end
+
 return TestScene

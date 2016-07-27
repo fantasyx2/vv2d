@@ -690,11 +690,17 @@ void CCFileUtils::purgeFileUtils()
 CCFileUtils::CCFileUtils()
 : m_pFilenameLookupDict(NULL)
 {
+	m_mountlist = new CCMountList();
 }
 
 CCFileUtils::~CCFileUtils()
 {
     CC_SAFE_RELEASE(m_pFilenameLookupDict);
+	if(m_mountlist)
+	{
+		delete m_mountlist;
+		m_mountlist = nullptr;
+	}
 }
 
 bool CCFileUtils::init()
@@ -715,7 +721,19 @@ unsigned char* CCFileUtils::getFileData(const char* pszFileName, const char* psz
     unsigned char * pBuffer = NULL;
     CCAssert(pszFileName != NULL && pSize != NULL && pszMode != NULL, "Invalid parameters.");
     *pSize = 0;
-    do
+//add for mount
+	if(pszFileName[0]==MOUNT_PREFIX[0])
+	{
+		unsigned long sz=0;
+		pBuffer = m_mountlist->getFileData(pszFileName,pszMode,&sz);
+		if(pBuffer)
+		{
+			*pSize=sz;
+		}
+		return pBuffer;
+	}
+//	
+	do
     {
 		if(pszMode[0]=='r' && pszMode[1]==0x00)
 		{
@@ -1077,6 +1095,20 @@ void CCFileUtils::updateSearchPathArrayCheck(void)
         m_searchPathArrayCheck.push_back(m_strDefaultResRootPath);
     }
 }
+//add for mount
+bool CCFileUtils::mount(std::string prefix,std::string source,bool iszip,int order)
+{
+	return m_mountlist->mount(prefix,source,iszip,order);
+}
+
+void CCFileUtils::unmount(std::string source)
+{
+	m_mountlist->unmount(source);
+}
+void CCFileUtils::clean(std::string prefix)
+{
+	m_mountlist->clean(prefix);
+}
+///////////
 
 NS_CC_END
-

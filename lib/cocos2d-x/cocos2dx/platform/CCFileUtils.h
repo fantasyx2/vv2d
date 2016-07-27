@@ -30,7 +30,7 @@ THE SOFTWARE.
 #include "CCPlatformMacros.h"
 #include "ccTypes.h"
 #include "ccTypeInfo.h"
-
+#include "CCFileMount.h"
 NS_CC_BEGIN
 
 class CCDictionary;
@@ -39,6 +39,7 @@ class CCArray;
  * @addtogroup platform
  * @{
  */
+
 
 //! @brief  Helper class to handle file operations
 class CC_DLL CCFileUtils : public TypeInfo
@@ -464,6 +465,13 @@ protected:
      *  The singleton pointer of CCFileUtils.
      */
     static CCFileUtils* s_sharedFileUtils;
+
+	//add for mount
+	CCMountList* m_mountlist;
+public:
+	bool mount(std::string prefix,std::string source,bool iszip=false,int order=0);
+	void unmount(std::string source);
+	void clean(std::string prefix);
 };
 
 // end of platform group
