@@ -116,6 +116,19 @@ bool CCFileUtilsAndroid::isAbsolutePath(const std::string& strPath)
 
 unsigned char* CCFileUtilsAndroid::getFileData(const char* pszFileName, const char* pszMode, unsigned long * pSize)
 {    
+    //add for mount
+    if(pszFileName[0]==MOUNT_PREFIX[0])
+    {
+        unsigned long sz=0;
+        unsigned char* pBuffer = m_mountlist->getFileData(pszFileName,pszMode,&sz);
+        if(pBuffer)
+        {
+            *pSize=sz;
+        }
+        return pBuffer;
+    }
+    //
+
     return doGetFileData(pszFileName, pszMode, pSize, false);
 }
 

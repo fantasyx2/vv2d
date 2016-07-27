@@ -84,6 +84,7 @@ LOCAL_SRC_FILES := \
     platform/CCSAXParser.cpp \
     platform/CCThread.cpp \
     platform/CCFileUtils.cpp \
+    platform/CCFileMount.cpp \
     platform/CCZipFile.cpp \
     platform/platform.cpp \
     platform/CCEGLViewProtocol.cpp \

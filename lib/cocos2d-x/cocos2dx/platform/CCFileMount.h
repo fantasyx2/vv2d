@@ -76,7 +76,8 @@ public:
 		count=0;
 	}
 	~CCMountList(){
-		clean(std::string(""));
+        std::string a;
+		clean(a);
 	}
 	int count;
 	std::map<std::string,std::vector<CCMountInfo*>> list;

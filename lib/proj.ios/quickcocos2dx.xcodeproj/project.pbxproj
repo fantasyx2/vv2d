@@ -10,6 +10,7 @@
 		1E3122E01D03F06D003E3CCB /* libluajit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E3122D61D03EBFE003E3CCB /* libluajit.a */; };
 		1E34DC531CDE4A5B000D7E06 /* LuaCocos2dSpine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1E34DC511CDE4A5B000D7E06 /* LuaCocos2dSpine.cpp */; };
 		1E4334641CDBB05A00CA97BD /* CCShaderSprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1E4334621CDBB05A00CA97BD /* CCShaderSprite.cpp */; };
+		1E8DBD401D48F2E30076E549 /* CCFileMount.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1E8DBD3E1D48F2E30076E549 /* CCFileMount.cpp */; };
 		1E9542BD1CDE425B0062367F /* SkeletonAnimation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1E95427F1CDE425B0062367F /* SkeletonAnimation.cpp */; };
 		1E9542BE1CDE425B0062367F /* SkeletonRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1E9542801CDE425B0062367F /* SkeletonRenderer.cpp */; };
 		1E9542BF1CDE425B0062367F /* Animation.c in Sources */ = {isa = PBXBuildFile; fileRef = 1E9542831CDE425B0062367F /* Animation.c */; };
@@ -373,6 +374,8 @@
 		1E34DC521CDE4A5B000D7E06 /* LuaCocos2dSpine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LuaCocos2dSpine.h; sourceTree = "<group>"; };
 		1E4334621CDBB05A00CA97BD /* CCShaderSprite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCShaderSprite.cpp; sourceTree = "<group>"; };
 		1E4334631CDBB05A00CA97BD /* CCShaderSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCShaderSprite.h; sourceTree = "<group>"; };
+		1E8DBD3E1D48F2E30076E549 /* CCFileMount.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCFileMount.cpp; sourceTree = "<group>"; };
+		1E8DBD3F1D48F2E30076E549 /* CCFileMount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCFileMount.h; sourceTree = "<group>"; };
 		1E95427C1CDE425B0062367F /* Animation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Animation.h; path = spine/Animation.h; sourceTree = "<group>"; };
 		1E95427D1CDE425B0062367F /* SkeletonAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SkeletonAnimation.h; path = spine/SkeletonAnimation.h; sourceTree = "<group>"; };
 		1E95427E1CDE425B0062367F /* spine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = spine.h; path = spine/spine.h; sourceTree = "<group>"; };
@@ -1443,6 +1446,8 @@
 		F428255C17575D8B001479DC /* platform */ = {
 			isa = PBXGroup;
 			children = (
+				1E8DBD3E1D48F2E30076E549 /* CCFileMount.cpp */,
+				1E8DBD3F1D48F2E30076E549 /* CCFileMount.h */,
 				F428255D17575DA8001479DC /* CCAccelerometerDelegate.h */,
 				F428255E17575DA8001479DC /* CCApplicationProtocol.h */,
 				F426146A17E817B400D37B8D /* CCCommon.cpp */,
@@ -2904,6 +2909,7 @@
 				F47C66C316EB37DB00132435 /* snapshot.c in Sources */,
 				F42824FA17575D88001479DC /* CCCamera.cpp in Sources */,
 				F42824FB17575D88001479DC /* CCConfiguration.cpp in Sources */,
+				1E8DBD401D48F2E30076E549 /* CCFileMount.cpp in Sources */,
 				F459EAFD180D04E1006CBDF1 /* cpDampedRotarySpring.c in Sources */,
 				F42824FC17575D88001479DC /* CCDirector.cpp in Sources */,
 				1E9542C41CDE425B0062367F /* Attachment.c in Sources */,

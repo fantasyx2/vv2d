@@ -10,6 +10,7 @@
 		1E2559B11CDD17CF0053A2EA /* LuaCocos2dSpine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1E2559AF1CDD17CF0053A2EA /* LuaCocos2dSpine.cpp */; };
 		1E3122D41D03D5D9003E3CCB /* libluajit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E3122D31D03D5D9003E3CCB /* libluajit.a */; };
 		1E4D3C5A1D032BE9003D5061 /* io.c in Sources */ = {isa = PBXBuildFile; fileRef = 1E4D3C581D032BE9003D5061 /* io.c */; };
+		1E8DBD3C1D48EFE90076E549 /* CCFileMount.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1E8DBD3A1D48EFE90076E549 /* CCFileMount.cpp */; };
 		1EA6D55E1D22BCFA00DC98A5 /* dgif_lib.c in Sources */ = {isa = PBXBuildFile; fileRef = 1EA6D5551D22BCFA00DC98A5 /* dgif_lib.c */; };
 		1EA6D55F1D22BCFA00DC98A5 /* gif_err.c in Sources */ = {isa = PBXBuildFile; fileRef = 1EA6D5561D22BCFA00DC98A5 /* gif_err.c */; };
 		1EA6D5601D22BCFA00DC98A5 /* gif_font.c in Sources */ = {isa = PBXBuildFile; fileRef = 1EA6D5571D22BCFA00DC98A5 /* gif_font.c */; };
@@ -495,6 +496,8 @@
 		1E3122D31D03D5D9003E3CCB /* libluajit.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libluajit.a; path = "../cocos2d-x/scripting/lua/luajit/prebuilt/mac/libluajit.a"; sourceTree = "<group>"; };
 		1E339F2F1CDB9C940008897B /* libcurl.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libcurl.tbd; path = usr/lib/libcurl.tbd; sourceTree = SDKROOT; };
 		1E4D3C581D032BE9003D5061 /* io.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = io.c; sourceTree = "<group>"; };
+		1E8DBD3A1D48EFE90076E549 /* CCFileMount.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCFileMount.cpp; sourceTree = "<group>"; };
+		1E8DBD3B1D48EFE90076E549 /* CCFileMount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCFileMount.h; sourceTree = "<group>"; };
 		1EA6D5551D22BCFA00DC98A5 /* dgif_lib.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = dgif_lib.c; path = Gif/gif_lib/dgif_lib.c; sourceTree = "<group>"; };
 		1EA6D5561D22BCFA00DC98A5 /* gif_err.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = gif_err.c; path = Gif/gif_lib/gif_err.c; sourceTree = "<group>"; };
 		1EA6D5571D22BCFA00DC98A5 /* gif_font.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = gif_font.c; path = Gif/gif_lib/gif_font.c; sourceTree = "<group>"; };
@@ -2645,6 +2648,8 @@
 		F477B8AB1757405000260C19 /* platform */ = {
 			isa = PBXGroup;
 			children = (
+				1E8DBD3A1D48EFE90076E549 /* CCFileMount.cpp */,
+				1E8DBD3B1D48EFE90076E549 /* CCFileMount.h */,
 				F4E880A91770074500577406 /* CCAccelerometerDelegate.h */,
 				F4E880AA1770074500577406 /* CCApplicationProtocol.h */,
 				F426146617E816FE00D37B8D /* CCCommon.cpp */,
@@ -4162,6 +4167,7 @@
 				F4CB87A0180D02F600D81CF3 /* fpconv.c in Sources */,
 				1EA6D5611D22BCFA00DC98A5 /* gif_hash.c in Sources */,
 				F4E8808F1770071600577406 /* ccCArray.cpp in Sources */,
+				1E8DBD3C1D48EFE90076E549 /* CCFileMount.cpp in Sources */,
 				F431528E180CF7E30046351C /* cpPinJoint.c in Sources */,
 				F412724819F75816005E6CD0 /* CCTransformHelp.cpp in Sources */,
 				2EBA845E191B6A6E00256D60 /* CCHazeFilter.cpp in Sources */,
