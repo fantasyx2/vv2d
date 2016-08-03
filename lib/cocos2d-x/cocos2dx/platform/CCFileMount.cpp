@@ -198,7 +198,6 @@ unsigned char* CCMountList::getFileData(const char* pszFileName, const char* psz
 				*pSize=s;
 				return p;
 			}
-			break;
 		}
 
 	}
