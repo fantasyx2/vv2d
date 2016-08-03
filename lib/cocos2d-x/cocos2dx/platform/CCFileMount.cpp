@@ -66,6 +66,8 @@ CCMountInfo* CCMountInfo::create(std::string& prefix,std::string source,bool isz
 		{
 			if(CCFileUtils::sharedFileUtils()->isDirectoryExist(source))
 			{
+				p->prefix = std::string(MOUNT_PREFIX)+prefix;
+				p->source = source;
 				return p; 
 			}
 		}
