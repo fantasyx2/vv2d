@@ -855,6 +855,12 @@ std::string CCFileUtils::getPathForFilename(const std::string& filename, const s
 std::string CCFileUtils::fullPathForFilename(const char* pszFileName)
 {
     CCAssert(pszFileName != NULL, "CCFileUtils: Invalid path");
+    //add for mount
+    if(pszFileName[0]==MOUNT_PREFIX[0])
+    {
+        return pszFileName;
+    }
+    //
     
     std::string strFileName = pszFileName;
     if (isAbsolutePath(pszFileName))

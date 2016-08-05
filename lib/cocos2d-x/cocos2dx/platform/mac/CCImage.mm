@@ -621,7 +621,14 @@ bool CCImage::initWithImageFile(const char * strPath, EImageFormat eImgFmt/* = e
     std::string strTemp = CCFileUtils::sharedFileUtils()->fullPathForFilename(strPath);
 	if (m_bEnabledScale)
 	{
-		if (!isFileExists(strTemp.c_str()))
+        //add for mount
+        bool noskip = true;
+        if(strTemp[0]==MOUNT_PREFIX[0])
+        {
+            noskip = false;
+        }
+        //
+		if (noskip && !isFileExists(strTemp.c_str()))
 		{
 			if (strTemp.rfind("@2x") == std::string::npos)
 			{
