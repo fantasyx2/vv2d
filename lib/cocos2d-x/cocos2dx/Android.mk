@@ -195,6 +195,8 @@ ifeq ($(CC_TIFF_ENABLED),1)
 LOCAL_WHOLE_STATIC_LIBRARIES += cocos_libtiff_static
 endif
 
+LOCAL_WHOLE_STATIC_LIBRARIES += cocos_zlib_static
+
 # define the macro to compile through support/zip_support/ioapi.c
 LOCAL_CFLAGS := -Wno-psabi -DUSE_FILE32API $(ANDROID_COCOS2D_BUILD_FLAGS)
 LOCAL_EXPORT_CFLAGS := -Wno-psabi -DUSE_FILE32API
@@ -202,7 +204,7 @@ LOCAL_EXPORT_CFLAGS := -Wno-psabi -DUSE_FILE32API
 include $(BUILD_STATIC_LIBRARY)
 
 $(call import-module,libpng)
-
+$(call import-module,zlib)
 ifeq ($(CC_JPEG_ENABLED),1)
 $(call import-module,libjpeg)
 endif
