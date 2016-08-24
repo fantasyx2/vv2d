@@ -1452,7 +1452,7 @@ CCObject* CCEaseBezierAction::copyWithZone(CCZone *pZone)
     }
 
     pCopy->initWithAction((CCActionInterval *)(m_pInner->copy()->autorelease()));
-
+    pCopy->setBezierParamer(m_p0,m_p1,m_p2,m_p3);
     CC_SAFE_DELETE(pNewZone);
     return pCopy;
 }

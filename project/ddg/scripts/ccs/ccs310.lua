@@ -614,8 +614,30 @@ function M:playAnim(rpt,handler)
 	end
 end
 
+function M:genAction(rpt,handler)
+	local anim 		= self.anim
+	local animlist  = self.animlist
+	local parent = self.parent
+	while((not anim) and parent) do
+		anim = parent.anim
+		animlist = parent.animlist
+		parent = parent.parent
+	end
+	if(anim) then
+		local act = ccsanim_genaction(self.actag,anim,animlist,handler)
+		if(rpt<=1) then
+			return act
+		elseif(rpt==-1) then
+			return CCRepeatForever:create(act)
+		else	
+			return CCRepeat:create(act,rpt)
+		end
+	end
+end
+
 M.play = M.playAnim
 M.childroot = M.getChildRoot
+M.action = M.genAction
 
 local function gen(a)
 	local tp = a.ctype
