@@ -1,4 +1,21 @@
 local FRAME_DT = 0.0166
+local function gen_easact(f,act)
+  local e=f.EasingData
+  if(e) then
+      local et=e.Type or 0
+      if(et>0) then
+          return CreateActionEasing:create(act,et)
+      elseif(et==-1) then
+          local f0 = e.Points[1].X
+          local f1 = e.Points[1].Y
+          local f2 = e.Points[2].X
+          local f3 = e.Points[2].Y
+          return CreateActionEasing:create(act,et,f0,f1,f2,f3)
+      end
+  end
+  return act
+end
+
 local function gen_pos(frames,start,speed,delay)
     local arr={}
     local lastIdx=0
@@ -11,7 +28,9 @@ local function gen_pos(frames,start,speed,delay)
             --table.insert(arr,CCPlace:create(ccp(f.X,f.Y)))
             lastIdx = start
         elseif(f.FrameIndex>start) then
-            table.insert(arr,CCMoveTo:create((f.FrameIndex-lastIdx)*speed,ccp(f.X,f.Y)))
+            local act = CCMoveTo:create((f.FrameIndex-lastIdx)*speed,ccp(f.X,f.Y))
+            act = gen_easact(f,act)
+            table.insert(arr,act)
             lastIdx = f.FrameIndex
         end
     end
@@ -28,7 +47,9 @@ local function gen_scale(frames,start,speed,delay)
             table.insert(arr,CCScaleTo:create(0,f.X,f.Y))
             lastIdx = start
         elseif(f.FrameIndex>start) then
-            table.insert(arr,CCScaleTo:create((f.FrameIndex-lastIdx)*speed,f.X,f.Y))
+            local act = CCScaleTo:create((f.FrameIndex-lastIdx)*speed,f.X,f.Y)
+            act = gen_easact(f,act)
+            table.insert(arr,act)
             lastIdx = f.FrameIndex
         end
     end
@@ -45,7 +66,9 @@ local function gen_rotate(frames,start,speed,delay)
             table.insert(arr,CCRotateTo:create(0,f.X,f.Y))
             lastIdx = start
         elseif(f.FrameIndex>start) then
-            table.insert(arr,CCRotateTo:create((f.FrameIndex-lastIdx)*speed,f.X,f.Y))
+            local act = CCRotateTo:create((f.FrameIndex-lastIdx)*speed,f.X,f.Y)
+            act = gen_easact(f,act)
+            table.insert(arr,act)
             lastIdx = f.FrameIndex
         end
     end
@@ -97,7 +120,9 @@ local function gen_color(frames,start,speed,delay)
             color.R=color.R or 255
             color.G=color.G or 255
             color.B=color.B or 255
-            table.insert(arr,CCTintTo:create((f.FrameIndex-lastIdx)*speed,color.R,color.G,color.B))
+            local act = CCTintTo:create((f.FrameIndex-lastIdx)*speed,color.R,color.G,color.B)
+            act = gen_easact(f,act)
+            table.insert(arr,act)
             lastIdx = f.FrameIndex
         end
     end
@@ -118,7 +143,9 @@ local function gen_alpha(frames,start,speed,delay)
             color.R=color.R or 255
             color.G=color.G or 255
             color.B=color.B or 255
-            table.insert(arr,CCFadeTo:create((f.FrameIndex-lastIdx)*speed,f.Value))
+            local act = CCFadeTo:create((f.FrameIndex-lastIdx)*speed,f.Value)
+            act = gen_easact(f,act)
+            table.insert(arr,act)
             lastIdx = f.FrameIndex
         end
     end

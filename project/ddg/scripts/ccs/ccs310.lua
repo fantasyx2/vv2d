@@ -292,15 +292,24 @@ local function gen_pageview(t)
 	end
 end
 local function gen_panel(t)
-	local a = t.SingleColor
-	local c
-	if(a and (a.R or a.G or a.B)) then
-		c = ccc4(a.R or 255, a.G or 255, a.B or 255,t.BackColorAlpha or 255)
-	end	
+	local tp = t.ComboBoxIndex	
 	local nd
-	if(c) then
+	if(tp==1) then
 		-- print("gen_panel",c.r,c.g,c.b,c.a)
+		local a = t.SingleColor
+		local c
+		if(a and (a.R or a.G or a.B)) then
+			c = ccc4(a.R or 255, a.G or 255, a.B or 255,t.BackColorAlpha or 255)
+		end
 		nd = display.newColorLayer(c)
+	elseif(tp==2) then
+		local a = t.FirstColor or {}
+		local b = t.EndColor or {}
+		local v = t.ColorVector or {}
+		local ac = ccc4(a.R or 255, a.G or 255, a.B or 255,t.BackColorAlpha or 255)
+		local bc = ccc4(b.R or 255, b.G or 255, b.B or 255,t.BackColorAlpha or 255)
+		local vp = ccp(v.ScaleX or 0,v.ScaleY or 0)
+		nd = CCLayerGradient:create(ac,bc,vp)
 	else	
 		nd = display.newNode()
 	end	
@@ -547,7 +556,6 @@ local config=
 --]]
 --------------------------------------
 M.__index=function(self,k)
-	-- print("_index",k)
 	if(M[k]) then
 		return M[k]
 	elseif(type(k)=="string") then
@@ -577,7 +585,7 @@ function M:getChildByName(name)
 	return r
 end
 function M:getChildRoot(name)
-	print("------getChildRoot")
+	-- print("------getChildRoot")
 	-- return self.childs and self.childs[name]
 	local r = rawget(self,'childs')
 	r  = r and rawget(r,name)
@@ -605,6 +613,9 @@ function M:playAnim(rpt,handler)
 		end
 	end
 end
+
+M.play = M.playAnim
+M.childroot = M.getChildRoot
 
 local function gen(a)
 	local tp = a.ctype

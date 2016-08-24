@@ -33,6 +33,56 @@ NS_CC_BEGIN
 class CCObject;
 class CCZone;
 
+enum FrameEaseType
+{
+    FrameEase_Custom = -1,
+
+    FrameEase_Linear = 0,
+
+    FrameEase_Sine_EaseIn,
+    FrameEase_Sine_EaseOut,
+    FrameEase_Sine_EaseInOut,
+
+
+    FrameEase_Quad_EaseIn,
+    FrameEase_Quad_EaseOut,
+    FrameEase_Quad_EaseInOut,
+
+    FrameEase_Cubic_EaseIn,
+    FrameEase_Cubic_EaseOut,
+    FrameEase_Cubic_EaseInOut,
+
+    FrameEase_Quart_EaseIn,
+    FrameEase_Quart_EaseOut,
+    FrameEase_Quart_EaseInOut,
+
+    FrameEase_Quint_EaseIn,
+    FrameEase_Quint_EaseOut,
+    FrameEase_Quint_EaseInOut,
+
+    FrameEase_Expo_EaseIn,
+    FrameEase_Expo_EaseOut,
+    FrameEase_Expo_EaseInOut,
+
+    FrameEase_Circ_EaseIn,
+    FrameEase_Circ_EaseOut,
+    FrameEase_Circ_EaseInOut,
+
+    FrameEase_Elastic_EaseIn,
+    FrameEase_Elastic_EaseOut,
+    FrameEase_Elastic_EaseInOut,
+
+    FrameEase_Back_EaseIn,
+    FrameEase_Back_EaseOut,
+    FrameEase_Back_EaseInOut,
+
+    FrameEase_Bounce_EaseIn,
+    FrameEase_Bounce_EaseOut,
+    FrameEase_Bounce_EaseInOut,
+
+    FrameEase_TWEEN_EASING_MAX = 10000
+};
+
 /**
  * @addtogroup actions
  * @{
@@ -558,6 +608,359 @@ public:
     /** creates the action */
     static CCEaseBackInOut* create(CCActionInterval* pAction);
 };
+
+//add for ccs
+//
+//
+//
+//
+/** 
+ @brief Ease Bezier
+ @ingroup Actions
+ */
+class CCEaseBezierAction:public CCActionEase
+{
+public:
+    virtual void update(float time);
+    virtual CCActionInterval* reverse(void);
+    /**
+    *  @js NA
+    *  @lua NA
+    */
+    virtual CCObject* copyWithZone(CCZone* pZone);
+
+    virtual void setBezierParamer( float p0, float p1, float p2, float p3);
+
+public:
+    /** creates the action */
+    static CCEaseBezierAction* create(CCActionInterval* pAction);
+
+private:
+    float m_p0;
+    float m_p1;
+    float m_p2;
+    float m_p3;
+};
+
+/** 
+ @brief Ease Quadratic In
+ @ingroup Actions
+ */
+class CCEaseQuadraticActionIn:public CCActionEase
+{
+public:
+    virtual void update(float time);
+    virtual CCActionInterval* reverse(void);
+    /**
+    *  @js NA
+    *  @lua NA
+    */
+    virtual CCObject* copyWithZone(CCZone* pZone);
+
+public:
+    /** creates the action */
+    static CCEaseQuadraticActionIn* create(CCActionInterval* pAction);
+};
+
+/** 
+ @brief Ease Quadratic Out
+ @ingroup Actions
+ */
+class CCEaseQuadraticActionOut:public CCActionEase
+{
+public:
+    virtual void update(float time);
+    virtual CCActionInterval* reverse(void);
+    /**
+    *  @js NA
+    *  @lua NA
+    */
+    virtual CCObject* copyWithZone(CCZone* pZone);
+
+public:
+    /** creates the action */
+    static CCEaseQuadraticActionOut* create(CCActionInterval* pAction);
+};
+
+/** 
+ @brief Ease Quadratic InOut
+ @ingroup Actions
+ */
+class CCEaseQuadraticActionInOut:public CCActionEase
+{
+public:
+    virtual void update(float time);
+    virtual CCActionInterval* reverse(void);
+    /**
+    *  @js NA
+    *  @lua NA
+    */
+    virtual CCObject* copyWithZone(CCZone* pZone);
+
+public:
+    /** creates the action */
+    static CCEaseQuadraticActionInOut* create(CCActionInterval* pAction);
+};
+
+/** 
+ @brief Ease Quartic In
+ @ingroup Actions
+ */
+class CCEaseQuarticActionIn:public CCActionEase
+{
+public:
+    virtual void update(float time);
+    virtual CCActionInterval* reverse(void);
+    /**
+    *  @js NA
+    *  @lua NA
+    */
+    virtual CCObject* copyWithZone(CCZone* pZone);
+
+public:
+    /** creates the action */
+    static CCEaseQuarticActionIn* create(CCActionInterval* pAction);
+};
+
+/** 
+ @brief Ease Quartic Out
+ @ingroup Actions
+ */
+class CCEaseQuarticActionOut:public CCActionEase
+{
+public:
+    virtual void update(float time);
+    virtual CCActionInterval* reverse(void);
+    /**
+    *  @js NA
+    *  @lua NA
+    */
+    virtual CCObject* copyWithZone(CCZone* pZone);
+
+public:
+    /** creates the action */
+    static CCEaseQuarticActionOut* create(CCActionInterval* pAction);
+};
+
+/** 
+ @brief Ease Quartic InOut
+ @ingroup Actions
+ */
+class CCEaseQuarticActionInOut:public CCActionEase
+{
+public:
+    virtual void update(float time);
+    virtual CCActionInterval* reverse(void);
+    /**
+    *  @js NA
+    *  @lua NA
+    */
+    virtual CCObject* copyWithZone(CCZone* pZone);
+
+public:
+    /** creates the action */
+    static CCEaseQuarticActionInOut* create(CCActionInterval* pAction);
+};
+
+
+/** 
+ @brief Ease Quintic In
+ @ingroup Actions
+ */
+class CCEaseQuinticActionIn:public CCActionEase
+{
+public:
+    virtual void update(float time);
+    virtual CCActionInterval* reverse(void);
+    /**
+    *  @js NA
+    *  @lua NA
+    */
+    virtual CCObject* copyWithZone(CCZone* pZone);
+
+public:
+    /** creates the action */
+    static CCEaseQuinticActionIn* create(CCActionInterval* pAction);
+};
+
+/** 
+ @brief Ease Quintic Out
+ @ingroup Actions
+ */
+class CCEaseQuinticActionOut:public CCActionEase
+{
+public:
+    virtual void update(float time);
+    virtual CCActionInterval* reverse(void);
+    /**
+    *  @js NA
+    *  @lua NA
+    */
+    virtual CCObject* copyWithZone(CCZone* pZone);
+
+public:
+    /** creates the action */
+    static CCEaseQuinticActionOut* create(CCActionInterval* pAction);
+};
+
+/** 
+ @brief Ease Quintic InOut
+ @ingroup Actions
+ */
+class CCEaseQuinticActionInOut:public CCActionEase
+{
+public:
+    virtual void update(float time);
+    virtual CCActionInterval* reverse(void);
+    /**
+    *  @js NA
+    *  @lua NA
+    */
+    virtual CCObject* copyWithZone(CCZone* pZone);
+
+public:
+    /** creates the action */
+    static CCEaseQuinticActionInOut* create(CCActionInterval* pAction);
+};
+
+/** 
+ @brief Ease Circle In
+ @ingroup Actions
+ */
+class CCEaseCircleActionIn:public CCActionEase
+{
+public:
+    virtual void update(float time);
+    virtual CCActionInterval* reverse(void);
+    /**
+    *  @js NA
+    *  @lua NA
+    */
+    virtual CCObject* copyWithZone(CCZone* pZone);
+
+public:
+    /** creates the action */
+    static CCEaseCircleActionIn* create(CCActionInterval* pAction);
+};
+
+/** 
+ @brief Ease Circle Out
+ @ingroup Actions
+ */
+class CCEaseCircleActionOut:public CCActionEase
+{
+public:
+    virtual void update(float time);
+    virtual CCActionInterval* reverse(void);
+    /**
+    *  @js NA
+    *  @lua NA
+    */
+    virtual CCObject* copyWithZone(CCZone* pZone);
+
+public:
+    /** creates the action */
+    static CCEaseCircleActionOut* create(CCActionInterval* pAction);
+};
+
+/** 
+ @brief Ease Circle InOut
+ @ingroup Actions
+ */
+class CCEaseCircleActionInOut:public CCActionEase
+{
+public:
+    virtual void update(float time);
+    virtual CCActionInterval* reverse(void);
+    /**
+    *  @js NA
+    *  @lua NA
+    */
+    virtual CCObject* copyWithZone(CCZone* pZone);
+
+public:
+    /** creates the action */
+    static CCEaseCircleActionInOut* create(CCActionInterval* pAction);
+};
+
+/** 
+ @brief Ease Cubic In
+ @ingroup Actions
+ */
+class CCEaseCubicActionIn:public CCActionEase
+{
+public:
+    virtual void update(float time);
+    virtual CCActionInterval* reverse(void);
+    /**
+    *  @js NA
+    *  @lua NA
+    */
+    virtual CCObject* copyWithZone(CCZone* pZone);
+
+public:
+    /** creates the action */
+    static CCEaseCubicActionIn* create(CCActionInterval* pAction);
+};
+
+/** 
+ @brief Ease Cubic Out
+ @ingroup Actions
+ */
+class CCEaseCubicActionOut:public CCActionEase
+{
+public:
+    virtual void update(float time);
+    virtual CCActionInterval* reverse(void);
+    /**
+    *  @js NA
+    *  @lua NA
+    */
+    virtual CCObject* copyWithZone(CCZone* pZone);
+
+public:
+    /** creates the action */
+    static CCEaseCubicActionOut* create(CCActionInterval* pAction);
+};
+
+/** 
+ @brief Ease Cubic InOut
+ @ingroup Actions
+ */
+class CCEaseCubicActionInOut:public CCActionEase
+{
+public:
+    virtual void update(float time);
+    virtual CCActionInterval* reverse(void);
+    /**
+    *  @js NA
+    *  @lua NA
+    */
+    virtual CCObject* copyWithZone(CCZone* pZone);
+
+public:
+    /** creates the action */
+    static CCEaseCubicActionInOut* create(CCActionInterval* pAction);
+};
+
+class CreateActionEasing
+{
+    //add for css
+    //
+    //
+public:
+    static CCActionInterval* create(CCActionInterval* action,int type,float p0,float p1,float p2,float p3);
+    static CCActionInterval* create(CCActionInterval* action,int type);
+    //
+    //
+    //add end
+};
+//
+//
+//
+//
+//
+//add end
 
 // end of actions group
 /// @}

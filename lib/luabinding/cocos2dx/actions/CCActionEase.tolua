@@ -272,5 +272,95 @@ class CCEaseBackInOut : public CCActionEase
     static CCEaseBackInOut* create(CCActionInterval* pAction);
 };
 
+//add for css
+//
+class CCEaseBezierAction:public CCActionEase
+{
+    void setBezierParamer( float p0, float p1, float p2, float p3);
+    static CCEaseBezierAction* create(CCActionInterval* pAction);
+};
+
+class CCEaseQuadraticActionIn:public CCActionEase
+{
+    static CCEaseQuadraticActionIn* create(CCActionInterval* pAction);
+};
+
+class CCEaseQuadraticActionOut:public CCActionEase
+{
+    static CCEaseQuadraticActionOut* create(CCActionInterval* pAction);
+};
+
+class CCEaseQuadraticActionInOut:public CCActionEase
+{
+    static CCEaseQuadraticActionInOut* create(CCActionInterval* pAction);
+};
+
+class CCEaseQuarticActionIn:public CCActionEase
+{
+    static CCEaseQuarticActionIn* create(CCActionInterval* pAction);
+};
+
+class CCEaseQuarticActionOut:public CCActionEase
+{
+    static CCEaseQuarticActionOut* create(CCActionInterval* pAction);
+};
+
+class CCEaseQuarticActionInOut:public CCActionEase
+{
+    static CCEaseQuarticActionInOut* create(CCActionInterval* pAction);
+};
+
+class CCEaseQuinticActionIn:public CCActionEase
+{
+    static CCEaseQuinticActionIn* create(CCActionInterval* pAction);
+};
+
+class CCEaseQuinticActionOut:public CCActionEase
+{
+    static CCEaseQuinticActionOut* create(CCActionInterval* pAction);
+};
+
+class CCEaseQuinticActionInOut:public CCActionEase
+{
+    static CCEaseQuinticActionInOut* create(CCActionInterval* pAction);
+};
+
+class CCEaseCircleActionIn:public CCActionEase
+{
+    static CCEaseCircleActionIn* create(CCActionInterval* pAction);
+};
+
+class CCEaseCircleActionOut:public CCActionEase
+{
+    static CCEaseCircleActionOut* create(CCActionInterval* pAction);
+};
+
+class CCEaseCircleActionInOut:public CCActionEase
+{
+    static CCEaseCircleActionInOut* create(CCActionInterval* pAction);
+};
+
+class CCEaseCubicActionIn:public CCActionEase
+{
+    static CCEaseCubicActionIn* create(CCActionInterval* pAction);
+};
+
+class CCEaseCubicActionOut:public CCActionEase
+{
+    static CCEaseCubicActionOut* create(CCActionInterval* pAction);
+};
+
+class CCEaseCubicActionInOut:public CCActionEase
+{
+    static CCEaseCubicActionInOut* create(CCActionInterval* pAction);
+};
+
+class CreateActionEasing
+{
+    static CCActionInterval* create(CCActionInterval* action,int type);
+    static CCActionInterval* create(CCActionInterval* action,int type,float p0,float p1,float p2,float p3);    
+};
+//
+
 // end of actions group
 /// @}

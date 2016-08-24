@@ -266,6 +266,22 @@ local CCObjectTypes = {
     "GifBase",
     "CacheGif",
     "InstantGif",
+    "CCEaseBezierAction",
+    "CCEaseQuadraticActionIn",
+    "CCEaseQuadraticActionOut",
+    "CCEaseQuadraticActionInOut",
+    "CCEaseQuarticActionIn",
+    "CCEaseQuarticActionOut",
+    "CCEaseQuarticActionInOut",
+    "CCEaseQuinticActionIn",
+    "CCEaseQuinticActionOut",
+    "CCEaseQuinticActionInOut",
+    "CCEaseCircleActionIn",
+    "CCEaseCircleActionOut",
+    "CCEaseCircleActionInOut",
+    "CCEaseCubicActionIn",
+    "CCEaseCubicActionOut",
+    "CCEaseCubicActionInOut",
 }
 
 -- register CCObject types
