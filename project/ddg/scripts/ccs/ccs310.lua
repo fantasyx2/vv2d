@@ -1,5 +1,7 @@
 import(".ccs310anim")
+import(".ccsevt")
 local M={}
+local M_EVT_NAME
 local sharedTextureCache     = CCTextureCache:sharedTextureCache()
 local sharedSpriteFrameCache = CCSpriteFrameCache:sharedSpriteFrameCache()
 local function set_param(nd,t)
@@ -190,6 +192,12 @@ local function gen_btn(t,class)
         	--nd:setButtonLabelOffset(0,0)
     	end	
 		--print("gen_btn_3",nd)
+		if(M_EVT_NAME and t.CallBackType) then
+			local evt_name=M_EVT_NAME
+			nd:onButtonClicked(function(...)
+				ccsevt.dispatchEvent(ccsevt.genevt(evt_name,t.CallBackType,t.CallBackName,nd))
+			end)
+		end
 		return nd
 	end
 end
@@ -217,6 +225,16 @@ local function gen_checkbox(t)
 	if(nd) then
 		nd:setName(t.Name)
 		set_param(nd,t)
+
+		if(M_EVT_NAME and t.CallBackType) then
+			local evt_name=M_EVT_NAME
+			nd:onButtonClicked(function(...)
+				local evt = ccsevt.genevt(evt_name,t.CallBackType,t.CallBackName,nd)
+				evt.select = nd:isButtonSelected()
+				ccsevt.dispatchEvent(evt)
+			end)
+		end
+
 		return nd
 	end
 end
@@ -601,7 +619,7 @@ function M:playAnim(rpt,handler)
 		parent = parent.parent
 	end
 	if(anim) then
-		local act = ccsanim_genaction(self.actag,anim,animlist,handler)
+		local act = ccsanim.gen(self.actag,anim,animlist,handler)
 		if(act) then
 			if(rpt==0) then
 				self.node:runAction(act)
@@ -624,7 +642,7 @@ function M:genAction(rpt,handler)
 		parent = parent.parent
 	end
 	if(anim) then
-		local act = ccsanim_genaction(self.actag,anim,animlist,handler)
+		local act = ccsanim.gen(self.actag,anim,animlist,handler)
 		if(rpt<=1) then
 			return act
 		elseif(rpt==-1) then
@@ -674,7 +692,8 @@ local function gen(a)
 	return r
 end	
 --conver json to table
-function M.load_tb(jsontb,func)
+function M.load_tb(jsontb,evtname,func)
+	M_EVT_NAME=evtname
 	local res = jsontb.Content.Content.UsedResources
 	local root = jsontb.Content.Content.ObjectData
 	local anim = jsontb.Content.Content.Animation
@@ -700,7 +719,7 @@ function M.load_tb(jsontb,func)
 	end
 	return r
 end
-function M.load(jsonfile,func)
+function M.load(jsonfile,evtname,func)
 	local str = get_file_data(jsonfile)
 	if(not str) then
 		return false
@@ -710,11 +729,11 @@ function M.load(jsonfile,func)
 	if(not jsontb) then
 		return false
 	end
-	return M.load_tb(jsontb,func)
+	return M.load_tb(jsontb,evtname,func)
 end
 
 function M.load_listviewcell(jsonfile)	
-	return M.load(jsonfile,function(root)
+	return M.load(jsonfile,nil,function(root)
 								root.CustomClassName = "ListViewCell"
 								for _,v in ipairs(root.Children) do
 									if(v.ctype=='ButtonObjectData') then

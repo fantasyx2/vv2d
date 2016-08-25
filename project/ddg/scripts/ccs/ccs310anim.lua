@@ -185,7 +185,7 @@ end
 
 local config=
 {
-  Position            = gen_pos,
+  -- Position            = gen_pos,
   Scale               = gen_scale,
   --AnchorPoint       = gen_arch,
   RotationSkew        = gen_rotate,
@@ -195,7 +195,7 @@ local config=
   FrameEvent    = gen_evt,
 }
 
-function ccsanim_genaction(tagorname,anim,animlist,evthandler)
+local function ccsanim_genaction(tagorname,anim,animlist,evthandler)
   -- print("========================")
   -- print("=======")
   -- print("=======")
@@ -237,3 +237,5 @@ function ccsanim_genaction(tagorname,anim,animlist,evthandler)
   end
 end
 
+ccsanim = {}
+ccsanim.gen = ccsanim_genaction
