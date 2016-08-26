@@ -577,7 +577,11 @@ M.__index=function(self,k)
 	if(M[k]) then
 		return M[k]
 	elseif(type(k)=="string") then
-		return M.getChildByName(self,k)
+		if(string.byte(k)==95) then --'_'
+			return M.getChildRoot(self,string.sub(k,2))
+		else	
+			return M.getChildByName(self,k)
+		end
 	elseif(type(k)=="number") then
 		return 	M.getChildByTag(self,k)
 	end
@@ -610,25 +614,9 @@ function M:getChildRoot(name)
 	return r
 end
 function M:playAnim(rpt,handler)
-	local anim 		= self.anim
-	local animlist  = self.animlist
-	local parent = self.parent
-	while((not anim) and parent) do
-		anim = parent.anim
-		animlist = parent.animlist
-		parent = parent.parent
-	end
-	if(anim) then
-		local act = ccsanim.gen(self.actag,anim,animlist,handler)
-		if(act) then
-			if(rpt==0) then
-				self.node:runAction(act)
-			elseif(rpt==-1) then
-				self.node:runAction(CCRepeatForever:create(act))
-			else	
-				self.node:runAction(CCRepeat:create(act,rpt))
-			end
-		end
+	local act = self:genAction(rpt,handler)
+	if(act) then
+		self.node:runAction(act)
 	end
 end
 
@@ -642,7 +630,8 @@ function M:genAction(rpt,handler)
 		parent = parent.parent
 	end
 	if(anim) then
-		local act = ccsanim.gen(self.actag,anim,animlist,handler)
+		local pp = {self.json.Position.X,self.json.Position.Y}
+		local act = ccsanim.gen(self.actag,anim,animlist,handler,{pos=pp})
 		if(rpt<=1) then
 			return act
 		elseif(rpt==-1) then
@@ -675,6 +664,7 @@ local function gen(a)
 	end
 	r.tag = a.Tag or -1
 	r.actag = a.ActionTag or 0
+	r.json = a
 	if(a.Children) then
 		r.childs={}
 		--parse childs

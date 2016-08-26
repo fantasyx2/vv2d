@@ -46,6 +46,8 @@ function SocketTCP:ctor(__host, __port, __retryConnectWhenFailure)
 	self.tcp = nil
 	self.isRetryConnect = __retryConnectWhenFailure
 	self.isConnected = false
+	self.ipv6_only=false
+	self.ip = __host
 end
 
 function SocketTCP:setName( __name )
@@ -74,7 +76,23 @@ function SocketTCP:connect(__host, __port, __retryConnectWhenFailure)
 	if __retryConnectWhenFailure ~= nil then self.isRetryConnect = __retryConnectWhenFailure end
 	assert(self.host or self.port, "Host and port are necessary!")
 	--printInfo("%s.connect(%s, %d)", self.name, self.host, self.port)
-	self.tcp = socket.tcp()
+	local addrinfo,err = socket.dns.getaddrinfo(self.host)
+	for _,alt in pairs(addrinfo) do
+		if(alt.family == 'inet6') then
+			self.ipv6_only = true
+			self.ip = alt.addr
+			break
+		elseif alt.family == 'inet' then
+			self.ipv6_only = false
+			self.ip = alt.addr
+			break
+		end		
+	end
+	if(self.ipv6_only) then
+		self.tcp = socket.tcp6()
+	else
+		self.tcp = socket.tcp()
+	end
 	self.tcp:settimeout(0)
 
 	local function __checkConnect()
@@ -130,7 +148,7 @@ end
 --- When connect a connected socket server, it will return "already connected"
 -- @see: http://lua-users.org/lists/lua-l/2009-10/msg00584.html
 function SocketTCP:_connect()
-	local __succ, __status = self.tcp:connect(self.host, self.port)
+	local __succ, __status = self.tcp:connect(self.ip, self.port)
 	-- print("SocketTCP._connect:", __succ, __status)
 	return __succ == 1 or __status == STATUS_ALREADY_CONNECTED
 end

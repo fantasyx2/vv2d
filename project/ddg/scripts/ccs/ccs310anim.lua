@@ -6,29 +6,37 @@ local function gen_easact(f,act)
       if(et>0) then
           return CreateActionEasing:create(act,et)
       elseif(et==-1) then
-          local f0 = e.Points[1].X
-          local f1 = e.Points[1].Y
-          local f2 = e.Points[2].X
-          local f3 = e.Points[2].Y
-          return CreateActionEasing:create(act,et,f0,f1,f2,f3)
+          local ax = e.Points[2].X
+          local ay = e.Points[2].Y
+          local bx = e.Points[3].X
+          local by = e.Points[3].Y
+          local f1 = ax^2+ay^2
+          local f2 = bx^2+by^2
+          return CreateActionEasing:create(act,et,0,f1,f2,1)
       end
   end
   return act
 end
 
-local function gen_pos(frames,start,speed,delay)
+local function gen_pos(frames,start,speed,delay,handler,extra)
     local arr={}
     local lastIdx=0
-    for _,f in ipairs(frames) do
+    local px,py=extra.pos[1],extra.pos[2]
+    for _,f in ipairs(frames) do        
         if(f.FrameIndex==start) then
             if(start>0 and delay) then
                 table.insert(arr,CCDelayTime:create(start*speed))
             end
-            table.insert(arr,CCMoveTo:create(0,ccp(f.X,f.Y)))
-            --table.insert(arr,CCPlace:create(ccp(f.X,f.Y)))
+            -- table.insert(arr,CCMoveTo:create(0,ccp(f.X,f.Y)))
+            table.insert(arr,CCMoveBy:create(0,ccp(f.X-px,f.Y-py)))
+            -- print(f.FrameIndex,f.X-px,f.Y-py)
+            px,py = f.X,f.Y
             lastIdx = start
         elseif(f.FrameIndex>start) then
-            local act = CCMoveTo:create((f.FrameIndex-lastIdx)*speed,ccp(f.X,f.Y))
+            -- local act = CCMoveTo:create((f.FrameIndex-lastIdx)*speed,ccp(f.X,f.Y))
+            local act = CCMoveBy:create((f.FrameIndex-lastIdx)*speed,ccp(f.X-px,f.Y-py))
+            -- print(f.FrameIndex,f.X-px,f.Y-py)
+            px,py = f.X,f.Y
             act = gen_easact(f,act)
             table.insert(arr,act)
             lastIdx = f.FrameIndex
@@ -185,7 +193,7 @@ end
 
 local config=
 {
-  -- Position            = gen_pos,
+  Position            = gen_pos,
   Scale               = gen_scale,
   --AnchorPoint       = gen_arch,
   RotationSkew        = gen_rotate,
@@ -195,7 +203,7 @@ local config=
   FrameEvent    = gen_evt,
 }
 
-local function ccsanim_genaction(tagorname,anim,animlist,evthandler)
+local function ccsanim_genaction(tagorname,anim,animlist,evthandler,extra)
   -- print("========================")
   -- print("=======")
   -- print("=======")
@@ -216,7 +224,7 @@ local function ccsanim_genaction(tagorname,anim,animlist,evthandler)
               local f=config[v.Property]
               --print("==",v.Property,f)
               if(f) then
-                  local act = f(v.Frames,0,speed,true,evthandler)
+                  local act = f(v.Frames,0,speed,true,evthandler,extra)
                   if(act) then
                       table.insert(tb,act)
                   end
