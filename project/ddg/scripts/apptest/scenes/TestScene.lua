@@ -30,7 +30,8 @@ function TestScene:ctor()
 		{"tstGif",		handler(self,self.tstGif)},
 		{"tstBlend",	handler(self,self.tstBlend)},
 		{"tstAnim",		handler(self,self.tstAnim)},
-		{"tstMount",	handler(self,self.tstMount)},		
+		{"tstMount",	handler(self,self.tstMount)},
+		{"tstLuaSocket", handler(self,self.tstLuaSocket)},		
 
 	}
 	self.TND = display.newNode()
@@ -793,6 +794,55 @@ function TestScene:tstMount()
 	print("@app/a.txt == ",fs.data("@app/a.txt"))
 	fs.mountclean()
 
+end
+
+function TestScene:tstLuaSocket()
+	local socket = require "socket"
+	local socket_core = require "socket.core"
+	print(socket==socket_core)
+	local ltn12 = require("ltn12") 		
+	print(ltn12)
+	local mime = require("mime") 		
+	print(mime)
+	local ftp = require("socket.ftp") 	
+	print(ftp)
+	local headers = require("socket.headers") 
+	print(headers)
+	local mbox = require("socket.mbox") 		
+	print(mbox)
+	local smtp = require("socket.smtp") 
+	print(smtp)
+	local tp = require("socket.tp") 
+	print(tp)
+	local url = require("socket.url") 
+	print(url)
+	local httptt = require("socket.http")
+	print(httptt)
+
+	local addrinfo,err = socket.dns.getaddrinfo("www.bing.com")
+	dump(addrinfo)
+	local addrinfo,err = socket.dns.getaddrinfo("192.168.1.1")
+	dump(addrinfo)
+	local myip = socket.dns.toip("www.baidu.com")
+	print("myip = ",myip)
+
+	local t={}
+	local r,e,h= 
+		httptt.request{ 
+	    	url = "http://www.baidu.com", 
+	    	sink = ltn12.sink.table(t),
+	    	--sink = ltn12.sink.file(io.open("/Users/jeep/a.txt"))
+	    	port= 80,
+	    	timeout = 1,
+	    	useragent= "good",
+	    }
+
+	print(e)
+	print(r)
+	dump(h)
+	for k,v in pairs(t) do
+		print(k,string.sub(v,1,16))
+	end	
 end
 
 return TestScene
