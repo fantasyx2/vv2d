@@ -16,7 +16,7 @@ void ProjectConfig::resetToWelcome(void)
 	m_isWelcome = true;
     string path = SimulatorConfig::sharedDefaults()->getQuickCocos2dxRootPath();
 //#ifdef WIN32
-#ifdef CC_TARGET_OS_MAC
+#if defined(CC_TARGET_OS_MAC) || defined(WIN32)
 	if(s_debug_prj_dir.length()==0)
 	{
 		path.append("player/welcome");
