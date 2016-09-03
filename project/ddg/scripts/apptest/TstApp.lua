@@ -20,6 +20,28 @@ require("tiled.tiledload")
 ----------------------------
 require("util.fs")
 require("http.http")
+
+package.path = "D:/game/vv2d/project/ddg/scripts/apptest/?.lua"..package.path
+print(package.path)
+require("apptest.scenes.TestScene")
+require("scenes.TestScene")
+
+local tb = string.split(package.path,';')
+for _,v in ipairs(tb) do
+	print(v)
+end
+
+for _,v in pairs(package.loaders) do
+	print(v)
+end
+
+
+for i=0,5 do
+	if(debug.getinfo(i)) then
+		local n,v = debug.getlocal(i, 1)
+		print(i,v)
+	end
+end
 ----------------------------
 -- print(string.format("%-10s%10s","67890","12345"))
 -- print(string.format("%-10d%10s",1234567,"12345"))
