@@ -45,7 +45,7 @@ public abstract class Cocos2dxActivity extends Activity implements Cocos2dxHelpe
 	// ===========================================================
 	// Fields
 	// ===========================================================
-	
+	private Cocos2dxWebView mWebView;
 	private Cocos2dxGLSurfaceView mGLSurfaceView;
 	private Cocos2dxHandler mHandler;
 	private static Context sContext = null;
@@ -53,7 +53,36 @@ public abstract class Cocos2dxActivity extends Activity implements Cocos2dxHelpe
 	public static Context getContext() {
 		return sContext;
 	}
-	
+	public static Cocos2dxActivity getActivity() {
+		return (Cocos2dxActivity)sContext;
+	}
+	public Cocos2dxWebView get_webview(){
+		return mWebView;
+	}
+	public void show_webview(String url,int luaid){
+		if(mWebView==null){
+	        mWebView = new Cocos2dxWebView(this);
+	        mFrameLayout.addView(this.mWebView);
+//	        mWebView.setVisibility(false);
+		}
+        //mWebView.loadUrl("res/js/game.html");
+        //mWebView.loadUrl("http://gamecenter.egret-labs.org/?chanId=20409&welcome=1");
+		mWebView.setVisibility(true);
+		mWebView.setLuaCallback(luaid);
+        mWebView.loadUrl(url);
+	}
+	public void hide_webview(){
+		if(mWebView!=null){
+			mWebView.setVisibility(false);
+		}
+	}
+	public void del_webview(){
+		if(mWebView!=null){
+			mWebView.setVisibility(false);
+			mFrameLayout.removeView(mWebView);
+			mWebView=null;
+		}
+	}	
 	// ===========================================================
 	// Constructors
 	// ===========================================================
@@ -121,14 +150,14 @@ public abstract class Cocos2dxActivity extends Activity implements Cocos2dxHelpe
 		
     	// FrameLayout
         ViewGroup.LayoutParams framelayout_params =
-            new ViewGroup.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT,
-                                       ViewGroup.LayoutParams.FILL_PARENT);
+            new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                                       ViewGroup.LayoutParams.MATCH_PARENT);
         mFrameLayout = new FrameLayout(this);
         mFrameLayout.setLayoutParams(framelayout_params);
 
         // Cocos2dxEditText layout
         ViewGroup.LayoutParams edittext_layout_params =
-            new ViewGroup.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT,
+            new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                                        ViewGroup.LayoutParams.WRAP_CONTENT);
         Cocos2dxEditText edittext = new Cocos2dxEditText(this);
         edittext.setLayoutParams(edittext_layout_params);
@@ -150,7 +179,7 @@ public abstract class Cocos2dxActivity extends Activity implements Cocos2dxHelpe
 
         this.mGLSurfaceView.setCocos2dxRenderer(new Cocos2dxRenderer());
         this.mGLSurfaceView.setCocos2dxEditText(edittext);
-
+               
         // Set framelayout as the content view
 		setContentView(mFrameLayout);
 	}
