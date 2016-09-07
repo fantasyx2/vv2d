@@ -31,7 +31,8 @@ function TestScene:ctor()
 		{"tstBlend",	handler(self,self.tstBlend)},
 		{"tstAnim",		handler(self,self.tstAnim)},
 		{"tstMount",	handler(self,self.tstMount)},
-		{"tstLuaSocket", handler(self,self.tstLuaSocket)},		
+		{"tstLuaSocket", handler(self,self.tstLuaSocket)},	
+		{"tstWebView",	handler(self,self.tstWebView)},	
 
 	}
 	self.TND = display.newNode()
@@ -681,7 +682,7 @@ function TestScene:tstEdit()
 	self:addChild(nd)
 	nd:setContentSize(cc.size(200,50))
 	print(nd:getPositionY(),nd:isVisible())
-	nd:runAction(CCScaleTo:create(2.0, 100.0))
+	-- nd:runAction(CCScaleTo:create(2.0, 100.0))
 
 end	
 function TestScene:tstGif()
@@ -842,6 +843,30 @@ function TestScene:tstLuaSocket()
 	dump(h)
 	for k,v in pairs(t) do
 		print(k,string.sub(v,1,16))
+	end	
+end
+function lua_js_callback(data)
+	print("lua_js_callback",data)
+	local obj = json.decode(data)
+	if(obj) then
+		if(obj.cmd=='goback') then
+			callLuaBridgeMethod("hide_webview",{})
+			show_webview = false
+		elseif(obj.cmd=='del') then
+			callLuaBridgeMethod("del_webview",{})
+			show_webview = false
+		end	
+	end
+	
+end
+
+function TestScene:tstWebView()
+	if(not show_webview) then
+		show_webview = true
+		callLuaBridgeMethod("show_webview",{"res/js/game.html",lua_js_callback})
+		-- callLuaBridgeMethod("show_webview",{"http://192.168.1.27:8080/zhpay/index.html",lua_js_callback})		
+		-- callLuaBridgeMethod("show_webview",{"http://gamecenter.egret-labs.org/?chanId=20409&welcome=1",lua_js_callback})
+
 	end	
 end
 
