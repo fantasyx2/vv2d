@@ -1500,6 +1500,7 @@ CCObject* CCBezierBy::copyWithZone(CCZone *pZone)
     CCActionInterval::copyWithZone(pZone);
 
     pCopy->initWithDuration(m_fDuration, m_sConfig);
+    pCopy->setAutoRotate(m_autort);
     
     CC_SAFE_DELETE(pNewZone);
     return pCopy;
@@ -1594,7 +1595,7 @@ bool CCBezierTo::initWithDuration(float t, const ccBezierConfig &c)
 CCObject* CCBezierTo::copyWithZone(CCZone *pZone)
 {
     CCZone* pNewZone = NULL;
-    CCBezierBy* pCopy = NULL;
+    CCBezierTo* pCopy = NULL;
     if(pZone && pZone->m_pCopyObject) 
     {
         //in case of being called at sub class
@@ -1608,7 +1609,8 @@ CCObject* CCBezierTo::copyWithZone(CCZone *pZone)
 
     CCBezierBy::copyWithZone(pZone);
 
-    pCopy->initWithDuration(m_fDuration, m_sConfig);
+    pCopy->initWithDuration(m_fDuration, m_sToConfig);
+    pCopy->setAutoRotate(m_autort);
     
     CC_SAFE_DELETE(pNewZone);
     return pCopy;
