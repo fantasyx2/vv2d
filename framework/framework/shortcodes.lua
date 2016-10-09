@@ -56,7 +56,7 @@ function Node:pos(x, y)
     return self
 end
 
-function Node:arch(x, y)
+function Node:anch(x, y)
     self:setAnchorPoint(ccp(x, y))
     return self
 end
@@ -114,6 +114,7 @@ end
 
 Node.timer=Node.schedule
 Node.delay=Node.performWithDelay
+Node.arch =Node.anch
 
 
 -- Sprite
