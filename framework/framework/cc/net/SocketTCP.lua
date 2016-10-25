@@ -9,6 +9,7 @@ Last Modification: 2013-12-05
 local SOCKET_TICK_TIME = 0.1 			-- check socket data interval
 local SOCKET_RECONNECT_TIME = 5			-- socket reconnect try interval
 local SOCKET_CONNECT_FAIL_TIMEOUT = 3	-- socket failure timeout
+local SOCKET_RECONNECT_MAX_TIMES = 3	-- socket reconect times
 
 local STATUS_CLOSED = "closed"
 local STATUS_NOT_CONNECTED = "Socket is not connected"
@@ -26,6 +27,8 @@ SocketTCP.EVENT_CLOSE = "SOCKET_TCP_CLOSE"
 SocketTCP.EVENT_CLOSED = "SOCKET_TCP_CLOSED"
 SocketTCP.EVENT_CONNECTED = "SOCKET_TCP_CONNECTED"
 SocketTCP.EVENT_CONNECT_FAILURE = "SOCKET_TCP_CONNECT_FAILURE"
+SocketTCP.EVENT_RECONNECT_TRY = "SOCKET_TCP_RECONNECT_TRY"
+SocketTCP.EVENT_RECONNECT_FAILURE = "SOCKET_TCP_RECONNECT_FAILURE"
 
 SocketTCP._VERSION = socket._VERSION
 SocketTCP._DEBUG = socket._DEBUG
@@ -48,6 +51,7 @@ function SocketTCP:ctor(__host, __port, __retryConnectWhenFailure)
 	self.isConnected = false
 	self.ipv6_only=false
 	self.ip = __host
+	self.recontimes = 0
 end
 
 function SocketTCP:setName( __name )
@@ -67,6 +71,14 @@ end
 
 function SocketTCP:setConnFailTime(__time)
 	SOCKET_CONNECT_FAIL_TIMEOUT = __time
+	return self
+end
+function SocketTCP:setReConnMaxTimes(__time)
+	SOCKET_RECONNECT_MAX_TIMES = __time
+	return self
+end
+function SocketTCP:setReConnTimes(__time)
+	self.recontimes = __time or 0
 	return self
 end
 
@@ -169,6 +181,7 @@ end
 -- connecte success, cancel the connection timerout timer
 function SocketTCP:_onConnected()
 	--printInfo("%s._onConnectd", self.name)
+	self.recontimes = 0
 	self.isConnected = true
 	self:dispatchEvent({name=SocketTCP.EVENT_CONNECTED})
 	if self.connectTimeTickScheduler then scheduler.unscheduleGlobal(self.connectTimeTickScheduler) end
@@ -208,6 +221,12 @@ end
 -- if connection is initiative, do not reconnect
 function SocketTCP:_reconnect(__immediately)
 	if not self.isRetryConnect then return end
+	if(self.recontimes>SOCKET_RECONNECT_MAX_TIMES) then
+		self:dispatchEvent({name=SocketTCP.EVENT_RECONNECT_FAILURE})
+		return
+	end	
+	self.recontimes = self.recontimes+1
+	self.dispatchEvent({name = SocketTCP.EVENT_RECONNECT_TRY,times=self.recontimes})
 	printInfo("%s._reconnect", self.name)
 	if __immediately then self:connect() return end
 	if self.reconnectScheduler then scheduler.unscheduleGlobal(self.reconnectScheduler) end

@@ -36,14 +36,16 @@ function ByteArray.toString(self, __radix, __separator)
 		return string.gsub(self, "(.)", __format)
 	end
 	local __bytes = {}
-	for i=1,#self._buf do
-		__bytes[i] = __format(self._buf[i])
+
+	local _buf = self._buf;
+	for i=1,#_buf do
+		__bytes[i] = __format(_buf[i])
 	end
 	return table.concat(__bytes) ,#__bytes
 end
 
 function ByteArray:ctor(__endian)
-	self._endian = __endian
+	self._endian = __endian or ByteArray.ENDIAN_LITTLE;
 	self._buf = {}
 	self._pos = 1
 end
@@ -56,8 +58,30 @@ function ByteArray:getAvailable()
 	return #self._buf - self._pos + 1
 end
 
+function ByteArray:hasRemaining()
+	return self._pos < #self._buf;
+end
+
 function ByteArray:getPos()
 	return self._pos
+end
+
+-- cut before curr pos
+function ByteArray:compact()
+	local _newBuf = {};
+	
+	for i = self._pos + 1, #self._buf do
+		table.insert(_newBuf, self._buf[i]);
+	end
+
+	self._buf = _newBuf;
+	self._pos = self._pos + 1
+
+	return self;
+end
+
+function ByteArray:flip()
+	return self:setPos(1);
 end
 
 function ByteArray:setPos(__pos)
@@ -249,12 +273,16 @@ function ByteArray:writeLuaNumber(__number)
 	return self
 end
 
---- The differently about (read/write)StringBytes and (read/write)String 
+--- The differently about (read/write)StringBytes and (read/write)String
 -- are use pack libraty or not.
 function ByteArray:readStringBytes(__len)
 	assert(__len, "Need a length of the string!")
 	if __len == 0 then return "" end
-	self:_checkAvailable()
+	-- self:_checkAvailable()
+	if(#self._buf < self._pos) then
+		error("readRawByte out bounds")
+		return;
+	end
 	local __, __v = string.unpack(self:readBuf(__len), self:_getLC("A"..__len))
 	return __v
 end
@@ -268,7 +296,11 @@ end
 function ByteArray:readString(__len)
 	assert(__len, "Need a length of the string!")
 	if __len == 0 then return "" end
-	self:_checkAvailable()
+	-- self:_checkAvailable()
+	if(#self._buf < self._pos) then
+		error("readRawByte out bounds")
+		return;
+	end
 	return self:readBuf(__len)
 end
 
@@ -278,7 +310,11 @@ function ByteArray:writeString(__string)
 end
 
 function ByteArray:readStringUInt()
-	self:_checkAvailable()
+	-- self:_checkAvailable()
+	if(#self._buf < self._pos) then
+		error("readRawByte out bounds")
+		return;
+	end
 	local __len = self:readUInt()
 	return self:readStringBytes(__len)
 end
@@ -293,7 +329,11 @@ end
 -- In 64bit os, it is 8 bytes.
 -- In 32bit os, it is 4 bytes.
 function ByteArray:readStringSizeT()
-	self:_checkAvailable()
+	-- self:_checkAvailable()
+	if(#self._buf < self._pos) then
+		error("readRawByte out bounds")
+		return;
+	end
 	local __s = self:rawUnPack(self:_getLC("a"))
 	return  __s
 end
@@ -305,7 +345,11 @@ function ByteArray:writeStringSizeT(__string)
 end
 
 function ByteArray:readStringUShort()
-	self:_checkAvailable()
+	-- self:_checkAvailable()
+	if(#self._buf < self._pos) then
+		error("readRawByte out bounds")
+		return;
+	end
 	local __len = self:readUShort()
 	return self:readStringBytes(__len)
 end
@@ -327,8 +371,11 @@ function ByteArray:readBytes(__bytes, __offset, __length)
 	__length = __length or 0
 	if __length == 0 or __length > __availableLen then __length = __availableLen end
 	__bytes:setPos(__offset)
+
+	local readRawByte = self.readRawByte;
+	local writeRawByte = __bytes.writeRawByte;
 	for i=__offset,__offset+__length do
-		__bytes:writeRawByte(self:readRawByte())
+		writeRawByte(__bytes, readRawByte(self))
 	end
 end
 
@@ -344,9 +391,14 @@ function ByteArray:writeBytes(__bytes, __offset, __length)
 	if __length == 0 or __length > __availableLen then __length = __availableLen end
 	local __oldPos = __bytes:getPos()
 	__bytes:setPos(__offset)
+
+	local writeRawByte = self.writeRawByte;
+	local readRawByte = __bytes.readRawByte;
 	for i=__offset,__offset+__length do
-		self:writeRawByte(__bytes:readRawByte())
+		-- self:writeRawByte(__bytes:readRawByte())
+		writeRawByte(self, readRawByte(__bytes));
 	end
+
 	__bytes:setPos(__oldPos)
 	return self
 end
@@ -377,35 +429,49 @@ function ByteArray:writeByte(__byte)
 end
 
 function ByteArray:readRawByte()
-	self:_checkAvailable()
-	local __byte = self._buf[self._pos]
-	self._pos = self._pos + 1
+	-- self:_checkAvailable()
+
+	local _buf = self._buf;
+	local _pos = self._pos;
+	if(#_buf < _pos) then
+		error("readRawByte out bounds")
+		return;
+	end
+	local __byte = _buf[_pos]
+	_pos = _pos + 1
+	self._pos = _pos;
 	return __byte
 end
 
 function ByteArray:writeRawByte(__rawByte)
-	if self._pos > #self._buf+1 then
-		for i=#self._buf+1,self._pos-1 do
-			self._buf[i] = string.char(0)
+	local _pos = self._pos;
+	local _buf = self._buf;
+	if _pos > #_buf+1 then
+		for i=#_buf+1, _pos-1 do
+			_buf[i] = string.char(0)
 		end
 	end
-	self._buf[self._pos] = string.sub(__rawByte, 1,1)
-	self._pos = self._pos + 1
+	_buf[_pos] = string.sub(__rawByte, 1,1)
+	_pos = _pos + 1;
+	self._pos = _pos;
 	return self
 end
 
 --- Read a byte array as string from current position, then update the position.
 function ByteArray:readBuf(__len)
 	--printf("readBuf,len:%u, pos:%u", __len, self._pos)
-	local __ba = self:getBytes(self._pos, self._pos + __len - 1)
-	self._pos = self._pos + __len
+	local _pos = self._pos;
+	local __ba = self:getBytes(_pos, _pos + __len - 1)
+	_pos = _pos + __len;
+	self._pos = _pos;
 	return __ba
 end
 
 --- Write a encoded char array into buf
 function ByteArray:writeBuf(__s)
-	for i=1,#__s do
-		self:writeRawByte(string.sub(__s,i,i))
+	local func = self.writeRawByte;
+	for i=1, #__s do
+		func(self, string.sub(__s,i,i));
 	end
 	return self
 end
