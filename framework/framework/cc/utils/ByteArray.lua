@@ -59,7 +59,7 @@ function ByteArray:getAvailable()
 end
 
 function ByteArray:hasRemaining()
-	return self._pos < #self._buf;
+	return self._pos < #self._buf
 end
 
 function ByteArray:getPos()
@@ -67,21 +67,28 @@ function ByteArray:getPos()
 end
 
 -- cut before curr pos
-function ByteArray:compact()
-	local _newBuf = {};
-	
-	for i = self._pos + 1, #self._buf do
-		table.insert(_newBuf, self._buf[i]);
+function ByteArray:cut(pos)
+	local _curBuf = self._buf
+	local _newBuf = {}
+	local _pos = pos or self._pos
+	for i = _pos + 1, #self._buf do
+		table.insert(_newBuf, _curBuf[i])
 	end
-
-	self._buf = _newBuf;
-	self._pos = self._pos + 1
-
-	return self;
+	self._buf = _newBuf
+	self._pos = 1
+	return self
 end
 
-function ByteArray:flip()
-	return self:setPos(1);
+function ByteArray:clean()
+	self._buf = {}
+	self._pos = 1
+end
+
+function ByteArray:skipHead()
+	return self:setPos(1)
+end
+function ByteArray:skip(skip)
+	self._pos = self._pos + skip
 end
 
 function ByteArray:setPos(__pos)

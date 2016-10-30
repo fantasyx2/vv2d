@@ -141,7 +141,7 @@ end
 
 function SocketTCP:close( ... )
 	--printInfo("%s.close", self.name)
-	self.tcp:close();
+	self.tcp:close()
 	if self.connectTimeTickScheduler then scheduler.unscheduleGlobal(self.connectTimeTickScheduler) end
 	if self.tickScheduler then scheduler.unscheduleGlobal(self.tickScheduler) end
 	self:dispatchEvent({name=SocketTCP.EVENT_CLOSE})
@@ -175,7 +175,6 @@ function SocketTCP:_onDisconnect()
 	--printInfo("%s._onDisConnect", self.name);
 	self.isConnected = false
 	self:dispatchEvent({name=SocketTCP.EVENT_CLOSED})
-	self:_reconnect();
 end
 
 -- connecte success, cancel the connection timerout timer
@@ -198,6 +197,7 @@ function SocketTCP:_onConnected()
 		    	else
 		    		self:_connectFailure()
 		    	end
+		    	self:_reconnect()
 		   		return
 	    	end
 		    if 	(__body and string.len(__body) == 0) or
@@ -215,19 +215,18 @@ end
 function SocketTCP:_connectFailure(status)
 	--printInfo("%s._connectFailure", self.name);
 	self:dispatchEvent({name=SocketTCP.EVENT_CONNECT_FAILURE})
-	self:_reconnect();
 end
 
 -- if connection is initiative, do not reconnect
 function SocketTCP:_reconnect(__immediately)
 	if not self.isRetryConnect then return end
 	if(self.recontimes>SOCKET_RECONNECT_MAX_TIMES) then
+		self.recontimes=0
 		self:dispatchEvent({name=SocketTCP.EVENT_RECONNECT_FAILURE})
 		return
 	end	
 	self.recontimes = self.recontimes+1
-	self.dispatchEvent({name = SocketTCP.EVENT_RECONNECT_TRY,times=self.recontimes})
-	printInfo("%s._reconnect", self.name)
+	self:dispatchEvent({name = SocketTCP.EVENT_RECONNECT_TRY,times=self.recontimes})
 	if __immediately then self:connect() return end
 	if self.reconnectScheduler then scheduler.unscheduleGlobal(self.reconnectScheduler) end
 	local __doReConnect = function ()
