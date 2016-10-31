@@ -65,6 +65,10 @@ function UICheckBoxButton:isButtonSelected()
     return self.fsm_:canDoEvent("unselect")
 end
 
+function UICheckBoxButton:check()
+    return self:isButtonSelected()
+end
+
 function UICheckBoxButton:setButtonSelected(selected)
     if self:isButtonSelected() ~= selected then
         if selected then

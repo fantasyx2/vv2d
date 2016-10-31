@@ -45,7 +45,7 @@ function ByteArray.toString(self, __radix, __separator)
 end
 
 function ByteArray:ctor(__endian)
-	self._endian = __endian or ByteArray.ENDIAN_LITTLE;
+	self._endian = __endian or ByteArray.ENDIAN_LITTLE
 	self._buf = {}
 	self._pos = 1
 end
@@ -71,7 +71,7 @@ function ByteArray:cut(pos)
 	local _curBuf = self._buf
 	local _newBuf = {}
 	local _pos = pos or self._pos
-	for i = _pos + 1, #self._buf do
+	for i = _pos, #self._buf do
 		table.insert(_newBuf, _curBuf[i])
 	end
 	self._buf = _newBuf
@@ -87,10 +87,16 @@ end
 function ByteArray:skipHead()
 	return self:setPos(1)
 end
+function ByteArray:skipEnd()
+	local n = #self._buf
+	return self:setPos(n+1)
+end
 function ByteArray:skip(skip)
 	self._pos = self._pos + skip
 end
-
+function ByteArray:skipTo(skip)
+	self._pos = skip
+end
 function ByteArray:setPos(__pos)
 	self._pos = __pos
 	return self
