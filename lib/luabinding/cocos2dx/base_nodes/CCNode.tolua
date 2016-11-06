@@ -1047,7 +1047,8 @@ class CCNode : public CCScriptEventDispatcher
     int getTouchMode();
 
     std::string getName();
-    void setName(const std::string& name);    
+    void setName(const std::string& name);   
+    CCNode* getChildByName(const std::string& name);
     
     /// @}
 };
