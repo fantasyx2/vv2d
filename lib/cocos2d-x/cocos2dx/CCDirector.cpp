@@ -161,6 +161,9 @@ bool CCDirector::init(void)
 
     // create autorelease pool
     CCPoolManager::sharedPoolManager()->push();
+    
+    //--------------------------------------------
+    mFuncAfterDraw = nullptr;
 
     return true;
 }
@@ -290,6 +293,12 @@ void CCDirector::drawScene(void)
         showStats();
     }
     
+    if(mFuncAfterDraw)
+    {
+        mFuncAfterDraw();
+        mFuncAfterDraw = nullptr;
+    }
+    
     kmGLPopMatrix();
 
     m_uTotalFrames++;
@@ -333,7 +342,7 @@ void CCDirector::calculateDeltaTime(void)
     // If we are debugging our code, prevent big delta time
     if(m_fDeltaTime > 0.2f)
     {
-        m_fDeltaTime = 1 / 60.0f;
+        //m_fDeltaTime = 1 / 60.0f;
     }
 #endif
 
@@ -1056,6 +1065,11 @@ void CCDirector::setAccelerometer(CCAccelerometer* pAccelerometer)
 CCAccelerometer* CCDirector::getAccelerometer()
 {
     return m_pAccelerometer;
+}
+
+
+void CCDirector::setAfterDrawFunc(std::function<int(void)> func){
+    mFuncAfterDraw = func;
 }
 
 /***************************************************

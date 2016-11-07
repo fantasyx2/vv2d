@@ -442,6 +442,11 @@ protected:
     
     // CCEGLViewProtocol will recreate stats labels to fit visible rect
     friend class CCEGLViewProtocol;
+//----------------------------------------
+//----------------------------------------
+public:
+    std::function<int(void)> mFuncAfterDraw;
+    void setAfterDrawFunc(std::function<int(void)> func);
 };
 
 /** 

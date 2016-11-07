@@ -27,7 +27,8 @@ THE SOFTWARE.
 /** @file ccUtils.h
 Misc free functions
 */
-
+#include <string>
+#include <functional>
 namespace cocos2d {
 /*
 ccNextPOT function is licensed under the same license that is used in CCTexture2D.m.
@@ -44,6 +45,16 @@ Examples:
 */
 
 unsigned long ccNextPOT( unsigned long value );
+    
+    /** Capture the entire screen.
+     * To ensure the snapshot is applied after everything is updated and rendered in the current frame,
+     * we need to wrap the operation with a custom command which is then inserted into the tail of the render queue.
+     * @param afterCaptured specify the callback function which will be invoked after the snapshot is done.
+     * @param filename specify a filename where the snapshot is stored. This parameter can be either an absolute path or a simple
+     * base filename ("hello.png" etc.), don't use a relative path containing directory names.("mydir/hello.png" etc.).
+     * @since v3.2
+     */
+    void  captureScreen(const std::function<void(bool, const std::string&)>& afterCaptured, const std::string& filename);
 
 }
 
