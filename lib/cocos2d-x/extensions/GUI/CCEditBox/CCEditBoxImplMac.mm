@@ -362,8 +362,8 @@ NSPoint CCEditBoxImplMac::convertDesignCoordToScreenCoord(const CCPoint& designC
     CGFloat height = frame.size.height;
     
     CCEGLViewProtocol* eglView = CCEGLView::sharedOpenGLView();
-
-    CCPoint visiblePos = ccp(designCoord.x * eglView->getScaleX(), designCoord.y * eglView->getScaleY());
+    float zoom = [[EAGLView sharedEGLView] frameZoomFactor];
+    CCPoint visiblePos = ccp(designCoord.x * eglView->getScaleX()*zoom, designCoord.y * eglView->getScaleY()*zoom);
     CCPoint screenGLPos = ccpAdd(visiblePos, eglView->getViewPortRect().origin);
     
     //TODO: I don't know why here needs to substract `height`.
@@ -374,7 +374,7 @@ NSPoint CCEditBoxImplMac::convertDesignCoordToScreenCoord(const CCPoint& designC
         screenPos.y = screenPos.y / 2.0f;
     }
     
-    CCLOG("[EditBox] pos x = %f, y = %f", screenGLPos.x, screenGLPos.y);
+//    CCLOG("[EditBox] pos x = %f, y = %f", screenGLPos.x, screenGLPos.y);
     return screenPos;
 }
 
@@ -415,7 +415,8 @@ void CCEditBoxImplMac::setAnchorPoint(const CCPoint& anchorPoint)
 
 void CCEditBoxImplMac::visit(void)
 {
-    
+    //add for step nativeinput pos while view % change or other issue
+    adjustTextFieldPosition();
 }
 
 void CCEditBoxImplMac::openKeyboard()
