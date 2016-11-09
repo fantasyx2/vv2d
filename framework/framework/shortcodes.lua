@@ -115,7 +115,7 @@ end
 Node.timer=Node.schedule
 Node.delay=Node.performWithDelay
 Node.arch =Node.anch
-
+Node.clean = Node.removeAllChildren
 
 -- Sprite
 
