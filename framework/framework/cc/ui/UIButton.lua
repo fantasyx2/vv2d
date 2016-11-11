@@ -239,9 +239,8 @@ function UIButton:updateButtonImage_()
                         if not self.scale9Size_ then
                             local size = self.sprite_[i]:getContentSize()
                             self.scale9Size_ = {size.width, size.height}
-                        else
-                            self.sprite_[i]:setContentSize(cc.size(self.scale9Size_[1], self.scale9Size_[2]))
                         end
+                        self.sprite_[i]:setContentSize(cc.size(self.scale9Size_[1], self.scale9Size_[2]))
                     else
                         self.sprite_[i] = display.newSprite(v)
                     end
@@ -257,9 +256,8 @@ function UIButton:updateButtonImage_()
                     if not self.scale9Size_ then
                         local size = self.sprite_[1]:getContentSize()
                         self.scale9Size_ = {size.width, size.height}
-                    else
-                        self.sprite_[1]:setContentSize(cc.size(self.scale9Size_[1], self.scale9Size_[2]))
                     end
+                    self.sprite_[1]:setContentSize(cc.size(self.scale9Size_[1], self.scale9Size_[2]))
                 else
                     self.sprite_[1] = display.newSprite(image)
                 end
