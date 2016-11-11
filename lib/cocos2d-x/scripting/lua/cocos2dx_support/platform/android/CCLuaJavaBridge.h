@@ -59,6 +59,7 @@ private:
         TypeFunction= 6,
         TypeMap     = 7,
         TypeArrayList = 8,
+        TypeLong    =9,
     } ValueType;
 
     typedef vector<ValueType> ValueTypes;
@@ -68,6 +69,7 @@ private:
         int     intValue;
         float   floatValue;
         int     boolValue;
+        long    longValue;
         string *stringValue;
         jobject objectValue;
     } ReturnValue;

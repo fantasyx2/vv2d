@@ -173,6 +173,7 @@ CCLuaJavaBridge::CallInfo::~CallInfo(void)
     {
         case TypeVoid:
         case TypeInteger:
+        case TypeLong:
         case TypeFloat:
         case TypeBoolean:
             break;            
@@ -206,6 +207,11 @@ bool CCLuaJavaBridge::CallInfo::execute(void)
         case TypeFloat:
         {
             m_ret.floatValue = m_env->CallStaticFloatMethod(m_classID, m_methodID);
+            break;
+        }
+        case TypeLong:
+        {
+            m_ret.longValue = m_env->CallStaticLongMethod(m_classID, m_methodID);
             break;
         }
         case TypeBoolean:
@@ -261,6 +267,11 @@ bool CCLuaJavaBridge::CallInfo::executeWithArgs(jvalue *args)
              m_ret.floatValue = m_env->CallStaticFloatMethodA(m_classID, m_methodID, args);
              break;
          }
+         case TypeLong:
+         {
+             m_ret.longValue = m_env->CallStaticLongMethodA(m_classID, m_methodID, args);
+             break;
+         }
          case TypeBoolean:
          {
              m_ret.boolValue = m_env->CallStaticBooleanMethodA(m_classID, m_methodID, args);
@@ -313,6 +324,11 @@ int CCLuaJavaBridge::CallInfo::pushReturnValue(lua_State *L)
         {
 			lua_pushnumber(L, m_ret.floatValue);
 			return 1;
+        }
+        case TypeLong:
+        {
+            lua_pushnumber(L, m_ret.longValue);
+            return 1;
         }
 		case TypeBoolean:
         {
@@ -403,10 +419,13 @@ CCLuaJavaBridge::ValueType CCLuaJavaBridge::CallInfo::checkType(const string& si
 {
     switch (sig[*pos])
     {
+
         case 'I':
             return TypeInteger;
         case 'F':
             return TypeFloat;
+        case 'J':
+            return TypeLong;    
         case 'Z':
             return TypeBoolean;
         case 'V':
@@ -752,6 +771,9 @@ int CCLuaJavaBridge::callJavaStaticMethod(lua_State *L)
 	            	}
 	                break;
 
+                case TypeLong:
+                    args[i].j = lua_tonumber(L, -1);
+                    break;
 	            case TypeFloat:
 	                args[i].f = lua_tonumber(L, -1);
 	                break;
