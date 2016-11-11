@@ -36,7 +36,7 @@ THE SOFTWARE.
 #include "kazmath/mat4.h"
 #include "label_nodes/CCLabelAtlas.h"
 #include "ccTypeInfo.h"
-
+#include <functional>
 
 NS_CC_BEGIN
 

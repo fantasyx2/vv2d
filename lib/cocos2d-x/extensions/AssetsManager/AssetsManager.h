@@ -32,7 +32,8 @@
 #if (CC_TARGET_PLATFORM != CC_PLATFORM_WINRT) && (CC_TARGET_PLATFORM != CC_PLATFORM_WP8)
 #include <string>
 #include <curl/curl.h>
-#include <pthread.h>
+#include <thread>
+#include <mutex>
 
 NS_CC_EXT_BEGIN
 
@@ -179,7 +180,7 @@ private:
         void handleUpdateSucceed(Message *msg);
         
         std::list<Message*> *_messageQueue;
-        pthread_mutex_t _messageQueueMutex;
+        std::mutex _messageQueueMutex;
     };
     
 private:
@@ -196,7 +197,7 @@ private:
     
     CURL *_curl;
     Helper *_schedule;
-    pthread_t *_tid;
+    std::thread *_tid;
     unsigned int _connectionTimeout;
     
     AssetsManagerDelegateProtocol *_delegate; // weak reference

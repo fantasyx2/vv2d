@@ -4,7 +4,7 @@
 #include "resource.h"
 
 // C RunTime Header Files
-#include "CCStdC.h"
+//#include "CCStdC.h"
 
 #include <string>
 

@@ -22,7 +22,9 @@
 #endif
 
 #ifdef _MSC_VER
+#if(_MSC_VER < 1900)
 #define snprintf _snprintf
+#endif
 #endif
 
 static void mark_object(lua_State *L, lua_State *dL, const void * parent, const char * desc);

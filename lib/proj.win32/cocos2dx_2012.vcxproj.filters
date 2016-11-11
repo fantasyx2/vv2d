@@ -346,15 +346,6 @@
     <Filter Include="cocos2d-x\extensions\Gif\gif_lib">
       <UniqueIdentifier>{3fd603ca-0146-4eb1-9cd4-1649b519c5cb}</UniqueIdentifier>
     </Filter>
-    <Filter Include="cocos2d-x\extensions\nanovg">
-      <UniqueIdentifier>{d36442f7-c3c1-4042-824f-b469b1ab83e1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="cocos2d-x\extensions\nanovg\nanonode">
-      <UniqueIdentifier>{77457f12-c3c0-48b4-9967-15b93f8f0539}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="cocos2d-x\extensions\nanovg\nanovg">
-      <UniqueIdentifier>{5c54fbe5-378b-4ebb-9eeb-91f99711d53e}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\cocos2d-x\scripting\lua\cocos2dx_support\CCLuaEngine.cpp">
@@ -1638,17 +1629,11 @@
     <ClCompile Include="..\cocos2d-x\scripting\lua\lua_extensions\socket\io.c">
       <Filter>cocos2d-x\scripting\lua\lua_extensions\socket</Filter>
     </ClCompile>
-    <ClCompile Include="..\cocos2d-x\extensions\nanovg\nanonode\NVGDrawNode.cpp">
-      <Filter>cocos2d-x\extensions\nanovg\nanonode</Filter>
-    </ClCompile>
-    <ClCompile Include="..\cocos2d-x\extensions\nanovg\nanonode\NVGNode.cpp">
-      <Filter>cocos2d-x\extensions\nanovg\nanonode</Filter>
-    </ClCompile>
-    <ClCompile Include="..\cocos2d-x\extensions\nanovg\nanovg\nanovg.c">
-      <Filter>cocos2d-x\extensions\nanovg\nanovg</Filter>
-    </ClCompile>
     <ClCompile Include="..\cocos2d-x\cocos2dx\platform\CCFileMount.cpp">
       <Filter>cocos2d-x\cocos2dx\platform</Filter>
+    </ClCompile>
+    <ClCompile Include="..\cocos2d-x\external\libwebsockets\win32\include\libwebsockets.cpp">
+      <Filter>cocos2d-x\external\libwebsockets\win32\include</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -3352,30 +3337,6 @@
     </ClInclude>
     <ClInclude Include="..\cocos2d-x\cocos2dx\platform\CCFileMount.h">
       <Filter>cocos2d-x\cocos2dx\platform</Filter>
-    </ClInclude>
-    <ClInclude Include="..\cocos2d-x\extensions\nanovg\nanonode\NVGDrawNode.h">
-      <Filter>cocos2d-x\extensions\nanovg\nanonode</Filter>
-    </ClInclude>
-    <ClInclude Include="..\cocos2d-x\extensions\nanovg\nanonode\NVGNode.h">
-      <Filter>cocos2d-x\extensions\nanovg\nanonode</Filter>
-    </ClInclude>
-    <ClInclude Include="..\cocos2d-x\extensions\nanovg\nanovg\fontstash.h">
-      <Filter>cocos2d-x\extensions\nanovg\nanovg</Filter>
-    </ClInclude>
-    <ClInclude Include="..\cocos2d-x\extensions\nanovg\nanovg\nanovg.h">
-      <Filter>cocos2d-x\extensions\nanovg\nanovg</Filter>
-    </ClInclude>
-    <ClInclude Include="..\cocos2d-x\extensions\nanovg\nanovg\nanovg_gl.h">
-      <Filter>cocos2d-x\extensions\nanovg\nanovg</Filter>
-    </ClInclude>
-    <ClInclude Include="..\cocos2d-x\extensions\nanovg\nanovg\nanovg_gl_utils.h">
-      <Filter>cocos2d-x\extensions\nanovg\nanovg</Filter>
-    </ClInclude>
-    <ClInclude Include="..\cocos2d-x\extensions\nanovg\nanovg\stb_image.h">
-      <Filter>cocos2d-x\extensions\nanovg\nanovg</Filter>
-    </ClInclude>
-    <ClInclude Include="..\cocos2d-x\extensions\nanovg\nanovg\stb_truetype.h">
-      <Filter>cocos2d-x\extensions\nanovg\nanovg</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

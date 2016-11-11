@@ -36,14 +36,9 @@ THE SOFTWARE.
 #include <cctype>
 #include <queue>
 #include <list>
-#if (CC_TARGET_PLATFORM != CC_PLATFORM_WINRT) && (CC_TARGET_PLATFORM != CC_PLATFORM_WP8)
-#include <pthread.h>
-#else
-#include "CCPThreadWinRT.h"
-#include <ppl.h>
-#include <ppltasks.h>
-using namespace concurrency;
-#endif
+#include <thread>
+#include <mutex>
+#include <condition_variable>
 
 static const char *VERSION = "version";
 static const float VERSION_2_0 = 2.0f;
@@ -189,18 +184,18 @@ typedef struct _DataInfo
 } DataInfo;
 
 
-static pthread_t s_loadingThread;
+static std::thread	*s_loadingThread = nullptr;
 
-static pthread_mutex_t		s_SleepMutex;
-static pthread_cond_t		s_SleepCondition;
+static std::mutex	s_SleepMutex;
+static std::condition_variable	s_SleepCondition;
 
-static pthread_mutex_t      s_asyncStructQueueMutex;
-static pthread_mutex_t      s_DataInfoMutex;
+static std::mutex      s_asyncStructQueueMutex;
+static std::mutex      s_DataInfoMutex;
 
-static pthread_mutex_t      s_addDataMutex;
-static pthread_mutex_t      s_ReadFileMutex;
+static std::mutex      s_addDataMutex;
+static std::mutex      s_ReadFileMutex;
 
-static pthread_mutex_t      s_GetFileDataMutex;
+static std::mutex      s_GetFileDataMutex;
 
 #ifdef EMSCRIPTEN
 // Hack to get ASM.JS validation (no undefined symbols allowed).
@@ -219,7 +214,7 @@ static void addData(AsyncStruct *pAsyncStruct)
 {
     std::string fullPath = CCFileUtils::sharedFileUtils()->fullPathForFilename(pAsyncStruct->filename.c_str());
     unsigned long size;
-    pthread_mutex_lock(&s_GetFileDataMutex);
+	s_GetFileDataMutex.lock();
 	std::string readmode = "r";
 	bool isbinary = pAsyncStruct->configType == CocoStudio_Binary;
 	if(isbinary)
@@ -228,7 +223,7 @@ static void addData(AsyncStruct *pAsyncStruct)
 	CCData data(pBytes, size);
     CC_SAFE_DELETE_ARRAY(pBytes);
 	pAsyncStruct->fileContent = std::string((const char*)data.getBytes(), data.getSize());
-    pthread_mutex_unlock(&s_GetFileDataMutex);
+	s_GetFileDataMutex.unlock();
 
     // generate data info
     DataInfo *pDataInfo = new DataInfo();
@@ -250,9 +245,9 @@ static void addData(AsyncStruct *pAsyncStruct)
 	}
 
     // put the image info into the queue
-    pthread_mutex_lock(&s_DataInfoMutex);
+	s_DataInfoMutex.lock();
     s_pDataQueue->push(pDataInfo);
-    pthread_mutex_unlock(&s_DataInfoMutex);
+	s_DataInfoMutex.unlock();
 }
 
 static void *loadData(void *)
@@ -264,17 +259,18 @@ static void *loadData(void *)
         thread.createAutoreleasePool();
 
         std::queue<AsyncStruct *> *pQueue = s_pAsyncStructQueue;
-        pthread_mutex_lock(&s_asyncStructQueueMutex);// get async struct from queue
+		s_asyncStructQueueMutex.lock();// get async struct from queue
         if (pQueue->empty())
         {
-            pthread_mutex_unlock(&s_asyncStructQueueMutex);
+			s_asyncStructQueueMutex.unlock();
             if (need_quit)
             {
                 break;
             }
             else
             {
-                pthread_cond_wait(&s_SleepCondition, &s_SleepMutex);
+				std::unique_lock<std::mutex> lk(s_SleepMutex);
+				s_SleepCondition.wait(lk);
                 continue;
             }
         }
@@ -282,7 +278,7 @@ static void *loadData(void *)
         {
             AsyncStruct *pAsyncStruct = pQueue->front();
             pQueue->pop();
-            pthread_mutex_unlock(&s_asyncStructQueueMutex);
+			s_asyncStructQueueMutex.unlock();
             addData(pAsyncStruct);
        }
     }
@@ -293,14 +289,6 @@ static void *loadData(void *)
         s_pAsyncStructQueue = NULL;
         delete s_pDataQueue;
         s_pDataQueue = NULL;
-
-        pthread_mutex_destroy(&s_asyncStructQueueMutex);
-        pthread_mutex_destroy(&s_DataInfoMutex);
-        pthread_mutex_destroy(&s_SleepMutex);
-        pthread_mutex_destroy(&s_addDataMutex);
-        pthread_mutex_destroy(&s_ReadFileMutex);
-        pthread_mutex_destroy(&s_GetFileDataMutex);
-        pthread_cond_destroy(&s_SleepCondition);
     }
 
     return NULL;
@@ -338,7 +326,9 @@ void CCDataReaderHelper::purge()
 CCDataReaderHelper::~CCDataReaderHelper()
 {
     need_quit = true;
-    pthread_cond_signal(&s_SleepCondition);
+	s_SleepCondition.notify_one();
+	if (s_loadingThread) s_loadingThread->join();
+	CC_SAFE_DELETE(s_loadingThread);
 }
 
 void CCDataReaderHelper::addDataFromFile(const char *filePath)
@@ -456,17 +446,7 @@ void CCDataReaderHelper::addDataFromFileAsync(const char *imagePath, const char 
     {
         s_pAsyncStructQueue = new std::queue<AsyncStruct *>();
         s_pDataQueue = new std::queue<DataInfo *>();
-
-        pthread_mutex_init(&s_asyncStructQueueMutex, NULL);
-        pthread_mutex_init(&s_DataInfoMutex, NULL);
-        pthread_mutex_init(&s_SleepMutex, NULL);
-        pthread_mutex_init(&s_addDataMutex, NULL);
-        pthread_mutex_init(&s_ReadFileMutex, NULL);
-        pthread_mutex_init(&s_GetFileDataMutex, NULL);
-        pthread_cond_init(&s_SleepCondition, NULL);
- #if (CC_TARGET_PLATFORM != CC_PLATFORM_WINRT) && (CC_TARGET_PLATFORM != CC_PLATFORM_WP8)
-        pthread_create(&s_loadingThread, NULL, loadData, NULL);
-#endif
+		s_loadingThread = new std::thread([]() {loadData(nullptr); });
         need_quit = false;
     }
 
@@ -511,19 +491,14 @@ void CCDataReaderHelper::addDataFromFileAsync(const char *imagePath, const char 
 		data->configType = CocoStudio_Binary;
 	}
 
-#if (CC_TARGET_PLATFORM != CC_PLATFORM_WINRT) && (CC_TARGET_PLATFORM != CC_PLATFORM_WP8)
-    // add async struct into queue
-    pthread_mutex_lock(&s_asyncStructQueueMutex);
-    s_pAsyncStructQueue->push(data);
-    pthread_mutex_unlock(&s_asyncStructQueueMutex);
 
-    pthread_cond_signal(&s_SleepCondition);
-#else
-    // WinRT uses an Async Task to load the image since the ThreadPool has a limited number of threads
-    create_task([this, data] {
-        addData(data);
-    });
-#endif
+    // add async struct into queue
+	s_asyncStructQueueMutex.lock();
+    s_pAsyncStructQueue->push(data);
+	s_asyncStructQueueMutex.unlock();
+
+
+	s_SleepCondition.notify_one();
 }
 
 
@@ -533,32 +508,32 @@ void CCDataReaderHelper::addDataAsyncCallBack(float dt)
     // the data is generated in loading thread
     std::queue<DataInfo *> *dataQueue = s_pDataQueue;
 
-    pthread_mutex_lock(&s_DataInfoMutex);
+	s_DataInfoMutex.lock();
     if (dataQueue->empty())
     {
-        pthread_mutex_unlock(&s_DataInfoMutex);
+		s_DataInfoMutex.unlock();
     }
     else
     {
         DataInfo *pDataInfo = dataQueue->front();
         dataQueue->pop();
-        pthread_mutex_unlock(&s_DataInfoMutex);
+		s_DataInfoMutex.lock();
 
         AsyncStruct *pAsyncStruct = pDataInfo->asyncStruct;
 
         if (pAsyncStruct->imagePath != "" && pAsyncStruct->plistPath != "")
         {
-            pthread_mutex_lock(&s_GetFileDataMutex);
+			s_GetFileDataMutex.lock();
             CCArmatureDataManager::sharedArmatureDataManager()->addSpriteFrameFromFile(pAsyncStruct->plistPath.c_str(), pAsyncStruct->imagePath.c_str());
-            pthread_mutex_unlock(&s_GetFileDataMutex);
+			s_GetFileDataMutex.unlock();
         }
 
         while (!pDataInfo->configFileQueue.empty())
         {
             std::string configPath = pDataInfo->configFileQueue.front();
-            pthread_mutex_lock(&s_GetFileDataMutex);
+			s_GetFileDataMutex.lock();
             CCArmatureDataManager::sharedArmatureDataManager()->addSpriteFrameFromFile((pAsyncStruct->baseFilePath + configPath + ".plist").c_str(), (pAsyncStruct->baseFilePath + configPath + ".png").c_str());
-            pthread_mutex_unlock(&s_GetFileDataMutex);
+			s_GetFileDataMutex.unlock();
             pDataInfo->configFileQueue.pop();
         }
 
@@ -628,13 +603,13 @@ void CCDataReaderHelper::addDataFromCache(const char *pFileContent, DataInfo *da
 
         if (dataInfo->asyncStruct)
         {
-            pthread_mutex_lock(&s_addDataMutex);
+			s_addDataMutex.lock();
         }
         CCArmatureDataManager::sharedArmatureDataManager()->addArmatureData(armatureData->name.c_str(), armatureData, dataInfo->filename.c_str());
         armatureData->release();
         if (dataInfo->asyncStruct)
         {
-            pthread_mutex_unlock(&s_addDataMutex);
+			s_addDataMutex.unlock();
         }
 
         armatureXML = armatureXML->NextSiblingElement(ARMATURE);
@@ -651,13 +626,13 @@ void CCDataReaderHelper::addDataFromCache(const char *pFileContent, DataInfo *da
         CCAnimationData *animationData = CCDataReaderHelper::decodeAnimation(animationXML, dataInfo);
         if (dataInfo->asyncStruct)
         {
-            pthread_mutex_lock(&s_addDataMutex);
+			s_addDataMutex.lock();
         }
         CCArmatureDataManager::sharedArmatureDataManager()->addAnimationData(animationData->name.c_str(), animationData, dataInfo->filename.c_str());
         animationData->release();
         if (dataInfo->asyncStruct)
         {
-            pthread_mutex_unlock(&s_addDataMutex);
+			s_addDataMutex.unlock();
         }
         animationXML = animationXML->NextSiblingElement(ANIMATION);
     }
@@ -674,13 +649,13 @@ void CCDataReaderHelper::addDataFromCache(const char *pFileContent, DataInfo *da
 
         if (dataInfo->asyncStruct)
         {
-            pthread_mutex_lock(&s_addDataMutex);
+            s_addDataMutex.lock();
         }
         CCArmatureDataManager::sharedArmatureDataManager()->addTextureData(textureData->name.c_str(), textureData, dataInfo->filename.c_str());
         textureData->release();
         if (dataInfo->asyncStruct)
         {
-            pthread_mutex_unlock(&s_addDataMutex);
+            s_addDataMutex.unlock();;
         }
         textureXML = textureXML->NextSiblingElement(SUB_TEXTURE);
     }
@@ -1319,13 +1294,13 @@ void CCDataReaderHelper::addDataFromJsonCache(const char *fileContent, DataInfo 
 
         if (dataInfo->asyncStruct)
         {
-            pthread_mutex_lock(&s_addDataMutex);
+            s_addDataMutex.lock();
         }
         CCArmatureDataManager::sharedArmatureDataManager()->addArmatureData(armatureData->name.c_str(), armatureData, dataInfo->filename.c_str());
         armatureData->release();
         if (dataInfo->asyncStruct)
         {
-            pthread_mutex_unlock(&s_addDataMutex);
+            s_addDataMutex.unlock();
         }
         //delete armatureDic;
     }
@@ -1339,13 +1314,13 @@ void CCDataReaderHelper::addDataFromJsonCache(const char *fileContent, DataInfo 
 
         if (dataInfo->asyncStruct)
         {
-            pthread_mutex_lock(&s_addDataMutex);
+            s_addDataMutex.lock();
         }
         CCArmatureDataManager::sharedArmatureDataManager()->addAnimationData(animationData->name.c_str(), animationData, dataInfo->filename.c_str());
         animationData->release();
         if (dataInfo->asyncStruct)
         {
-            pthread_mutex_unlock(&s_addDataMutex);
+            s_addDataMutex.unlock();
         }
     }
 
@@ -1358,13 +1333,13 @@ void CCDataReaderHelper::addDataFromJsonCache(const char *fileContent, DataInfo 
 
         if (dataInfo->asyncStruct)
         {
-            pthread_mutex_lock(&s_addDataMutex);
+            s_addDataMutex.lock();
         }
         CCArmatureDataManager::sharedArmatureDataManager()->addTextureData(textureData->name.c_str(), textureData, dataInfo->filename.c_str());
         textureData->release();
         if (dataInfo->asyncStruct)
         {
-            pthread_mutex_unlock(&s_addDataMutex);
+            s_addDataMutex.unlock();
         }
         //delete textureDic;
     }
@@ -1836,13 +1811,13 @@ void CCDataReaderHelper::addDataFromBinaryCache(const char *fileContent, DataInf
 						armatureData = decodeArmature(&tCocoLoader, &pDataArray[i], dataInfo);
 						if (dataInfo->asyncStruct)
 						{
-							pthread_mutex_lock(&s_addDataMutex);
+							s_addDataMutex.lock();
 						}
 						CCArmatureDataManager::sharedArmatureDataManager()->addArmatureData(armatureData->name.c_str(), armatureData, dataInfo->filename.c_str());
 						armatureData->release();
 						if (dataInfo->asyncStruct)
 						{
-							pthread_mutex_unlock(&s_addDataMutex);
+							s_addDataMutex.unlock();
 						}
 					}
 				}
@@ -1856,13 +1831,13 @@ void CCDataReaderHelper::addDataFromBinaryCache(const char *fileContent, DataInf
 						animationData = decodeAnimation(&tCocoLoader, &pDataArray[i], dataInfo);
 						if (dataInfo->asyncStruct)
 						{
-							pthread_mutex_lock(&s_addDataMutex);
+							s_addDataMutex.lock();
 						}
 						CCArmatureDataManager::sharedArmatureDataManager()->addAnimationData(animationData->name.c_str(), animationData, dataInfo->filename.c_str());
 						animationData->release();
 						if (dataInfo->asyncStruct)
 						{
-							pthread_mutex_unlock(&s_addDataMutex);
+							s_addDataMutex.unlock();
 						}
 					}
 				}
@@ -1875,13 +1850,13 @@ void CCDataReaderHelper::addDataFromBinaryCache(const char *fileContent, DataInf
 						CCTextureData *textureData = decodeTexture(&tCocoLoader, &pDataArray[i]);
 						if (dataInfo->asyncStruct)
 						{
-							pthread_mutex_lock(&s_addDataMutex);
+							s_addDataMutex.lock();
 						}
 						CCArmatureDataManager::sharedArmatureDataManager()->addTextureData(textureData->name.c_str(), textureData, dataInfo->filename.c_str());
 						textureData->release();
 						if (dataInfo->asyncStruct)
 						{
-							pthread_mutex_unlock(&s_addDataMutex);
+							s_addDataMutex.unlock();
 						}
 					}
 				}

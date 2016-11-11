@@ -7,7 +7,9 @@
 # define FPCONV_G_FMT_BUFSIZE   32
 
 #ifdef _MSC_VER
+#if(_MSC_VER < 1900)
 #define snprintf _snprintf
+#endif
 #undef inline
 #define inline __inline
 #endif

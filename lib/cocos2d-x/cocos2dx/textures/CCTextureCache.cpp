@@ -45,14 +45,9 @@ THE SOFTWARE.
 #include <list>
 #include "apptools/HelperFunc.h"
 
-#if (CC_TARGET_PLATFORM != CC_PLATFORM_WINRT) && (CC_TARGET_PLATFORM != CC_PLATFORM_WP8)
-#include <pthread.h>
-#else
-#include "CCPThreadWinRT.h"
-#include <ppl.h>
-#include <ppltasks.h>
-using namespace concurrency;
-#endif
+#include <thread>
+#include <mutex>
+#include <condition_variable>
 
 using namespace std;
 
@@ -73,13 +68,13 @@ typedef struct _ImageInfo
     EImageFormat imageType;
 } ImageInfo;
 
-static pthread_t s_loadingThread;
+static std::thread  *s_loadingThread = nullptr;
 
-static pthread_mutex_t		s_SleepMutex;
-static pthread_cond_t		s_SleepCondition;
+static std::mutex		s_SleepMutex;
+static std::condition_variable		s_SleepCondition;
 
-static pthread_mutex_t      s_asyncStructQueueMutex;
-static pthread_mutex_t      s_ImageInfoMutex;
+static std::mutex      s_asyncStructQueueMutex;
+static std::mutex      s_ImageInfoMutex;
 
 #ifdef EMSCRIPTEN
 // Hack to get ASM.JS validation (no undefined symbols allowed).
@@ -149,9 +144,9 @@ static void loadImageData(AsyncStruct *pAsyncStruct)
     pImageInfo->image = pImage;
     pImageInfo->imageType = imageType;
     // put the image info into the queue
-    pthread_mutex_lock(&s_ImageInfoMutex);
+	s_ImageInfoMutex.lock();
     s_pImageQueue->push(pImageInfo);
-    pthread_mutex_unlock(&s_ImageInfoMutex);   
+	s_ImageInfoMutex.unlock();  
 }
 
 static void* loadImage(void* data)
@@ -165,15 +160,16 @@ static void* loadImage(void* data)
         thread.createAutoreleasePool();
 
         std::queue<AsyncStruct*> *pQueue = s_pAsyncStructQueue;
-        pthread_mutex_lock(&s_asyncStructQueueMutex);// get async struct from queue
+		s_asyncStructQueueMutex.lock();// get async struct from queue
         if (pQueue->empty())
         {
-            pthread_mutex_unlock(&s_asyncStructQueueMutex);
+			s_asyncStructQueueMutex.unlock();
             if (need_quit) {
                 break;
             }
             else {
-                pthread_cond_wait(&s_SleepCondition, &s_SleepMutex);
+				std::unique_lock<std::mutex> lk(s_SleepMutex);
+				s_SleepCondition.wait(lk);
                 continue;
             }
         }
@@ -181,7 +177,7 @@ static void* loadImage(void* data)
         {
             pAsyncStruct = pQueue->front();
             pQueue->pop();
-            pthread_mutex_unlock(&s_asyncStructQueueMutex);
+			s_asyncStructQueueMutex.unlock();
             loadImageData(pAsyncStruct);
         }        
     }
@@ -192,11 +188,6 @@ static void* loadImage(void* data)
         s_pAsyncStructQueue = NULL;
         delete s_pImageQueue;
         s_pImageQueue = NULL;
-
-        pthread_mutex_destroy(&s_asyncStructQueueMutex);
-        pthread_mutex_destroy(&s_ImageInfoMutex);
-        pthread_mutex_destroy(&s_SleepMutex);
-        pthread_cond_destroy(&s_SleepCondition);
     }
     
     return 0;
@@ -228,8 +219,10 @@ CCTextureCache::~CCTextureCache()
 {
     CCLOGINFO("cocos2d: deallocing CCTextureCache.");
     need_quit = true;
-    pthread_cond_signal(&s_SleepCondition);
     CC_SAFE_RELEASE(m_pTextures);
+	s_SleepCondition.notify_one();
+	if (s_loadingThread)s_loadingThread->join();
+	CC_SAFE_DELETE(s_loadingThread);
 }
 
 void CCTextureCache::purgeSharedTextureCache()
@@ -306,14 +299,7 @@ void CCTextureCache::addImageAsyncImpl(const char *path, CCObject *target, SEL_C
     {             
         s_pAsyncStructQueue = new queue<AsyncStruct*>();
         s_pImageQueue = new queue<ImageInfo*>();        
-        
-        pthread_mutex_init(&s_asyncStructQueueMutex, NULL);
-        pthread_mutex_init(&s_ImageInfoMutex, NULL);
-        pthread_mutex_init(&s_SleepMutex, NULL);
-        pthread_cond_init(&s_SleepCondition, NULL);
-#if (CC_TARGET_PLATFORM != CC_PLATFORM_WINRT) && (CC_TARGET_PLATFORM != CC_PLATFORM_WP8)
-        pthread_create(&s_loadingThread, NULL, loadImage, NULL);
-#endif
+		s_loadingThread = new std::thread([](){loadImage(nullptr);});
         need_quit = false;
     }
 
@@ -336,19 +322,12 @@ void CCTextureCache::addImageAsyncImpl(const char *path, CCObject *target, SEL_C
     data->selector = selector;
     data->handler = handler;
 
-#if (CC_TARGET_PLATFORM != CC_PLATFORM_WINRT) && (CC_TARGET_PLATFORM != CC_PLATFORM_WP8)
     // add async struct into queue
-    pthread_mutex_lock(&s_asyncStructQueueMutex);
+	s_asyncStructQueueMutex.lock();
     s_pAsyncStructQueue->push(data);
-    pthread_mutex_unlock(&s_asyncStructQueueMutex);
-    pthread_cond_signal(&s_SleepCondition);
-#else
-    // WinRT uses an Async Task to load the image since the ThreadPool has a limited number of threads
-    //std::replace( data->filename.begin(), data->filename.end(), '/', '\\'); 
-    create_task([this, data] {
-        loadImageData(data);
-    });
-#endif
+	s_asyncStructQueueMutex.unlock();
+	s_SleepCondition.notify_one();
+
 }
 
 void CCTextureCache::addImageAsyncCallBack(float dt)
@@ -356,16 +335,16 @@ void CCTextureCache::addImageAsyncCallBack(float dt)
     // the image is generated in loading thread
     std::queue<ImageInfo*> *imagesQueue = s_pImageQueue;
 
-    pthread_mutex_lock(&s_ImageInfoMutex);
+	s_ImageInfoMutex.lock();
     if (imagesQueue->empty())
     {
-        pthread_mutex_unlock(&s_ImageInfoMutex);
+		s_ImageInfoMutex.unlock();
     }
     else
     {
         ImageInfo *pImageInfo = imagesQueue->front();
         imagesQueue->pop();
-        pthread_mutex_unlock(&s_ImageInfoMutex);
+		s_ImageInfoMutex.unlock();
 
         AsyncStruct *pAsyncStruct = pImageInfo->asyncStruct;
         CCImage *pImage = pImageInfo->image;

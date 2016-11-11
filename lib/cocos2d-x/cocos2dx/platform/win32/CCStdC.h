@@ -39,8 +39,11 @@ THE SOFTWARE.
     #define isnan   _isnan
 #endif
 
+
+#if(_MSC_VER < 1900)
 #ifndef snprintf
 #define snprintf _snprintf
+#endif
 #endif
 
 #endif // __MINGW32__

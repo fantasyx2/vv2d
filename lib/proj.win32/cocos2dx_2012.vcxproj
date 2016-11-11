@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
       <Configuration>Debug</Configuration>
@@ -302,9 +302,6 @@
     <ClCompile Include="..\cocos2d-x\extensions\GUI\CCScrollView\CCSorting.cpp" />
     <ClCompile Include="..\cocos2d-x\extensions\GUI\CCScrollView\CCTableView.cpp" />
     <ClCompile Include="..\cocos2d-x\extensions\GUI\CCScrollView\CCTableViewCell.cpp" />
-    <ClCompile Include="..\cocos2d-x\extensions\nanovg\nanonode\NVGDrawNode.cpp" />
-    <ClCompile Include="..\cocos2d-x\extensions\nanovg\nanonode\NVGNode.cpp" />
-    <ClCompile Include="..\cocos2d-x\extensions\nanovg\nanovg\nanovg.c" />
     <ClCompile Include="..\cocos2d-x\extensions\network\WebSocket.cpp" />
     <ClCompile Include="..\cocos2d-x\extensions\proj.win32\Win32InputBox.cpp" />
     <ClCompile Include="..\cocos2d-x\extensions\ProjectConfig\SimulatorConfig.cpp" />
@@ -481,6 +478,7 @@
     <ClCompile Include="..\cocos2d-x\external\extra\platform\win32\CCNative.cpp" />
     <ClCompile Include="..\cocos2d-x\external\extra\platform\win32\CCNativeWin32.cpp" />
     <ClCompile Include="..\cocos2d-x\external\extra\platform\win32\CCNetworkWin32.cpp" />
+    <ClCompile Include="..\cocos2d-x\external\libwebsockets\win32\include\libwebsockets.cpp" />
     <ClCompile Include="..\cocos2d-x\scripting\lua\cocos2dx_support\CCBProxy.cpp" />
     <ClCompile Include="..\cocos2d-x\scripting\lua\cocos2dx_support\CCLuaEngine.cpp" />
     <ClCompile Include="..\cocos2d-x\scripting\lua\cocos2dx_support\CCLuaStack.cpp" />
@@ -968,14 +966,6 @@
     <ClInclude Include="..\cocos2d-x\extensions\GUI\CCScrollView\CCSorting.h" />
     <ClInclude Include="..\cocos2d-x\extensions\GUI\CCScrollView\CCTableView.h" />
     <ClInclude Include="..\cocos2d-x\extensions\GUI\CCScrollView\CCTableViewCell.h" />
-    <ClInclude Include="..\cocos2d-x\extensions\nanovg\nanonode\NVGDrawNode.h" />
-    <ClInclude Include="..\cocos2d-x\extensions\nanovg\nanonode\NVGNode.h" />
-    <ClInclude Include="..\cocos2d-x\extensions\nanovg\nanovg\fontstash.h" />
-    <ClInclude Include="..\cocos2d-x\extensions\nanovg\nanovg\nanovg.h" />
-    <ClInclude Include="..\cocos2d-x\extensions\nanovg\nanovg\nanovg_gl.h" />
-    <ClInclude Include="..\cocos2d-x\extensions\nanovg\nanovg\nanovg_gl_utils.h" />
-    <ClInclude Include="..\cocos2d-x\extensions\nanovg\nanovg\stb_image.h" />
-    <ClInclude Include="..\cocos2d-x\extensions\nanovg\nanovg\stb_truetype.h" />
     <ClInclude Include="..\cocos2d-x\extensions\network\WebSocket.h" />
     <ClInclude Include="..\cocos2d-x\extensions\proj.win32\Win32InputBox.h" />
     <ClInclude Include="..\cocos2d-x\extensions\ProjectConfig\SimulatorConfig.h" />
@@ -1119,13 +1109,13 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v110</PlatformToolset>
+    <PlatformToolset>v140</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v110</PlatformToolset>
+    <PlatformToolset>v140</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>

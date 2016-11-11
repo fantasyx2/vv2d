@@ -75,7 +75,9 @@ static void strbuf_append_char(strbuf_t *s, const char c);
 static void strbuf_ensure_null(strbuf_t *s);
 
 #ifdef _MSC_VER
+#if _MSC_VER < 1900
 #define snprintf _snprintf
+#endif
 #undef inline
 #define inline __inline
 #endif

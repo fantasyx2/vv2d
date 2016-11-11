@@ -193,6 +193,10 @@ void* assetsManagerDownloadAndUncompress(void *data)
     
     if (self->_tid)
     {
+		if (self->_tid->joinable())
+		{
+			self->_tid->join();
+		}
         delete self->_tid;
         self->_tid = NULL;
     }
@@ -220,8 +224,7 @@ void AssetsManager::update()
     // Is package already downloaded?
     _downloadedVersion = CCUserDefault::sharedUserDefault()->getStringForKey(KEY_OF_DOWNLOADED_VERSION);
     
-    _tid = new pthread_t();
-    pthread_create(&(*_tid), NULL, assetsManagerDownloadAndUncompress, this);
+    _tid = new std::thread(&assetsManagerDownloadAndUncompress, this);
 }
 
 bool AssetsManager::uncompress()
@@ -536,7 +539,6 @@ void AssetsManager::sendErrorMessage(AssetsManager::ErrorCode code)
 AssetsManager::Helper::Helper()
 {
     _messageQueue = new list<Message*>();
-    pthread_mutex_init(&_messageQueueMutex, NULL);
     CCDirector::sharedDirector()->getScheduler()->scheduleUpdateForTarget(this, 0, false);
 }
 
@@ -548,9 +550,9 @@ AssetsManager::Helper::~Helper()
 
 void AssetsManager::Helper::sendMessage(Message *msg)
 {
-    pthread_mutex_lock(&_messageQueueMutex);
+	_messageQueueMutex.lock();
     _messageQueue->push_back(msg);
-    pthread_mutex_unlock(&_messageQueueMutex);
+	_messageQueueMutex.unlock();
 }
 
 void AssetsManager::Helper::update(float dt)
@@ -558,17 +560,17 @@ void AssetsManager::Helper::update(float dt)
     Message *msg = NULL;
     
     // Returns quickly if no message
-    pthread_mutex_lock(&_messageQueueMutex);
+	_messageQueueMutex.lock();
     if (0 == _messageQueue->size())
     {
-        pthread_mutex_unlock(&_messageQueueMutex);
+		_messageQueueMutex.unlock();
         return;
     }
     
     // Gets message
     msg = *(_messageQueue->begin());
     _messageQueue->pop_front();
-    pthread_mutex_unlock(&_messageQueueMutex);
+	_messageQueueMutex.unlock();
     
     switch (msg->what) {
         case ASSETSMANAGER_MESSAGE_UPDATE_SUCCEED:
