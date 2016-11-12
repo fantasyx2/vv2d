@@ -188,6 +188,10 @@ function Node:stop()
     return self
 end
 
+function Node:hasAction()
+    return self:getNumberOfRunningActions()>0
+end
+
 function Node:fadeIn(time)
     self:runAction(CCFadeIn:create(time))
     return self
