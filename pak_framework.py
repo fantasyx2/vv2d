@@ -45,7 +45,7 @@ def copy_file_to_tmp_dir(root, prefix_path, tmp_dir):
 			shutil.copy(next_root, new_filename)
 
 def zip_file_dir(path, outfile):
-	compression = zipfile.ZIP_STORED
+	compression = zipfile.ZIP_DEFLATED
 	# start = path.rfind(os.sep) + 1
 	start = len(path) + 1
 	z = zipfile.ZipFile(outfile, mode="w", compression=compression)
