@@ -37,12 +37,12 @@ def copy_file_to_tmp_dir(root, prefix_path, tmp_dir):
 				pos = f.rfind(".")
 				f_name = f[0:pos]
 
-			if prefix_path:
-				new_filename = os.path.join(tmp_dir, "%s.%s" % (prefix_path, f_name))
-			else:
-				new_filename = os.path.join(tmp_dir, f_name)
-			print("copy %s => %s" % (next_root, new_filename))
-			shutil.copy(next_root, new_filename)
+				if prefix_path:
+					new_filename = os.path.join(tmp_dir, "%s.%s" % (prefix_path, f_name))
+				else:
+					new_filename = os.path.join(tmp_dir, f_name)
+				print("copy %s => %s" % (next_root, new_filename))
+				shutil.copy(next_root, new_filename)
 
 def zip_file_dir(path, outfile):
 	compression = zipfile.ZIP_DEFLATED
