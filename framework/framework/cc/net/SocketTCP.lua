@@ -127,8 +127,10 @@ function SocketTCP:connect(__host, __port, __retryConnectWhenFailure)
 				self.waitConnect = nil
 				self:close()
 				self:_connectFailure()
-			end
-			__checkConnect()
+				self:_reconnect()
+			else
+				__checkConnect()
+			end	
 		end
 		self.connectTimeTickScheduler = scheduler.scheduleGlobal(__connectTimeTick, SOCKET_TICK_TIME)
 	end
