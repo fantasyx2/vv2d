@@ -366,4 +366,9 @@ float CCEGLViewProtocol::getScaleY() const
     return m_fScaleY;
 }
 
+float CCEGLViewProtocol::getFrameZoomFactor()
+{
+    return 1.0;
+}
+
 NS_CC_END

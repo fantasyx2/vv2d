@@ -192,6 +192,8 @@ protected:
     float  m_fScaleX;
     float  m_fScaleY;
     ResolutionPolicy m_eResolutionPolicy;
+public:
+    virtual float getFrameZoomFactor();
 };
 
 // end of platform group

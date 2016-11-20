@@ -64,7 +64,7 @@ static void onCaptureScreen(const std::function<void(bool, const std::string&)>&
         CCEGLView* glView = CCDirector::sharedDirector()->getOpenGLView();
         auto frameSize = glView->getFrameSize();
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_MAC) || (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32) || (CC_TARGET_PLATFORM == CC_PLATFORM_LINUX)
-        //frameSize = frameSize * glView->getFrameZoomFactor() * glView->getRetinaFactor();
+        frameSize = frameSize * glView->getFrameZoomFactor();// * glView->getRetinaFactor();
 #endif
         
         int width = static_cast<int>(frameSize.width);

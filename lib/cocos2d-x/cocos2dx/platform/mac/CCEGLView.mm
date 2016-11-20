@@ -115,4 +115,9 @@ void CCEGLView::setMultiTouchMask(bool mask)
 	//glView.multipleTouchEnabled = mask ? YES : NO;
 }
 
+float CCEGLView::getFrameZoomFactor()
+{
+    [[EAGLView sharedEGLView] frameZoomFactor];
+}
+
 NS_CC_END // end of namespace cocos2d;
