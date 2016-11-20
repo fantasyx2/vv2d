@@ -269,6 +269,8 @@ class CCDirector : public CCObject
 
     /** returns a shared instance of the director */
     static CCDirector* sharedDirector(void);
+
+    void captureScreen(LUA_FUNCTION luafunc,std::string fullname);
 };
 
 // end of base_node group

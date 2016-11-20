@@ -1349,4 +1349,8 @@ function display.printscreen(node, args)
 	return sp, file
 end
 
+function display.capturescreen(handler,name)
+    sharedDirector:captureScreen(handler,name)
+end
+
 return display

@@ -447,6 +447,7 @@ protected:
 public:
     std::function<int(void)> mFuncAfterDraw;
     void setAfterDrawFunc(std::function<int(void)> func);
+    void captureScreen(int luacallbackfunc,std::string filename);
 };
 
 /** 

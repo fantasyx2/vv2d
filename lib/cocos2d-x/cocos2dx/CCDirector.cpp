@@ -65,6 +65,9 @@ THE SOFTWARE.
 #include "CCEGLView.h"
 #include "CCConfiguration.h"
 
+#include "ccUtils.h"
+#include "CCLuaEngine.h"
+#include "script_support/CCScriptSupport.h"
 
 
 /**
@@ -1072,6 +1075,21 @@ void CCDirector::setAfterDrawFunc(std::function<int(void)> func){
     mFuncAfterDraw = func;
 }
 
+void CCDirector::captureScreen(int luacallbackfunc,std::string fullfilename)
+{
+    cocos2d::captureScreen([=](bool result, const std::string& name){
+        if(luacallbackfunc)
+        {
+            CCLuaEngine* luaEngine = dynamic_cast<CCLuaEngine*>(CCScriptEngineManager::sharedManager()->getScriptEngine());
+            cocos2d::CCLuaStack *pStack = luaEngine->getLuaStack();
+            pStack->pushBoolean(result);
+            pStack->pushString(name.c_str());
+            pStack->executeFunctionByHandler(luacallbackfunc, 2);
+            pStack->clean();
+        }
+    },fullfilename);
+}
+
 /***************************************************
 * implementation of DisplayLinkDirector
 **************************************************/
@@ -1122,6 +1140,7 @@ void CCDisplayLinkDirector::setAnimationInterval(double dValue)
         startAnimation();
     }    
 }
+
 
 NS_CC_END
 
